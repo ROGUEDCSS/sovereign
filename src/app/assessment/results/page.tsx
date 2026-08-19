@@ -62,7 +62,7 @@ export default function ResultsPage() {
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1.5rem", flexWrap: "wrap", margin: "0 0 1.5rem" }}>
-          <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 700, color: "#fff" }}>
+          <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, color: "var(--amber-strong)" }}>
             Your Sovereign Score
           </h1>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.6rem" }}>
@@ -89,7 +89,7 @@ export default function ResultsPage() {
             </span>
           </div>
         </div>
-        <p style={{ color: "var(--text-2)", marginBottom: "2.5rem" }}>
+        <p style={{ color: "#fff", marginBottom: "2.5rem" }}>
           Sovereignty is a goal, not a binary state — this tells you where to go, what to fix.
         </p>
 
@@ -119,8 +119,8 @@ export default function ResultsPage() {
                 }}
               />
               <div>
-                <strong style={{ color: "var(--ink)" }}>{domain.name}</strong>
-                <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginTop: "0.2rem" }}>
+                <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
+                <p style={{ color: "var(--ink)", marginTop: "0.2rem" }}>
                   {domain.tierAdvice[tier]}
                 </p>
               </div>
@@ -135,12 +135,12 @@ export default function ResultsPage() {
           <ol style={{ paddingLeft: "1.25rem" }}>
             {weakest.map(({ domain }) => (
               <li key={domain.id} style={{ marginBottom: "0.5rem" }}>
-                <strong style={{ color: "var(--ink)" }}>{domain.name}</strong>
+                <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
                 {codexLinksForDomain(domain.id).map((link) => (
                   <Link
                     key={link.path.join("/")}
                     href={codexHref(link.path)}
-                    style={{ marginLeft: "0.6rem", fontSize: "var(--size-sm)", color: "var(--amber-on-light)" }}
+                    style={{ marginLeft: "0.6rem", color: "var(--amber-on-light)" }}
                   >
                     Read: {link.label} →
                   </Link>
@@ -164,12 +164,12 @@ export default function ResultsPage() {
               >
                 <div style={{ flex: 1 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.35rem" }}>
-                    <strong style={{ color: "var(--ink)" }}>{domain.quickAction.title}</strong>
+                    <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
                     <span style={{ color: "var(--danger)", fontSize: "var(--size-sm)", fontWeight: 600, whiteSpace: "nowrap" }}>
                       {domain.quickAction.cost} · {domain.quickAction.time}
                     </span>
                   </div>
-                  <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)" }}>{domain.quickAction.why}</p>
+                  <p style={{ color: "var(--ink)" }}>{domain.quickAction.why}</p>
                 </div>
                 {actionLink && (
                   <Link
