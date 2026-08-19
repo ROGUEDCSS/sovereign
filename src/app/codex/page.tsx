@@ -47,57 +47,59 @@ export default function CodexIndexPage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
           {CODEX_BRANCHES.map((branch, i) => (
-            <Link
+            <div
               key={branch.slug}
-              href={`/codex/${branch.slug}`}
               className="card"
-              style={{ display: "block", padding: "1.25rem 1.5rem", minHeight: 260, textDecoration: "none" }}
+              style={{ padding: "1.25rem 1.5rem", minHeight: 260, display: "flex", flexDirection: "column" }}
             >
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.5rem" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem", marginBottom: "1.1rem" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                   <span
                     style={{
                       display: "inline-flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      width: 22,
-                      height: 22,
+                      width: 28,
+                      height: 28,
                       borderRadius: "50%",
                       background: "var(--amber)",
                       color: "#1a1005",
-                      fontSize: "var(--size-xs)",
+                      fontSize: "var(--size-sm)",
                       fontWeight: 700,
                       flexShrink: 0,
                     }}
                   >
                     {i + 1}
                   </span>
-                  <span style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{branch.name}</span>
+                  <div>
+                    <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)", lineHeight: 1.2 }}>{branch.name}</div>
+                    <div style={{ fontSize: "var(--size-xs)", color: "var(--amber-on-light)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em", marginTop: "0.15rem" }}>
+                      {JOURNEY_TAG[branch.slug]}
+                    </div>
+                  </div>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-                  <span style={{ fontSize: "var(--size-sm)", color: "var(--ink)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>
-                    {JOURNEY_TAG[branch.slug]}
+                {!branch.detailed && (
+                  <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)", flexShrink: 0 }}>
+                    Not yet mapped
                   </span>
-                  {!branch.detailed && (
-                    <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)" }}>
-                      Not yet mapped
-                    </span>
-                  )}
-                </div>
+                )}
               </div>
-              {(() => {
-                const dot = branch.tagline.indexOf(".");
-                const lead = branch.tagline.slice(0, dot);
-                const rest = branch.tagline.slice(dot + 1).trim();
-                return (
-                  <>
-                    <p style={{ fontSize: "var(--size-body)", fontWeight: 700, color: "var(--ink)", marginBottom: "0.6rem" }}>{lead}</p>
-                    <p style={{ fontSize: "var(--size-body)", color: "var(--ink-2)", marginBottom: "0.6rem" }}>{rest}</p>
-                  </>
-                );
-              })()}
-              <p style={{ fontSize: "var(--size-body)", color: "var(--ink-2)" }}>{CODEX_PROMISE[branch.slug]}</p>
-            </Link>
+
+              <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginBottom: "1rem" }}>{branch.tagline}</p>
+
+              <div style={{ borderTop: "1px solid rgba(11,14,17,0.12)", paddingTop: "1rem", marginBottom: "1.25rem" }}>
+                <div style={{ fontSize: "var(--size-xs)", color: "var(--ink-2)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: "0.4rem" }}>
+                  The Codex promise
+                </div>
+                <p style={{ fontSize: "var(--size-body)", color: "var(--ink-2)" }}>{CODEX_PROMISE[branch.slug]}</p>
+              </div>
+
+              <div style={{ marginTop: "auto", display: "flex", justifyContent: "flex-end" }}>
+                <Link href={`/codex/${branch.slug}`} className="btn btn-primary" style={{ padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
+                  Explore {branch.name} →
+                </Link>
+              </div>
+            </div>
           ))}
         </div>
       </div>
