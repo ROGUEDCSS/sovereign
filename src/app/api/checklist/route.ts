@@ -20,6 +20,7 @@ export async function POST(req: Request) {
   const supabase = createClient(supabaseUrl, serviceKey);
   const { error: dbError } = await supabase.from("checklist_leads").insert({ email });
   if (dbError) {
+    console.error("checklist_leads insert failed:", dbError);
     return NextResponse.json({ error: "Could not save your email. Try again." }, { status: 500 });
   }
 

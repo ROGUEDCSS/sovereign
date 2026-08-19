@@ -31,6 +31,7 @@ export async function POST(req: Request) {
     notes: typeof notes === "string" ? notes : null,
   });
   if (dbError) {
+    console.error("consultation_leads insert failed:", dbError);
     return NextResponse.json({ error: "Could not submit your request. Try again." }, { status: 500 });
   }
 
