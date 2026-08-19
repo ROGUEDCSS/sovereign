@@ -166,7 +166,24 @@ const MINDSET_RESPONSIBILITY: CodexNode = {
   tagline: "Self-governance — the character and judgement a Sovereign individual actually runs on.",
   elaboration:
     "Skills and resources only matter if the person holding them is disciplined enough to actually use them well. This branch is about the follow-through — showing up, owning outcomes, and making sound calls under pressure.",
+  definition:
+    "Mindset and responsibility is the discipline to do what you said you'd do, own the consequences of your own decisions, and make sound calls under pressure — without waiting for someone else to hold you accountable. Every skill and resource in this Codex is inert without it; it's the difference between having what you need and actually using it when it counts.",
+  facts: [
+    "Most people default to blaming circumstances, other people, or bad luck for outcomes they had real influence over — it's the easier story to tell, not the honest one.",
+    "Discipline consistently outperforms motivation because motivation is unreliable — it shows up under good conditions and disappears exactly when you need it most.",
+    "Under real pressure, most people don't rise to some higher standard — they fall back to whatever they've actually practiced, not what they intended to do.",
+    "Following through on a commitment you made to yourself, with no one else watching or checking, is one of the few things that reliably builds genuine self-trust.",
+  ],
+  practicalQuestion:
+    "When was the last time you did something hard and inconvenient purely because you said you would — with no one else checking?",
   detailed: true,
+  items: [
+    { name: "Self-discipline", description: "Doing the necessary thing on schedule, regardless of how you feel about it that day." },
+    { name: "Decision-making under pressure", description: "Making sound calls with incomplete information and real consequences — not in a classroom, with a deadline." },
+    { name: "Accountability", description: "Owning the outcome of your own decisions first, before looking at what anyone else did or didn't do." },
+    { name: "Follow-through", description: "Finishing what you started, especially once the initial motivation has worn off." },
+    { name: "Emotional regulation", description: "Staying functional and clear-headed when the situation genuinely isn't." },
+  ],
   connections: [{ path: ["family", "responsibility"] }],
 };
 
