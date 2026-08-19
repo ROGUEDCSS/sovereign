@@ -6,8 +6,8 @@ html {
 }
 
 body {
-  background: #0b0e11;
-  color: #e9e6df;
+  background: var(--bg);
+  color: var(--text-1);
   font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Inter', Arial, sans-serif;
   font-size: 17px;
   line-height: 1.65;
@@ -44,6 +44,8 @@ body {
   --ink: #0b0e11;
   --ink-2: rgba(11,14,17,0.7);
   --amber-on-light: #8a6e28;
+  --fact-strong: #7cb8e8;
+  --opinion-strong: #b0aca3;
 
   --size-xs: 0.7rem;
   --size-label: 0.78rem;
@@ -65,9 +67,35 @@ body {
 }
 
 .card {
-  background: var(--card);
-  border: 1px solid var(--border);
+  background: var(--cream);
+  border: 1px solid rgba(11,14,17,0.15);
   border-radius: 12px;
+  /* Plain CSS inheritance carries the parent's *computed* color, not a
+     live var() reference — so anything inside a card that doesn't set
+     its own color (a bare <h2>, for instance) needs this element to
+     actually resolve --text-1 itself, not just redefine the token for
+     descendants that explicitly reference var(--text-1)/var(--text-2). */
+  color: var(--text-1);
+  /*
+   * Redefining these tokens here (not just the background) is deliberate:
+   * every descendant that reads var(--text-2), var(--border), var(--card)
+   * etc. via an inline style resolves against the NEAREST ancestor
+   * definition, not just :root — so this one block re-points the whole
+   * color system to its light-on-cream equivalents for anything nested
+   * inside a card, without editing every inline style at every call site.
+   */
+  --text-1: var(--ink);
+  --text-2: var(--ink-2);
+  --text-3: rgba(11,14,17,0.5);
+  --border: rgba(11,14,17,0.15);
+  --border-strong: rgba(11,14,17,0.28);
+  --card: rgba(11,14,17,0.045);
+  --card-hover: rgba(11,14,17,0.08);
+  --amber-strong: var(--amber-on-light);
+  --fact-strong: #1a5f96;
+  --opinion-strong: #5c584f;
+  --bg: var(--cream);
+  --bg-raised: rgba(11,14,17,0.03);
 }
 
 .label {
@@ -105,8 +133,8 @@ body {
   font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
 }
 
-.pill-fact { background: rgba(79,156,214,0.14); color: #7cb8e8; }
+.pill-fact { background: rgba(79,156,214,0.14); color: var(--fact-strong); }
 .pill-scenario { background: var(--amber-dim); color: var(--amber-strong); }
-.pill-opinion { background: rgba(138,135,128,0.16); color: #b0aca3; }
+.pill-opinion { background: rgba(138,135,128,0.16); color: var(--opinion-strong); }
 
 a { color: inherit; }

@@ -22,14 +22,13 @@ export function PeekList({ items, variant = "list" }: { items: PeekItem[]; varia
           return (
             <div key={item.label} style={{ position: "relative" }}>
               <button
+                className="card"
                 onMouseEnter={() => setHoverIdx(i)}
                 onMouseLeave={() => setHoverIdx(null)}
                 onFocus={() => setHoverIdx(i)}
                 onBlur={() => setHoverIdx(null)}
                 onClick={() => open(item.target)}
                 style={{
-                  background: "var(--card)",
-                  border: "1px solid var(--border)",
                   borderRadius: "999px",
                   padding: "0.45rem 0.9rem",
                   cursor: "pointer",
@@ -76,6 +75,7 @@ export function PeekList({ items, variant = "list" }: { items: PeekItem[]; varia
         return (
           <div key={item.label} style={{ position: "relative" }}>
             <button
+              className="card"
               onMouseEnter={() => setHoverIdx(i)}
               onMouseLeave={() => setHoverIdx(null)}
               onFocus={() => setHoverIdx(i)}
@@ -86,9 +86,6 @@ export function PeekList({ items, variant = "list" }: { items: PeekItem[]; varia
                 alignItems: "center",
                 justifyContent: "space-between",
                 gap: "0.75rem",
-                background: "var(--card)",
-                border: "1px solid var(--border-strong)",
-                borderRadius: "8px",
                 padding: "0.8rem 1rem",
                 cursor: "pointer",
                 textAlign: "left",

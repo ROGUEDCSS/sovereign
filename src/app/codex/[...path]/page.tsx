@@ -219,7 +219,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
                     key={id}
                     href="/assessment"
                     className="pill"
-                    style={{ background: "var(--card)", color: "var(--text-2)", textDecoration: "none" }}
+                    style={{ background: "var(--cream)", color: "var(--ink-2)", textDecoration: "none" }}
                   >
                     {DOMAINS.find((d) => d.id === id)?.name}
                   </Link>
