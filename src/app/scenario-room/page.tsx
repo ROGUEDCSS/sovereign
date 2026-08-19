@@ -65,14 +65,13 @@ export default function ScenarioRoomPage() {
                 textAlign: "left",
                 padding: "1.1rem 1.25rem",
                 cursor: "pointer",
-                borderColor: selected?.id === s.id ? "var(--amber)" : "var(--border)",
-                background: selected?.id === s.id ? "var(--amber-dim)" : "var(--card)",
+                border: selected?.id === s.id ? "2px solid var(--amber)" : "1px solid transparent",
               }}
             >
               <div className="label" style={{ marginBottom: "0.35rem" }}>
                 Scenario {s.letter}
               </div>
-              <div style={{ fontWeight: 500, color: selected?.id === s.id ? "var(--amber-strong)" : "var(--text-1)" }}>
+              <div style={{ fontWeight: selected?.id === s.id ? 700 : 500 }}>
                 {s.title}
               </div>
             </button>

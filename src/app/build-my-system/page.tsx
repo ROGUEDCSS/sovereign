@@ -53,10 +53,8 @@ export default function BuildMySystemPage() {
               style={{
                 padding: "1rem 1.5rem",
                 cursor: "pointer",
-                borderColor: tier === t ? "var(--amber)" : "var(--border)",
-                background: tier === t ? "var(--amber-dim)" : "var(--card)",
-                color: tier === t ? "var(--amber-strong)" : "var(--text-1)",
-                fontWeight: 500,
+                border: tier === t ? "2px solid var(--amber)" : "1px solid transparent",
+                fontWeight: tier === t ? 700 : 500,
               }}
             >
               {BUDGET_LABELS[t]}

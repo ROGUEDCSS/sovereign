@@ -68,14 +68,15 @@ export default function AssessmentPage() {
                     <button
                       key={opt.label}
                       onClick={() => select(q.id, opt.score)}
-                      className="card"
                       style={{
                         textAlign: "left",
                         padding: "0.85rem 1.1rem",
                         cursor: "pointer",
-                        borderColor: selected ? "var(--amber)" : "var(--border)",
-                        background: selected ? "var(--amber-dim)" : "var(--card)",
-                        color: selected ? "var(--amber-strong)" : "var(--text-1)",
+                        borderRadius: "12px",
+                        border: selected ? "2px solid var(--amber)" : "1px solid transparent",
+                        background: "var(--cream)",
+                        color: "var(--ink)",
+                        fontWeight: selected ? 700 : 500,
                         fontSize: "var(--size-sm)",
                         width: "100%",
                       }}
