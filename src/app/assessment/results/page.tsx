@@ -120,24 +120,17 @@ export default function ResultsPage() {
                   </p>
                 </div>
 
-                <div className="card" style={{ padding: "1.1rem 1.4rem", display: "flex", alignItems: "center", gap: "1.25rem" }}>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.35rem" }}>
-                      <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
-                      <span style={{ color: "var(--danger)", fontSize: "var(--size-sm)", fontWeight: 600, whiteSpace: "nowrap" }}>
-                        {domain.quickAction.cost} · {domain.quickAction.time}
-                      </span>
-                    </div>
-                    <p style={{ fontSize: "var(--size-body)", color: "var(--ink)" }}>{domain.quickAction.why}</p>
-                  </div>
+                <div className="card" style={{ padding: "1.1rem 1.4rem" }}>
+                  <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
+                  <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>{domain.quickAction.why}</p>
+                  <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.75rem" }}>Time: {domain.quickAction.time}</p>
+                  <p style={{ fontSize: "var(--size-body)", color: "var(--ink)" }}>Cost: {domain.quickAction.cost}</p>
                   {actionLink && (
-                    <Link
-                      href={codexHref(actionLink.path)}
-                      className="btn btn-primary"
-                      style={{ flexShrink: 0, padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}
-                    >
-                      Action →
-                    </Link>
+                    <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "0.9rem" }}>
+                      <Link href={codexHref(actionLink.path)} className="btn btn-primary" style={{ padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
+                        Action →
+                      </Link>
+                    </div>
                   )}
                 </div>
               </div>
@@ -168,28 +161,17 @@ export default function ResultsPage() {
           {alsoWorthDoing.map(({ domain }) => {
             const actionLink = codexLinksForDomain(domain.id)[0];
             return (
-              <div
-                key={domain.id}
-                className="card"
-                style={{ padding: "1.1rem 1.4rem", display: "flex", alignItems: "center", gap: "1.25rem" }}
-              >
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.35rem" }}>
-                    <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
-                    <span style={{ color: "var(--danger)", fontSize: "var(--size-sm)", fontWeight: 600, whiteSpace: "nowrap" }}>
-                      {domain.quickAction.cost} · {domain.quickAction.time}
-                    </span>
-                  </div>
-                  <p style={{ fontSize: "var(--size-body)", color: "var(--ink)" }}>{domain.quickAction.why}</p>
-                </div>
+              <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem" }}>
+                <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
+                <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>{domain.quickAction.why}</p>
+                <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.75rem" }}>Time: {domain.quickAction.time}</p>
+                <p style={{ fontSize: "var(--size-body)", color: "var(--ink)" }}>Cost: {domain.quickAction.cost}</p>
                 {actionLink && (
-                  <Link
-                    href={codexHref(actionLink.path)}
-                    className="btn btn-primary"
-                    style={{ flexShrink: 0, padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}
-                  >
-                    Action →
-                  </Link>
+                  <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "0.9rem" }}>
+                    <Link href={codexHref(actionLink.path)} className="btn btn-primary" style={{ padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
+                      Action →
+                    </Link>
+                  </div>
                 )}
               </div>
             );
