@@ -20,7 +20,7 @@ const NAV: NavItem[] = [
     href: "/codex",
     label: "Codex",
     children: [
-      { href: "/assessment", label: "Sovereign Score" },
+      { href: "/assessment", label: "Sovereign Assessment" },
       { href: "/scenario-room", label: "Disaster scenarios" },
       { href: "/build-my-system", label: "Build my system" },
     ],
