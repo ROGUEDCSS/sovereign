@@ -1,175 +1,231 @@
-const swatches: { name: string; token: string; note?: string }[] = [
-  { name: "Background", token: "--bg" },
-  { name: "Background (raised)", token: "--bg-raised" },
-  { name: "Gold", token: "--amber", note: "buttons, headings, active state" },
-  { name: "Gold (strong / hover)", token: "--amber-strong" },
-  { name: "White block", token: "--cream", note: "every .card is this — pure white, not cream" },
-  { name: "Danger / red", token: "--danger" },
-  { name: "Good / green", token: "--good" },
-  { name: "Text on dark (primary)", token: "--text-1" },
-  { name: "Text on dark (secondary)", token: "--text-2" },
-  { name: "Text on dark (muted)", token: "--text-3" },
-  { name: "Ink (text on white)", token: "--ink" },
-];
+interface Row {
+  name: string;
+  example: React.ReactNode;
+  technical: string;
+  rule: string;
+}
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Swatch({ color }: { color: string }) {
   return (
-    <div style={{ marginBottom: "3.5rem" }}>
-      <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 700, marginBottom: "1.25rem", borderBottom: "1px solid var(--border)", paddingBottom: "0.75rem" }}>
-        {title}
-      </h2>
+    <div
+      style={{
+        width: 36,
+        height: 36,
+        borderRadius: "6px",
+        background: color,
+        border: "1px solid var(--border-strong)",
+      }}
+    />
+  );
+}
+
+function WhiteExample({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ background: "#fff", borderRadius: "8px", padding: "0.75rem 1rem" }}>
       {children}
     </div>
   );
 }
 
-function Row({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div style={{ display: "flex", alignItems: "baseline", gap: "1.5rem", padding: "1rem 0", borderTop: "1px solid var(--border)" }}>
-      <div style={{ width: 170, flexShrink: 0, color: "var(--text-3)", fontSize: "var(--size-sm)" }}>{label}</div>
-      <div style={{ flex: 1 }}>{children}</div>
-    </div>
-  );
-}
+const ROWS: Row[] = [
+  {
+    name: "Page title",
+    example: <span style={{ fontSize: "var(--size-h2)", fontWeight: 500 }}>Page title</span>,
+    technical: "var(--size-h2), weight 500",
+    rule: "One per page. Always the <h1> tag, nothing else uses this size.",
+  },
+  {
+    name: "Section heading",
+    example: <span style={{ fontSize: "var(--size-h3)", fontWeight: 700 }}>Section heading</span>,
+    technical: "var(--size-h3), weight 700",
+    rule: "Every \"Sources\", \"Connections\", \"Related X\" style heading. Always this exact size, never h4.",
+  },
+  {
+    name: "Card / item title",
+    example: (
+      <WhiteExample>
+        <span style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)" }}>Card title</span>
+      </WhiteExample>
+    ),
+    technical: "var(--size-h4), weight 700, color var(--ink)",
+    rule: "Titles one card or item, not a whole section. Explicit black — never relies on inherited gold.",
+  },
+  {
+    name: "Body paragraph",
+    example: <span style={{ fontSize: "var(--size-body)" }}>Normal paragraph text</span>,
+    technical: "var(--size-body), weight 400",
+    rule: "One size, everywhere — description, explanation, answer, caption, list item. No separate small/secondary size.",
+  },
+  {
+    name: "Body paragraph — bold",
+    example: <span style={{ fontSize: "var(--size-body)", fontWeight: 700 }}>Bold paragraph text</span>,
+    technical: "var(--size-body), weight 700",
+    rule: "Exact same size as normal. Weight is the only lever for making a paragraph stand out.",
+  },
+  {
+    name: "Body paragraph — muted",
+    example: <span style={{ fontSize: "var(--size-body)", color: "var(--text-3)" }}>Muted paragraph text</span>,
+    technical: "var(--size-body), color var(--text-3) / var(--ink-2)",
+    rule: "Colour de-emphasises, not a smaller font-size. Still var(--size-body).",
+  },
+  {
+    name: "Kicker / label",
+    example: <span className="label" style={{ color: "var(--amber-strong)" }}>Kicker label</span>,
+    technical: 'className="label" — var(--size-label), uppercase, letter-spacing 0.08em',
+    rule: "Dark background only. Never used inside a white card as a substitute heading.",
+  },
+  {
+    name: "White block",
+    example: <WhiteExample><span style={{ color: "var(--ink)" }}>A card</span></WhiteExample>,
+    technical: "background: var(--cream) = #fff",
+    rule: "Every .card is solid white, no cream tint. Text inside must be explicit black, never inherited.",
+  },
+  {
+    name: "Callout",
+    example: (
+      <div style={{ background: "var(--amber)", borderRadius: "8px", padding: "0.75rem 1rem" }}>
+        <span style={{ color: "#1a1005", fontWeight: 700 }}>Callout</span>
+      </div>
+    ),
+    technical: "background: var(--amber), color #1a1005",
+    rule: "Reserved for the single most important prompt on a page. Not a general card style.",
+  },
+  {
+    name: "Button — primary",
+    example: <button className="btn btn-primary" style={{ padding: "0.5rem 1rem" }}>Action</button>,
+    technical: 'className="btn btn-primary"',
+    rule: "The default action button. Solid gold background, #1a1005 text.",
+  },
+  {
+    name: "Button — secondary",
+    example: <button className="btn btn-outline" style={{ padding: "0.5rem 1rem" }}>Action</button>,
+    technical: 'className="btn btn-outline"',
+    rule: "Same solid gold treatment as primary. There is no ghost/transparent button on this site.",
+  },
+  {
+    name: "Colour — Background",
+    example: <Swatch color="var(--bg)" />,
+    technical: "var(--bg)",
+    rule: "The page background, everywhere.",
+  },
+  {
+    name: "Colour — Background raised",
+    example: <Swatch color="var(--bg-raised)" />,
+    technical: "var(--bg-raised)",
+    rule: "A dark surface one step up from the page background — nav dropdowns, tooltips.",
+  },
+  {
+    name: "Colour — Gold",
+    example: <Swatch color="var(--amber)" />,
+    technical: "var(--amber)",
+    rule: "Buttons, callouts, gold headings, active nav state.",
+  },
+  {
+    name: "Colour — Gold, strong",
+    example: <Swatch color="var(--amber-strong)" />,
+    technical: "var(--amber-strong)",
+    rule: "Hover state on gold, and gold headings on the dark background.",
+  },
+  {
+    name: "Colour — White block",
+    example: <Swatch color="var(--cream)" />,
+    technical: "var(--cream)",
+    rule: "Every .card background. Pure white, not off-white.",
+  },
+  {
+    name: "Colour — Danger",
+    example: <Swatch color="var(--danger)" />,
+    technical: "var(--danger)",
+    rule: "Red-tier score, warnings, cost/time flags.",
+  },
+  {
+    name: "Colour — Good",
+    example: <Swatch color="var(--good)" />,
+    technical: "var(--good)",
+    rule: "Green-tier score, positive state.",
+  },
+  {
+    name: "Colour — Text on dark, primary",
+    example: <Swatch color="var(--text-1)" />,
+    technical: "var(--text-1)",
+    rule: "Default body text colour on the dark background.",
+  },
+  {
+    name: "Colour — Text on dark, secondary",
+    example: <Swatch color="var(--text-2)" />,
+    technical: "var(--text-2)",
+    rule: "Muted body text on the dark background.",
+  },
+  {
+    name: "Colour — Text on dark, muted",
+    example: <Swatch color="var(--text-3)" />,
+    technical: "var(--text-3)",
+    rule: "Quietest text on the dark background — captions, meta.",
+  },
+  {
+    name: "Colour — Ink",
+    example: <Swatch color="var(--ink)" />,
+    technical: "var(--ink)",
+    rule: "Text colour on every white block.",
+  },
+];
 
 export default function StyleGuidePage() {
   return (
-    <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
-      <div style={{ maxWidth: 780, margin: "0 auto" }}>
-        <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.75rem" }}>
-          Internal reference — not linked in navigation
-        </div>
-        <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>
-          Sovereign style guide
-        </h1>
-        <p style={{ color: "var(--text-2)", marginBottom: "3rem", maxWidth: 620 }}>
-          The agreed scale, applied consistently everywhere from here on. When a page looks
-          inconsistent, it&apos;s drifted from this — fix it back to match this page, not the
-          other way around.
-        </p>
-
-        <Section title="Type scale — five levels, no others">
-          <Row label="1. Page title (h1)">
-            <div style={{ fontSize: "var(--size-h2)", fontWeight: 500 }}>The name of this page</div>
-            <div style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.35rem" }}>
-              var(--size-h2), weight 500. One per page, always the h1.
-            </div>
-          </Row>
-          <Row label="2. Section heading">
-            <div style={{ fontSize: "var(--size-h3)", fontWeight: 700 }}>A section of this page</div>
-            <div style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.35rem" }}>
-              var(--size-h3), weight 700. Every "Sources", "Connections", "Related X" heading —
-              always this exact size, never h4.
-            </div>
-          </Row>
-          <Row label="3. Card / item title">
-            <div style={{ fontSize: "var(--size-h4)", fontWeight: 700 }}>Title of one card or item</div>
-            <div style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.35rem" }}>
-              var(--size-h4), weight 700. Item names, kicker-titles like "Definition"/"Facts",
-              plan-step titles — anything that titles one card, not a whole section.
-            </div>
-          </Row>
-          <Row label="4. Body paragraph">
-            <div style={{ fontSize: "var(--size-body)", marginBottom: "0.5rem" }}>
-              Normal paragraph. Same size everywhere — a description, an explanation, an answer,
-              a caption, a list item. No separate "secondary" or "small print" paragraph size.
-            </div>
-            <div style={{ fontSize: "var(--size-body)", fontWeight: 700, marginBottom: "0.5rem" }}>
-              Bold paragraph. Exact same size as above — only the weight changes when a
-              paragraph needs to stand out.
-            </div>
-            <div style={{ color: "var(--text-3)", fontSize: "var(--size-body)" }}>
-              This line is quieter too, and it is still var(--size-body) — muted colour does the
-              work, not a smaller font-size.
-            </div>
-            <div style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.6rem" }}>
-              One size, always: var(--size-body). Bold for emphasis, colour for de-emphasis —
-              never a smaller font-size for "secondary" text. var(--size-sm)/var(--size-xs) are
-              reserved for meta chrome only (pill tags, timestamps, breadcrumbs) — never a
-              paragraph of actual content.
-            </div>
-          </Row>
-          <Row label="5. Kicker / label">
-            <div className="label" style={{ color: "var(--amber-strong)" }}>A small uppercase kicker</div>
-            <div style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.35rem" }}>
-              className=&quot;label&quot; (var(--size-label), uppercase, letter-spaced). Dark
-              background only — breadcrumb-style context, never a heading substitute inside a
-              white card.
-            </div>
-          </Row>
-        </Section>
-
-        <Section title="Color on white blocks — the one rule that keeps breaking">
-          <p style={{ color: "var(--text-2)", marginBottom: "1.25rem" }}>
-            Every <code>.card</code> is pure white (<code>#fff</code>). Inside one, text must be
-            explicit black — the global heading rule (h1–h4, strong = gold) is written for the
-            dark page background and will silently turn card titles into muddy gold-on-white if
-            not overridden.
-          </p>
-          <div className="card" style={{ padding: "1.25rem 1.5rem" }}>
-            <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)", marginBottom: "0.4rem" }}>
-              Correct: title is var(--ink)
-            </div>
-            <p style={{ color: "var(--ink-2)" }}>
-              Body copy inside a card is var(--ink-2), not var(--text-2) — the card locally
-              redefines that token, but always set color explicitly on headings/strong tags
-              rather than relying on it.
-            </p>
-          </div>
-        </Section>
-
-        <Section title="Callout — the one deliberate exception">
-          <p style={{ color: "var(--text-2)", marginBottom: "1.25rem" }}>
-            A single, deliberately-loud pattern for the one most important prompt on a page (e.g.
-            the Codex &quot;practical question&quot;). Solid gold, black text, larger than a
-            normal card title so it doesn&apos;t get confused with one.
-          </p>
-          <div className="card" style={{ padding: "1.25rem 1.5rem", background: "var(--amber)" }}>
-            <div style={{ fontSize: "var(--size-h3)", fontWeight: 700, color: "#1a1005", marginBottom: "0.5rem" }}>
-              The callout title
-            </div>
-            <p style={{ fontSize: "var(--size-body)", fontWeight: 500, color: "#1a1005" }}>
-              The callout body text — still readable at a glance, still clearly a step down from
-              the title above it.
-            </p>
-          </div>
-        </Section>
-
-        <Section title="Buttons">
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <button className="btn btn-primary">Primary action</button>
-            <button className="btn btn-outline">Secondary action</button>
-          </div>
-          <div style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.75rem" }}>
-            Both render solid gold (#1a1005 text) — there is no ghost/transparent button style on
-            this site.
-          </div>
-        </Section>
-
-        <Section title="Colour tokens">
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-            {swatches.map((s) => (
-              <div key={s.token} style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-                <div
+    <main className="container" style={{ paddingTop: "2.5rem", paddingBottom: "6rem" }}>
+      <div style={{ overflowX: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", minWidth: 1100, tableLayout: "fixed" }}>
+          <colgroup>
+            <col style={{ width: 50 }} />
+            <col style={{ width: 180 }} />
+            <col style={{ width: 420 }} />
+            <col style={{ width: 220 }} />
+            <col style={{ width: 230 }} />
+          </colgroup>
+          <thead>
+            <tr style={{ borderBottom: "1px solid var(--border-strong)" }}>
+              {["#", "Element", "Example", "Technical", "Rule"].map((h) => (
+                <th
+                  key={h}
                   style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: "8px",
-                    background: `var(${s.token})`,
-                    border: "1px solid var(--border-strong)",
-                    flexShrink: 0,
+                    textAlign: "left",
+                    padding: "0.75rem 1rem",
+                    fontSize: "var(--size-label)",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.06em",
+                    color: "var(--text-3)",
+                    fontWeight: 500,
                   }}
-                />
-                <div>
-                  <div style={{ fontWeight: 500 }}>
-                    {s.name} <span style={{ color: "var(--text-3)", fontSize: "var(--size-sm)" }}>{s.token}</span>
-                  </div>
-                  {s.note && <div style={{ color: "var(--text-3)", fontSize: "var(--size-sm)" }}>{s.note}</div>}
-                </div>
-              </div>
+                >
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {ROWS.map((row, i) => (
+              <tr key={row.name} style={{ borderBottom: "1px solid var(--border)" }}>
+                <td style={{ padding: "1rem", color: "var(--text-3)", verticalAlign: "middle" }}>{i + 1}</td>
+                <td style={{ padding: "1rem", verticalAlign: "middle" }}>{row.name}</td>
+                <td style={{ padding: "1rem", verticalAlign: "middle" }}>{row.example}</td>
+                <td
+                  style={{
+                    padding: "1rem",
+                    verticalAlign: "middle",
+                    fontFamily: "monospace",
+                    fontSize: "var(--size-sm)",
+                    color: "var(--text-2)",
+                  }}
+                >
+                  {row.technical}
+                </td>
+                <td style={{ padding: "1rem", verticalAlign: "middle", color: "var(--text-2)", fontSize: "var(--size-sm)" }}>
+                  {row.rule}
+                </td>
+              </tr>
             ))}
-          </div>
-        </Section>
+          </tbody>
+        </table>
       </div>
     </main>
   );
