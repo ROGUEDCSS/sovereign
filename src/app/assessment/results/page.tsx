@@ -39,7 +39,7 @@ export default function ResultsPage() {
   if (!answers) {
     return (
       <main className="container" style={{ paddingTop: "4rem" }}>
-        <p style={{ color: "var(--text-2)" }}>
+        <p style={{ fontSize: "var(--size-body)", color: "#fff" }}>
           You haven&apos;t been scored yet.{" "}
           <Link href="/assessment" style={{ color: "var(--amber-strong)" }}>
             Get your Sovereign Score
@@ -85,19 +85,19 @@ export default function ResultsPage() {
               </span>
               <span style={{ fontSize: "var(--size-label)", color: "var(--text-3)" }}>/ 12 Domains</span>
             </div>
-            <span style={{ fontSize: "calc(var(--size-h3) / 2)", fontWeight: 700, color: status.color, textAlign: "center" }}>
+            <span style={{ fontSize: "var(--size-sm)", fontWeight: 700, color: status.color, textAlign: "center" }}>
               {status.label}
             </span>
           </div>
         </div>
-        <p style={{ color: "#fff", marginBottom: "2.5rem" }}>
+        <p style={{ fontSize: "var(--size-body)", color: "#fff", marginBottom: "2.5rem" }}>
           Sovereignty is a goal, not a binary state — this tells you where to go, what to fix.
         </p>
 
         <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
           How &quot;Sovereign&quot; are you?
         </h2>
-        <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem", background: "#fff" }}>
+        <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
           {scored.map(({ domain, tier }, i) => (
             <div
               key={domain.id}
@@ -121,7 +121,7 @@ export default function ResultsPage() {
               />
               <div>
                 <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
-                <p style={{ color: "var(--ink)", marginTop: "0.2rem" }}>
+                <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>
                   {domain.tierAdvice[tier]}
                 </p>
               </div>
@@ -132,7 +132,7 @@ export default function ResultsPage() {
         <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
           Your biggest vulnerabilities
         </h2>
-        <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem", background: "#fff" }}>
+        <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
           <ol style={{ paddingLeft: "1.25rem" }}>
             {weakest.map(({ domain }) => (
               <li key={domain.id} style={{ marginBottom: "0.5rem" }}>
@@ -141,7 +141,7 @@ export default function ResultsPage() {
                   <Link
                     key={link.path.join("/")}
                     href={codexHref(link.path)}
-                    style={{ marginLeft: "0.6rem", color: "var(--amber-on-light)" }}
+                    style={{ marginLeft: "0.6rem", fontSize: "var(--size-body)", color: "var(--amber-on-light)" }}
                   >
                     Read: {link.label} →
                   </Link>
@@ -161,7 +161,7 @@ export default function ResultsPage() {
               <div
                 key={domain.id}
                 className="card"
-                style={{ padding: "1.1rem 1.4rem", background: "#fff", display: "flex", alignItems: "center", gap: "1.25rem" }}
+                style={{ padding: "1.1rem 1.4rem", display: "flex", alignItems: "center", gap: "1.25rem" }}
               >
                 <div style={{ flex: 1 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.35rem" }}>
@@ -170,7 +170,7 @@ export default function ResultsPage() {
                       {domain.quickAction.cost} · {domain.quickAction.time}
                     </span>
                   </div>
-                  <p style={{ color: "var(--ink)" }}>{domain.quickAction.why}</p>
+                  <p style={{ fontSize: "var(--size-body)", color: "var(--ink)" }}>{domain.quickAction.why}</p>
                 </div>
                 {actionLink && (
                   <Link
