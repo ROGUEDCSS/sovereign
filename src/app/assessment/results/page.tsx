@@ -122,7 +122,7 @@ export default function ResultsPage() {
                 </div>
 
                 <div className="card" style={{ padding: "1.1rem 1.4rem" }}>
-                  <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
+                  <strong style={{ display: "block", textAlign: "center", fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
                   <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>{domain.quickAction.why}</p>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem", marginTop: "0.9rem" }}>
                     <div>
@@ -153,15 +153,15 @@ export default function ResultsPage() {
                 const actionLink = codexLinksForDomain(domain.id)[0];
                 return (
                   <div key={domain.id}>
-                    <div className="card" style={{ padding: "1.5rem", marginBottom: "0.9rem" }}>
-                      <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
-                      <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>
+                    <div className="card" style={{ padding: "1.5rem", background: "var(--amber)", marginBottom: "0.9rem" }}>
+                      <strong style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "#1a1005" }}>{domain.name}</strong>
+                      <p style={{ fontSize: "var(--size-body)", fontWeight: 700, color: "#1a1005", marginTop: "0.2rem" }}>
                         {domain.tierAdvice[tier]}
                       </p>
                     </div>
 
                     <div className="card" style={{ padding: "1.1rem 1.4rem" }}>
-                      <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
+                      <strong style={{ display: "block", textAlign: "center", fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
                       <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>{domain.quickAction.why}</p>
                       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem", marginTop: "0.9rem" }}>
                         <div>
@@ -190,9 +190,9 @@ export default function ResultsPage() {
             </h2>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem", marginBottom: "3rem" }}>
               {greenDomains.map(({ domain, tier }) => (
-                <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem" }}>
-                  <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
-                  <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>
+                <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem", background: "var(--amber)" }}>
+                  <strong style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "#1a1005" }}>{domain.name}</strong>
+                  <p style={{ fontSize: "var(--size-body)", fontWeight: 700, color: "#1a1005", marginTop: "0.2rem" }}>
                     {domain.tierAdvice[tier]}
                   </p>
                 </div>
