@@ -116,18 +116,6 @@ const ROWS: Row[] = [
     rule: "Buttons, callouts, gold headings, active nav state.",
   },
   {
-    name: "Colour — Gold, strong",
-    example: <Swatch color="var(--amber-strong)" />,
-    technical: "var(--amber-strong)",
-    rule: "Hover state on gold, and gold headings on the dark background.",
-  },
-  {
-    name: "Colour — Card",
-    example: <Swatch color="var(--white-block)" />,
-    technical: "var(--white-block)",
-    rule: "Every .card background. Pure white, not off-white.",
-  },
-  {
     name: "Colour — Danger",
     example: <Swatch color="var(--danger)" />,
     technical: "var(--danger)",
