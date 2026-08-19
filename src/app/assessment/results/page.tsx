@@ -189,14 +189,28 @@ export default function ResultsPage() {
               Totally Sovereign
             </h2>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem", marginBottom: "3rem" }}>
-              {greenDomains.map(({ domain, tier }) => (
-                <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem", background: "var(--amber)" }}>
-                  <strong style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "#1a1005" }}>{domain.name}</strong>
-                  <p style={{ fontSize: "var(--size-body)", fontWeight: 700, color: "#1a1005", marginTop: "0.2rem" }}>
-                    {domain.tierAdvice[tier]}
-                  </p>
-                </div>
-              ))}
+              {greenDomains.map(({ domain, tier }) => {
+                const learnMoreLink = codexLinksForDomain(domain.id)[0];
+                return (
+                  <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem", background: "var(--amber)" }}>
+                    <strong style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "#1a1005" }}>{domain.name}</strong>
+                    <p style={{ fontSize: "var(--size-body)", fontWeight: 700, color: "#1a1005", marginTop: "0.2rem" }}>
+                      {domain.tierAdvice[tier]}
+                    </p>
+                    {learnMoreLink && (
+                      <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "0.9rem" }}>
+                        <Link
+                          href={codexHref(learnMoreLink.path)}
+                          className="btn btn-white"
+                          style={{ padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}
+                        >
+                          Learn more →
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </>
         )}
