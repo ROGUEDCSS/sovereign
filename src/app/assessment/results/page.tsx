@@ -61,31 +61,33 @@ export default function ResultsPage() {
   return (
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
-        <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 700, color: "#fff", textAlign: "left", marginBottom: "0.5rem" }}>
-          Your Sovereign Score
-        </h1>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.85rem", margin: "0.5rem 0 0.25rem" }}>
-          <div
-            style={{
-              width: 130,
-              height: 130,
-              borderRadius: "50%",
-              border: `3px solid ${status.color}`,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "var(--bg-raised)",
-            }}
-          >
-            <span style={{ fontSize: "var(--size-h1)", fontWeight: 700, color: "var(--amber-strong)", lineHeight: 1 }}>
-              {greenCount}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1.5rem", flexWrap: "wrap", margin: "0 0 1.5rem" }}>
+          <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 700, color: "#fff" }}>
+            Your Sovereign Score
+          </h1>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.6rem" }}>
+            <div
+              style={{
+                width: 130,
+                height: 130,
+                borderRadius: "50%",
+                border: `3px solid ${status.color}`,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                background: "var(--bg-raised)",
+              }}
+            >
+              <span style={{ fontSize: "var(--size-h1)", fontWeight: 700, color: "var(--amber-strong)", lineHeight: 1 }}>
+                {greenCount}
+              </span>
+              <span style={{ fontSize: "var(--size-label)", color: "var(--text-3)" }}>/ 12 Domains</span>
+            </div>
+            <span style={{ fontSize: "calc(var(--size-h3) / 2)", fontWeight: 700, color: status.color, textAlign: "center" }}>
+              {status.label}
             </span>
-            <span style={{ fontSize: "var(--size-label)", color: "var(--text-3)" }}>/ 12 Domains</span>
           </div>
-          <span style={{ fontSize: "var(--size-h3)", fontWeight: 700, color: status.color, textAlign: "right" }}>
-            {status.label}
-          </span>
         </div>
         <p style={{ color: "var(--text-2)", marginBottom: "2.5rem" }}>
           Sovereignty is a goal, not a binary state — this tells you where to go, what to fix.
