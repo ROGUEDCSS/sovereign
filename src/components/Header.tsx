@@ -27,6 +27,14 @@ const NAV: NavItem[] = [
     ],
   },
   {
+    href: "/checklist",
+    label: "Free Checklist",
+  },
+  {
+    href: "/consultation",
+    label: "Consultation",
+  },
+  {
     href: "/style-guide",
     label: "Style guide",
   },
