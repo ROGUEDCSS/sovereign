@@ -57,6 +57,14 @@ const IDENTITY: CodexNode = {
   slug: "identity",
   name: "Identity",
   tagline: "Who you are, how you prove it, and how much of it you have to hand over to do so.",
+  definition:
+    "Identity is your ability to prove who you are — to institutions, to strangers, and to yourself — without any single document, device, or company being the only thing standing between you and being believed.",
+  facts: [
+    "For most people, identity is provable through only one primary channel — a phone, or a single government-issued document. Losing that one channel is an ordinary event (a stolen phone, a house fire, a lost wallet), not a rare catastrophe.",
+    "The World Wide Web Consortium's Verifiable Credentials Data Model — a real, published web standard — formalises digital identity into three separate roles (issuer, holder, verifier) specifically so no single party has to hold or control everything.",
+    "Replacing a lost primary ID document typically requires other forms of ID to apply for it — a bootstrapping problem for anyone whose identity proof was concentrated in that one document.",
+    "Account-takeover attacks overwhelmingly target the single weakest verification channel available — SIM-swap attacks against phone-based two-factor authentication are a well-documented example of exploiting exactly this kind of single point of failure.",
+  ],
   practicalQuestion: "How can you prove what's actually necessary about yourself, to whoever needs it, without surrendering everything else?",
   detailed: true,
   sovereignFramework: true,
