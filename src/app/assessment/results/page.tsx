@@ -127,7 +127,7 @@ export default function ResultsPage() {
             <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem", background: "#fff" }}>
               <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.35rem" }}>
                 <strong style={{ color: "var(--ink)" }}>{domain.quickAction.title}</strong>
-                <span style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", whiteSpace: "nowrap" }}>
+                <span style={{ color: "var(--danger)", fontSize: "var(--size-sm)", fontWeight: 600, whiteSpace: "nowrap" }}>
                   {domain.quickAction.cost} · {domain.quickAction.time}
                 </span>
               </div>
