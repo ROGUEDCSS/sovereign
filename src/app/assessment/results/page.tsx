@@ -60,8 +60,9 @@ export default function ResultsPage() {
     (a, b) => a.score - b.score
   );
   const greenCount = scored.filter((s) => s.tier === "green").length;
-  const weakest = scored.slice(0, 3);
-  const alsoWorthDoing = scored.slice(3, 5);
+  const redDomains = scored.filter((s) => s.tier === "red");
+  const amberDomains = scored.filter((s) => s.tier === "amber");
+  const greenDomains = scored.filter((s) => s.tier === "green");
   const status = sovereigntyStatus(greenCount);
 
   return (
@@ -109,7 +110,7 @@ export default function ResultsPage() {
           Urgent Action Needed
         </h2>
         <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", marginBottom: "2.5rem" }}>
-          {weakest.map(({ domain, tier }) => {
+          {redDomains.map(({ domain, tier }) => {
             const actionLink = codexLinksForDomain(domain.id)[0];
             return (
               <div key={domain.id}>
@@ -154,32 +155,61 @@ export default function ResultsPage() {
           ))}
         </div>
 
-        {alsoWorthDoing.length > 0 && (
+        {amberDomains.length > 0 && (
           <>
-            <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
-              Also worth doing
+            <h2 style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
+              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "var(--amber)", flexShrink: 0 }} />
+              Action Over Time
+            </h2>
+            <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", marginBottom: "2.5rem" }}>
+              {amberDomains.map(({ domain, tier }) => {
+                const actionLink = codexLinksForDomain(domain.id)[0];
+                return (
+                  <div key={domain.id}>
+                    <div className="card" style={{ padding: "1.5rem", marginBottom: "0.9rem" }}>
+                      <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
+                      <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>
+                        {domain.tierAdvice[tier]}
+                      </p>
+                    </div>
+
+                    <div className="card" style={{ padding: "1.1rem 1.4rem" }}>
+                      <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
+                      <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>{domain.quickAction.why}</p>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem", marginTop: "0.9rem" }}>
+                        <div>
+                          <p style={{ fontSize: "var(--size-sm)", color: "var(--danger)", fontWeight: 600 }}>Time: {domain.quickAction.time}</p>
+                          <p style={{ fontSize: "var(--size-sm)", color: "var(--danger)", fontWeight: 600 }}>Cost: {domain.quickAction.cost}</p>
+                        </div>
+                        {actionLink && (
+                          <Link href={codexHref(actionLink.path)} className="btn btn-primary" style={{ flexShrink: 0, padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
+                            Action →
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
+
+        {greenDomains.length > 0 && (
+          <>
+            <h2 style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
+              <span style={{ width: 10, height: 10, borderRadius: "50%", background: "var(--good)", flexShrink: 0 }} />
+              Totally Sovereign
             </h2>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem", marginBottom: "3rem" }}>
-          {alsoWorthDoing.map(({ domain }) => {
-            const actionLink = codexLinksForDomain(domain.id)[0];
-            return (
-              <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem" }}>
-                <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
-                <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>{domain.quickAction.why}</p>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem", marginTop: "0.9rem" }}>
-                  <div>
-                    <p style={{ fontSize: "var(--size-sm)", color: "var(--danger)", fontWeight: 600 }}>Time: {domain.quickAction.time}</p>
-                    <p style={{ fontSize: "var(--size-sm)", color: "var(--danger)", fontWeight: 600 }}>Cost: {domain.quickAction.cost}</p>
-                  </div>
-                  {actionLink && (
-                    <Link href={codexHref(actionLink.path)} className="btn btn-primary" style={{ flexShrink: 0, padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
-                      Action →
-                    </Link>
-                  )}
+              {greenDomains.map(({ domain, tier }) => (
+                <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem" }}>
+                  <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
+                  <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>
+                    {domain.tierAdvice[tier]}
+                  </p>
                 </div>
-              </div>
-            );
-          })}
+              ))}
             </div>
           </>
         )}
