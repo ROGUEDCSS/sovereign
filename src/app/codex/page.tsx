@@ -55,7 +55,7 @@ export default function CodexIndexPage() {
                   : undefined
               }
             >
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", marginBottom: "0.3rem" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", marginBottom: "1.25rem" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                   <span
                     style={{
