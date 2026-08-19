@@ -64,14 +64,14 @@ export default function ResultsPage() {
         <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 700, color: "#fff", textAlign: "left", marginBottom: "0.5rem" }}>
           Your Sovereign Score
         </h1>
-        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "0.75rem", margin: "0.5rem 0 0.25rem", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "flex-end", gap: "1.5rem", margin: "0.5rem 0 0.25rem", flexWrap: "wrap" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem" }}>
             <span style={{ fontSize: "var(--size-stat)", fontWeight: 500, color: "var(--amber-strong)" }}>
               {greenCount}
             </span>
             <span style={{ fontSize: "var(--size-stat-suffix)", color: "var(--text-3)" }}>/ 12 Domains</span>
           </div>
-          <span style={{ fontSize: "var(--size-h3)", fontWeight: 700, color: status.color, marginLeft: "auto", textAlign: "right" }}>
+          <span style={{ fontSize: "var(--size-h3)", fontWeight: 700, color: status.color, textAlign: "right" }}>
             {status.label}
           </span>
         </div>
