@@ -75,7 +75,7 @@ export function PeekProvider({ children }: { children: React.ReactNode }) {
                     height: 26,
                     borderRadius: "50%",
                     cursor: "pointer",
-                    fontSize: "0.95rem",
+                    fontSize: "var(--size-sm)",
                     display: "inline-flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -85,8 +85,8 @@ export function PeekProvider({ children }: { children: React.ReactNode }) {
                   ✕
                 </button>
               </div>
-              <h2 style={{ fontSize: "1.35rem", fontWeight: 500, margin: "0 0 0.4rem" }}>{content.title}</h2>
-              <p style={{ fontSize: "0.9rem", color: "var(--text-2)", margin: 0, lineHeight: 1.5 }}>{content.tagline}</p>
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, margin: "0 0 0.4rem" }}>{content.title}</h2>
+              <p style={{ fontSize: "var(--size-sm)", color: "var(--text-2)", margin: 0, lineHeight: 1.5 }}>{content.tagline}</p>
             </div>
 
             <div style={{ padding: "1.2rem 1.4rem 1.6rem", overflowY: "auto", flex: 1 }}>
@@ -97,14 +97,14 @@ export function PeekProvider({ children }: { children: React.ReactNode }) {
               {content.whyItMatters && (
                 <div style={{ marginBottom: "1.2rem" }}>
                   <div className="label" style={{ marginBottom: "0.35rem" }}>Why it matters</div>
-                  <p style={{ fontSize: "0.86rem", color: "var(--text-2)", lineHeight: 1.55, margin: 0 }}>{content.whyItMatters}</p>
+                  <p style={{ fontSize: "var(--size-sm)", color: "var(--text-2)", lineHeight: 1.55, margin: 0 }}>{content.whyItMatters}</p>
                 </div>
               )}
 
               {content.pros && content.pros.length > 0 && (
                 <div style={{ marginBottom: "1.2rem" }}>
                   <div className="label" style={{ marginBottom: "0.5rem", color: "var(--good)" }}>Pros</div>
-                  <ul style={{ paddingLeft: "1.1rem", color: "var(--text-2)", fontSize: "0.84rem" }}>
+                  <ul style={{ paddingLeft: "1.1rem", color: "var(--text-2)", fontSize: "var(--size-sm)" }}>
                     {content.pros.map((p) => (
                       <li key={p} style={{ marginBottom: "0.5rem", lineHeight: 1.5 }}>{p}</li>
                     ))}
@@ -115,7 +115,7 @@ export function PeekProvider({ children }: { children: React.ReactNode }) {
               {content.cons && content.cons.length > 0 && (
                 <div style={{ marginBottom: "1.2rem" }}>
                   <div className="label" style={{ marginBottom: "0.5rem", color: "var(--danger)" }}>Cons</div>
-                  <ul style={{ paddingLeft: "1.1rem", color: "var(--text-2)", fontSize: "0.84rem" }}>
+                  <ul style={{ paddingLeft: "1.1rem", color: "var(--text-2)", fontSize: "var(--size-sm)" }}>
                     {content.cons.map((c) => (
                       <li key={c} style={{ marginBottom: "0.5rem", lineHeight: 1.5 }}>{c}</li>
                     ))}
@@ -127,9 +127,9 @@ export function PeekProvider({ children }: { children: React.ReactNode }) {
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "1.2rem" }}>
                   {content.items.map((it) => (
                     <div key={it.name} className="card" style={{ padding: "0.85rem 1rem" }}>
-                      <strong style={{ fontSize: "0.88rem" }}>{it.name}</strong>
+                      <strong style={{ fontSize: "var(--size-sm)" }}>{it.name}</strong>
                       {it.description && (
-                        <p style={{ margin: "0.25rem 0 0", fontSize: "0.82rem", color: "var(--text-2)", lineHeight: 1.5 }}>
+                        <p style={{ margin: "0.25rem 0 0", fontSize: "var(--size-sm)", color: "var(--text-2)", lineHeight: 1.5 }}>
                           {it.description}
                         </p>
                       )}
@@ -141,7 +141,7 @@ export function PeekProvider({ children }: { children: React.ReactNode }) {
               {content.facts && content.facts.length > 0 && (
                 <div style={{ marginBottom: "1.2rem" }}>
                   <div className="label" style={{ marginBottom: "0.5rem" }}>Evidence</div>
-                  <ul style={{ paddingLeft: "1.1rem", color: "var(--text-2)", fontSize: "0.86rem" }}>
+                  <ul style={{ paddingLeft: "1.1rem", color: "var(--text-2)", fontSize: "var(--size-sm)" }}>
                     {content.facts.map((f) => (
                       <li key={f} style={{ marginBottom: "0.5rem", lineHeight: 1.5 }}>
                         {f}
@@ -152,13 +152,13 @@ export function PeekProvider({ children }: { children: React.ReactNode }) {
               )}
 
               {content.meta && (
-                <p style={{ fontSize: "0.78rem", color: "var(--text-3)", marginBottom: "1.2rem" }}>Source: {content.meta}</p>
+                <p style={{ fontSize: "var(--size-label)", color: "var(--text-3)", marginBottom: "1.2rem" }}>Source: {content.meta}</p>
               )}
 
               {content.furtherReading && content.furtherReading.length > 0 && (
                 <div style={{ marginBottom: "1.2rem" }}>
                   <div className="label" style={{ marginBottom: "0.5rem" }}>Further reading</div>
-                  <ul style={{ paddingLeft: "1.1rem", color: "var(--text-2)", fontSize: "0.82rem" }}>
+                  <ul style={{ paddingLeft: "1.1rem", color: "var(--text-2)", fontSize: "var(--size-sm)" }}>
                     {content.furtherReading.map((r) => (
                       <li key={r} style={{ marginBottom: "0.4rem", lineHeight: 1.5 }}>{r}</li>
                     ))}
@@ -173,7 +173,7 @@ export function PeekProvider({ children }: { children: React.ReactNode }) {
                   textAlign: "center",
                   color: "var(--amber-strong)",
                   textDecoration: "none",
-                  fontSize: "0.86rem",
+                  fontSize: "var(--size-sm)",
                   border: "1px solid var(--border)",
                   borderRadius: "8px",
                   padding: "0.7rem",

@@ -16,7 +16,7 @@ export default function ThreatMapPage() {
         <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginBottom: "3rem" }}>
           {THREAT_SYSTEMS.map((system) => (
             <div key={system.name} className="card" style={{ padding: "1.5rem" }}>
-              <h2 style={{ fontSize: "1.05rem", fontWeight: 500, marginBottom: "0.9rem" }}>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.9rem" }}>
                 {system.name}
               </h2>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
@@ -34,7 +34,7 @@ export default function ThreatMapPage() {
           <p style={{ fontWeight: 500, marginBottom: "0.4rem" }}>
             Every system has failure modes. Build alternatives.
           </p>
-          <p style={{ color: "var(--text-2)", fontSize: "0.9rem" }}>
+          <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)" }}>
             You don&apos;t need to predict which failure happens, or agree about why the risk
             exists. You need options that hold up regardless of the cause.
           </p>

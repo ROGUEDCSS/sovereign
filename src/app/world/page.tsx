@@ -25,7 +25,7 @@ export default function WorldIndex() {
           <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
             {groups.map(({ type, entities }) => (
               <div key={type}>
-                <h2 style={{ fontSize: "1.05rem", fontWeight: 500, marginBottom: "0.9rem" }}>
+                <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.9rem" }}>
                   {ENTITY_TYPE_LABELS[type]}
                 </h2>
                 <PeekList

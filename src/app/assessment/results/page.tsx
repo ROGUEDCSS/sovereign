@@ -40,10 +40,10 @@ export default function ResultsPage() {
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
         <div className="label">Your Sovereign Score</div>
         <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem", margin: "0.5rem 0 0.25rem" }}>
-          <span style={{ fontSize: "3.5rem", fontWeight: 500, color: "var(--amber-strong)" }}>
+          <span style={{ fontSize: "var(--size-stat)", fontWeight: 500, color: "var(--amber-strong)" }}>
             {total}
           </span>
-          <span style={{ fontSize: "1.5rem", color: "var(--text-3)" }}>/ 120</span>
+          <span style={{ fontSize: "var(--size-stat-suffix)", color: "var(--text-3)" }}>/ 120</span>
         </div>
         <p style={{ color: "var(--text-2)", marginBottom: "2.5rem" }}>
           Status: <strong style={{ color: "var(--text-1)" }}>{status}</strong>. Sovereignty is a
@@ -65,7 +65,7 @@ export default function ResultsPage() {
                 borderTop: i === 0 ? "none" : "1px solid var(--border)",
               }}
             >
-              <span style={{ width: 140, fontSize: "0.9rem" }}>{domain.name}</span>
+              <span style={{ width: 140, fontSize: "var(--size-sm)" }}>{domain.name}</span>
               <div style={{ flex: 1, height: 6, background: "var(--border)", borderRadius: 3, overflow: "hidden" }}>
                 <div
                   style={{
@@ -75,7 +75,7 @@ export default function ResultsPage() {
                   }}
                 />
               </div>
-              <span style={{ width: 40, textAlign: "right", fontSize: "0.9rem", color: "var(--text-2)" }}>
+              <span style={{ width: 40, textAlign: "right", fontSize: "var(--size-sm)", color: "var(--text-2)" }}>
                 {score}/10
               </span>
             </div>
@@ -93,7 +93,7 @@ export default function ResultsPage() {
                 <Link
                   key={link.path.join("/")}
                   href={codexHref(link.path)}
-                  style={{ marginLeft: "0.6rem", fontSize: "0.82rem", color: "var(--amber-strong)" }}
+                  style={{ marginLeft: "0.6rem", fontSize: "var(--size-sm)", color: "var(--amber-strong)" }}
                 >
                   Read: {link.label} →
                 </Link>
@@ -110,11 +110,11 @@ export default function ResultsPage() {
             <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem" }}>
               <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.35rem" }}>
                 <strong>{domain.quickAction.title}</strong>
-                <span style={{ color: "var(--text-3)", fontSize: "0.85rem", whiteSpace: "nowrap" }}>
+                <span style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", whiteSpace: "nowrap" }}>
                   {domain.quickAction.cost} · {domain.quickAction.time}
                 </span>
               </div>
-              <p style={{ color: "var(--text-2)", fontSize: "0.9rem" }}>{domain.quickAction.why}</p>
+              <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)" }}>{domain.quickAction.why}</p>
             </div>
           ))}
         </div>

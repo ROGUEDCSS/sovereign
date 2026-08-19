@@ -7,7 +7,10 @@ const PILLARS = [
     tag: "GET READY",
     title: "See what breaks. Find out if you'd survive it.",
     body: "Power. Banking. Internet. Food. Water. Most people don't know how exposed they are until one of these stops. Run the scenarios before one runs on you.",
-    links: [{ label: "Scenario room", href: "/scenario-room" }],
+    links: [
+      { label: "Scenario room", href: "/scenario-room" },
+      { label: "Threat map", href: "/threat-map" },
+    ],
   },
   {
     tag: "GET ORGANISED",
@@ -31,7 +34,10 @@ const PILLARS = [
     tag: "GET CONNECTED",
     title: "The one thing you can't stockpile.",
     body: "Neighbours, tradespeople, mutual aid. Build the network before the day you actually need to call someone.",
-    links: [{ label: "Community", href: "/codex/community" }],
+    links: [
+      { label: "Community", href: "/codex/community" },
+      { label: "Mutual aid", href: "/codex/community/mutual-aid" },
+    ],
   },
 ];
 
@@ -49,15 +55,15 @@ export default function Home() {
         <h1 style={{ fontSize: "var(--size-h1)", fontWeight: 500, lineHeight: 1.15, marginBottom: "1.5rem" }}>
           The storm is coming.
         </h1>
-        <p style={{ fontSize: "1.15rem", color: "var(--text-2)", marginBottom: "2.5rem", maxWidth: 560 }}>
+        <p style={{ fontSize: "var(--size-h4)", color: "var(--text-2)", marginBottom: "2.5rem", maxWidth: 560 }}>
           Get your affairs in order before the system fails. Power outages. Bank freezes. Supply
           shocks. Most households find out how exposed they are the hard way.
         </p>
         <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-          <Link href="/assessment" className="btn btn-primary" style={{ fontSize: "1rem" }}>
+          <Link href="/assessment" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>
             Get your Sovereign Score →
           </Link>
-          <Link href="/codex" className="btn btn-outline" style={{ fontSize: "1rem" }}>
+          <Link href="/codex" className="btn btn-outline" style={{ fontSize: "var(--size-body)" }}>
             Explore the Codex
           </Link>
         </div>
@@ -73,22 +79,23 @@ export default function Home() {
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
               gap: "1rem",
+              alignItems: "start",
             }}
           >
             {PILLARS.map((p) => (
-              <div key={p.tag} className="card" style={{ padding: "1.5rem", background: "var(--bg)" }}>
+              <div key={p.tag} className="card" style={{ padding: "1.5rem" }}>
                 <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.75rem" }}>
                   {p.tag}
                 </div>
-                <h3 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "0.6rem", lineHeight: 1.35 }}>
+                <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.6rem", lineHeight: 1.35 }}>
                   {p.title}
                 </h3>
-                <p style={{ color: "var(--text-2)", fontSize: "0.9rem", marginBottom: "1.25rem", lineHeight: 1.55 }}>
+                <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)", marginBottom: "1.25rem", lineHeight: 1.55 }}>
                   {p.body}
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                   {p.links.map((l) => (
-                    <Link key={l.href} href={l.href} style={{ color: "var(--amber-strong)", fontSize: "0.88rem", textDecoration: "none" }}>
+                    <Link key={l.href} href={l.href} style={{ color: "var(--amber-strong)", fontSize: "var(--size-sm)", textDecoration: "none" }}>
                       {l.label} →
                     </Link>
                   ))}
@@ -121,7 +128,7 @@ export default function Home() {
                 key={b.slug}
                 href={`/codex/${b.slug}`}
                 className="card"
-                style={{ padding: "0.9rem 1.1rem", fontSize: "0.9rem", textDecoration: "none" }}
+                style={{ padding: "0.9rem 1.1rem", fontSize: "var(--size-sm)", textDecoration: "none" }}
               >
                 {b.name}
               </Link>
@@ -151,7 +158,7 @@ export default function Home() {
                 key={e.slug}
                 href={`/world/${e.slug}`}
                 className="card"
-                style={{ padding: "0.5rem 0.95rem", fontSize: "0.85rem", textDecoration: "none", background: "var(--bg)" }}
+                style={{ padding: "0.5rem 0.95rem", fontSize: "var(--size-sm)", textDecoration: "none" }}
               >
                 {e.name}
               </Link>
@@ -161,7 +168,7 @@ export default function Home() {
             <Link href="/world" className="btn btn-outline">
               Open the World
             </Link>
-            <Link href="/threat-map" style={{ color: "var(--amber-strong)", fontSize: "0.9rem", textDecoration: "none", display: "inline-flex", alignItems: "center" }}>
+            <Link href="/threat-map" style={{ color: "var(--amber-strong)", fontSize: "var(--size-sm)", textDecoration: "none", display: "inline-flex", alignItems: "center" }}>
               Threat map →
             </Link>
           </div>
@@ -169,7 +176,7 @@ export default function Home() {
       </section>
 
       <footer style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container" style={{ paddingTop: "2rem", paddingBottom: "2rem", color: "var(--text-3)", fontSize: "0.85rem" }}>
+        <div className="container" style={{ paddingTop: "2rem", paddingBottom: "2rem", color: "var(--text-3)", fontSize: "var(--size-sm)" }}>
           You can&apos;t control the direction of the world. You can control how dependent you
           are on any single part of it.
         </div>

@@ -76,7 +76,7 @@ export default function AssessmentPage() {
                         borderColor: selected ? "var(--amber)" : "var(--border)",
                         background: selected ? "var(--amber-dim)" : "var(--card)",
                         color: selected ? "var(--amber-strong)" : "var(--text-1)",
-                        fontSize: "0.95rem",
+                        fontSize: "var(--size-sm)",
                         width: "100%",
                       }}
                     >

@@ -34,7 +34,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
     <PeekProvider>
       <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
         <div style={{ maxWidth: 720, margin: "0 auto" }}>
-          <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", fontSize: "0.82rem", color: "var(--text-3)", marginBottom: "1.25rem" }}>
+          <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", fontSize: "var(--size-sm)", color: "var(--text-3)", marginBottom: "1.25rem" }}>
             <Link href="/world" style={{ color: "var(--text-3)" }}>
               The World
             </Link>
@@ -50,7 +50,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           </h1>
           <p style={{ color: "var(--text-2)", marginBottom: "1.25rem" }}>{entity.summary}</p>
 
-          <div style={{ display: "flex", gap: "1.5rem", marginBottom: "2.5rem", fontSize: "0.85rem", color: "var(--text-3)" }}>
+          <div style={{ display: "flex", gap: "1.5rem", marginBottom: "2.5rem", fontSize: "var(--size-sm)", color: "var(--text-3)" }}>
             <span>Evidence: {"★".repeat(entity.evidenceRating)}{"☆".repeat(5 - entity.evidenceRating)}</span>
             <span>Source: {entity.independenceSource}</span>
           </div>
@@ -62,7 +62,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
             </div>
           )}
 
-          <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>Facts</h2>
+          <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Facts</h2>
           <ul style={{ paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
             {entity.facts.map((f) => (
               <li key={f} style={{ marginBottom: "0.5rem" }}>
@@ -73,7 +73,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
 
           {entity.pros && entity.pros.length > 0 && (
             <>
-              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem", color: "var(--good)" }}>Pros</h2>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--good)" }}>Pros</h2>
               <ul style={{ paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
                 {entity.pros.map((p) => (
                   <li key={p} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>{p}</li>
@@ -84,7 +84,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
 
           {entity.cons && entity.cons.length > 0 && (
             <>
-              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem", color: "var(--danger)" }}>Cons</h2>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--danger)" }}>Cons</h2>
               <ul style={{ paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
                 {entity.cons.map((c) => (
                   <li key={c} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>{c}</li>
@@ -95,8 +95,8 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
 
           {entity.furtherReading && entity.furtherReading.length > 0 && (
             <>
-              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>Further reading</h2>
-              <ul style={{ paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem", fontSize: "0.92rem" }}>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Further reading</h2>
+              <ul style={{ paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem", fontSize: "var(--size-sm)" }}>
                 {entity.furtherReading.map((r) => (
                   <li key={r} style={{ marginBottom: "0.4rem" }}>{r}</li>
                 ))}
@@ -108,7 +108,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
 
           {relationshipItems.length > 0 && (
             <>
-              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>Relationships</h2>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Relationships</h2>
               <div style={{ marginBottom: "2.5rem" }}>
                 <PeekList items={relationshipItems} />
               </div>
@@ -117,7 +117,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
 
           {codexLinkItems.length > 0 && (
             <>
-              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>Connects to the Codex</h2>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Connects to the Codex</h2>
               <div style={{ marginBottom: "2.5rem" }}>
                 <PeekList items={codexLinkItems} />
               </div>

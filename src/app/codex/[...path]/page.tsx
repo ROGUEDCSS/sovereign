@@ -33,7 +33,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
     <PeekProvider>
       <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
         <div style={{ maxWidth: 780, margin: "0 auto" }}>
-          <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", fontSize: "0.82rem", color: "var(--text-3)", marginBottom: "1.25rem" }}>
+          <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", fontSize: "var(--size-sm)", color: "var(--text-3)", marginBottom: "1.25rem" }}>
             <Link href="/codex" style={{ color: "var(--text-3)" }}>
               Codex
             </Link>
@@ -74,13 +74,14 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {node.branches && node.branches.length > 0 && (
             <>
-              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>Branches</h2>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Branches</h2>
               <div
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
                   gap: "0.75rem",
                   marginBottom: "2.5rem",
+                  alignItems: "start",
                 }}
               >
                 {node.branches.map((b) => (
@@ -93,12 +94,12 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.3rem" }}>
                       <span style={{ fontWeight: 500 }}>{b.name}</span>
                       {!b.detailed && (
-                        <span className="pill pill-opinion" style={{ fontSize: "0.62rem" }}>
+                        <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)" }}>
                           Stub
                         </span>
                       )}
                     </div>
-                    <p style={{ color: "var(--text-2)", fontSize: "0.85rem" }}>{b.tagline}</p>
+                    <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)" }}>{b.tagline}</p>
                   </Link>
                 ))}
               </div>
@@ -107,7 +108,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {node.items && node.items.length > 0 && (
             <>
-              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
                 {node.slug === "family-capability" ? "Examples" : "Categories"}
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.5rem" }}>
@@ -115,7 +116,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
                   <div key={item.name} className="card" style={{ padding: "0.9rem 1.25rem" }}>
                     <strong>{item.name}</strong>
                     {item.description && (
-                      <p style={{ color: "var(--text-2)", fontSize: "0.88rem", marginTop: "0.2rem" }}>
+                      <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)", marginTop: "0.2rem" }}>
                         {item.description}
                       </p>
                     )}
@@ -127,10 +128,10 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {node.pathways && node.pathways.length > 0 && (
             <>
-              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "0.5rem" }}>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.5rem" }}>
                 Multiple ways to the same outcome
               </h2>
-              <p style={{ color: "var(--text-2)", fontSize: "0.9rem", marginBottom: "1rem" }}>
+              <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)", marginBottom: "1rem" }}>
                 The same category can be reached through different materials — the Codex is meant
                 to show the alternatives, not just the conventional default.
               </p>
@@ -153,7 +154,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {connectionItems.length > 0 && (
             <>
-              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>Connections</h2>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Connections</h2>
               <div style={{ marginBottom: node.futureRefs && node.futureRefs.length > 0 ? "0.75rem" : "2.5rem" }}>
                 <PeekList items={connectionItems} />
               </div>
@@ -161,17 +162,17 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
           )}
 
           {node.futureRefs && node.futureRefs.length > 0 && (
-            <p style={{ color: "var(--text-3)", fontSize: "0.85rem", marginBottom: "2.5rem" }}>
+            <p style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginBottom: "2.5rem" }}>
               Also connects to: {node.futureRefs.join(", ")} — not built yet.
             </p>
           )}
 
           {node.sovereignFramework && (
             <div className="card" style={{ padding: "1.5rem", marginBottom: "2.5rem" }}>
-              <h2 style={{ fontSize: "1.05rem", fontWeight: 500, marginBottom: "1rem" }}>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
                 How this node will be filled in
               </h2>
-              <p style={{ color: "var(--text-2)", fontSize: "0.9rem", marginBottom: "1.25rem" }}>
+              <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)", marginBottom: "1.25rem" }}>
                 Every node that touches rights or permissions follows this same framework. The
                 structure is built — the research and content for each field still needs to be
                 done properly, not guessed.
@@ -179,25 +180,25 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
               <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
                 <div>
                   <span className="pill pill-scenario">Sovereign principle</span>
-                  <p style={{ color: "var(--text-3)", fontSize: "0.85rem", marginTop: "0.35rem" }}>
+                  <p style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.35rem" }}>
                     What should an individual be free to do here, in principle?
                   </p>
                 </div>
                 <div>
                   <span className="pill pill-fact">Legal reality</span>
-                  <p style={{ color: "var(--text-3)", fontSize: "0.85rem", marginTop: "0.35rem" }}>
+                  <p style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.35rem" }}>
                     What does the applicable jurisdiction actually permit, restrict, or require —
                     researched per jurisdiction, not assumed.
                   </p>
                 </div>
                 <div>
                   <span className="pill pill-opinion">Rationale → evidence → counterarguments → options</span>
-                  <p style={{ color: "var(--text-3)", fontSize: "0.85rem", marginTop: "0.35rem" }}>
+                  <p style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.35rem" }}>
                     Why it matters, what supports it, the strongest case against it, and the real
                     options available.
                   </p>
                 </div>
-                <div style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap", fontSize: "0.82rem", color: "var(--text-3)" }}>
+                <div style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap", fontSize: "var(--size-sm)", color: "var(--text-3)" }}>
                   <span>What · Why · When · Where · How</span>
                   <span>Evidence / sources</span>
                   <span>Sovereign alignment rating</span>
@@ -209,7 +210,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {relatedDomains.length > 0 && (
             <>
-              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
                 Related Sovereign Score domains
               </h2>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.5rem" }}>
@@ -229,7 +230,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {node.relatedTools && node.relatedTools.length > 0 && (
             <>
-              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>Related tools</h2>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Related tools</h2>
               <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
                 {node.relatedTools.map((t) => (
                   <Link key={t.href} href={t.href} className="btn btn-outline">

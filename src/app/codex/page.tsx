@@ -26,6 +26,7 @@ export default function CodexIndexPage() {
             display: "grid",
             gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
             gap: "0.75rem",
+            alignItems: "start",
           }}
         >
           {CODEX_BRANCHES.map((branch) => (
@@ -38,12 +39,12 @@ export default function CodexIndexPage() {
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.4rem" }}>
                 <span style={{ fontWeight: 500 }}>{branch.name}</span>
                 {!branch.detailed && (
-                  <span className="pill pill-opinion" style={{ fontSize: "0.65rem" }}>
+                  <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)" }}>
                     Not yet mapped
                   </span>
                 )}
               </div>
-              <p style={{ color: "var(--text-2)", fontSize: "0.88rem" }}>{branch.tagline}</p>
+              <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)" }}>{branch.tagline}</p>
             </Link>
           ))}
         </div>

@@ -24,7 +24,7 @@ function Tooltip({ text }: { text: string }) {
         border: "1px solid var(--border-strong)",
         borderRadius: "8px",
         padding: "0.6rem 0.75rem",
-        fontSize: "0.74rem",
+        fontSize: "var(--size-label)",
         color: "var(--text-2)",
         lineHeight: 1.4,
         boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
@@ -37,6 +37,7 @@ function Tooltip({ text }: { text: string }) {
   );
 }
 
+/** Neutral bordered pill, matching the site's own card/pill language — no black block. */
 function SignalRow({
   icon,
   label,
@@ -64,18 +65,18 @@ function SignalRow({
           alignItems: "center",
           justifyContent: "center",
           gap: "0.35rem",
-          background: "#000",
-          border: "1px solid rgba(255,255,255,0.18)",
+          background: "var(--card-hover)",
+          border: "1px solid var(--border-strong)",
           borderRadius: "8px",
           padding: "0.5rem 0.4rem",
-          color: "#fff",
-          fontSize: "0.74rem",
+          color: "var(--text-1)",
+          fontSize: "var(--size-label)",
           fontWeight: 600,
         }}
       >
-        <span style={{ fontFamily: "var(--font-mono, monospace)", fontWeight: 700 }}>{icon}</span>
+        <span style={{ color: "var(--amber-strong)", fontWeight: 700 }}>{icon}</span>
         <span>{label}</span>
-        {count !== undefined && <span style={{ opacity: 0.65, fontWeight: 500 }}>{count}</span>}
+        {count !== undefined && <span style={{ opacity: 0.6, fontWeight: 500 }}>{count}</span>}
       </div>
       {hovered === explainerKey && <Tooltip text={EXPLAINERS[explainerKey]} />}
     </div>
@@ -83,11 +84,10 @@ function SignalRow({
 }
 
 /**
- * The block itself carries the tone colour (green / red) — the emoji is an
- * overlay icon sitting on top of that coloured block, not a separately
- * coloured circle floating on a neutral card. Text inside is always white:
- * the block's own saturated background is the surface being contrasted
- * against, independent of whichever outer panel mode (fixed/inline) it's in.
+ * A tinted, bordered pill in the tone colour — never a solid saturated fill.
+ * Matches the site's own restrained semantic-colour pattern (pill-fact,
+ * pill-scenario): colour is a light wash under saturated text/icon, not a
+ * block. The emoji reads at 2x size so the tone is still unmistakable.
  */
 function ThumbButton({
   emoji,
@@ -104,7 +104,9 @@ function ThumbButton({
   hovered: ExplainerKey | null;
   onHover: (key: ExplainerKey | null) => void;
 }) {
-  const bg = tone === "positive" ? "var(--good)" : "var(--danger)";
+  const wash = tone === "positive" ? "rgba(111,160,114,0.14)" : "rgba(194,91,79,0.14)";
+  const border = tone === "positive" ? "rgba(111,160,114,0.4)" : "rgba(194,91,79,0.4)";
+  const ink = tone === "positive" ? "var(--good)" : "var(--danger)";
   return (
     <div
       onMouseEnter={() => onHover(explainerKey)}
@@ -118,15 +120,15 @@ function ThumbButton({
           alignItems: "center",
           justifyContent: "center",
           gap: "0.25rem",
-          background: bg,
+          background: wash,
+          border: `1px solid ${border}`,
           borderRadius: "8px",
           padding: "0.7rem 0.4rem",
-          color: "#fff",
         }}
       >
         <span style={{ fontSize: "2.1rem", lineHeight: 1 }}>{emoji}</span>
         {count !== undefined && (
-          <span style={{ fontSize: "0.72rem", fontWeight: 700 }}>{count.toLocaleString()}</span>
+          <span style={{ fontSize: "var(--size-xs)", fontWeight: 700, color: ink }}>{count.toLocaleString()}</span>
         )}
       </div>
       {hovered === explainerKey && <Tooltip text={EXPLAINERS[explainerKey]} />}
@@ -135,11 +137,10 @@ function ThumbButton({
 }
 
 /**
- * Two rendering modes: `fixed` pins a small inverse-colour badge to the
- * top-right of the viewport (used on full Codex/World pages, so it doesn't
- * compete with the actual content). Inline (default) renders compactly in
- * normal flow, for use inside the peek drawer where a fixed badge would
- * collide with the drawer's own corner.
+ * Always a dark, bordered panel — matches the site's own card language and
+ * Resonance's restrained "tint, don't fill" discipline. Never inverts to a
+ * light block: `fixed` only changes position (viewport-pinned top-right vs
+ * inline top-of-drawer), not colour.
  *
  * Three signals, not four: Endorse was dropped — it duplicated the editorial
  * evidenceRating/independenceSource signal shown elsewhere on the page.
@@ -157,26 +158,17 @@ export function CommunityPanel({
 }) {
   const [hovered, setHovered] = useState<ExplainerKey | null>(null);
 
-  const container: React.CSSProperties = fixed
-    ? {
-        position: "fixed",
-        top: "5.2rem",
-        right: "1.4rem",
-        zIndex: 40,
-        width: 230,
-        background: "var(--text-1)",
-        borderRadius: "10px",
-        padding: "0.75rem 0.85rem",
-        boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
-      }
-    : {
-        width: 230,
-        background: "var(--card)",
-        border: "1px solid var(--border)",
-        borderRadius: "10px",
-        padding: "0.75rem 0.85rem",
-        flexShrink: 0,
-      };
+  const container: React.CSSProperties = {
+    ...(fixed
+      ? { position: "fixed", top: "5.2rem", right: "1.4rem", zIndex: 40 }
+      : { flexShrink: 0 }),
+    width: 230,
+    background: "var(--card)",
+    border: "1px solid var(--border-strong)",
+    borderRadius: "10px",
+    padding: "0.75rem 0.85rem",
+    boxShadow: fixed ? "0 8px 24px rgba(0,0,0,0.4)" : "none",
+  };
 
   return (
     <div style={container}>
@@ -186,7 +178,7 @@ export function CommunityPanel({
           gap: "0.5rem",
           paddingBottom: "0.6rem",
           marginBottom: "0.5rem",
-          borderBottom: fixed ? "1px solid rgba(0,0,0,0.12)" : "1px solid var(--border)",
+          borderBottom: "1px solid var(--border)",
         }}
       >
         <ThumbButton emoji="👍" tone="positive" count={sovereignAlignment?.positive} explainerKey="positive" hovered={hovered} onHover={setHovered} />

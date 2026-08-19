@@ -35,7 +35,7 @@ export function PeekList({ items, variant = "list" }: { items: PeekItem[]; varia
                   cursor: "pointer",
                   color: "var(--text-1)",
                   font: "inherit",
-                  fontSize: "0.85rem",
+                  fontSize: "var(--size-sm)",
                   whiteSpace: "nowrap",
                 }}
               >
@@ -58,8 +58,8 @@ export function PeekList({ items, variant = "list" }: { items: PeekItem[]; varia
                     boxShadow: "0 12px 32px rgba(0,0,0,0.35)",
                   }}
                 >
-                  <div style={{ fontWeight: 500, fontSize: "0.88rem", marginBottom: "0.3rem" }}>{preview.title}</div>
-                  <p style={{ fontSize: "0.8rem", color: "var(--text-2)", lineHeight: 1.45, margin: 0 }}>{preview.tagline}</p>
+                  <div style={{ fontWeight: 500, fontSize: "var(--size-sm)", marginBottom: "0.3rem" }}>{preview.title}</div>
+                  <p style={{ fontSize: "var(--size-label)", color: "var(--text-2)", lineHeight: 1.45, margin: 0 }}>{preview.tagline}</p>
                 </div>
               )}
             </div>
@@ -95,14 +95,14 @@ export function PeekList({ items, variant = "list" }: { items: PeekItem[]; varia
                 width: "100%",
                 color: "var(--text-1)",
                 font: "inherit",
-                fontSize: "0.92rem",
+                fontSize: "var(--size-sm)",
               }}
             >
               <span>
                 <span style={{ color: "var(--amber-strong)" }}>→</span> {item.label}
-                {item.note && <span style={{ color: "var(--text-3)", fontSize: "0.82rem" }}> {item.note}</span>}
+                {item.note && <span style={{ color: "var(--text-3)", fontSize: "var(--size-sm)" }}> {item.note}</span>}
               </span>
-              <span style={{ color: "var(--text-3)", fontSize: "0.78rem" }}>peek</span>
+              <span style={{ color: "var(--text-3)", fontSize: "var(--size-label)" }}>peek</span>
             </button>
 
             {preview && (
@@ -121,8 +121,8 @@ export function PeekList({ items, variant = "list" }: { items: PeekItem[]; varia
                   boxShadow: "0 12px 32px rgba(0,0,0,0.35)",
                 }}
               >
-                <div style={{ fontWeight: 500, fontSize: "0.92rem", marginBottom: "0.35rem" }}>{preview.title}</div>
-                <p style={{ fontSize: "0.82rem", color: "var(--text-2)", lineHeight: 1.45, margin: 0 }}>{preview.tagline}</p>
+                <div style={{ fontWeight: 500, fontSize: "var(--size-sm)", marginBottom: "0.35rem" }}>{preview.title}</div>
+                <p style={{ fontSize: "var(--size-sm)", color: "var(--text-2)", lineHeight: 1.45, margin: 0 }}>{preview.tagline}</p>
               </div>
             )}
           </div>

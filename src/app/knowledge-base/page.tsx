@@ -20,8 +20,8 @@ export default function KnowledgeBasePage() {
               className="card"
               style={{ display: "block", padding: "1.5rem", textDecoration: "none" }}
             >
-              <h2 style={{ fontSize: "1.15rem", fontWeight: 500, marginBottom: "0.4rem" }}>{a.title}</h2>
-              <p style={{ color: "var(--text-2)", fontSize: "0.95rem" }}>{a.dek}</p>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.4rem" }}>{a.title}</h2>
+              <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)" }}>{a.dek}</p>
             </Link>
           ))}
         </div>

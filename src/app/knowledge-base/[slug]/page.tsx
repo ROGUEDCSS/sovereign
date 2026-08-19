@@ -20,7 +20,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   return (
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
       <div style={{ maxWidth: 680, margin: "0 auto" }}>
-        <Link href="/knowledge-base" style={{ color: "var(--text-3)", fontSize: "0.85rem" }}>
+        <Link href="/knowledge-base" style={{ color: "var(--text-3)", fontSize: "var(--size-sm)" }}>
           ← Knowledge base
         </Link>
 
@@ -29,7 +29,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </h1>
         <p style={{ color: "var(--text-2)", marginBottom: "1.25rem" }}>{article.dek}</p>
 
-        <div style={{ display: "flex", gap: "1.5rem", marginBottom: "2.5rem", fontSize: "0.85rem", color: "var(--text-3)" }}>
+        <div style={{ display: "flex", gap: "1.5rem", marginBottom: "2.5rem", fontSize: "var(--size-sm)", color: "var(--text-3)" }}>
           <span>Evidence: {"★".repeat(article.evidenceRating)}{"☆".repeat(5 - article.evidenceRating)}</span>
           <span>Source: {article.independenceSource}</span>
         </div>

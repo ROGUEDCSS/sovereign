@@ -53,6 +53,7 @@ export default function ScenarioRoomPage() {
             gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
             gap: "0.75rem",
             marginBottom: "2rem",
+            alignItems: "start",
           }}
         >
           {SCENARIOS.map((s) => (
@@ -83,7 +84,7 @@ export default function ScenarioRoomPage() {
             <div className="label" style={{ marginBottom: "0.5rem" }}>
               Scenario {selected.letter}
             </div>
-            <h2 style={{ fontSize: "1.25rem", fontWeight: 500, marginBottom: "0.5rem" }}>
+            <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "0.5rem" }}>
               {selected.title}
             </h2>
             <p style={{ color: "var(--text-2)", marginBottom: "1.25rem" }}>{selected.description}</p>
@@ -103,10 +104,10 @@ export default function ScenarioRoomPage() {
                 return (
                   <div>
                     <div style={{ display: "flex", alignItems: "baseline", gap: "0.6rem", marginBottom: "0.4rem" }}>
-                      <span style={{ fontSize: "2rem", fontWeight: 500, color: verdict.color }}>{score}/10</span>
+                      <span style={{ fontSize: "var(--size-stat-sm)", fontWeight: 500, color: verdict.color }}>{score}/10</span>
                       <span style={{ color: verdict.color, fontWeight: 500 }}>{verdict.label}</span>
                     </div>
-                    <p style={{ color: "var(--text-3)", fontSize: "0.85rem" }}>
+                    <p style={{ color: "var(--text-3)", fontSize: "var(--size-sm)" }}>
                       Based on your scores in {selected.domains.map((id) => DOMAINS.find((d) => d.id === id)?.name).join(", ")}.
                     </p>
                   </div>
