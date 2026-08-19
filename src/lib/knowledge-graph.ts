@@ -221,6 +221,46 @@ export const KG_ENTITIES: KGEntity[] = [
     evidenceRating: 4,
     independenceSource: "Academic source",
   },
+  {
+    slug: "identity",
+    name: "Identity",
+    type: "concept",
+    summary: "The ability to prove who you are — to yourself and to others — without depending on any single person, company, or government to vouch for you.",
+    whyItMatters: "Almost everything else depends on it: opening a bank account, crossing a border, proving you own something, or simply being believed when you say who you are. The more of that proof routes through one login, one document, or one authority, the more a single failure or gatekeeper can lock you out of your own life.",
+    facts: [
+      "Identity has always rested on more than one form of proof — physical documents, biometrics, and the testimony of people who already know you are independent channels; resilience comes from not relying on just one of them.",
+      "Digital identity systems increasingly split identity into three separate roles — issuer, holder, and verifier — precisely so no single party has to see or control everything (see Digital ID).",
+      "Losing your only form of identification is one of the most common ways people get locked out of housing, banking, and employment — the risk isn't hypothetical, it's a routine failure mode of relying on a single point of proof.",
+    ],
+    relationships: [
+      { type: "specific form", targetSlug: "digital-identity", note: "The digital-systems version of the same underlying problem." },
+    ],
+    codexLinks: [{ path: ["individual", "identity"], note: "The Codex node this concept underpins." }],
+    evidenceRating: 4,
+    independenceSource: "Academic source",
+  },
+  {
+    slug: "digital-identity",
+    name: "Digital ID",
+    type: "concept",
+    summary: "A model for proving facts about yourself online that separates the job into three roles — issuer, holder, and verifier — so no single party has to see or control everything.",
+    whyItMatters: "Most digital ID systems people already use quietly collapse issuer and verifier into the same party — the company or government that issued the credential is also the one checking it every time, seeing every place you use it. The issuer/holder/verifier split is the standard alternative model: it's how a physical driver's licence already works (the government issues it, you hold it, a bar checks it without calling the government), and modern digital identity standards are built to replicate that same separation online.",
+    facts: [
+      "The World Wide Web Consortium's Verifiable Credentials Data Model — a real, published web standard — formalises the three roles: an issuer creates and signs a credential, a holder stores and controls it, and a verifier checks it's valid without needing to contact the issuer directly.",
+      "Identity researcher Kim Cameron's 'Laws of Identity' (2005), written while he was Microsoft's Identity Architect, argued that a trustworthy digital identity system must give the holder control over what's disclosed and to whom — a foundational, widely-cited framing for this model.",
+      "When issuer and verifier are the same party, that party can see every time and place the credential is used — the three-role split exists specifically to remove that single vantage point.",
+    ],
+    relationships: [
+      { type: "generalises to", targetSlug: "identity", note: "The broader, non-digital version of the same concept." },
+    ],
+    codexLinks: [{ path: ["individual", "identity"], note: "Where this model applies directly to your own setup." }],
+    furtherReading: [
+      "W3C, 'Verifiable Credentials Data Model' (w3.org/TR/vc-data-model/)",
+      "Kim Cameron, 'The Laws of Identity' (2005)",
+    ],
+    evidenceRating: 4,
+    independenceSource: "Academic source",
+  },
 ];
 
 export function getEntity(slug: string): KGEntity | undefined {

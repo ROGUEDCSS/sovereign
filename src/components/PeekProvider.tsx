@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useState } from "react";
 import Link from "next/link";
 import { PeekTarget, resolvePeek } from "@/lib/peek-content";
 import { CommunityPanel } from "./CommunityPanel";
+import { PeekList } from "./PeekList";
 
 interface PeekContextValue {
   open: (target: PeekTarget) => void;
@@ -18,9 +19,11 @@ export function usePeek() {
 }
 
 export function PeekProvider({ children }: { children: React.ReactNode }) {
-  const [target, setTarget] = useState<PeekTarget | null>(null);
-  const open = useCallback((t: PeekTarget) => setTarget(t), []);
-  const close = useCallback(() => setTarget(null), []);
+  const [stack, setStack] = useState<PeekTarget[]>([]);
+  const open = useCallback((t: PeekTarget) => setStack((s) => [...s, t]), []);
+  const close = useCallback(() => setStack([]), []);
+  const back = useCallback(() => setStack((s) => s.slice(0, -1)), []);
+  const target = stack.length > 0 ? stack[stack.length - 1] : null;
   const content = target ? resolvePeek(target) : null;
 
   return (
@@ -63,7 +66,31 @@ export function PeekProvider({ children }: { children: React.ReactNode }) {
           <>
             <div style={{ padding: "1.2rem 1.4rem 0.9rem", borderBottom: "1px solid var(--border)" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.8rem" }}>
-                <span className="label">{content.breadcrumb}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                  {stack.length > 1 && (
+                    <button
+                      onClick={back}
+                      aria-label="Back"
+                      style={{
+                        background: "var(--card)",
+                        border: "1px solid var(--border)",
+                        color: "var(--text-2)",
+                        width: 26,
+                        height: 26,
+                        borderRadius: "50%",
+                        cursor: "pointer",
+                        fontSize: "var(--size-sm)",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                      }}
+                    >
+                      ←
+                    </button>
+                  )}
+                  <span className="label">{content.breadcrumb}</span>
+                </div>
                 <button
                   onClick={close}
                   aria-label="Close"
@@ -153,6 +180,13 @@ export function PeekProvider({ children }: { children: React.ReactNode }) {
 
               {content.meta && (
                 <p style={{ fontSize: "var(--size-label)", color: "var(--text-3)", marginBottom: "1.2rem" }}>Source: {content.meta}</p>
+              )}
+
+              {content.related && content.related.length > 0 && (
+                <div style={{ marginBottom: "1.2rem" }}>
+                  <div className="label" style={{ marginBottom: "0.5rem" }}>Related</div>
+                  <PeekList items={content.related} />
+                </div>
               )}
 
               {content.furtherReading && content.furtherReading.length > 0 && (

@@ -16,6 +16,7 @@ export interface PeekContent {
   meta?: string;
   communitySignal?: CommunitySignal;
   sovereignAlignment?: SovereignAlignment;
+  related?: { label: string; note?: string; target: PeekTarget }[];
   href: string;
 }
 
@@ -49,6 +50,14 @@ export function resolvePeek(target: PeekTarget): PeekContent | null {
     meta: entity.independenceSource,
     communitySignal: entity.communitySignal,
     sovereignAlignment: entity.sovereignAlignment,
+    related: entity.relationships.map((r) => {
+      const target = getEntity(r.targetSlug);
+      return {
+        label: (target ? target.name : r.targetSlug) + (r.type ? ` (${r.type})` : ""),
+        note: r.note,
+        target: { kind: "world" as const, slug: r.targetSlug },
+      };
+    }),
     href: "/world/" + target.slug,
   };
 }

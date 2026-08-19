@@ -2,10 +2,43 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { DOMAINS, domainScore } from "@/lib/domains";
+import { DOMAINS, Domain, domainScore } from "@/lib/domains";
+import { getEntity } from "@/lib/knowledge-graph";
+import { PeekProvider, usePeek } from "@/components/PeekProvider";
 
 function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function DomainTitle({ domain }: { domain: Domain }) {
+  const { open } = usePeek();
+  const entity = getEntity(domain.id);
+
+  if (!entity) {
+    return (
+      <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>
+        {domain.name}
+      </h1>
+    );
+  }
+
+  return (
+    <h1
+      onClick={() => open({ kind: "world", slug: domain.id })}
+      style={{
+        fontSize: "var(--size-h2)",
+        fontWeight: 500,
+        marginBottom: "0.5rem",
+        cursor: "pointer",
+        textDecoration: "underline",
+        textDecorationColor: "var(--border-strong)",
+        textUnderlineOffset: "6px",
+        width: "fit-content",
+      }}
+    >
+      {domain.name}
+    </h1>
+  );
 }
 
 export default function AssessmentPage() {
@@ -144,15 +177,14 @@ export default function AssessmentPage() {
   }
 
   return (
+    <PeekProvider>
     <main className="container" style={{ paddingTop: "3rem", paddingBottom: "5rem" }}>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
         <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.75rem" }}>
           Your Sovereign Assessment
         </div>
 
-        <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>
-          {domain.name}
-        </h1>
+        <DomainTitle domain={domain} />
         <p style={{ color: "var(--text-2)", marginBottom: "1.5rem" }}>{domain.tagline}</p>
 
         <div className="label" style={{ margin: "1rem 0 1.25rem", textAlign: "center" }}>
@@ -258,5 +290,6 @@ export default function AssessmentPage() {
         </div>
       </div>
     </main>
+    </PeekProvider>
   );
 }
