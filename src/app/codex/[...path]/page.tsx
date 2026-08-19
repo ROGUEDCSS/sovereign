@@ -101,10 +101,10 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
           {node.branches && node.branches.length > 0 && (
             <>
               <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1.5rem" }}>Branches</h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", marginBottom: "2.5rem" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginBottom: "2.5rem" }}>
                 {node.branches.map((b) => (
-                  <div key={b.slug}>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", marginBottom: "0.5rem" }}>
+                  <div key={b.slug} style={{ border: "1px solid var(--border-strong)", borderRadius: "12px", padding: "1.5rem" }}>
+                    <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "1rem", marginBottom: "1.25rem" }}>
                       <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--amber-strong)" }}>{b.name}</h2>
                       {!b.detailed && (
                         <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)", flexShrink: 0 }}>

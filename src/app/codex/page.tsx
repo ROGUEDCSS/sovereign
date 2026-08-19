@@ -49,11 +49,7 @@ export default function CodexIndexPage() {
           {CODEX_BRANCHES.map((branch, i) => (
             <div
               key={branch.slug}
-              style={
-                i === 0
-                  ? { border: "1px solid var(--border-strong)", borderRadius: "12px", padding: "1.5rem" }
-                  : undefined
-              }
+              style={{ border: "1px solid var(--border-strong)", borderRadius: "12px", padding: "1.5rem" }}
             >
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", marginBottom: "1.25rem" }}>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem" }}>
