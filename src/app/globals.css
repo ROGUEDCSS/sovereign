@@ -31,16 +31,17 @@ h1, h2, h3, h4, strong {
   --border: rgba(255,255,255,0.22);
   --border-strong: rgba(255,255,255,0.32);
 
-  --amber: #C9A84C;
+  --amber: #e0c070;
   --amber-strong: #e0c070;
-  --amber-dim: rgba(201,168,76,0.18);
+  --amber-hover: #ecd28f;
+  --amber-dim: rgba(224,192,112,0.18);
 
   --text-1: #f0ede5;
   --text-2: rgba(240,237,229,0.88);
   --text-3: rgba(240,237,229,0.65);
 
   --fact: #4f9cd6;
-  --scenario: #C9A84C;
+  --scenario: #e0c070;
   --opinion: #8a8780;
 
   --danger: #e5342f;
@@ -124,7 +125,7 @@ h1, h2, h3, h4, strong {
   background: var(--amber);
   color: #1a1005;
 }
-.btn-primary:hover { background: var(--amber-strong); }
+.btn-primary:hover { background: var(--amber-hover); }
 
 .pill {
   display: inline-flex; align-items: center; gap: 0.4rem;

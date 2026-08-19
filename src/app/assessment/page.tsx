@@ -216,7 +216,7 @@ export default function AssessmentPage() {
         <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
           {domain.questions.map((q) => (
             <div key={q.id}>
-              <p style={{ marginBottom: "0.9rem", fontWeight: 500 }}>{q.text}</p>
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--amber-strong)", marginBottom: "0.9rem" }}>{q.text}</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
                 {q.options.map((opt) => {
                   const selected = answers[q.id] === opt.score;
