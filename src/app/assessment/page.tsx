@@ -229,7 +229,7 @@ export default function AssessmentPage() {
                         border: "1px solid transparent",
                         background: selected ? "var(--amber)" : "var(--white-block)",
                         color: "var(--ink)",
-                        fontWeight: selected ? 700 : 500,
+                        fontWeight: 500,
                         fontSize: "var(--size-sm)",
                         width: "100%",
                       }}
