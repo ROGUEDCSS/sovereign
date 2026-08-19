@@ -10,8 +10,8 @@ export default function CodexIndexPage() {
           A Journey Across Four Dimensions
         </h1>
         <p style={{ fontSize: "var(--size-body)", color: "var(--text-2)", marginBottom: "2.5rem", maxWidth: 620 }}>
-          Sovereignty starts with the individual, strengthens through the family, becomes
-          tangible through home and land, and becomes resilient through community. This is
+          Sovereignty starts with the Individual, strengthens through the Family, becomes
+          tangible through Home and Land, and becomes resilient through Community. This is
           what you build. It&apos;s deliberately juxtaposed against{" "}
           <Link href="/world" style={{ color: "var(--amber-strong)" }}>
             the world
