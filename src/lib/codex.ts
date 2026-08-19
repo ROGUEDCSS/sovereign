@@ -98,7 +98,23 @@ const HEALTH: CodexNode = {
   tagline: "Physical and mental wellbeing — the capacity everything else depends on.",
   elaboration:
     "Resilience isn't separate from health — it's built on it. This branch covers the habits, capacity, and reserves that determine whether you can actually act on everything else in this Codex when it matters.",
+  definition:
+    "Health is your physical and mental capacity to actually do the things everything else in this Codex depends on — the base layer that determines whether you can act, not just plan.",
+  facts: [
+    "The World Health Organization defines health as complete physical, mental, and social wellbeing, not merely the absence of disease — a definition it has used since 1948.",
+    "Regular physical activity is one of the most consistently evidence-backed interventions for reducing chronic disease risk, and sedentary behaviour is independently associated with worse outcomes even in people who exercise occasionally.",
+    "Sleep deprivation measurably impairs cognitive function, decision-making, and immune response — a well-documented, repeatedly replicated finding in sleep research.",
+    "The WHO's 2022 World Mental Health Report estimated roughly one in eight people worldwide live with a mental health condition — mental health conditions are common, not rare or exceptional.",
+  ],
+  practicalQuestion: "If your body or mind stopped functioning at full capacity for a month, what in your life would actually still work?",
   detailed: true,
+  items: [
+    { name: "Physical fitness", description: "Strength, cardiovascular capacity, and mobility — the basic ability to do physical work when it's actually required." },
+    { name: "Nutrition", description: "What you actually eat, not what you know you should eat — the fuel everything else runs on." },
+    { name: "Sleep", description: "Often the first thing sacrificed, and the first thing that degrades everything else once it is." },
+    { name: "Mental health", description: "Stress, resilience, and knowing when and how to actually get support, not just push through." },
+    { name: "Preventive care", description: "Check-ups and screenings — catching problems while they're still small and cheap to fix." },
+  ],
   connections: [{ path: ["family", "family-capability"] }],
 };
 
