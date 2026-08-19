@@ -16,7 +16,10 @@ export default function CodexIndexPage() {
           <Link href="/world" style={{ color: "var(--amber-strong)" }}>
             the world
           </Link>{" "}
-          outside it — the part you don&apos;t control, only navigate.
+          outside it — the part you don&apos;t control, only navigate. The world is loud, fast-moving,
+          and largely indifferent to what you&apos;d prefer — you can study it, prepare for it, and
+          respond to it, but you can&apos;t steer it. The Codex is the opposite: everything here is
+          something you can actually build, strengthen, or fix, starting today.
         </p>
 
         <div
