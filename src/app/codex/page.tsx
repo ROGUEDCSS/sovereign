@@ -53,7 +53,7 @@ export default function CodexIndexPage() {
               className="card"
               style={{ display: "block", padding: "1.25rem 1.5rem", minHeight: 260, textDecoration: "none" }}
             >
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.4rem" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1.5rem" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
                   <span
                     style={{
@@ -73,15 +73,17 @@ export default function CodexIndexPage() {
                     {i + 1}
                   </span>
                   <span style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{branch.name}</span>
-                  <span style={{ fontSize: "var(--size-sm)", color: "var(--amber-on-light)", fontWeight: 600 }}>
-                    — {JOURNEY_TAG[branch.slug]}
-                  </span>
                 </div>
-                {!branch.detailed && (
-                  <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)" }}>
-                    Not yet mapped
+                <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                  <span style={{ fontSize: "var(--size-sm)", color: "var(--ink)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                    {JOURNEY_TAG[branch.slug]}
                   </span>
-                )}
+                  {!branch.detailed && (
+                    <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)" }}>
+                      Not yet mapped
+                    </span>
+                  )}
+                </div>
               </div>
               {(() => {
                 const dot = branch.tagline.indexOf(".");
