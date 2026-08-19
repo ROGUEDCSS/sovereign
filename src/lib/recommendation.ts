@@ -14,6 +14,12 @@ export const BUDGET_LABELS: Record<BudgetTier, string> = {
   "50000": "$50,000+",
 };
 
+export const BUDGET_EXPLAINERS: Record<BudgetTier, string> = {
+  "1000": "The essentials: water, food, light, backup power, comms, first aid, and document backup — a real 72-hour to 30-day buffer.",
+  "10000": "Real capability: solar power, a proper water system, food production, a generator, and workshop basics — weeks of independence, not days.",
+  "50000": "A fully integrated, tested system across power, water, food, workshop, comms, and finances — the closest thing to genuine household self-sufficiency.",
+};
+
 const BUDGET_PLANS: Record<BudgetTier, PlanItem[]> = {
   "1000": [
     { title: "Water storage", category: "water", note: "72-hour reserve for the household" },

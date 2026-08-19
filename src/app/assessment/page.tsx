@@ -1,12 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DOMAINS } from "@/lib/domains";
 
+function isValidEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 export default function AssessmentPage() {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [emailSaved, setEmailSaved] = useState(false);
   const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("sovereign-email");
+    if (saved) {
+      setEmail(saved);
+      setEmailSaved(true);
+    }
+  }, []);
   const [answers, setAnswers] = useState<Record<string, number>>({});
 
   const domain = DOMAINS[step];
@@ -17,6 +31,12 @@ export default function AssessmentPage() {
     setAnswers((prev) => ({ ...prev, [questionId]: score }));
   }
 
+  function startAssessment() {
+    if (!isValidEmail(email)) return;
+    localStorage.setItem("sovereign-email", email);
+    setEmailSaved(true);
+  }
+
   function next() {
     if (isLast) {
       localStorage.setItem("sovereign-answers", JSON.stringify(answers));
@@ -24,6 +44,54 @@ export default function AssessmentPage() {
       return;
     }
     setStep((s) => s + 1);
+  }
+
+  if (!emailSaved) {
+    return (
+      <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
+        <div style={{ maxWidth: 480, margin: "0 auto" }}>
+          <div className="label" style={{ marginBottom: "0.75rem" }}>
+            Before you start
+          </div>
+          <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem" }}>
+            Where should your score go?
+          </h1>
+          <p style={{ color: "var(--text-2)", marginBottom: "1.75rem" }}>
+            Twelve domains, three questions each. Give us your email so your result isn&apos;t
+            just left in this browser tab.
+          </p>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && startAssessment()}
+            placeholder="you@example.com"
+            style={{
+              width: "100%",
+              padding: "0.85rem 1rem",
+              borderRadius: "8px",
+              border: "1px solid var(--border-strong)",
+              background: "var(--card)",
+              color: "var(--text-1)",
+              fontSize: "var(--size-body)",
+              marginBottom: "0.75rem",
+            }}
+          />
+          <button
+            className="btn btn-primary"
+            onClick={startAssessment}
+            disabled={!isValidEmail(email)}
+            style={{ width: "100%", marginBottom: "1rem" }}
+          >
+            Start the assessment →
+          </button>
+          <p style={{ color: "var(--text-3)", fontSize: "var(--size-label)", lineHeight: 1.5 }}>
+            Saved to this browser only — there&apos;s no account system yet, so nothing is sent
+            anywhere or emailed to you. This just reserves the field until real accounts exist.
+          </p>
+        </div>
+      </main>
+    );
   }
 
   return (

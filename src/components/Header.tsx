@@ -21,7 +21,7 @@ const NAV: NavItem[] = [
     label: "Codex",
     children: [
       { href: "/assessment", label: "Sovereign Score" },
-      { href: "/scenario-room", label: "Scenario room" },
+      { href: "/scenario-room", label: "Disaster scenarios" },
       { href: "/build-my-system", label: "Build my system" },
     ],
   },

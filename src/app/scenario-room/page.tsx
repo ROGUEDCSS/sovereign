@@ -33,7 +33,7 @@ export default function ScenarioRoomPage() {
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
       <div style={{ maxWidth: 780, margin: "0 auto" }}>
         <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>
-          Scenario room
+          Disaster scenarios
         </h1>
         <p style={{ color: "var(--text-2)", marginBottom: "0.75rem" }}>
           Pick a scenario. Find out now — not when it happens.

@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { DOMAINS, domainScore, DomainId } from "@/lib/domains";
-import { buildPlan, BudgetTier, BUDGET_LABELS } from "@/lib/recommendation";
+import { buildPlan, BudgetTier, BUDGET_LABELS, BUDGET_EXPLAINERS } from "@/lib/recommendation";
 
 export default function BuildMySystemPage() {
   const [tier, setTier] = useState<BudgetTier | null>(null);
   const [weakDomains, setWeakDomains] = useState<DomainId[]>([]);
   const [hasAssessment, setHasAssessment] = useState(false);
+  const [hoveredTier, setHoveredTier] = useState<BudgetTier | null>(null);
 
   useEffect(() => {
     const raw = localStorage.getItem("sovereign-answers");
@@ -29,43 +30,91 @@ export default function BuildMySystemPage() {
         <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>
           Build my system
         </h1>
-        <p style={{ color: "var(--text-2)", marginBottom: "2rem" }}>
-          {hasAssessment
-            ? "Your plan is prioritised by your Sovereign Score — weakest domains first."
-            : "Pick a budget. Get your Sovereign Score first, and the plan builds itself around what's actually weakest."}
+        <p style={{ color: "var(--text-2)", marginBottom: "2.5rem" }}>
+          Three steps: score, budget, plan. Your plan is prioritised by what&apos;s actually
+          weakest, not what&apos;s loudest.
         </p>
 
-        {!hasAssessment && (
-          <Link href="/assessment" className="btn btn-outline" style={{ marginBottom: "2.5rem" }}>
-            Get your Sovereign Score first →
-          </Link>
+        <div className="label" style={{ color: hasAssessment ? "var(--good)" : "var(--amber-strong)", marginBottom: "0.5rem" }}>
+          Step 1 {hasAssessment ? "— done" : "of 3"}
+        </div>
+        <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.75rem" }}>
+          Get your Sovereign Score
+        </h2>
+        {hasAssessment ? (
+          <p style={{ color: "var(--text-2)", marginBottom: "2.5rem" }}>
+            Score on file — your plan below is prioritised by your weakest domains.
+          </p>
+        ) : (
+          <>
+            <p style={{ color: "var(--text-2)", marginBottom: "1rem" }}>
+              Everything below depends on this. No score yet, so the plan can&apos;t be
+              prioritised — it&apos;ll just show budget tiers in a default order.
+            </p>
+            <Link href="/assessment" className="btn btn-primary" style={{ marginBottom: "2.5rem" }}>
+              Get your Sovereign Score →
+            </Link>
+          </>
         )}
 
-        <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", marginTop: hasAssessment ? 0 : "2.5rem" }}>
+        <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
+          Step 2 of 3
+        </div>
+        <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
           Choose a budget
         </h2>
         <div style={{ display: "flex", gap: "0.75rem", marginBottom: "2.5rem", flexWrap: "wrap" }}>
           {(Object.keys(BUDGET_LABELS) as BudgetTier[]).map((t) => (
-            <button
-              key={t}
-              onClick={() => setTier(t)}
-              className="card"
-              style={{
-                padding: "1rem 1.5rem",
-                cursor: "pointer",
-                border: tier === t ? "2px solid var(--amber)" : "1px solid transparent",
-                fontWeight: tier === t ? 700 : 500,
-              }}
-            >
-              {BUDGET_LABELS[t]}
-            </button>
+            <div key={t} style={{ position: "relative" }}>
+              <button
+                onClick={() => setTier(t)}
+                onMouseEnter={() => setHoveredTier(t)}
+                onMouseLeave={() => setHoveredTier(null)}
+                onFocus={() => setHoveredTier(t)}
+                onBlur={() => setHoveredTier(null)}
+                className="card"
+                style={{
+                  padding: "1rem 1.5rem",
+                  cursor: "pointer",
+                  border: tier === t ? "2px solid var(--amber)" : "1px solid transparent",
+                  fontWeight: tier === t ? 700 : 500,
+                }}
+              >
+                {BUDGET_LABELS[t]}
+              </button>
+              {hoveredTier === t && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "100%",
+                    left: 0,
+                    marginTop: "0.5rem",
+                    zIndex: 20,
+                    width: 260,
+                    background: "var(--bg-raised)",
+                    border: "1px solid var(--border-strong)",
+                    borderRadius: "8px",
+                    padding: "0.85rem 1rem",
+                    fontSize: "var(--size-label)",
+                    color: "var(--text-2)",
+                    lineHeight: 1.5,
+                    boxShadow: "0 12px 32px rgba(0,0,0,0.4)",
+                  }}
+                >
+                  {BUDGET_EXPLAINERS[t]}
+                </div>
+              )}
+            </div>
           ))}
         </div>
 
         {plan && (
           <>
+            <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
+              Step 3 of 3
+            </div>
             <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
-              Your prioritised plan
+              Result: your action plan, prioritised
             </h2>
             <ol style={{ display: "flex", flexDirection: "column", gap: "0.75rem", paddingLeft: "1.25rem" }}>
               {plan.map((item) => (
