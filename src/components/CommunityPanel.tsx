@@ -140,7 +140,7 @@ function ThumbButton({
  * white cards work against its black sections: real light-vs-dark, not a
  * subtler shade of the same dark tone. Solid colour blocks (thumbs, Q/+)
  * sit on top of it, mirroring Resonance's own pattern of alternating solid
- * white/black/gold panels rather than tinted washes.
+ * white/black/amber panels rather than tinted washes.
  *
  * Three signals, not four: Endorse was dropped — it duplicated the editorial
  * evidenceRating/independenceSource signal shown elsewhere on the page.

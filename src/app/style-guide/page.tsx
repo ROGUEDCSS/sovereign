@@ -32,7 +32,7 @@ const ROWS: Row[] = [
     name: "Page title",
     example: <span style={{ fontSize: "var(--size-h2)", fontWeight: 500, color: "var(--amber-strong)" }}>Page title</span>,
     technical: "var(--size-h2), weight 500, color var(--amber-strong)",
-    rule: "One per page, applied to the <h1> tag. Note: the variable is named --size-h2 (a size-scale label, not an HTML tag reference) — it still styles <h1>. Gold by default unless a page explicitly overrides it white.",
+    rule: "One per page, applied to the <h1> tag. Note: the variable is named --size-h2 (a size-scale label, not an HTML tag reference) — it still styles <h1>. Amber by default unless a page explicitly overrides it white.",
   },
   {
     name: "Section heading / Subheading",
@@ -48,7 +48,7 @@ const ROWS: Row[] = [
       </WhiteExample>
     ),
     technical: "var(--size-h4), weight 500, color var(--ink)",
-    rule: "Titles one card or item, not a whole section. Explicit black — never relies on inherited gold.",
+    rule: "Titles one card or item, not a whole section. Explicit black — never relies on inherited amber.",
   },
   {
     name: "Body paragraph",
@@ -90,13 +90,19 @@ const ROWS: Row[] = [
       </div>
     ),
     technical: "var(--size-body), weight 700, background var(--amber), color #1a1005",
-    rule: "Reserved for the single most important prompt on a page. Text is just bold paragraph text (row 5) on a gold background — not a separate size.",
+    rule: "Reserved for the single most important prompt on a page. Text is just bold paragraph text (row 5) on an amber background — not a separate size.",
   },
   {
-    name: "Button",
+    name: "Button — amber",
     example: <button className="btn btn-primary" style={{ padding: "0.5rem 1rem" }}>Action</button>,
     technical: 'className="btn btn-primary"',
-    rule: "The only button style on this site. Solid gold background, #1a1005 text — no secondary/ghost variant.",
+    rule: "The default action button. Solid amber background, #1a1005 text.",
+  },
+  {
+    name: "Button — white",
+    example: <button className="btn btn-white" style={{ padding: "0.5rem 1rem" }}>Action</button>,
+    technical: 'className="btn btn-white"',
+    rule: "For a button/tooltip that needs to sit on top of other amber or coloured elements without competing with them — e.g. a hover tooltip. Solid white background, var(--ink) text.",
   },
   {
     name: "Colour — Background",
@@ -110,10 +116,10 @@ const ROWS: Row[] = [
     rule: "Two options only: black (var(--bg), the default) or white. No other page-level background colour is used.",
   },
   {
-    name: "Colour — Gold",
+    name: "Colour — Amber",
     example: <Swatch color="var(--amber)" />,
     technical: "var(--amber)",
-    rule: "Buttons, callouts, gold headings, active nav state.",
+    rule: "Buttons, callouts, amber headings, active nav state.",
   },
   {
     name: "Colour — Danger",

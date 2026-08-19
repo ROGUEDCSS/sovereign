@@ -187,6 +187,7 @@ export default function AssessmentPage() {
                 />
                 {hoveredDomain === i && (
                   <div
+                    className="btn btn-white"
                     style={{
                       position: "absolute",
                       top: "100%",
@@ -194,18 +195,14 @@ export default function AssessmentPage() {
                       transform: "translateX(-50%)",
                       marginTop: "0.6rem",
                       zIndex: 20,
-                      whiteSpace: "nowrap",
-                      background: "var(--bg-raised)",
-                      border: "1px solid var(--border-strong)",
-                      borderRadius: "6px",
-                      padding: "0.4rem 0.65rem",
+                      padding: "0.4rem 0.9rem",
                       fontSize: "var(--size-label)",
-                      color: "var(--text-1)",
                       boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
+                      cursor: "default",
                     }}
                   >
                     {d.name}
-                    {done && <span style={{ color: "var(--text-3)" }}> — {domainScore(d, answers)}/10</span>}
+                    {done && <span style={{ color: "var(--ink-2)" }}> — {domainScore(d, answers)}/10</span>}
                   </div>
                 )}
               </div>

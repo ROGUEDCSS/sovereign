@@ -15,7 +15,7 @@ body {
   min-height: 100vh;
 }
 
-/* Hard rule: every heading is gold, always — h1-h4 and the <strong> titles
+/* Hard rule: every heading is amber, always — h1-h4 and the <strong> titles
    used for card/item names that function as headings without the tag. */
 h1, h2, h3, h4, strong {
   color: var(--amber-strong);
@@ -126,6 +126,12 @@ h1, h2, h3, h4, strong {
   color: #1a1005;
 }
 .btn-primary:hover { background: var(--amber-hover); }
+
+.btn-white {
+  background: var(--white-block);
+  color: var(--ink);
+}
+.btn-white:hover { background: #f0f0f0; }
 
 .pill {
   display: inline-flex; align-items: center; gap: 0.4rem;
