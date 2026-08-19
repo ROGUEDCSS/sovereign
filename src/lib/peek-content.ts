@@ -29,6 +29,8 @@ export function resolvePeek(target: PeekTarget): PeekContent | null {
       breadcrumb: trail.slice(0, -1).map((n) => n.name).join(" → ") || "Codex",
       tagline: node.tagline,
       items: node.items,
+      communitySignal: node.communitySignal,
+      sovereignAlignment: node.sovereignAlignment,
       href: "/codex/" + target.path.join("/"),
     };
   }

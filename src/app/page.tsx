@@ -43,12 +43,15 @@ export default function Home() {
   return (
     <main>
       <section className="container" style={{ paddingTop: "6rem", paddingBottom: "5rem", maxWidth: 760 }}>
+        <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "1rem" }}>
+          This is your warning
+        </div>
         <h1 style={{ fontSize: "var(--size-h1)", fontWeight: 500, lineHeight: 1.15, marginBottom: "1.5rem" }}>
-          You don&apos;t get a warning before the system fails.
+          The storm is coming.
         </h1>
         <p style={{ fontSize: "1.15rem", color: "var(--text-2)", marginBottom: "2.5rem", maxWidth: 560 }}>
-          Power outages. Bank freezes. Supply shocks. Most households find out how exposed they
-          are the hard way. Get ready before that&apos;s you.
+          Get your affairs in order before the system fails. Power outages. Bank freezes. Supply
+          shocks. Most households find out how exposed they are the hard way.
         </p>
         <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
           <Link href="/assessment" className="btn btn-primary" style={{ fontSize: "1rem" }}>

@@ -90,7 +90,7 @@ export default function ScenarioRoomPage() {
 
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.5rem" }}>
               {selected.domains.map((id) => (
-                <span key={id} className="pill" style={{ background: "var(--card)", color: "var(--text-2)" }}>
+                <span key={id} className="pill" style={{ background: "var(--card-hover)", border: "1px solid var(--border-strong)", color: "var(--text-1)" }}>
                   {DOMAINS.find((d) => d.id === id)?.name}
                 </span>
               ))}

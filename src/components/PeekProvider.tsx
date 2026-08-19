@@ -90,11 +90,9 @@ export function PeekProvider({ children }: { children: React.ReactNode }) {
             </div>
 
             <div style={{ padding: "1.2rem 1.4rem 1.6rem", overflowY: "auto", flex: 1 }}>
-              {(content.pros || content.cons) && (
-                <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "1.2rem" }}>
-                  <CommunityPanel communitySignal={content.communitySignal} sovereignAlignment={content.sovereignAlignment} />
-                </div>
-              )}
+              <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "1.2rem" }}>
+                <CommunityPanel communitySignal={content.communitySignal} sovereignAlignment={content.sovereignAlignment} />
+              </div>
 
               {content.whyItMatters && (
                 <div style={{ marginBottom: "1.2rem" }}>

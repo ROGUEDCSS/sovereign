@@ -1,3 +1,5 @@
+import { CommunitySignal, SovereignAlignment } from "./knowledge-graph";
+
 export interface CodexItem {
   name: string;
   description?: string;
@@ -33,6 +35,9 @@ export interface CodexNode {
   detailed: boolean;
   /** Show the Sovereign Principle / Legal Reality / evidence framework panel. */
   sovereignFramework?: boolean;
+  /** Same living-status signal every World entity carries. Undefined until real activity exists — never fabricated. */
+  communitySignal?: CommunitySignal;
+  sovereignAlignment?: SovereignAlignment;
 }
 
 /**

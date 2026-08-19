@@ -104,9 +104,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
             </>
           )}
 
-          {(entity.pros || entity.cons) && (
-            <CommunityPanel communitySignal={entity.communitySignal} sovereignAlignment={entity.sovereignAlignment} fixed />
-          )}
+          <CommunityPanel communitySignal={entity.communitySignal} sovereignAlignment={entity.sovereignAlignment} fixed />
 
           {relationshipItems.length > 0 && (
             <>

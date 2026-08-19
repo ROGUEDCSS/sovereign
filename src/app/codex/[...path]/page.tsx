@@ -5,6 +5,7 @@ import { domainIdsForCodexPath } from "@/lib/taxonomy-map";
 import { DOMAINS } from "@/lib/domains";
 import { PeekProvider } from "@/components/PeekProvider";
 import { PeekList, PeekItem } from "@/components/PeekList";
+import { CommunityPanel } from "@/components/CommunityPanel";
 
 export function generateStaticParams() {
   return allCodexPaths().map((path) => ({ path }));
@@ -50,6 +51,8 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>{node.name}</h1>
           <p style={{ color: "var(--text-2)", marginBottom: "2rem", maxWidth: 620 }}>{node.tagline}</p>
+
+          <CommunityPanel communitySignal={node.communitySignal} sovereignAlignment={node.sovereignAlignment} fixed />
 
           {!node.detailed && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
@@ -137,7 +140,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
                     <strong>{p.label}</strong>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginTop: "0.5rem" }}>
                       {p.options.map((o) => (
-                        <span key={o} className="pill" style={{ background: "var(--card)", color: "var(--text-2)" }}>
+                        <span key={o} className="pill" style={{ background: "var(--card-hover)", border: "1px solid var(--border-strong)", color: "var(--text-1)" }}>
                           {o}
                         </span>
                       ))}

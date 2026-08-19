@@ -44,7 +44,6 @@ function SignalRow({
   explainerKey,
   hovered,
   onHover,
-  ink,
 }: {
   icon: string;
   label: string;
@@ -52,27 +51,32 @@ function SignalRow({
   explainerKey: ExplainerKey;
   hovered: ExplainerKey | null;
   onHover: (key: ExplainerKey | null) => void;
-  ink: string;
 }) {
   return (
     <div
       onMouseEnter={() => onHover(explainerKey)}
       onMouseLeave={() => onHover(null)}
-      style={{
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0.3rem 0",
-      }}
+      style={{ position: "relative", flex: 1 }}
     >
-      <span style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.72rem", color: ink }}>
-        <span style={{ fontFamily: "var(--font-mono, monospace)", fontWeight: 700, width: 12, textAlign: "center", flexShrink: 0 }}>
-          {icon}
-        </span>
-        {label}
-      </span>
-      {count !== undefined && <span style={{ fontSize: "0.7rem", opacity: 0.55, color: ink }}>{count}</span>}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "0.35rem",
+          background: "#000",
+          border: "1px solid rgba(255,255,255,0.18)",
+          borderRadius: "8px",
+          padding: "0.5rem 0.4rem",
+          color: "#fff",
+          fontSize: "0.74rem",
+          fontWeight: 600,
+        }}
+      >
+        <span style={{ fontFamily: "var(--font-mono, monospace)", fontWeight: 700 }}>{icon}</span>
+        <span>{label}</span>
+        {count !== undefined && <span style={{ opacity: 0.65, fontWeight: 500 }}>{count}</span>}
+      </div>
       {hovered === explainerKey && <Tooltip text={EXPLAINERS[explainerKey]} />}
     </div>
   );
@@ -89,7 +93,6 @@ function ThumbButton({
   emoji,
   tone,
   count,
-  label,
   explainerKey,
   hovered,
   onHover,
@@ -97,7 +100,6 @@ function ThumbButton({
   emoji: string;
   tone: "positive" | "negative";
   count?: number;
-  label: string;
   explainerKey: ExplainerKey;
   hovered: ExplainerKey | null;
   onHover: (key: ExplainerKey | null) => void;
@@ -115,15 +117,14 @@ function ThumbButton({
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: "0.2rem",
+          gap: "0.25rem",
           background: bg,
           borderRadius: "8px",
-          padding: "0.55rem 0.4rem",
+          padding: "0.7rem 0.4rem",
           color: "#fff",
         }}
       >
-        <span style={{ fontSize: "1.05rem", lineHeight: 1 }}>{emoji}</span>
-        <span style={{ fontSize: "0.62rem", fontWeight: 600, letterSpacing: "0.02em", opacity: 0.9 }}>{label}</span>
+        <span style={{ fontSize: "2.1rem", lineHeight: 1 }}>{emoji}</span>
         {count !== undefined && (
           <span style={{ fontSize: "0.72rem", fontWeight: 700 }}>{count.toLocaleString()}</span>
         )}
@@ -156,22 +157,20 @@ export function CommunityPanel({
 }) {
   const [hovered, setHovered] = useState<ExplainerKey | null>(null);
 
-  const ink = fixed ? "var(--bg)" : "var(--text-2)";
-
   const container: React.CSSProperties = fixed
     ? {
         position: "fixed",
         top: "5.2rem",
         right: "1.4rem",
         zIndex: 40,
-        width: 196,
+        width: 230,
         background: "var(--text-1)",
         borderRadius: "10px",
         padding: "0.75rem 0.85rem",
         boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
       }
     : {
-        width: 196,
+        width: 230,
         background: "var(--card)",
         border: "1px solid var(--border)",
         borderRadius: "10px",
@@ -190,13 +189,13 @@ export function CommunityPanel({
           borderBottom: fixed ? "1px solid rgba(0,0,0,0.12)" : "1px solid var(--border)",
         }}
       >
-        <ThumbButton emoji="👍" tone="positive" label="Aligned" count={sovereignAlignment?.positive} explainerKey="positive" hovered={hovered} onHover={setHovered} />
-        <ThumbButton emoji="👎" tone="negative" label="Against" count={sovereignAlignment?.negative} explainerKey="negative" hovered={hovered} onHover={setHovered} />
+        <ThumbButton emoji="👍" tone="positive" count={sovereignAlignment?.positive} explainerKey="positive" hovered={hovered} onHover={setHovered} />
+        <ThumbButton emoji="👎" tone="negative" count={sovereignAlignment?.negative} explainerKey="negative" hovered={hovered} onHover={setHovered} />
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <SignalRow icon="?" label="Question" count={communitySignal?.questioned} explainerKey="question" hovered={hovered} onHover={setHovered} ink={ink} />
-        <SignalRow icon="+" label="Contribute" count={communitySignal?.contributed} explainerKey="contribute" hovered={hovered} onHover={setHovered} ink={ink} />
+      <div style={{ display: "flex", gap: "0.4rem" }}>
+        <SignalRow icon="?" label="Question" count={communitySignal?.questioned} explainerKey="question" hovered={hovered} onHover={setHovered} />
+        <SignalRow icon="+" label="Contribute" count={communitySignal?.contributed} explainerKey="contribute" hovered={hovered} onHover={setHovered} />
       </div>
     </div>
   );
