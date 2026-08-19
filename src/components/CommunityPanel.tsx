@@ -4,8 +4,8 @@ import { useState } from "react";
 import { CommunitySignal, SovereignAlignment } from "@/lib/knowledge-graph";
 
 const EXPLAINERS = {
-  positive: "The community's view: this helps individual sovereignty.",
-  negative: "The community's view: this hurts individual sovereignty.",
+  positive: "I like this.",
+  negative: "I don't like this.",
   question: "I question this, disagree, or want it scrutinised.",
   contribute: "I have something to add — a correction, source, alternative method, or experience.",
 } as const;
@@ -75,7 +75,6 @@ function SignalRow({
       >
         <span style={{ color: "var(--amber-strong)", fontWeight: 700 }}>{icon}</span>
         <span>{label}</span>
-        {count !== undefined && <span style={{ opacity: 0.65, fontWeight: 500 }}>{count}</span>}
       </div>
       {hovered === explainerKey && <Tooltip text={EXPLAINERS[explainerKey]} />}
     </div>
@@ -125,9 +124,6 @@ function ThumbButton({
         }}
       >
         <span style={{ fontSize: "2.1rem", lineHeight: 1 }}>{emoji}</span>
-        {count !== undefined && (
-          <span style={{ fontSize: "var(--size-xs)", fontWeight: 700 }}>{count.toLocaleString()}</span>
-        )}
       </div>
       {hovered === explainerKey && <Tooltip text={EXPLAINERS[explainerKey]} />}
     </div>
