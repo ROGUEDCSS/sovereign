@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { DOMAINS } from "@/lib/domains";
+import { DOMAINS, domainScore } from "@/lib/domains";
 
 function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -101,23 +101,31 @@ export default function AssessmentPage() {
           Domain {step + 1} of {DOMAINS.length}
         </div>
 
-        <div
-          style={{
-            height: 4,
-            background: "var(--border)",
-            borderRadius: 2,
-            marginBottom: "2rem",
-            overflow: "hidden",
-          }}
-        >
-          <div
-            style={{
-              height: "100%",
-              width: `${((step + 1) / DOMAINS.length) * 100}%`,
-              background: "var(--amber)",
-              transition: "width 0.3s ease",
-            }}
-          />
+        <div style={{ display: "flex", gap: "0.4rem", marginBottom: "2rem" }}>
+          {DOMAINS.map((d, i) => {
+            const done = d.questions.every((q) => answers[q.id] !== undefined);
+            const isCurrent = i === step;
+            let background = "var(--border)";
+            if (done) {
+              const score = domainScore(d, answers);
+              background = score <= 3 ? "var(--danger)" : score <= 6 ? "var(--amber)" : "var(--good)";
+            }
+            return (
+              <div
+                key={d.id}
+                title={`${d.name}${done ? ` — ${domainScore(d, answers)}/10` : ""}`}
+                style={{
+                  flex: 1,
+                  height: 8,
+                  borderRadius: 3,
+                  background,
+                  outline: isCurrent ? "2px solid var(--amber-strong)" : "none",
+                  outlineOffset: 2,
+                  transition: "background 0.2s ease",
+                }}
+              />
+            );
+          })}
         </div>
 
         <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>
