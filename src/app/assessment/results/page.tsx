@@ -154,17 +154,35 @@ export default function ResultsPage() {
           Do these 5 things first
         </h2>
         <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem", marginBottom: "3rem" }}>
-          {firstFive.map(({ domain }) => (
-            <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem", background: "#fff" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.35rem" }}>
-                <strong style={{ color: "var(--ink)" }}>{domain.quickAction.title}</strong>
-                <span style={{ color: "var(--danger)", fontSize: "var(--size-sm)", fontWeight: 600, whiteSpace: "nowrap" }}>
-                  {domain.quickAction.cost} · {domain.quickAction.time}
-                </span>
+          {firstFive.map(({ domain }) => {
+            const actionLink = codexLinksForDomain(domain.id)[0];
+            return (
+              <div
+                key={domain.id}
+                className="card"
+                style={{ padding: "1.1rem 1.4rem", background: "#fff", display: "flex", alignItems: "center", gap: "1.25rem" }}
+              >
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.35rem" }}>
+                    <strong style={{ color: "var(--ink)" }}>{domain.quickAction.title}</strong>
+                    <span style={{ color: "var(--danger)", fontSize: "var(--size-sm)", fontWeight: 600, whiteSpace: "nowrap" }}>
+                      {domain.quickAction.cost} · {domain.quickAction.time}
+                    </span>
+                  </div>
+                  <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)" }}>{domain.quickAction.why}</p>
+                </div>
+                {actionLink && (
+                  <Link
+                    href={codexHref(actionLink.path)}
+                    className="btn btn-primary"
+                    style={{ flexShrink: 0, padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}
+                  >
+                    Action →
+                  </Link>
+                )}
               </div>
-              <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)" }}>{domain.quickAction.why}</p>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <Link href="/build-my-system" className="btn btn-primary">
