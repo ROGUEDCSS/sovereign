@@ -98,14 +98,20 @@ export default function AssessmentPage() {
   return (
     <main className="container" style={{ paddingTop: "3rem", paddingBottom: "5rem" }}>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
-        <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.35rem" }}>
+        <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.75rem" }}>
           Your Sovereign Score
         </div>
+
+        <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>
+          {domain.name}
+        </h1>
+        <p style={{ color: "var(--text-2)", marginBottom: "1.5rem" }}>{domain.tagline}</p>
+
         <div className="label" style={{ marginBottom: "0.75rem" }}>
           Domain {step + 1} of {DOMAINS.length}
         </div>
 
-        <div style={{ display: "flex", gap: "0.4rem", marginBottom: "2rem" }}>
+        <div style={{ display: "flex", gap: "0.4rem", marginBottom: "2.5rem" }}>
           {DOMAINS.map((d, i) => {
             const done = d.questions.every((q) => answers[q.id] !== undefined);
             const isCurrent = i === step;
@@ -158,11 +164,6 @@ export default function AssessmentPage() {
             );
           })}
         </div>
-
-        <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>
-          {domain.name}
-        </h1>
-        <p style={{ color: "var(--text-2)", marginBottom: "2.5rem" }}>{domain.tagline}</p>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
           {domain.questions.map((q) => (
