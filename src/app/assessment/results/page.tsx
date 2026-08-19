@@ -61,7 +61,7 @@ export default function ResultsPage() {
   );
   const greenCount = scored.filter((s) => s.tier === "green").length;
   const weakest = scored.slice(0, 3);
-  const firstFive = scored.slice(0, 5);
+  const alsoWorthDoing = scored.slice(3, 5);
   const status = sovereigntyStatus(greenCount);
 
   return (
@@ -108,17 +108,41 @@ export default function ResultsPage() {
           <span style={{ width: 10, height: 10, borderRadius: "50%", background: "var(--danger)", flexShrink: 0 }} />
           Urgent Action Needed
         </h2>
-        <div className="card" style={{ padding: "1.5rem", marginBottom: "2.5rem" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-            {weakest.map(({ domain, tier }) => (
-              <div key={domain.id} style={{ padding: "0.9rem 0" }}>
-                <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
-                <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>
-                  {domain.tierAdvice[tier]}
-                </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", marginBottom: "2.5rem" }}>
+          {weakest.map(({ domain, tier }) => {
+            const actionLink = codexLinksForDomain(domain.id)[0];
+            return (
+              <div key={domain.id}>
+                <div className="card" style={{ padding: "1.5rem", background: "var(--amber)", marginBottom: "0.9rem" }}>
+                  <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "#1a1005" }}>{domain.name}</strong>
+                  <p style={{ fontSize: "var(--size-body)", color: "#1a1005", marginTop: "0.2rem" }}>
+                    {domain.tierAdvice[tier]}
+                  </p>
+                </div>
+
+                <div className="card" style={{ padding: "1.1rem 1.4rem", display: "flex", alignItems: "center", gap: "1.25rem" }}>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.35rem" }}>
+                      <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
+                      <span style={{ color: "var(--danger)", fontSize: "var(--size-sm)", fontWeight: 600, whiteSpace: "nowrap" }}>
+                        {domain.quickAction.cost} · {domain.quickAction.time}
+                      </span>
+                    </div>
+                    <p style={{ fontSize: "var(--size-body)", color: "var(--ink)" }}>{domain.quickAction.why}</p>
+                  </div>
+                  {actionLink && (
+                    <Link
+                      href={codexHref(actionLink.path)}
+                      className="btn btn-primary"
+                      style={{ flexShrink: 0, padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}
+                    >
+                      Action →
+                    </Link>
+                  )}
+                </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
         <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
@@ -135,11 +159,13 @@ export default function ResultsPage() {
           ))}
         </div>
 
-        <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
-          Do these 5 things first
-        </h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem", marginBottom: "3rem" }}>
-          {firstFive.map(({ domain }) => {
+        {alsoWorthDoing.length > 0 && (
+          <>
+            <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
+              Also worth doing
+            </h2>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem", marginBottom: "3rem" }}>
+          {alsoWorthDoing.map(({ domain }) => {
             const actionLink = codexLinksForDomain(domain.id)[0];
             return (
               <div
@@ -168,7 +194,9 @@ export default function ResultsPage() {
               </div>
             );
           })}
-        </div>
+            </div>
+          </>
+        )}
 
         <Link href="/build-my-system" className="btn btn-primary">
           Build my system →
