@@ -86,15 +86,29 @@ export default function Home() {
                 <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "1rem" }}>
                   {p.tag}
                 </div>
-                <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.6rem", lineHeight: 1.35, color: "var(--amber-strong)" }}>
+                <h3 style={{ fontSize: "var(--size-h3)", fontWeight: 700, marginBottom: "0.6rem", lineHeight: 1.35, color: "var(--amber-strong)" }}>
                   {p.title}
                 </h3>
                 <p style={{ color: "#fff", fontSize: "var(--size-h4)", marginBottom: "1.25rem", lineHeight: 1.55 }}>
                   {p.body}
                 </p>
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
                   {p.links.map((l) => (
-                    <Link key={l.href} href={l.href} style={{ color: "#fff", fontSize: "var(--size-body)", textDecoration: "none", fontWeight: 600 }}>
+                    <Link
+                      key={l.href}
+                      href={l.href}
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        background: "var(--amber)",
+                        color: "#1a1005",
+                        fontSize: "var(--size-sm)",
+                        fontWeight: 700,
+                        textDecoration: "none",
+                        padding: "0.45rem 0.9rem",
+                        borderRadius: "8px",
+                      }}
+                    >
                       {l.label} →
                     </Link>
                   ))}

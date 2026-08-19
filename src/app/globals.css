@@ -127,9 +127,9 @@ h1, h2, h3, h4, strong {
 .btn-primary:hover { background: var(--amber-strong); }
 
 .btn-outline {
-  background: var(--text-1);
-  color: var(--bg);
-  border-color: var(--text-1);
+  background: var(--amber);
+  color: #1a1005;
+  border-color: var(--amber);
 }
 .btn-outline:hover { background: var(--amber-strong); border-color: var(--amber-strong); color: #1a1005; }
 
