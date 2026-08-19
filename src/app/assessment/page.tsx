@@ -22,6 +22,7 @@ export default function AssessmentPage() {
     }
   }, []);
   const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [hoveredDomain, setHoveredDomain] = useState<number | null>(null);
 
   const domain = DOMAINS[step];
   const isLast = step === DOMAINS.length - 1;
@@ -97,6 +98,9 @@ export default function AssessmentPage() {
   return (
     <main className="container" style={{ paddingTop: "3rem", paddingBottom: "5rem" }}>
       <div style={{ maxWidth: 640, margin: "0 auto" }}>
+        <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.35rem" }}>
+          Your Sovereign Score
+        </div>
         <div className="label" style={{ marginBottom: "0.75rem" }}>
           Domain {step + 1} of {DOMAINS.length}
         </div>
@@ -113,17 +117,44 @@ export default function AssessmentPage() {
             return (
               <div
                 key={d.id}
-                title={`${d.name}${done ? ` — ${domainScore(d, answers)}/10` : ""}`}
-                style={{
-                  flex: 1,
-                  height: 8,
-                  borderRadius: 3,
-                  background,
-                  outline: isCurrent ? "2px solid var(--amber-strong)" : "none",
-                  outlineOffset: 2,
-                  transition: "background 0.2s ease",
-                }}
-              />
+                onMouseEnter={() => setHoveredDomain(i)}
+                onMouseLeave={() => setHoveredDomain(null)}
+                style={{ flex: 1, position: "relative" }}
+              >
+                <div
+                  style={{
+                    height: 8,
+                    borderRadius: 3,
+                    background,
+                    outline: isCurrent ? "2px solid var(--amber-strong)" : "none",
+                    outlineOffset: 2,
+                    transition: "background 0.2s ease",
+                  }}
+                />
+                {hoveredDomain === i && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "100%",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      marginTop: "0.6rem",
+                      zIndex: 20,
+                      whiteSpace: "nowrap",
+                      background: "var(--bg-raised)",
+                      border: "1px solid var(--border-strong)",
+                      borderRadius: "6px",
+                      padding: "0.4rem 0.65rem",
+                      fontSize: "var(--size-label)",
+                      color: "var(--text-1)",
+                      boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
+                    }}
+                  >
+                    {d.name}
+                    {done && <span style={{ color: "var(--text-3)" }}> — {domainScore(d, answers)}/10</span>}
+                  </div>
+                )}
+              </div>
             );
           })}
         </div>
