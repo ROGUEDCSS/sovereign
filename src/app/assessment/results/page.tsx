@@ -88,7 +88,7 @@ export default function ResultsPage() {
           </span>
         </div>
         <p style={{ color: "var(--text-2)", marginBottom: "2.5rem" }}>
-          Sovereignty is a continuum, not a binary state — this is where you start, not a verdict.
+          Sovereignty is a goal, not a binary state — this tells you where to go, what to fix.
         </p>
 
         <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
