@@ -61,9 +61,10 @@ export default function ResultsPage() {
   return (
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
+        <div className="label" style={{ marginBottom: "0.5rem" }}>Your Sovereign Score</div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1.5rem", flexWrap: "wrap", margin: "0 0 1.5rem" }}>
           <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, color: "var(--amber-strong)" }}>
-            Your Sovereign Score
+            Results
           </h1>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.6rem" }}>
             <div
