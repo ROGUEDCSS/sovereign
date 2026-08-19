@@ -23,6 +23,8 @@ export interface CodexNode {
   slug: string;
   name: string;
   tagline: string;
+  /** One or two extra sentences shown on the PARENT node's branch-preview card, so a listing page doesn't just repeat the one-line tagline. */
+  elaboration?: string;
   definition?: string;
   facts?: string[];
   practicalQuestion?: string;
@@ -57,6 +59,8 @@ const IDENTITY: CodexNode = {
   slug: "identity",
   name: "Identity",
   tagline: "Who you are, how you prove it, and how much of it you have to hand over to do so.",
+  elaboration:
+    "From your passport to your passwords, identity increasingly determines what you're allowed to do, access, or prove. This branch covers how resilient that proof actually is, and how much of yourself you have to disclose just to be believed.",
   definition:
     "Identity is your ability to prove who you are — to institutions, to strangers, and to yourself — without any single document, device, or company being the only thing standing between you and being believed.",
   facts: [
@@ -82,6 +86,8 @@ const PERSONAL_DEVELOPMENT: CodexNode = {
   slug: "personal-development",
   name: "Personal development",
   tagline: "What you actually know and are deliberately learning — theory and practice, outside of any formal system.",
+  elaboration:
+    "The knowledge and skills you're actively building outside any classroom or workplace — reading, practising, and teaching yourself the things that make you more capable and harder to replace.",
   detailed: true,
   connections: [{ path: ["family", "education"] }],
 };
@@ -90,6 +96,8 @@ const HEALTH: CodexNode = {
   slug: "health",
   name: "Health",
   tagline: "Physical and mental wellbeing — the capacity everything else depends on.",
+  elaboration:
+    "Resilience isn't separate from health — it's built on it. This branch covers the habits, capacity, and reserves that determine whether you can actually act on everything else in this Codex when it matters.",
   detailed: true,
   connections: [{ path: ["family", "family-capability"] }],
 };
@@ -98,6 +106,8 @@ const FINANCE: CodexNode = {
   slug: "finance",
   name: "Finance",
   tagline: "Personal income, savings, and financial independence — before it becomes a household concern.",
+  elaboration:
+    "Covers both sides of the ledger: managing what you already have (savings, spending, reserves) and how resilient your ability to earn actually is — one employer vs. transferable skills vs. more than one income source.",
   definition:
     "Financial independence is the ability to meet your own needs and absorb a shock — a lost job, a medical bill, a bad month — without immediately depending on credit, family, or the state to bridge the gap.",
   facts: [
@@ -114,6 +124,8 @@ const MINDSET_RESPONSIBILITY: CodexNode = {
   slug: "mindset-responsibility",
   name: "Mindset & responsibility",
   tagline: "Self-governance — the character and judgement a Sovereign individual actually runs on.",
+  elaboration:
+    "Skills and resources only matter if the person holding them is disciplined enough to actually use them well. This branch is about the follow-through — showing up, owning outcomes, and making sound calls under pressure.",
   detailed: true,
   connections: [{ path: ["family", "responsibility"] }],
 };

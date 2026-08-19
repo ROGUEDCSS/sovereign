@@ -50,7 +50,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
           </div>
 
           <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>{node.name}</h1>
-          {!node.definition && (
+          {!node.definition && !node.branches && (
             <p style={{ fontSize: "var(--size-body)", color: "var(--text-2)", marginBottom: "2rem", maxWidth: 620 }}>{node.tagline}</p>
           )}
 
@@ -100,33 +100,28 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {node.branches && node.branches.length > 0 && (
             <>
-              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>Branches</h2>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-                  gap: "0.75rem",
-                  marginBottom: "2.5rem",
-                  alignItems: "start",
-                }}
-              >
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1.5rem" }}>Branches</h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", marginBottom: "2.5rem" }}>
                 {node.branches.map((b) => (
-                  <Link
-                    key={b.slug}
-                    href={`/codex/${[...path, b.slug].join("/")}`}
-                    className="card"
-                    style={{ display: "block", padding: "1.1rem 1.25rem", textDecoration: "none" }}
-                  >
-                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.3rem" }}>
-                      <span style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{b.name}</span>
+                  <div key={b.slug}>
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", marginBottom: "0.5rem" }}>
+                      <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--amber-strong)" }}>{b.name}</h2>
                       {!b.detailed && (
-                        <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)" }}>
+                        <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)", flexShrink: 0 }}>
                           Stub
                         </span>
                       )}
                     </div>
-                    <p style={{ color: "var(--text-2)", fontSize: "var(--size-body)" }}>{b.tagline}</p>
-                  </Link>
+                    <p style={{ fontSize: "var(--size-body)", color: "#fff", marginBottom: "0.75rem" }}>{b.tagline}</p>
+                    {b.elaboration && (
+                      <p style={{ fontSize: "var(--size-body)", color: "#fff", marginBottom: "1rem" }}>{b.elaboration}</p>
+                    )}
+                    <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                      <Link href={`/codex/${[...path, b.slug].join("/")}`} className="btn btn-primary" style={{ padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
+                        Explore {b.name} →
+                      </Link>
+                    </div>
+                  </div>
                 ))}
               </div>
             </>
