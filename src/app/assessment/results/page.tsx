@@ -98,8 +98,8 @@ export default function ResultsPage() {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.5rem", marginBottom: "2.5rem" }}>
           {(["red", "amber", "green"] as Tier[]).map((tier) => (
             <div key={tier} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <span style={{ width: 10, height: 10, borderRadius: "50%", background: TIER_COLOR[tier], flexShrink: 0 }} />
               <span style={{ fontSize: "var(--size-sm)", color: "#fff" }}>{TIER_LABEL[tier]}</span>
+              <span style={{ width: 10, height: 10, borderRadius: "50%", background: TIER_COLOR[tier], flexShrink: 0 }} />
             </div>
           ))}
         </div>
@@ -114,8 +114,8 @@ export default function ResultsPage() {
             return (
               <div key={domain.id}>
                 <div className="card" style={{ padding: "1.5rem", background: "var(--amber)", marginBottom: "0.9rem" }}>
-                  <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "#1a1005" }}>{domain.name}</strong>
-                  <p style={{ fontSize: "var(--size-body)", color: "#1a1005", marginTop: "0.2rem" }}>
+                  <strong style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "#1a1005" }}>{domain.name}</strong>
+                  <p style={{ fontSize: "var(--size-body)", fontWeight: 700, color: "#1a1005", marginTop: "0.2rem" }}>
                     {domain.tierAdvice[tier]}
                   </p>
                 </div>
@@ -123,16 +123,17 @@ export default function ResultsPage() {
                 <div className="card" style={{ padding: "1.1rem 1.4rem" }}>
                   <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
                   <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>{domain.quickAction.why}</p>
-                  <p style={{ fontSize: "var(--size-body)", color: "var(--danger)", fontWeight: 600, marginTop: "0.75rem" }}>
-                    Time: {domain.quickAction.time} &nbsp;&nbsp; Cost: {domain.quickAction.cost}
-                  </p>
-                  {actionLink && (
-                    <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "0.9rem" }}>
-                      <Link href={codexHref(actionLink.path)} className="btn btn-primary" style={{ padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem", marginTop: "0.9rem" }}>
+                    <div>
+                      <p style={{ fontSize: "var(--size-sm)", color: "var(--danger)", fontWeight: 600 }}>Time: {domain.quickAction.time}</p>
+                      <p style={{ fontSize: "var(--size-sm)", color: "var(--danger)", fontWeight: 600 }}>Cost: {domain.quickAction.cost}</p>
+                    </div>
+                    {actionLink && (
+                      <Link href={codexHref(actionLink.path)} className="btn btn-primary" style={{ flexShrink: 0, padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
                         Action →
                       </Link>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             );
@@ -165,16 +166,17 @@ export default function ResultsPage() {
               <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem" }}>
                 <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.quickAction.title}</strong>
                 <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>{domain.quickAction.why}</p>
-                <p style={{ fontSize: "var(--size-body)", color: "var(--danger)", fontWeight: 600, marginTop: "0.75rem" }}>
-                  Time: {domain.quickAction.time} &nbsp;&nbsp; Cost: {domain.quickAction.cost}
-                </p>
-                {actionLink && (
-                  <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "0.9rem" }}>
-                    <Link href={codexHref(actionLink.path)} className="btn btn-primary" style={{ padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem", marginTop: "0.9rem" }}>
+                  <div>
+                    <p style={{ fontSize: "var(--size-sm)", color: "var(--danger)", fontWeight: 600 }}>Time: {domain.quickAction.time}</p>
+                    <p style={{ fontSize: "var(--size-sm)", color: "var(--danger)", fontWeight: 600 }}>Cost: {domain.quickAction.cost}</p>
+                  </div>
+                  {actionLink && (
+                    <Link href={codexHref(actionLink.path)} className="btn btn-primary" style={{ flexShrink: 0, padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
                       Action →
                     </Link>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             );
           })}
