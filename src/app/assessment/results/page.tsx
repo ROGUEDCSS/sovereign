@@ -19,6 +19,12 @@ const TIER_COLOR: Record<Tier, string> = {
   green: "var(--good)",
 };
 
+const TIER_LABEL: Record<Tier, string> = {
+  red: "Vulnerability — urgent action needed",
+  amber: "Action over time",
+  green: "Totally Sovereign",
+};
+
 function sovereigntyStatus(greenCount: number): { label: string; color: string } {
   if (greenCount <= 2) return { label: "Grossly Dependent", color: "var(--danger)" };
   if (greenCount <= 4) return { label: "Dangerously Exposed", color: "var(--danger)" };
@@ -62,67 +68,54 @@ export default function ResultsPage() {
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
         <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>Your Sovereign Score</div>
-        <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
-          Results
-        </h1>
-        <p style={{ fontSize: "var(--size-body)", color: "#fff", marginBottom: "2.5rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1.5rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
+          <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, color: "var(--amber-strong)" }}>
+            Results
+          </h1>
+          <div
+            style={{
+              width: 130,
+              height: 130,
+              borderRadius: "50%",
+              border: `3px solid ${status.color}`,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "var(--bg-raised)",
+            }}
+          >
+            <span style={{ fontSize: "var(--size-h1)", fontWeight: 700, color: "var(--amber-strong)", lineHeight: 1 }}>
+              {greenCount}
+            </span>
+            <span style={{ fontSize: "var(--size-label)", color: "var(--text-3)" }}>/ 12 Domains</span>
+            <span style={{ fontSize: "var(--size-label)", color: "var(--text-3)" }}>OK</span>
+          </div>
+        </div>
+        <p style={{ fontSize: "var(--size-body)", color: "#fff", marginBottom: "1.5rem" }}>
           Sovereignty is a goal, not a binary state — this tells you where to go, what to fix.
         </p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "1.25rem", marginBottom: "2.5rem" }}>
+          {(["red", "amber", "green"] as Tier[]).map((tier) => (
+            <div key={tier} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <span style={{ width: 10, height: 10, borderRadius: "50%", background: TIER_COLOR[tier], flexShrink: 0 }} />
+              <span style={{ fontSize: "var(--size-sm)", color: "#fff" }}>{TIER_LABEL[tier]}</span>
+            </div>
+          ))}
+        </div>
 
-        <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
-          Vulnerabilities
+        <h2 style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
+          <span style={{ width: 10, height: 10, borderRadius: "50%", background: "var(--danger)", flexShrink: 0 }} />
+          Urgent Action Needed
         </h2>
         <div className="card" style={{ padding: "1.5rem", marginBottom: "2.5rem" }}>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.6rem", marginBottom: "1.5rem" }}>
-            <div
-              style={{
-                width: 130,
-                height: 130,
-                borderRadius: "50%",
-                border: `3px solid ${status.color}`,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <span style={{ fontSize: "var(--size-h1)", fontWeight: 700, color: "var(--ink)", lineHeight: 1 }}>
-                {greenCount}
-              </span>
-              <span style={{ fontSize: "var(--size-label)", color: "var(--ink-2)" }}>/ 12 Domains</span>
-            </div>
-            <span style={{ fontSize: "var(--size-sm)", fontWeight: 700, color: status.color, textAlign: "center" }}>
-              {status.label}
-            </span>
-          </div>
-
           <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
             {weakest.map(({ domain, tier }) => (
-              <div
-                key={domain.id}
-                style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "0.85rem",
-                  padding: "0.9rem 0",
-                }}
-              >
-                <span
-                  style={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: "50%",
-                    background: TIER_COLOR[tier],
-                    flexShrink: 0,
-                    marginTop: "0.3rem",
-                  }}
-                />
-                <div>
-                  <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
-                  <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>
-                    {domain.tierAdvice[tier]}
-                  </p>
-                </div>
+              <div key={domain.id} style={{ padding: "0.9rem 0" }}>
+                <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
+                <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>
+                  {domain.tierAdvice[tier]}
+                </p>
               </div>
             ))}
           </div>
@@ -133,31 +126,11 @@ export default function ResultsPage() {
         </h2>
         <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
           {scored.map(({ domain, tier }) => (
-            <div
-              key={domain.id}
-              style={{
-                display: "flex",
-                alignItems: "flex-start",
-                gap: "0.85rem",
-                padding: "0.9rem 0",
-              }}
-            >
-              <span
-                style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: "50%",
-                  background: TIER_COLOR[tier],
-                  flexShrink: 0,
-                  marginTop: "0.3rem",
-                }}
-              />
-              <div>
-                <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
-                <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>
-                  {domain.tierAdvice[tier]}
-                </p>
-              </div>
+            <div key={domain.id} style={{ padding: "0.9rem 0" }}>
+              <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
+              <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>
+                {domain.tierAdvice[tier]}
+              </p>
             </div>
           ))}
         </div>
