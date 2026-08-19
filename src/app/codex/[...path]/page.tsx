@@ -100,7 +100,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {node.branches && node.branches.length > 0 && (
             <>
-              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Branches</h2>
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 700, marginBottom: "1rem" }}>Branches</h2>
               <div
                 style={{
                   display: "grid",
@@ -118,7 +118,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
                     style={{ display: "block", padding: "1.1rem 1.25rem", textDecoration: "none" }}
                   >
                     <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.3rem" }}>
-                      <span style={{ fontWeight: 500 }}>{b.name}</span>
+                      <span style={{ fontSize: "var(--size-h4)", fontWeight: 700 }}>{b.name}</span>
                       {!b.detailed && (
                         <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)" }}>
                           Stub
@@ -140,7 +140,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
               <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.5rem" }}>
                 {node.items.map((item) => (
                   <div key={item.name} className="card" style={{ padding: "0.9rem 1.25rem" }}>
-                    <strong style={{ color: "var(--ink)" }}>{item.name}</strong>
+                    <strong style={{ fontSize: "var(--size-h4)", color: "var(--ink)" }}>{item.name}</strong>
                     {item.description && (
                       <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)", marginTop: "0.2rem" }}>
                         {item.description}
@@ -154,7 +154,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {node.pathways && node.pathways.length > 0 && (
             <>
-              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.5rem" }}>
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 700, marginBottom: "0.5rem" }}>
                 Multiple ways to the same outcome
               </h2>
               <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)", marginBottom: "1rem" }}>
@@ -164,7 +164,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
               <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.5rem" }}>
                 {node.pathways.map((p) => (
                   <div key={p.label} className="card" style={{ padding: "0.9rem 1.25rem" }}>
-                    <strong style={{ color: "var(--ink)" }}>{p.label}</strong>
+                    <strong style={{ fontSize: "var(--size-h4)", color: "var(--ink)" }}>{p.label}</strong>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginTop: "0.5rem" }}>
                       {p.options.map((o) => (
                         <span key={o} className="pill" style={{ background: "var(--card-hover)", border: "1px solid var(--border-strong)", color: "var(--text-1)" }}>
@@ -180,7 +180,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {connectionItems.length > 0 && (
             <>
-              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Connections</h2>
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 700, marginBottom: "1rem" }}>Connections</h2>
               <div style={{ marginBottom: node.futureRefs && node.futureRefs.length > 0 ? "0.75rem" : "2.5rem" }}>
                 <PeekList items={connectionItems} />
               </div>
@@ -195,7 +195,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {node.sovereignFramework && (
             <div className="card" style={{ padding: "1.5rem", marginBottom: "2.5rem" }}>
-              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)", marginBottom: "1rem" }}>
                 How this node will be filled in
               </h2>
               <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)", marginBottom: "1.25rem" }}>
@@ -236,7 +236,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {relatedDomains.length > 0 && (
             <>
-              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 700, marginBottom: "1rem" }}>
                 Related Sovereign Score domains
               </h2>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.5rem" }}>
@@ -256,7 +256,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {node.relatedTools && node.relatedTools.length > 0 && (
             <>
-              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Related tools</h2>
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 700, marginBottom: "1rem" }}>Related tools</h2>
               <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
                 {node.relatedTools.map((t) => (
                   <Link key={t.href} href={t.href} className="btn btn-outline">
