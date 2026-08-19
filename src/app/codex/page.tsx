@@ -47,7 +47,14 @@ export default function CodexIndexPage() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
           {CODEX_BRANCHES.map((branch, i) => (
-            <div key={branch.slug}>
+            <div
+              key={branch.slug}
+              style={
+                i === 0
+                  ? { border: "1px solid var(--border-strong)", borderRadius: "12px", padding: "1.5rem" }
+                  : undefined
+              }
+            >
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", marginBottom: "0.3rem" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                   <span
@@ -68,15 +75,15 @@ export default function CodexIndexPage() {
                     {i + 1}
                   </span>
                   <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--amber-strong)" }}>{branch.name}</h2>
+                  <span style={{ fontSize: "var(--size-xs)", color: "var(--text-3)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                    {JOURNEY_TAG[branch.slug]}
+                  </span>
                 </div>
                 {!branch.detailed && (
                   <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)", flexShrink: 0 }}>
                     Not yet mapped
                   </span>
                 )}
-              </div>
-              <div style={{ fontSize: "var(--size-xs)", color: "var(--text-3)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: "0.75rem", marginLeft: "2.6rem" }}>
-                {JOURNEY_TAG[branch.slug]}
               </div>
 
               <p style={{ fontSize: "var(--size-body)", color: "#fff", marginBottom: "0.75rem" }}>{branch.tagline}</p>
