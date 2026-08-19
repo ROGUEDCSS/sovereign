@@ -30,24 +30,24 @@ function WhiteExample({ children }: { children: React.ReactNode }) {
 const ROWS: Row[] = [
   {
     name: "Page title",
-    example: <span style={{ fontSize: "var(--size-h2)", fontWeight: 500 }}>Page title</span>,
-    technical: "var(--size-h2), weight 500",
-    rule: "One per page. Always the <h1> tag, nothing else uses this size.",
+    example: <span style={{ fontSize: "var(--size-h2)", fontWeight: 500, color: "var(--amber-strong)" }}>Page title</span>,
+    technical: "var(--size-h2), weight 500, color var(--amber-strong)",
+    rule: "One per page, applied to the <h1> tag. Note: the variable is named --size-h2 (a size-scale label, not an HTML tag reference) — it still styles <h1>. Gold by default unless a page explicitly overrides it white.",
   },
   {
     name: "Section heading",
-    example: <span style={{ fontSize: "var(--size-h3)", fontWeight: 700 }}>Section heading</span>,
-    technical: "var(--size-h3), weight 700",
+    example: <span style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--amber-strong)" }}>Section heading</span>,
+    technical: "var(--size-h3), weight 500, color var(--amber-strong)",
     rule: "Every \"Sources\", \"Connections\", \"Related X\" style heading. Always this exact size, never h4.",
   },
   {
     name: "Card / item title",
     example: (
       <WhiteExample>
-        <span style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)" }}>Card title</span>
+        <span style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>Card title</span>
       </WhiteExample>
     ),
-    technical: "var(--size-h4), weight 700, color var(--ink)",
+    technical: "var(--size-h4), weight 500, color var(--ink)",
     rule: "Titles one card or item, not a whole section. Explicit black — never relies on inherited gold.",
   },
   {
@@ -63,56 +63,51 @@ const ROWS: Row[] = [
     rule: "Exact same size as normal. Weight is the only lever for making a paragraph stand out.",
   },
   {
-    name: "Body paragraph — muted",
-    example: <span style={{ fontSize: "var(--size-body)", color: "var(--text-3)" }}>Muted paragraph text</span>,
-    technical: "var(--size-body), color var(--text-3) / var(--ink-2)",
-    rule: "Colour de-emphasises, not a smaller font-size. Still var(--size-body).",
-  },
-  {
     name: "Kicker / label",
     example: <span className="label" style={{ color: "var(--amber-strong)" }}>Kicker label</span>,
     technical: 'className="label" — var(--size-label), uppercase, letter-spacing 0.08em',
     rule: "Dark background only. Never used inside a white card as a substitute heading.",
   },
   {
-    name: "White block",
-    example: <WhiteExample><span style={{ color: "var(--ink)" }}>A card</span></WhiteExample>,
-    technical: "background: var(--cream) = #fff",
-    rule: "Every .card is solid white, no cream tint. Text inside must be explicit black, never inherited.",
+    name: "Card",
+    example: (
+      <WhiteExample>
+        <span style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "var(--ink)" }}>
+          Normal paragraph text inside a card
+        </span>
+      </WhiteExample>
+    ),
+    technical: "className=\"card\" — background: var(--white-block) = #fff; text var(--size-body), weight 400, color var(--ink)",
+    rule: "Every .card is solid white, no tint. Text inside must be explicit black, never inherited.",
   },
   {
     name: "Callout",
     example: (
       <div style={{ background: "var(--amber)", borderRadius: "8px", padding: "0.75rem 1rem" }}>
-        <span style={{ color: "#1a1005", fontWeight: 700 }}>Callout</span>
+        <span style={{ fontSize: "var(--size-body)", fontWeight: 700, color: "#1a1005" }}>
+          Bold paragraph text inside a callout
+        </span>
       </div>
     ),
-    technical: "background: var(--amber), color #1a1005",
-    rule: "Reserved for the single most important prompt on a page. Not a general card style.",
+    technical: "var(--size-body), weight 700, background var(--amber), color #1a1005",
+    rule: "Reserved for the single most important prompt on a page. Text is just bold paragraph text (row 5) on a gold background — not a separate size.",
   },
   {
-    name: "Button — primary",
+    name: "Button",
     example: <button className="btn btn-primary" style={{ padding: "0.5rem 1rem" }}>Action</button>,
     technical: 'className="btn btn-primary"',
-    rule: "The default action button. Solid gold background, #1a1005 text.",
-  },
-  {
-    name: "Button — secondary",
-    example: <button className="btn btn-outline" style={{ padding: "0.5rem 1rem" }}>Action</button>,
-    technical: 'className="btn btn-outline"',
-    rule: "Same solid gold treatment as primary. There is no ghost/transparent button on this site.",
+    rule: "The only button style on this site. Solid gold background, #1a1005 text — no secondary/ghost variant.",
   },
   {
     name: "Colour — Background",
-    example: <Swatch color="var(--bg)" />,
-    technical: "var(--bg)",
-    rule: "The page background, everywhere.",
-  },
-  {
-    name: "Colour — Background raised",
-    example: <Swatch color="var(--bg-raised)" />,
-    technical: "var(--bg-raised)",
-    rule: "A dark surface one step up from the page background — nav dropdowns, tooltips.",
+    example: (
+      <div style={{ display: "flex", gap: "0.5rem" }}>
+        <Swatch color="var(--bg)" />
+        <Swatch color="#fff" />
+      </div>
+    ),
+    technical: "var(--bg) or #fff",
+    rule: "Two options only: black (var(--bg), the default) or white. No other page-level background colour is used.",
   },
   {
     name: "Colour — Gold",
@@ -127,9 +122,9 @@ const ROWS: Row[] = [
     rule: "Hover state on gold, and gold headings on the dark background.",
   },
   {
-    name: "Colour — White block",
-    example: <Swatch color="var(--cream)" />,
-    technical: "var(--cream)",
+    name: "Colour — Card",
+    example: <Swatch color="var(--white-block)" />,
+    technical: "var(--white-block)",
     rule: "Every .card background. Pure white, not off-white.",
   },
   {

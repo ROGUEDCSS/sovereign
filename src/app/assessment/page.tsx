@@ -181,7 +181,7 @@ export default function AssessmentPage() {
                         cursor: "pointer",
                         borderRadius: "12px",
                         border: "1px solid transparent",
-                        background: selected ? "var(--amber)" : "var(--cream)",
+                        background: selected ? "var(--amber)" : "var(--white-block)",
                         color: "var(--ink)",
                         fontWeight: selected ? 700 : 500,
                         fontSize: "var(--size-sm)",
@@ -199,7 +199,7 @@ export default function AssessmentPage() {
 
         <div style={{ marginTop: "3rem", display: "flex", justifyContent: "space-between" }}>
           <button
-            className="btn btn-outline"
+            className="btn btn-primary"
             onClick={() => setStep((s) => Math.max(0, s - 1))}
             disabled={step === 0}
             style={{ visibility: step === 0 ? "hidden" : "visible" }}

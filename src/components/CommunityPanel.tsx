@@ -135,12 +135,12 @@ function ThumbButton({
 }
 
 /**
- * A genuinely light panel — not a dark tint. On this dark site, a light
- * cream block is what actually reads as contrast, the same way Resonance's
+ * A genuinely light panel — not a dark tint. On this dark site, a solid
+ * white block is what actually reads as contrast, the same way Resonance's
  * white cards work against its black sections: real light-vs-dark, not a
  * subtler shade of the same dark tone. Solid colour blocks (thumbs, Q/+)
  * sit on top of it, mirroring Resonance's own pattern of alternating solid
- * cream/black/gold panels rather than tinted washes.
+ * white/black/gold panels rather than tinted washes.
  *
  * Three signals, not four: Endorse was dropped — it duplicated the editorial
  * evidenceRating/independenceSource signal shown elsewhere on the page.
@@ -161,7 +161,7 @@ export function CommunityPanel({
       ? { position: "fixed", top: "5.2rem", right: "1.4rem", zIndex: 40 }
       : { flexShrink: 0 }),
     width: 230,
-    background: "var(--cream)",
+    background: "var(--white-block)",
     borderRadius: "10px",
     padding: "0.75rem 0.85rem",
     boxShadow: "0 8px 24px rgba(0,0,0,0.4)",

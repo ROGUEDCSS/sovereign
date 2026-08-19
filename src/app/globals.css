@@ -46,7 +46,7 @@ h1, h2, h3, h4, strong {
   --danger: #c25b4f;
   --good: #6fa072;
 
-  --cream: #fff;
+  --white-block: #fff;
   --ink: #06080f;
   --ink-2: rgba(11,14,17,0.7);
   --amber-on-light: #8a6e28;
@@ -73,7 +73,7 @@ h1, h2, h3, h4, strong {
 }
 
 .card {
-  background: var(--cream);
+  background: var(--white-block);
   border: 1px solid rgba(11,14,17,0.15);
   border-radius: 12px;
   /* Plain CSS inheritance carries the parent's *computed* color, not a
@@ -87,7 +87,7 @@ h1, h2, h3, h4, strong {
    * every descendant that reads var(--text-2), var(--border), var(--card)
    * etc. via an inline style resolves against the NEAREST ancestor
    * definition, not just :root — so this one block re-points the whole
-   * color system to its light-on-cream equivalents for anything nested
+   * color system to its light-on-white equivalents for anything nested
    * inside a card, without editing every inline style at every call site.
    */
   --text-1: var(--ink);
@@ -100,7 +100,7 @@ h1, h2, h3, h4, strong {
   --amber-strong: var(--amber-on-light);
   --fact-strong: #1a5f96;
   --opinion-strong: #5c584f;
-  --bg: var(--cream);
+  --bg: var(--white-block);
   --bg-raised: rgba(11,14,17,0.03);
 }
 
@@ -125,13 +125,6 @@ h1, h2, h3, h4, strong {
   color: #1a1005;
 }
 .btn-primary:hover { background: var(--amber-strong); }
-
-.btn-outline {
-  background: var(--amber);
-  color: #1a1005;
-  border-color: var(--amber);
-}
-.btn-outline:hover { background: var(--amber-strong); border-color: var(--amber-strong); color: #1a1005; }
 
 .pill {
   display: inline-flex; align-items: center; gap: 0.4rem;

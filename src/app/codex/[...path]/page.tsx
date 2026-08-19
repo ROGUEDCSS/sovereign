@@ -245,7 +245,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
                     key={id}
                     href="/assessment"
                     className="pill"
-                    style={{ background: "var(--cream)", color: "var(--ink-2)", textDecoration: "none" }}
+                    style={{ background: "var(--white-block)", color: "var(--ink-2)", textDecoration: "none" }}
                   >
                     {DOMAINS.find((d) => d.id === id)?.name}
                   </Link>
@@ -259,7 +259,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
               <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 700, marginBottom: "1rem" }}>Related tools</h2>
               <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
                 {node.relatedTools.map((t) => (
-                  <Link key={t.href} href={t.href} className="btn btn-outline">
+                  <Link key={t.href} href={t.href} className="btn btn-primary">
                     {t.label}
                   </Link>
                 ))}

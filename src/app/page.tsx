@@ -71,13 +71,13 @@ export default function Home() {
           skilled, organised, and connected with your kin and clan.
         </p>
         <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-          <Link href="/sovereignty" className="btn btn-outline" style={{ fontSize: "var(--size-body)" }}>
+          <Link href="/sovereignty" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>
             What does it mean to be Sovereign?
           </Link>
           <Link href="/assessment" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>
             Get your Sovereign Score →
           </Link>
-          <Link href="/codex" className="btn btn-outline" style={{ fontSize: "var(--size-body)" }}>
+          <Link href="/codex" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>
             Explore the Codex
           </Link>
         </div>
@@ -158,7 +158,7 @@ export default function Home() {
               </Link>
             ))}
           </div>
-          <Link href="/codex" className="btn btn-outline">
+          <Link href="/codex" className="btn btn-primary">
             Open the Codex
           </Link>
         </div>
@@ -189,7 +189,7 @@ export default function Home() {
             ))}
           </div>
           <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-            <Link href="/world" className="btn btn-outline">
+            <Link href="/world" className="btn btn-primary">
               Open the World
             </Link>
             <Link href="/threat-map" style={{ color: "var(--amber-strong)", fontSize: "var(--size-sm)", textDecoration: "none", display: "inline-flex", alignItems: "center" }}>

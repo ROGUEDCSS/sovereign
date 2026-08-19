@@ -44,7 +44,7 @@ export default function ThreatMapPage() {
           <Link href="/scenario-room" className="btn btn-primary">
             Run a scenario →
           </Link>
-          <Link href="/assessment" className="btn btn-outline">
+          <Link href="/assessment" className="btn btn-primary">
             Measure your household
           </Link>
         </div>

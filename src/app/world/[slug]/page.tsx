@@ -125,7 +125,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           )}
 
           {entity.knowledgeBaseSlug && (
-            <Link href={`/knowledge-base/${entity.knowledgeBaseSlug}`} className="btn btn-outline">
+            <Link href={`/knowledge-base/${entity.knowledgeBaseSlug}`} className="btn btn-primary">
               Read the full article →
             </Link>
           )}

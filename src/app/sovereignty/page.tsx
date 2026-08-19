@@ -70,7 +70,7 @@ export default function SovereigntyPage() {
           <Link href="/assessment" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>
             Get your Sovereign Score →
           </Link>
-          <Link href="/codex" className="btn btn-outline" style={{ fontSize: "var(--size-body)" }}>
+          <Link href="/codex" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>
             Explore the Codex
           </Link>
         </div>
