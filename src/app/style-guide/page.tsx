@@ -35,10 +35,10 @@ const ROWS: Row[] = [
     rule: "One per page, applied to the <h1> tag. Note: the variable is named --size-h2 (a size-scale label, not an HTML tag reference) — it still styles <h1>. Gold by default unless a page explicitly overrides it white.",
   },
   {
-    name: "Section heading",
+    name: "Section heading / Subheading",
     example: <span style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--amber-strong)" }}>Section heading</span>,
     technical: "var(--size-h3), weight 500, color var(--amber-strong)",
-    rule: "Every \"Sources\", \"Connections\", \"Related X\" style heading. Always this exact size, never h4.",
+    rule: "Every \"Sources\", \"Connections\", \"Related X\" style heading. Always this exact size, never h4. \"Section heading\" and \"subheading\" mean the same thing on this site — used interchangeably.",
   },
   {
     name: "Card / item title",
