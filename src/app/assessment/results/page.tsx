@@ -65,7 +65,7 @@ export default function ResultsPage() {
         <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
           How &quot;Sovereign&quot; are you?
         </h2>
-        <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
+        <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem", background: "#fff" }}>
           {scored.map(({ domain, tier }, i) => (
             <div
               key={domain.id}
@@ -88,7 +88,7 @@ export default function ResultsPage() {
                 }}
               />
               <div>
-                <strong>{domain.name}</strong>
+                <strong style={{ color: "var(--ink)" }}>{domain.name}</strong>
                 <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginTop: "0.2rem" }}>
                   {domain.tierAdvice[tier]}
                 </p>
@@ -100,31 +100,33 @@ export default function ResultsPage() {
         <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
           Your biggest vulnerabilities
         </h2>
-        <ol style={{ marginBottom: "2.5rem", paddingLeft: "1.25rem", color: "var(--text-2)" }}>
-          {weakest.map(({ domain }) => (
-            <li key={domain.id} style={{ marginBottom: "0.5rem" }}>
-              <strong>{domain.name}</strong>
-              {codexLinksForDomain(domain.id).map((link) => (
-                <Link
-                  key={link.path.join("/")}
-                  href={codexHref(link.path)}
-                  style={{ marginLeft: "0.6rem", fontSize: "var(--size-sm)", color: "var(--amber-strong)" }}
-                >
-                  Read: {link.label} →
-                </Link>
-              ))}
-            </li>
-          ))}
-        </ol>
+        <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem", background: "#fff" }}>
+          <ol style={{ paddingLeft: "1.25rem" }}>
+            {weakest.map(({ domain }) => (
+              <li key={domain.id} style={{ marginBottom: "0.5rem" }}>
+                <strong style={{ color: "var(--ink)" }}>{domain.name}</strong>
+                {codexLinksForDomain(domain.id).map((link) => (
+                  <Link
+                    key={link.path.join("/")}
+                    href={codexHref(link.path)}
+                    style={{ marginLeft: "0.6rem", fontSize: "var(--size-sm)", color: "var(--amber-on-light)" }}
+                  >
+                    Read: {link.label} →
+                  </Link>
+                ))}
+              </li>
+            ))}
+          </ol>
+        </div>
 
         <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
           Do these five things first
         </h2>
         <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem", marginBottom: "3rem" }}>
           {firstFive.map(({ domain }) => (
-            <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem" }}>
+            <div key={domain.id} className="card" style={{ padding: "1.1rem 1.4rem", background: "#fff" }}>
               <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.35rem" }}>
-                <strong>{domain.quickAction.title}</strong>
+                <strong style={{ color: "var(--ink)" }}>{domain.quickAction.title}</strong>
                 <span style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", whiteSpace: "nowrap" }}>
                   {domain.quickAction.cost} · {domain.quickAction.time}
                 </span>
