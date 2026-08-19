@@ -57,7 +57,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
 
           {entity.whyItMatters && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
-              <div className="label" style={{ marginBottom: "0.4rem" }}>Why it matters</div>
+              <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)", marginBottom: "0.4rem" }}>Why it matters</div>
               <p style={{ color: "var(--text-2)", lineHeight: 1.6 }}>{entity.whyItMatters}</p>
             </div>
           )}
