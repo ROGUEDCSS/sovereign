@@ -4,36 +4,40 @@ import { entitiesByType } from "@/lib/knowledge-graph";
 
 const PILLARS = [
   {
+    step: 1,
     tag: "GET READY",
-    title: "See what breaks. Find out if you'd survive it.",
-    body: "Power. Banking. Internet. Food. Water. Most people don't know how exposed they are until one of these stops. Run the scenarios before one runs on you.",
-    links: [
-      { label: "Scenario room", href: "/scenario-room" },
-      { label: "Threat map", href: "/threat-map" },
-    ],
-  },
-  {
-    tag: "GET ORGANISED",
-    title: "Score your household. Get a plan, not a panic list.",
-    body: "Twelve domains, one number, five actions to start this week — prioritised by what's actually weakest, not what's loudest.",
+    title: "Know exactly where you stand.",
+    body: "Your Sovereign Score is the starting point — an honest read across all twelve domains, before you try to fix anything. This is you knowing where you actually are, not where you assume you are.",
     links: [
       { label: "Get your Sovereign Score", href: "/assessment" },
       { label: "Build my system", href: "/build-my-system" },
     ],
   },
   {
+    step: 2,
     tag: "GET SKILLED",
-    title: "Real knowledge, sourced and sorted.",
-    body: "Digital ID. CBDCs. The 2030 Agenda. Every claim labelled fact, scenario, or opinion — evidence outranks ideology, always.",
+    title: "The skills only you can carry.",
+    body: "Fire. A blade. First aid. Leading people, and saying what you actually mean. Skills live in you, not in a cupboard — nobody can hand them to you in the moment you need them.",
     links: [
-      { label: "Explore the Codex", href: "/codex" },
-      { label: "Knowledge base", href: "/knowledge-base" },
+      { label: "Family capability", href: "/codex/family/family-capability" },
+      { label: "Personal development", href: "/codex/individual/personal-development" },
     ],
   },
   {
+    step: 3,
+    tag: "GET ORGANISED",
+    title: "Everything in its place, before you need it.",
+    body: "Fuel in the tank. Food in the store. The animals fed, the water tank full, the tools where you can find them in the dark. This is the physical work — your home and land, actually ready.",
+    links: [
+      { label: "Home & Land", href: "/codex/home" },
+      { label: "Threat map", href: "/threat-map" },
+    ],
+  },
+  {
+    step: 4,
     tag: "GET CONNECTED",
-    title: "The one thing you can't stockpile.",
-    body: "Neighbours, tradespeople, mutual aid. Build the network before the day you actually need to call someone.",
+    title: "Find your clan.",
+    body: "Neighbours, tradespeople, mutual aid — the people who actually show up. Sovereignty isn't done alone. It's done with the people building the same thing you are.",
     links: [
       { label: "Community", href: "/codex/community" },
       { label: "Mutual aid", href: "/codex/community/mutual-aid" },
@@ -62,7 +66,7 @@ export default function Home() {
         </p>
         <p style={{ fontSize: "var(--size-h4)", color: "var(--text-2)", marginBottom: "2.5rem", maxWidth: 560 }}>
           The Sovereign Codex is a complete blueprint for you and your family — to get ready,
-          organised, skilled, and connected with your kin and clan.
+          skilled, organised, and connected with your kin and clan.
         </p>
         <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
           <Link href="/sovereignty" className="btn btn-outline" style={{ fontSize: "var(--size-body)" }}>
@@ -79,9 +83,6 @@ export default function Home() {
 
       <section style={{ borderTop: "1px solid var(--border)", background: "#fff" }}>
         <div className="container" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
-          <h2 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem", maxWidth: 560, color: "var(--ink)" }}>
-            4 STEPS: Start TODAY
-          </h2>
           <div
             style={{
               display: "grid",
@@ -92,7 +93,7 @@ export default function Home() {
             {PILLARS.map((p) => (
               <div key={p.tag} style={{ padding: "1.5rem", borderRadius: "10px", background: "var(--ink)" }}>
                 <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "1rem" }}>
-                  {p.tag}
+                  Step {p.step}: {p.tag}
                 </div>
                 <h3 style={{ fontSize: "var(--size-h3)", fontWeight: 700, marginBottom: "0.6rem", lineHeight: 1.35, color: "var(--amber-strong)" }}>
                   {p.title}
