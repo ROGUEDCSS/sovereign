@@ -83,19 +83,19 @@ export default function Home() {
             }}
           >
             {PILLARS.map((p) => (
-              <div key={p.tag} className="card" style={{ padding: "1.5rem" }}>
-                <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.75rem" }}>
+              <div key={p.tag} style={{ padding: "1.5rem", borderRadius: "10px", background: "var(--cream)" }}>
+                <div className="label" style={{ color: "var(--amber-on-light)", marginBottom: "0.75rem" }}>
                   {p.tag}
                 </div>
-                <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.6rem", lineHeight: 1.35 }}>
+                <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.6rem", lineHeight: 1.35, color: "var(--ink)" }}>
                   {p.title}
                 </h3>
-                <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)", marginBottom: "1.25rem", lineHeight: 1.55 }}>
+                <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginBottom: "1.25rem", lineHeight: 1.55 }}>
                   {p.body}
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                   {p.links.map((l) => (
-                    <Link key={l.href} href={l.href} style={{ color: "var(--amber-strong)", fontSize: "var(--size-sm)", textDecoration: "none" }}>
+                    <Link key={l.href} href={l.href} style={{ color: "var(--ink)", fontSize: "var(--size-sm)", textDecoration: "none", fontWeight: 600 }}>
                       {l.label} →
                     </Link>
                   ))}

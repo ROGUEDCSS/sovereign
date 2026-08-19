@@ -37,7 +37,7 @@ function Tooltip({ text }: { text: string }) {
   );
 }
 
-/** Neutral bordered pill, matching the site's own card/pill language — no black block. */
+/** A solid black block, same idea as Resonance's black CTA blocks on a light card. */
 function SignalRow({
   icon,
   label,
@@ -65,18 +65,17 @@ function SignalRow({
           alignItems: "center",
           justifyContent: "center",
           gap: "0.35rem",
-          background: "var(--card-hover)",
-          border: "1px solid var(--border-strong)",
+          background: "var(--ink)",
           borderRadius: "8px",
           padding: "0.5rem 0.4rem",
-          color: "var(--text-1)",
+          color: "#fff",
           fontSize: "var(--size-label)",
           fontWeight: 600,
         }}
       >
         <span style={{ color: "var(--amber-strong)", fontWeight: 700 }}>{icon}</span>
         <span>{label}</span>
-        {count !== undefined && <span style={{ opacity: 0.6, fontWeight: 500 }}>{count}</span>}
+        {count !== undefined && <span style={{ opacity: 0.65, fontWeight: 500 }}>{count}</span>}
       </div>
       {hovered === explainerKey && <Tooltip text={EXPLAINERS[explainerKey]} />}
     </div>
@@ -84,10 +83,11 @@ function SignalRow({
 }
 
 /**
- * A tinted, bordered pill in the tone colour — never a solid saturated fill.
- * Matches the site's own restrained semantic-colour pattern (pill-fact,
- * pill-scenario): colour is a light wash under saturated text/icon, not a
- * block. The emoji reads at 2x size so the tone is still unmistakable.
+ * Solid tone block, no wash — the panel itself is now the light surface
+ * doing the contrast work, so a fully saturated green/red block reads
+ * cleanly on top of it (this is exactly the failure mode from before: a
+ * saturated block only looks wrong sitting on a near-black background,
+ * not on a genuinely light one).
  */
 function ThumbButton({
   emoji,
@@ -104,9 +104,7 @@ function ThumbButton({
   hovered: ExplainerKey | null;
   onHover: (key: ExplainerKey | null) => void;
 }) {
-  const wash = tone === "positive" ? "rgba(111,160,114,0.14)" : "rgba(194,91,79,0.14)";
-  const border = tone === "positive" ? "rgba(111,160,114,0.4)" : "rgba(194,91,79,0.4)";
-  const ink = tone === "positive" ? "var(--good)" : "var(--danger)";
+  const bg = tone === "positive" ? "var(--good)" : "var(--danger)";
   return (
     <div
       onMouseEnter={() => onHover(explainerKey)}
@@ -120,15 +118,15 @@ function ThumbButton({
           alignItems: "center",
           justifyContent: "center",
           gap: "0.25rem",
-          background: wash,
-          border: `1px solid ${border}`,
+          background: bg,
           borderRadius: "8px",
           padding: "0.7rem 0.4rem",
+          color: "#fff",
         }}
       >
         <span style={{ fontSize: "2.1rem", lineHeight: 1 }}>{emoji}</span>
         {count !== undefined && (
-          <span style={{ fontSize: "var(--size-xs)", fontWeight: 700, color: ink }}>{count.toLocaleString()}</span>
+          <span style={{ fontSize: "var(--size-xs)", fontWeight: 700 }}>{count.toLocaleString()}</span>
         )}
       </div>
       {hovered === explainerKey && <Tooltip text={EXPLAINERS[explainerKey]} />}
@@ -137,15 +135,15 @@ function ThumbButton({
 }
 
 /**
- * Always a dark, bordered panel — matches the site's own card language and
- * Resonance's restrained "tint, don't fill" discipline. Never inverts to a
- * light block: `fixed` only changes position (viewport-pinned top-right vs
- * inline top-of-drawer), not colour.
+ * A genuinely light panel — not a dark tint. On this dark site, a light
+ * cream block is what actually reads as contrast, the same way Resonance's
+ * white cards work against its black sections: real light-vs-dark, not a
+ * subtler shade of the same dark tone. Solid colour blocks (thumbs, Q/+)
+ * sit on top of it, mirroring Resonance's own pattern of alternating solid
+ * cream/black/gold panels rather than tinted washes.
  *
  * Three signals, not four: Endorse was dropped — it duplicated the editorial
  * evidenceRating/independenceSource signal shown elsewhere on the page.
- * Sovereign alignment (thumbs, counted) is the only approval-shaped signal;
- * Question and Contribute are distinct actions, not votes.
  */
 export function CommunityPanel({
   communitySignal,
@@ -163,11 +161,10 @@ export function CommunityPanel({
       ? { position: "fixed", top: "5.2rem", right: "1.4rem", zIndex: 40 }
       : { flexShrink: 0 }),
     width: 230,
-    background: "var(--card)",
-    border: "1px solid var(--border-strong)",
+    background: "var(--cream)",
     borderRadius: "10px",
     padding: "0.75rem 0.85rem",
-    boxShadow: fixed ? "0 8px 24px rgba(0,0,0,0.4)" : "none",
+    boxShadow: "0 8px 24px rgba(0,0,0,0.4)",
   };
 
   return (
@@ -178,7 +175,7 @@ export function CommunityPanel({
           gap: "0.5rem",
           paddingBottom: "0.6rem",
           marginBottom: "0.5rem",
-          borderBottom: "1px solid var(--border)",
+          borderBottom: "1px solid rgba(11,14,17,0.12)",
         }}
       >
         <ThumbButton emoji="👍" tone="positive" count={sovereignAlignment?.positive} explainerKey="positive" hovered={hovered} onHover={setHovered} />

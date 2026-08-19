@@ -40,6 +40,11 @@ body {
   --danger: #c25b4f;
   --good: #6fa072;
 
+  --cream: #f0ede5;
+  --ink: #0b0e11;
+  --ink-2: rgba(11,14,17,0.7);
+  --amber-on-light: #8a6e28;
+
   --size-xs: 0.7rem;
   --size-label: 0.78rem;
   --size-sm: 0.88rem;
