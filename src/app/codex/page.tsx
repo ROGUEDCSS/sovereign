@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { CODEX_BRANCHES } from "@/lib/codex";
 
+const JOURNEY_TAG: Record<string, string> = {
+  individual: "Where it starts",
+  family: "Where it strengthens",
+  home: "Where it becomes tangible",
+  community: "Where it becomes resilient",
+};
+
 export default function CodexIndexPage() {
   return (
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
@@ -28,23 +35,38 @@ export default function CodexIndexPage() {
           strengthen, or fix, starting today.
         </p>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-            gap: "0.75rem",
-            alignItems: "start",
-          }}
-        >
-          {CODEX_BRANCHES.map((branch) => (
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+          {CODEX_BRANCHES.map((branch, i) => (
             <Link
               key={branch.slug}
               href={`/codex/${branch.slug}`}
               className="card"
-              style={{ display: "block", padding: "1.25rem 1.5rem", textDecoration: "none" }}
+              style={{ display: "block", padding: "1.25rem 1.5rem", minHeight: 130, textDecoration: "none" }}
             >
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.4rem" }}>
-                <span style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{branch.name}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: 22,
+                      height: 22,
+                      borderRadius: "50%",
+                      background: "var(--amber)",
+                      color: "#1a1005",
+                      fontSize: "var(--size-xs)",
+                      fontWeight: 700,
+                      flexShrink: 0,
+                    }}
+                  >
+                    {i + 1}
+                  </span>
+                  <span style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{branch.name}</span>
+                  <span style={{ fontSize: "var(--size-sm)", color: "var(--amber-on-light)", fontWeight: 600 }}>
+                    — {JOURNEY_TAG[branch.slug]}
+                  </span>
+                </div>
                 {!branch.detailed && (
                   <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)" }}>
                     Not yet mapped
