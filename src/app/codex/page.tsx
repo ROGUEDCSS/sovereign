@@ -5,13 +5,11 @@ export default function CodexIndexPage() {
   return (
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
       <div style={{ maxWidth: 780, margin: "0 auto" }}>
-        <h1 style={{ fontSize: "var(--size-h1)", fontWeight: 700, marginBottom: "0.5rem" }}>
-          The Sovereign Codex
-        </h1>
-        <p style={{ fontSize: "var(--size-h4)", fontWeight: 600, color: "var(--amber-strong)", marginBottom: "0.75rem" }}>
+        <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>The Sovereign Codex</div>
+        <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, color: "var(--amber-strong)", marginBottom: "0.75rem" }}>
           Four circles, radiating out from the individual
-        </p>
-        <p style={{ color: "var(--text-2)", marginBottom: "2.5rem", maxWidth: 620 }}>
+        </h1>
+        <p style={{ fontSize: "var(--size-body)", color: "var(--text-2)", marginBottom: "2.5rem", maxWidth: 620 }}>
           Sovereignty starts with the individual, strengthens through the family, becomes
           tangible through home and land, and becomes resilient through community. This is
           what you build. It&apos;s deliberately juxtaposed against{" "}
@@ -37,14 +35,14 @@ export default function CodexIndexPage() {
               style={{ display: "block", padding: "1.25rem 1.5rem", textDecoration: "none" }}
             >
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.4rem" }}>
-                <span style={{ fontWeight: 500 }}>{branch.name}</span>
+                <span style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{branch.name}</span>
                 {!branch.detailed && (
                   <span className="pill pill-opinion" style={{ fontSize: "var(--size-xs)" }}>
                     Not yet mapped
                   </span>
                 )}
               </div>
-              <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)" }}>{branch.tagline}</p>
+              <p style={{ fontSize: "var(--size-body)", color: "var(--ink-2)" }}>{branch.tagline}</p>
             </Link>
           ))}
         </div>
