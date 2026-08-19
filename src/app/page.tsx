@@ -55,9 +55,14 @@ export default function Home() {
         <h1 style={{ fontSize: "var(--size-h1)", fontWeight: 500, lineHeight: 1.15, marginBottom: "1.5rem" }}>
           The storm is coming.
         </h1>
+        <p style={{ fontSize: "var(--size-h4)", color: "var(--text-2)", marginBottom: "1.25rem", maxWidth: 560 }}>
+          If you don&apos;t have a plan for the world — know that the world has a plan for you, and
+          it is a plan without thought or care for your wellbeing. Get your affairs in order before the
+          system fails you.
+        </p>
         <p style={{ fontSize: "var(--size-h4)", color: "var(--text-2)", marginBottom: "2.5rem", maxWidth: 560 }}>
-          Get your affairs in order before the system fails. Power outages. Bank freezes. Supply
-          shocks. Most households find out how exposed they are the hard way.
+          The Sovereign Codex is a complete blueprint for you and your family — to get ready,
+          organised, skilled, and connected with your kin and clan.
         </p>
         <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
           <Link href="/assessment" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>
