@@ -26,6 +26,10 @@ const NAV: NavItem[] = [
     ],
   },
   {
+    href: "/style-guide",
+    label: "Style guide",
+  },
+  {
     href: "/world",
     label: "World",
     children: [

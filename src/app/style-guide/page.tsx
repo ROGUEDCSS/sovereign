@@ -70,12 +70,23 @@ export default function StyleGuidePage() {
             </div>
           </Row>
           <Row label="4. Body paragraph">
-            <div style={{ fontSize: "var(--size-body)" }}>
-              The actual sentence-level content — descriptions, explanations, answers.
+            <div style={{ fontSize: "var(--size-body)", marginBottom: "0.5rem" }}>
+              Normal paragraph. Same size everywhere — a description, an explanation, an answer,
+              a caption, a list item. No separate "secondary" or "small print" paragraph size.
             </div>
-            <div style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.35rem" }}>
-              var(--size-body) for primary copy, var(--size-sm) for secondary/supporting copy.
-              Never bold unless it&apos;s truly emphasis.
+            <div style={{ fontSize: "var(--size-body)", fontWeight: 700, marginBottom: "0.5rem" }}>
+              Bold paragraph. Exact same size as above — only the weight changes when a
+              paragraph needs to stand out.
+            </div>
+            <div style={{ color: "var(--text-3)", fontSize: "var(--size-body)" }}>
+              This line is quieter too, and it is still var(--size-body) — muted colour does the
+              work, not a smaller font-size.
+            </div>
+            <div style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.6rem" }}>
+              One size, always: var(--size-body). Bold for emphasis, colour for de-emphasis —
+              never a smaller font-size for "secondary" text. var(--size-sm)/var(--size-xs) are
+              reserved for meta chrome only (pill tags, timestamps, breadcrumbs) — never a
+              paragraph of actual content.
             </div>
           </Row>
           <Row label="5. Kicker / label">
