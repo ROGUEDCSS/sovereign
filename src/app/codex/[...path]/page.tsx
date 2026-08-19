@@ -130,7 +130,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
           {node.items && node.items.length > 0 && (
             <>
               <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
-                {node.slug === "family-capability" ? "Examples" : node.slug === "water" ? "Sources" : "Categories"}
+                {node.slug === "family-capability" ? "Examples" : node.slug === "water" ? "Sources" : "Topics"}
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.5rem" }}>
                 {node.items.map((item) => (

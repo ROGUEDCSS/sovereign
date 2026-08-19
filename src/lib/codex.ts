@@ -116,7 +116,15 @@ const FINANCE: CodexNode = {
     "Income concentrated in a single employer or client is a single point of failure in the same way savings in a single account are — job loss is one of the most common triggers of financial hardship.",
     "Cash and physical currency remain functional when card networks, apps, or the power grid itself do not — a form of resilience a purely digital financial life doesn't have.",
   ],
+  practicalQuestion: "If your main income stopped tomorrow, how many months could your household actually cover its real expenses?",
   detailed: true,
+  items: [
+    { name: "Income", description: "What actually comes in — salary, wages, business revenue — and how many genuinely independent sources it comes from, not just how much." },
+    { name: "Savings & reserves", description: "The buffer between a disruption and real hardship. Split by purpose: emergency fund, short-term goals, longer-term reserve." },
+    { name: "Debt", description: "What you owe, to whom, and on what terms — and how much control that gives someone else over your decisions until it's cleared." },
+    { name: "Insurance", description: "Transferring the risks you can't personally absorb — income protection, health, home and contents — onto someone who can." },
+    { name: "Financial literacy", description: "Actually knowing your own numbers: net worth, real cash flow, and the real interest rate you're paying or earning, not the advertised one." },
+  ],
   connections: [{ path: ["family", "family-finance"] }],
 };
 
