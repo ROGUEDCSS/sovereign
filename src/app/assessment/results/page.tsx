@@ -19,6 +19,15 @@ const TIER_COLOR: Record<Tier, string> = {
   green: "var(--good)",
 };
 
+function sovereigntyStatus(greenCount: number): { label: string; color: string } {
+  if (greenCount <= 2) return { label: "Grossly Dependent", color: "var(--danger)" };
+  if (greenCount <= 4) return { label: "Dangerously Exposed", color: "var(--danger)" };
+  if (greenCount <= 6) return { label: "Partially Prepared", color: "var(--amber)" };
+  if (greenCount <= 8) return { label: "Building Sovereignty", color: "var(--amber)" };
+  if (greenCount <= 10) return { label: "Largely Sovereign", color: "var(--good)" };
+  return { label: "Totally Sovereign", color: "var(--good)" };
+}
+
 export default function ResultsPage() {
   const [answers, setAnswers] = useState<Record<string, number> | null>(null);
 
@@ -47,16 +56,22 @@ export default function ResultsPage() {
   const greenCount = scored.filter((s) => s.tier === "green").length;
   const weakest = scored.slice(0, 3);
   const firstFive = scored.slice(0, 5);
+  const status = sovereigntyStatus(greenCount);
 
   return (
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
-        <div className="label">Your Sovereign Score</div>
-        <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem", margin: "0.5rem 0 0.25rem" }}>
-          <span style={{ fontSize: "var(--size-stat)", fontWeight: 500, color: "var(--amber-strong)" }}>
-            {greenCount}
+        <div className="label" style={{ color: "#fff", fontWeight: 700 }}>Your Sovereign Score</div>
+        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "0.75rem", margin: "0.5rem 0 0.25rem", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem" }}>
+            <span style={{ fontSize: "var(--size-stat)", fontWeight: 500, color: "var(--amber-strong)" }}>
+              {greenCount}
+            </span>
+            <span style={{ fontSize: "var(--size-stat-suffix)", color: "var(--text-3)" }}>/ 12 Domains</span>
+          </div>
+          <span style={{ fontSize: "var(--size-h3)", fontWeight: 700, color: status.color, marginLeft: "auto" }}>
+            {status.label}
           </span>
-          <span style={{ fontSize: "var(--size-stat-suffix)", color: "var(--text-3)" }}>/ 12 domains</span>
         </div>
         <p style={{ color: "var(--text-2)", marginBottom: "2.5rem" }}>
           Sovereignty is a continuum, not a binary state — this is where you start, not a verdict.
