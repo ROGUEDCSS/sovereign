@@ -79,7 +79,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)", marginBottom: "0.4rem" }}>
                 Facts
               </div>
-              <ul style={{ paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+              <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                 {node.facts.map((fact) => (
                   <li key={fact} style={{ fontSize: "var(--size-body)", fontWeight: 400 }}>
                     {fact}

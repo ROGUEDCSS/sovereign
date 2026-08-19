@@ -65,7 +65,7 @@ const IDENTITY: CodexNode = {
     "Identity is your ability to prove who you are — to institutions, to strangers, and to yourself — without any single document, device, or company being the only thing standing between you and being believed.",
   facts: [
     "For most people, identity is provable through only one primary channel — a phone, or a single government-issued document. Losing that one channel is an ordinary event (a stolen phone, a house fire, a lost wallet), not a rare catastrophe.",
-    "The World Wide Web Consortium's Verifiable Credentials Data Model — a real, published web standard — formalises digital identity into three separate roles (issuer, holder, verifier) specifically so no single party has to hold or control everything.",
+    "Digital identity works best when split into three separate roles — issuer, holder, and verifier — so no single party has to hold or control everything, the same way a driver's licence works: the government issues it, you hold it, a bar checks it without calling the government.",
     "Replacing a lost primary ID document typically requires other forms of ID to apply for it — a bootstrapping problem for anyone whose identity proof was concentrated in that one document.",
     "Account-takeover attacks overwhelmingly target the single weakest verification channel available — SIM-swap attacks against phone-based two-factor authentication are a well-documented example of exploiting exactly this kind of single point of failure.",
   ],
@@ -88,7 +88,23 @@ const PERSONAL_DEVELOPMENT: CodexNode = {
   tagline: "What you actually know and are deliberately learning — theory and practice, outside of any formal system.",
   elaboration:
     "The knowledge and skills you're actively building outside any classroom or workplace — reading, practising, and teaching yourself the things that make you more capable and harder to replace.",
+  definition:
+    "Personal development is the deliberate practice of getting better at things that matter to you — outside any classroom, curriculum, or employer's agenda, and driven by your own judgment about what's worth learning.",
+  facts: [
+    "Deliberate, structured practice — practice with clear feedback and a specific stretch goal — produces far more improvement than passive repetition or simply logging hours, a consistent finding across skill-acquisition research.",
+    "Skills that combine well together can make someone genuinely hard to replace in a way that being merely excellent at one narrow skill often doesn't — rare combinations, not single specialisms, are what's actually scarce.",
+    "Self-directed learners retain and apply knowledge better when they can immediately connect it to a real problem they're solving, rather than learning material in the abstract, disconnected from use.",
+    "Formal credentials and actual on-the-job competence are measurably different things — a growing number of employers now use skills-based assessments specifically because holding a credential doesn't reliably predict capability.",
+  ],
+  practicalQuestion: "What's one skill you've been meaning to learn for over a year — and what's actually stopped you from starting?",
   detailed: true,
+  items: [
+    { name: "Reading & study", description: "Deliberately reading and absorbing material outside anything required of you — the foundation everything else draws on." },
+    { name: "Practical skills", description: "Hands-on capability you build by actually doing the thing, not just knowing about it." },
+    { name: "Skill stacking", description: "Combining two or more skills into a rarer, harder-to-replace combination than either alone." },
+    { name: "Teaching yourself", description: "Structuring your own learning without a curriculum, and knowing how to tell if it's actually working." },
+    { name: "Mentors & communities", description: "Learning faster by borrowing someone else's experience instead of relying only on your own trial and error." },
+  ],
   connections: [{ path: ["family", "education"] }],
 };
 
@@ -99,12 +115,12 @@ const HEALTH: CodexNode = {
   elaboration:
     "Resilience isn't separate from health — it's built on it. This branch covers the habits, capacity, and reserves that determine whether you can actually act on everything else in this Codex when it matters.",
   definition:
-    "Health is your physical and mental capacity to actually do the things everything else in this Codex depends on — the base layer that determines whether you can act, not just plan.",
+    "Health, in practical terms, is what you eat and drink, how much you move — cardio and strength training — how well you sleep, and how you manage stress. It's the one form of capacity you can't borrow, outsource, or buy back once it's gone — everything else in this Codex depends on you actually having it.",
   facts: [
-    "The World Health Organization defines health as complete physical, mental, and social wellbeing, not merely the absence of disease — a definition it has used since 1948.",
-    "Regular physical activity is one of the most consistently evidence-backed interventions for reducing chronic disease risk, and sedentary behaviour is independently associated with worse outcomes even in people who exercise occasionally.",
-    "Sleep deprivation measurably impairs cognitive function, decision-making, and immune response — a well-documented, repeatedly replicated finding in sleep research.",
-    "The WHO's 2022 World Mental Health Report estimated roughly one in eight people worldwide live with a mental health condition — mental health conditions are common, not rare or exceptional.",
+    "Health is more than the absence of disease — it's your actual physical and mental capacity, and it declines measurably when movement, sleep, or nutrition are neglected for long enough.",
+    "Sedentary behaviour and poor nutrition are strongly linked to higher rates of chronic disease — cardiovascular problems, diabetes, reduced life expectancy — even in people who exercise occasionally.",
+    "Sleep deprivation impairs cognitive function, decision-making, and immune response within days, not months.",
+    "Mental health conditions are common, not rare or exceptional — most people will experience real mental strain, or a diagnosable condition, at some point in their life.",
   ],
   practicalQuestion: "If your body or mind stopped functioning at full capacity for a month, what in your life would actually still work?",
   detailed: true,
@@ -127,8 +143,8 @@ const FINANCE: CodexNode = {
   definition:
     "Financial independence is the ability to meet your own needs and absorb a shock — a lost job, a medical bill, a bad month — without immediately depending on credit, family, or the state to bridge the gap.",
   facts: [
-    "A widely-cited rule of thumb among financial planners is a cash emergency fund covering three to six months of essential expenses — the exact number varies by household, but the underlying principle, a real buffer rather than none, is close to universal advice.",
-    "Concentrating savings in a single bank exposes you to that one institution's outages, freezes, or failures — deposit insurance schemes such as Australia's Financial Claims Scheme exist precisely because bank failures, while rare, are a real and anticipated risk.",
+    "A cash emergency fund covering three to six months of essential expenses is a real buffer, not overkill — the exact number varies by household, but having no buffer at all is the actual risk.",
+    "Concentrating savings in a single bank exposes you to that one institution's outages, freezes, or failures — bank failures are rare, but real, and losing access to your only account is not a hypothetical.",
     "Income concentrated in a single employer or client is a single point of failure in the same way savings in a single account are — job loss is one of the most common triggers of financial hardship.",
     "Cash and physical currency remain functional when card networks, apps, or the power grid itself do not — a form of resilience a purely digital financial life doesn't have.",
   ],
