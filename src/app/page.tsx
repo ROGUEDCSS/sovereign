@@ -64,9 +64,12 @@ export default function Home() {
           it is a plan without thought or care for your wellbeing. Get your affairs in order before the
           system fails you.
         </p>
-        <p style={{ fontSize: "var(--size-h4)", color: "var(--text-2)", marginBottom: "2.5rem", maxWidth: 560 }}>
+        <p style={{ fontSize: "var(--size-h4)", color: "var(--text-2)", marginBottom: "1.25rem", maxWidth: 560 }}>
           The Sovereign Codex is a complete blueprint for you and your family — to get ready,
           skilled, organised, and connected with your kin and clan.
+        </p>
+        <p style={{ fontSize: "var(--size-h4)", color: "#fff", fontWeight: 700, marginBottom: "2.5rem", maxWidth: 560 }}>
+          Get your affairs in order before the new world begins...
         </p>
         <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
           <Link href="/sovereignty" className="btn btn-outline" style={{ fontSize: "var(--size-body)" }}>
