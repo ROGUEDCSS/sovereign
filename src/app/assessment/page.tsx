@@ -132,7 +132,7 @@ export default function AssessmentPage() {
     return (
       <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
         <div style={{ maxWidth: 480, margin: "0 auto" }}>
-          <div className="label" style={{ marginBottom: "0.75rem" }}>
+          <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.75rem" }}>
             Before you start
           </div>
           <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem" }}>

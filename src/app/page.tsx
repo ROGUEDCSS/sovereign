@@ -166,7 +166,7 @@ export default function Home() {
 
       <section style={{ borderTop: "1px solid var(--border)", background: "var(--bg-raised)" }}>
         <div className="container" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
-          <div className="label" style={{ color: "var(--text-3)", marginBottom: "0.5rem" }}>
+          <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
             Not the Codex — the opposing pillar
           </div>
           <h2 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem", maxWidth: 560 }}>

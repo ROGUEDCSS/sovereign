@@ -42,7 +42,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
             <span style={{ color: "var(--text-2)" }}>{entity.name}</span>
           </div>
 
-          <div className="label" style={{ marginBottom: "0.4rem" }}>
+          <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.4rem" }}>
             {ENTITY_TYPE_LABELS[entity.type]}
           </div>
           <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>
