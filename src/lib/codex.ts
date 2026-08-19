@@ -98,6 +98,14 @@ const FINANCE: CodexNode = {
   slug: "finance",
   name: "Finance",
   tagline: "Personal income, savings, and financial independence — before it becomes a household concern.",
+  definition:
+    "Financial independence is the ability to meet your own needs and absorb a shock — a lost job, a medical bill, a bad month — without immediately depending on credit, family, or the state to bridge the gap.",
+  facts: [
+    "A widely-cited rule of thumb among financial planners is a cash emergency fund covering three to six months of essential expenses — the exact number varies by household, but the underlying principle, a real buffer rather than none, is close to universal advice.",
+    "Concentrating savings in a single bank exposes you to that one institution's outages, freezes, or failures — deposit insurance schemes such as Australia's Financial Claims Scheme exist precisely because bank failures, while rare, are a real and anticipated risk.",
+    "Income concentrated in a single employer or client is a single point of failure in the same way savings in a single account are — job loss is one of the most common triggers of financial hardship.",
+    "Cash and physical currency remain functional when card networks, apps, or the power grid itself do not — a form of resilience a purely digital financial life doesn't have.",
+  ],
   detailed: true,
   connections: [{ path: ["family", "family-finance"] }],
 };
