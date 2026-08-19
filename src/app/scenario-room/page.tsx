@@ -65,7 +65,8 @@ export default function ScenarioRoomPage() {
                 textAlign: "left",
                 padding: "1.1rem 1.25rem",
                 cursor: "pointer",
-                border: selected?.id === s.id ? "2px solid var(--amber)" : "1px solid transparent",
+                border: "1px solid transparent",
+                background: selected?.id === s.id ? "var(--amber)" : undefined,
               }}
             >
               <div className="label" style={{ marginBottom: "0.35rem" }}>

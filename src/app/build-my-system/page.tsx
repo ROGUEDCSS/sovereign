@@ -36,7 +36,7 @@ export default function BuildMySystemPage() {
         </p>
 
         <div className="label" style={{ color: hasAssessment ? "var(--good)" : "var(--amber-strong)", marginBottom: "0.5rem" }}>
-          Step 1 {hasAssessment ? "— done" : "of 3"}
+          Step 1{hasAssessment ? " — done" : ""}
         </div>
         <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.75rem" }}>
           Get your Sovereign Score
@@ -58,7 +58,7 @@ export default function BuildMySystemPage() {
         )}
 
         <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
-          Step 2 of 3
+          Step 2
         </div>
         <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
           Choose a budget
@@ -76,7 +76,8 @@ export default function BuildMySystemPage() {
                 style={{
                   padding: "1rem 1.5rem",
                   cursor: "pointer",
-                  border: tier === t ? "2px solid var(--amber)" : "1px solid transparent",
+                  border: "1px solid transparent",
+                  background: tier === t ? "var(--amber)" : undefined,
                   fontWeight: tier === t ? 700 : 500,
                 }}
               >
@@ -108,14 +109,14 @@ export default function BuildMySystemPage() {
           ))}
         </div>
 
-        {plan && (
+        <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
+          Step 3
+        </div>
+        <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
+          Result: your action plan, prioritised
+        </h2>
+        {plan ? (
           <>
-            <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
-              Step 3 of 3
-            </div>
-            <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
-              Result: your action plan, prioritised
-            </h2>
             <ol style={{ display: "flex", flexDirection: "column", gap: "0.75rem", paddingLeft: "1.25rem" }}>
               {plan.map((item) => (
                 <li key={item.title} className="card" style={{ padding: "1rem 1.25rem", listStyle: "decimal" }}>
@@ -135,6 +136,8 @@ export default function BuildMySystemPage() {
               to refine it further.
             </p>
           </>
+        ) : (
+          <p style={{ color: "var(--text-3)" }}>Pick a budget above to see your plan.</p>
         )}
       </div>
     </main>
