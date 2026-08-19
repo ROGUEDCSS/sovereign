@@ -30,12 +30,19 @@ export interface QuickAction {
   why: string;
 }
 
+export interface TierAdvice {
+  red: string;
+  amber: string;
+  green: string;
+}
+
 export interface Domain {
   id: DomainId;
   name: string;
   tagline: string;
   questions: Question[];
   quickAction: QuickAction;
+  tierAdvice: TierAdvice;
 }
 
 export const DOMAINS: Domain[] = [
@@ -48,6 +55,11 @@ export const DOMAINS: Domain[] = [
       cost: "$0–50",
       time: "1 evening",
       why: "Certified copies of key documents mean a lost phone or locked account isn't a lost identity.",
+    },
+    tierAdvice: {
+      red: "Everything about you routes through one phone and one login. Get certified copies of your key documents made this week, and set up at least one backup way to prove who you are.",
+      amber: "You've got a fallback or two, but no offline backup. Add a certified paper copy of your ID and one non-digital recovery method.",
+      green: "You've got real redundancy across identity and authentication — keep your backups current as documents expire.",
     },
     questions: [
       {
@@ -92,6 +104,11 @@ export const DOMAINS: Domain[] = [
       time: "Ongoing",
       why: "Cash still works when card networks, apps, or the power itself do not.",
     },
+    tierAdvice: {
+      red: "You need to open a second bank account, and start putting at least 10% of your monthly income aside as a cash reserve.",
+      amber: "You've got a start, but it's concentrated in one place. Open an account at a second institution and grow your cash reserve toward a week's expenses.",
+      green: "Your money is genuinely spread across institutions and forms — keep the reserve topped up as expenses change.",
+    },
     questions: [
       {
         id: "money-1",
@@ -134,6 +151,11 @@ export const DOMAINS: Domain[] = [
       cost: "$0",
       time: "1 weekend",
       why: "Most households already have unused capacity — a yard, a shed, a spare room — worth mapping before buying anything.",
+    },
+    tierAdvice: {
+      red: "You have no productive land or equipment, and no housing-stability plan. Start by mapping what you already have — a yard, a shed, unused space — before buying anything.",
+      amber: "You've got some space or a basic plan, but it's not doing much yet. Pick one part of it and put it to use this month.",
+      green: "You've got real productive capacity — keep expanding it deliberately, not opportunistically.",
     },
     questions: [
       {
@@ -178,6 +200,11 @@ export const DOMAINS: Domain[] = [
       time: "Ongoing, start this week",
       why: "The single highest-leverage action in the whole assessment — covers disruption from inflation, supply shocks, or income loss alike.",
     },
+    tierAdvice: {
+      red: "You have under three days of food in the house and no growing capability. Start a 30-day pantry this week — it's the single highest-leverage action in the whole assessment.",
+      amber: "You've got some stock and maybe a small garden, but not enough to matter in a real disruption. Push your pantry toward a month and get one growing bed producing.",
+      green: "You're genuinely food-secure — keep rotating stock and expanding what you grow or preserve.",
+    },
     questions: [
       {
         id: "food-1",
@@ -220,6 +247,11 @@ export const DOMAINS: Domain[] = [
       cost: "$30–80",
       time: "1 afternoon",
       why: "Water is the shortest-fuse dependency of all — most people can go weeks without food but only days without water.",
+    },
+    tierAdvice: {
+      red: "You have no stored water and no independent access. A 72-hour reserve costs under $80 and takes an afternoon — do it this week.",
+      amber: "You've got a few days covered, but no way to get more. Add basic rainwater collection or a filter so a short outage doesn't become a long one.",
+      green: "You've got real water independence — keep your filtration and storage tested and current.",
     },
     questions: [
       {
@@ -264,6 +296,11 @@ export const DOMAINS: Domain[] = [
       time: "1 weekend",
       why: "Lighting, refrigeration, and communications charging cover most of what a household actually needs during an outage.",
     },
+    tierAdvice: {
+      red: "You have no backup power at all. Start with lighting and phone charging — a battery bank and a plan cost under $200 and cover the two things you'll miss most.",
+      amber: "You've got something, but you've never tested it under real conditions. Run it for a full evening this month and find the gaps before an outage does.",
+      green: "You've got tested backup power — keep it maintained and rehearse it at least once a year.",
+    },
     questions: [
       {
         id: "energy-1",
@@ -306,6 +343,11 @@ export const DOMAINS: Domain[] = [
       cost: "$0–100",
       time: "A few hours",
       why: "Mechanical self-sufficiency reduces dependence on parts availability and service networks under strain.",
+    },
+    tierAdvice: {
+      red: "You have no alternative to your car and no ability to repair it. Learn one real repair — a tyre change is the place to start — and identify a genuine backup option.",
+      amber: "You've got a fallback, but it's not one you actually use. Ride or drive your alternative route once this month so it's proven, not theoretical.",
+      green: "You've got genuine transport redundancy — keep your alternatives current and your vehicle maintained.",
     },
     questions: [
       {
@@ -350,6 +392,11 @@ export const DOMAINS: Domain[] = [
       time: "1 afternoon",
       why: "A battery radio and a household reconnection plan cover the two things that actually fail together — information and coordination.",
     },
+    tierAdvice: {
+      red: "You have no plan for reaching family or getting information if networks go down. A battery radio costs under $50 — get one, and agree a fallback meeting point with your household.",
+      amber: "You've got a device or two, but no agreed household plan. Sit down this week and actually write the plan down.",
+      green: "You've got real, tested communications redundancy — keep the charging and the plan current.",
+    },
     questions: [
       {
         id: "comms-1",
@@ -392,6 +439,11 @@ export const DOMAINS: Domain[] = [
       cost: "$0–60/yr",
       time: "1 evening",
       why: "The highest-leverage digital-security action available — closes off the most common route attackers actually use.",
+    },
+    tierAdvice: {
+      red: "One password unlocks everything you own online. Set up a password manager and multi-factor authentication on your email this week — it's the highest-leverage security action available.",
+      amber: "You've separated a few accounts, but the important ones are still exposed. Put MFA on your email and financial accounts specifically — those are the ones that unlock everything else.",
+      green: "You've got real digital security discipline — keep your recovery methods tested as accounts change.",
     },
     questions: [
       {
@@ -436,6 +488,11 @@ export const DOMAINS: Domain[] = [
       time: "A weekend course",
       why: "Most household medical events are minor — the gap is usually knowledge and supplies, not access to a hospital.",
     },
+    tierAdvice: {
+      red: "You have no first-aid kit and no training. A proper kit costs $60–150 and a weekend course covers the basics that actually come up.",
+      amber: "You've got a kit, but not the knowledge to use it well. Book a first-aid course — the kit is only as good as the person using it.",
+      green: "You've got real first-aid capability in the household — keep certifications current and the kit stocked.",
+    },
     questions: [
       {
         id: "health-1",
@@ -478,6 +535,11 @@ export const DOMAINS: Domain[] = [
       cost: "$0–200",
       time: "Ongoing",
       why: "A single well-developed skill — repair, growing, preserving — compounds across every other domain.",
+    },
+    tierAdvice: {
+      red: "You have no practical skill you could rely on without paying someone else. Pick one — repair, growing, preserving — and start deliberately this month.",
+      amber: "You've got one skill, but it's not compounding into others. Add a second, ideally one that supports the first.",
+      green: "You've got real, actively-used practical skills — keep building rather than plateauing.",
     },
     questions: [
       {
@@ -522,6 +584,11 @@ export const DOMAINS: Domain[] = [
       time: "20 minutes",
       why: "Community is the domain money can't buy quickly — it compounds slowly, so the best time to start is before you need it.",
     },
+    tierAdvice: {
+      red: "You don't know your neighbours and have no one nearby to call. Have one real conversation with a neighbour this week — it's the slowest-compounding domain, so the best time to start is now.",
+      amber: "You know a few people, but the relationships aren't reciprocal yet. Offer to help someone before you need help yourself — that's what makes it reciprocal.",
+      green: "You've got a genuine, reciprocal network — keep showing up for it, not just drawing on it.",
+    },
     questions: [
       {
         id: "community-1",
@@ -563,13 +630,3 @@ export function domainScore(domain: Domain, answers: Record<string, number>): nu
   return Math.round(avg);
 }
 
-export function totalScore(answers: Record<string, number>): number {
-  return DOMAINS.reduce((sum, d) => sum + domainScore(d, answers), 0);
-}
-
-export function statusForScore(total: number): string {
-  if (total < 40) return "Fragile";
-  if (total < 70) return "Developing";
-  if (total < 95) return "Resilient";
-  return "High sovereignty";
-}

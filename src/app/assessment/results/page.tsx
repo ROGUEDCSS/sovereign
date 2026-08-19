@@ -2,8 +2,22 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { DOMAINS, domainScore, totalScore, statusForScore } from "@/lib/domains";
+import { DOMAINS, domainScore } from "@/lib/domains";
 import { codexLinksForDomain, codexHref } from "@/lib/taxonomy-map";
+
+type Tier = "red" | "amber" | "green";
+
+function tierFor(score: number): Tier {
+  if (score <= 3) return "red";
+  if (score <= 6) return "amber";
+  return "green";
+}
+
+const TIER_COLOR: Record<Tier, string> = {
+  red: "var(--danger)",
+  amber: "var(--amber)",
+  green: "var(--good)",
+};
 
 export default function ResultsPage() {
   const [answers, setAnswers] = useState<Record<string, number> | null>(null);
@@ -27,11 +41,10 @@ export default function ResultsPage() {
     );
   }
 
-  const scored = DOMAINS.map((d) => ({ domain: d, score: domainScore(d, answers) })).sort(
+  const scored = DOMAINS.map((d) => ({ domain: d, score: domainScore(d, answers), tier: tierFor(domainScore(d, answers)) })).sort(
     (a, b) => a.score - b.score
   );
-  const total = totalScore(answers);
-  const status = statusForScore(total);
+  const greenCount = scored.filter((s) => s.tier === "green").length;
   const weakest = scored.slice(0, 3);
   const firstFive = scored.slice(0, 5);
 
@@ -41,43 +54,45 @@ export default function ResultsPage() {
         <div className="label">Your Sovereign Score</div>
         <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem", margin: "0.5rem 0 0.25rem" }}>
           <span style={{ fontSize: "var(--size-stat)", fontWeight: 500, color: "var(--amber-strong)" }}>
-            {total}
+            {greenCount}
           </span>
-          <span style={{ fontSize: "var(--size-stat-suffix)", color: "var(--text-3)" }}>/ 120</span>
+          <span style={{ fontSize: "var(--size-stat-suffix)", color: "var(--text-3)" }}>/ 12 domains</span>
         </div>
         <p style={{ color: "var(--text-2)", marginBottom: "2.5rem" }}>
-          Status: <strong>{status}</strong>. Sovereignty is a
-          continuum, not a binary state — this is where you start, not a verdict.
+          Sovereignty is a continuum, not a binary state — this is where you start, not a verdict.
         </p>
 
         <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
-          Your 12 domains
+          How &quot;Sovereign&quot; are you?
         </h2>
         <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
-          {scored.map(({ domain, score }, i) => (
+          {scored.map(({ domain, tier }, i) => (
             <div
               key={domain.id}
               style={{
                 display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-                padding: "0.6rem 0",
+                alignItems: "flex-start",
+                gap: "0.85rem",
+                padding: "0.9rem 0",
                 borderTop: i === 0 ? "none" : "1px solid var(--border)",
               }}
             >
-              <span style={{ width: 140, fontSize: "var(--size-sm)" }}>{domain.name}</span>
-              <div style={{ flex: 1, height: 6, background: "var(--border)", borderRadius: 3, overflow: "hidden" }}>
-                <div
-                  style={{
-                    height: "100%",
-                    width: `${score * 10}%`,
-                    background: score <= 3 ? "var(--danger)" : score <= 6 ? "var(--amber)" : "var(--good)",
-                  }}
-                />
+              <span
+                style={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: "50%",
+                  background: TIER_COLOR[tier],
+                  flexShrink: 0,
+                  marginTop: "0.3rem",
+                }}
+              />
+              <div>
+                <strong>{domain.name}</strong>
+                <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginTop: "0.2rem" }}>
+                  {domain.tierAdvice[tier]}
+                </p>
               </div>
-              <span style={{ width: 40, textAlign: "right", fontSize: "var(--size-sm)", color: "var(--text-2)" }}>
-                {score}/10
-              </span>
             </div>
           ))}
         </div>
@@ -86,9 +101,9 @@ export default function ResultsPage() {
           Your biggest vulnerabilities
         </h2>
         <ol style={{ marginBottom: "2.5rem", paddingLeft: "1.25rem", color: "var(--text-2)" }}>
-          {weakest.map(({ domain, score }) => (
+          {weakest.map(({ domain }) => (
             <li key={domain.id} style={{ marginBottom: "0.5rem" }}>
-              <strong>{domain.name}</strong> — {score}/10
+              <strong>{domain.name}</strong>
               {codexLinksForDomain(domain.id).map((link) => (
                 <Link
                   key={link.path.join("/")}
