@@ -20,6 +20,7 @@ const SECTIONS = [
       "At least 2 weeks of stored drinking water (1 gallon / 4L per person per day)",
       "A way to purify more — filter, tablets, or boiling capability, not just stored bottles",
       "You know where your water actually comes from and what shuts it off",
+      "A source beyond the mains — tank, bore, or a mapped natural source you could actually reach",
     ],
   },
   {
@@ -28,6 +29,8 @@ const SECTIONS = [
       "2–4 weeks of food that needs no refrigeration or power to prepare",
       "A way to cook without mains electricity or gas (camp stove, fire, etc.)",
       "You know which nearby land, water, or contacts could realistically supply food if supply chains broke for a month",
+      "You can grow, forage, or catch at least some of your own food — not just in theory",
+      "Stored food is rotated, not bought once and left to expire unnoticed",
     ],
   },
   {
@@ -36,6 +39,8 @@ const SECTIONS = [
       "A way to keep essential devices charged with the grid down for 72+ hours",
       "You know your home's actual daily power draw, not a guess",
       "At least one heat/cooling option that doesn't depend on mains power",
+      "A light source that doesn't rely on batteries alone — candles, oil lamp, hand-crank",
+      "If you own a generator or solar setup, you actually know how to run it, not just that it exists",
     ],
   },
   {
@@ -45,6 +50,7 @@ const SECTIONS = [
       "Savings are not all in a single bank or single account type",
       "Some physical cash on hand for when card networks or apps are down",
       "Household income doesn't depend entirely on one employer or one client",
+      "You know your real net worth and monthly cash flow, not an estimate",
     ],
   },
   {
@@ -53,6 +59,8 @@ const SECTIONS = [
       "You train strength and cardio, not just one or neither",
       "You could describe your own sleep and stress patterns accurately, not just guess",
       "A stocked first-aid kit, and at least one person in the household who knows how to use it",
+      "Chronic conditions and medications are documented, with more than a week's buffer supply on hand",
+      "At least one person in the household knows basic emergency response — CPR, bleeding control",
     ],
   },
   {
@@ -61,6 +69,8 @@ const SECTIONS = [
       "Physical copies of core ID documents stored somewhere other than your main residence",
       "A second, independent way to prove who you are if your primary ID is lost or destroyed",
       "You know the actual process to replace a lost passport, licence, or birth certificate",
+      "Digital copies of key documents are backed up somewhere you control, not locked to one cloud account",
+      "Your will, insurance policies, and property documents are findable by family without needing you to explain where",
     ],
   },
   {
@@ -68,6 +78,7 @@ const SECTIONS = [
     items: [
       "A way to reach family if mobile networks and internet are both down",
       "An agreed meeting point or check-in plan the whole household actually knows",
+      "A physical, offline contact list for the people who actually matter in an emergency — not just names saved in a phone",
     ],
   },
   {
@@ -76,6 +87,8 @@ const SECTIONS = [
       "Working smoke and CO detectors, checked in the last 12 months",
       "You know how to shut off your home's water, gas, and power manually",
       "Basic tools and materials on hand to secure doors, windows, or a leak without a hardware run",
+      "A fire extinguisher that's accessible and still in date",
+      "You know your street's actual evacuation route, not just a general direction",
     ],
   },
   {
@@ -83,6 +96,7 @@ const SECTIONS = [
     items: [
       "You know at least two neighbours well enough to ask for or offer real help",
       "You have a role, skill, or resource you could actually contribute if your street needed it",
+      "You know how to reach a local response network — SES, RFS/CFA, community group — before you need it, not after",
     ],
   },
 ];
