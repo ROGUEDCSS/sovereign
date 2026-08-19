@@ -8,6 +8,16 @@ const JOURNEY_TAG: Record<string, string> = {
   community: "Where it becomes resilient",
 };
 
+const CODEX_PROMISE: Record<string, string> = {
+  individual:
+    "Codex gives you a clear map of what you actually know, own, and can do — and a way to close the gaps, one skill and one document at a time.",
+  family:
+    "Codex turns “we should really sort that out” into an actual plan — one every member of the household can see and contribute to.",
+  home: "Codex shows you exactly what your home and land already provide, and what's missing before you need it.",
+  community:
+    "Codex helps you find and build the relationships that actually show up — before you're relying on strangers.",
+};
+
 export default function CodexIndexPage() {
   return (
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
@@ -41,7 +51,7 @@ export default function CodexIndexPage() {
               key={branch.slug}
               href={`/codex/${branch.slug}`}
               className="card"
-              style={{ display: "block", padding: "1.25rem 1.5rem", minHeight: 130, textDecoration: "none" }}
+              style={{ display: "block", padding: "1.25rem 1.5rem", minHeight: 260, textDecoration: "none" }}
             >
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.4rem" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
@@ -73,7 +83,18 @@ export default function CodexIndexPage() {
                   </span>
                 )}
               </div>
-              <p style={{ fontSize: "var(--size-body)", color: "var(--ink-2)" }}>{branch.tagline}</p>
+              {(() => {
+                const dot = branch.tagline.indexOf(".");
+                const lead = branch.tagline.slice(0, dot);
+                const rest = branch.tagline.slice(dot + 1).trim();
+                return (
+                  <>
+                    <p style={{ fontSize: "var(--size-body)", fontWeight: 700, color: "var(--ink)", marginBottom: "0.6rem" }}>{lead}</p>
+                    <p style={{ fontSize: "var(--size-body)", color: "var(--ink-2)", marginBottom: "0.6rem" }}>{rest}</p>
+                  </>
+                );
+              })()}
+              <p style={{ fontSize: "var(--size-body)", color: "var(--ink-2)" }}>{CODEX_PROMISE[branch.slug]}</p>
             </Link>
           ))}
         </div>
