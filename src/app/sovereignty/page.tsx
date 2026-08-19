@@ -8,7 +8,7 @@ export default function SovereigntyPage() {
           Before you begin
         </div>
         <h1 style={{ fontSize: "var(--size-h1)", fontWeight: 500, lineHeight: 1.15, marginBottom: "1.5rem" }}>
-          What does it mean to be sovereign?
+          What does it mean to be Sovereign?
         </h1>
         <p style={{ fontSize: "var(--size-h4)", color: "var(--text-2)", marginBottom: "2.5rem" }}>
           Not a legal theory. Not a loophole. Not a flag you fly against the government. Sovereignty,

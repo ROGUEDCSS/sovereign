@@ -95,7 +95,7 @@ const FINANCE: CodexNode = {
 const MINDSET_RESPONSIBILITY: CodexNode = {
   slug: "mindset-responsibility",
   name: "Mindset & responsibility",
-  tagline: "Self-governance — the character and judgement a sovereign individual actually runs on.",
+  tagline: "Self-governance — the character and judgement a Sovereign individual actually runs on.",
   detailed: true,
   connections: [{ path: ["family", "responsibility"] }],
 };
