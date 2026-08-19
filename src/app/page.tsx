@@ -65,6 +65,9 @@ export default function Home() {
           organised, skilled, and connected with your kin and clan.
         </p>
         <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+          <Link href="/sovereignty" className="btn btn-outline" style={{ fontSize: "var(--size-body)" }}>
+            What does it mean to be sovereign?
+          </Link>
           <Link href="/assessment" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>
             Get your Sovereign Score →
           </Link>
