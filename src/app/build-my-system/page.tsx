@@ -121,7 +121,7 @@ export default function BuildMySystemPage() {
               {plan.map((item) => (
                 <li key={item.title} className="card" style={{ padding: "1rem 1.25rem", listStyle: "decimal" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.25rem" }}>
-                    <strong>{item.title}</strong>
+                    <strong style={{ color: "var(--ink)" }}>{item.title}</strong>
                     <span className="pill pill-scenario">
                       {DOMAINS.find((d) => d.id === item.category)?.name}
                     </span>

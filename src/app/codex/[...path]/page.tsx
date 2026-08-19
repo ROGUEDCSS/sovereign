@@ -50,7 +50,9 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
           </div>
 
           <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>{node.name}</h1>
-          <p style={{ color: "var(--text-2)", marginBottom: "2rem", maxWidth: 620 }}>{node.tagline}</p>
+          {!node.definition && (
+            <p style={{ color: "var(--text-2)", marginBottom: "2rem", maxWidth: 620 }}>{node.tagline}</p>
+          )}
 
           <CommunityPanel communitySignal={node.communitySignal} sovereignAlignment={node.sovereignAlignment} fixed />
 
@@ -63,9 +65,33 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
             </div>
           )}
 
+          {node.definition && (
+            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
+              <div className="label" style={{ marginBottom: "0.4rem", color: "var(--ink)" }}>
+                Definition
+              </div>
+              <p style={{ fontWeight: 500 }}>{node.definition}</p>
+            </div>
+          )}
+
+          {node.facts && node.facts.length > 0 && (
+            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
+              <div className="label" style={{ marginBottom: "0.4rem", color: "var(--ink)" }}>
+                Facts
+              </div>
+              <ul style={{ paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                {node.facts.map((fact) => (
+                  <li key={fact} style={{ fontWeight: 500 }}>
+                    {fact}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {node.practicalQuestion && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
-              <div className="label" style={{ marginBottom: "0.4rem" }}>
+              <div className="label" style={{ marginBottom: "0.4rem", color: "var(--ink)" }}>
                 The practical question
               </div>
               <p style={{ fontWeight: 500 }}>{node.practicalQuestion}</p>
@@ -108,13 +134,13 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
 
           {node.items && node.items.length > 0 && (
             <>
-              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
-                {node.slug === "family-capability" ? "Examples" : "Categories"}
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 700, marginBottom: "1rem" }}>
+                {node.slug === "family-capability" ? "Examples" : node.slug === "water" ? "Sources" : "Categories"}
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.5rem" }}>
                 {node.items.map((item) => (
                   <div key={item.name} className="card" style={{ padding: "0.9rem 1.25rem" }}>
-                    <strong>{item.name}</strong>
+                    <strong style={{ color: "var(--ink)" }}>{item.name}</strong>
                     {item.description && (
                       <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)", marginTop: "0.2rem" }}>
                         {item.description}
@@ -138,7 +164,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
               <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.5rem" }}>
                 {node.pathways.map((p) => (
                   <div key={p.label} className="card" style={{ padding: "0.9rem 1.25rem" }}>
-                    <strong>{p.label}</strong>
+                    <strong style={{ color: "var(--ink)" }}>{p.label}</strong>
                     <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginTop: "0.5rem" }}>
                       {p.options.map((o) => (
                         <span key={o} className="pill" style={{ background: "var(--card-hover)", border: "1px solid var(--border-strong)", color: "var(--text-1)" }}>

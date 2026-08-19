@@ -23,6 +23,8 @@ export interface CodexNode {
   slug: string;
   name: string;
   tagline: string;
+  definition?: string;
+  facts?: string[];
   practicalQuestion?: string;
   items?: CodexItem[];
   connections?: CodexConnection[];
@@ -277,6 +279,15 @@ const WATER: CodexNode = {
   slug: "water",
   name: "Water",
   tagline: "Where your water actually comes from, and what happens if that source stops.",
+  definition:
+    "Water is the single most essential input for human life — more urgent than food, shelter, or almost anything else you could stockpile. Every cell, organ, and system in the body depends on it.",
+  facts: [
+    "The human body is roughly 60% water, and every major bodily system depends on it functioning.",
+    "Most people can survive only about 3 days without water — compared to several weeks without food.",
+    "Losing just 2% of your body's water (mild dehydration) is enough to measurably impair concentration and physical performance.",
+    "Municipal water systems typically hold only a few days of treated reserve — a mains failure, contamination event, or extended outage can interrupt supply with very little warning.",
+    "A single adult needs a minimum of roughly 3 litres a day just to survive — more for cooking, hygiene, and any physical exertion.",
+  ],
   practicalQuestion: "How much of your household's water can come from a source you control directly?",
   detailed: true,
   sovereignFramework: true,
