@@ -120,7 +120,7 @@ export default function ResultsPage() {
         </div>
 
         <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
-          Do these five things first
+          Do these 5 things first
         </h2>
         <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem", marginBottom: "3rem" }}>
           {firstFive.map(({ domain }) => (
