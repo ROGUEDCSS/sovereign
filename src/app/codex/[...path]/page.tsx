@@ -90,11 +90,11 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
           )}
 
           {node.practicalQuestion && (
-            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
-              <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)", marginBottom: "0.4rem" }}>
+            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem", background: "var(--amber)" }}>
+              <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "#1a1005", marginBottom: "0.4rem" }}>
                 The practical question
               </div>
-              <p style={{ fontWeight: 500 }}>{node.practicalQuestion}</p>
+              <p style={{ fontWeight: 700, color: "#1a1005" }}>{node.practicalQuestion}</p>
             </div>
           )}
 
