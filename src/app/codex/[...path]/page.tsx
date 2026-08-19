@@ -1,0 +1,243 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { allCodexPaths, resolveCodexPath } from "@/lib/codex";
+import { domainIdsForCodexPath } from "@/lib/taxonomy-map";
+import { DOMAINS } from "@/lib/domains";
+import { PeekProvider } from "@/components/PeekProvider";
+import { PeekList, PeekItem } from "@/components/PeekList";
+
+export function generateStaticParams() {
+  return allCodexPaths().map((path) => ({ path }));
+}
+
+export default async function CodexNodePage({ params }: { params: Promise<{ path: string[] }> }) {
+  const { path } = await params;
+
+  const resolved = resolveCodexPath(path);
+  if (!resolved) notFound();
+  const { node, trail } = resolved;
+  const relatedDomains = domainIdsForCodexPath(path);
+
+  const connectionItems: PeekItem[] = (node.connections ?? []).map((c) => {
+    const target = resolveCodexPath(c.path);
+    const label = target ? target.node.name : c.path.join(" → ");
+    const note =
+      target && target.trail.length > 1
+        ? "via " + target.trail.slice(0, -1).map((n) => n.name).join(" → ")
+        : undefined;
+    return { label, note, target: { kind: "codex", path: c.path } };
+  });
+
+  return (
+    <PeekProvider>
+      <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
+        <div style={{ maxWidth: 780, margin: "0 auto" }}>
+          <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap", fontSize: "0.82rem", color: "var(--text-3)", marginBottom: "1.25rem" }}>
+            <Link href="/codex" style={{ color: "var(--text-3)" }}>
+              Codex
+            </Link>
+            {trail.map((t, i) => {
+              const href = "/codex/" + trail.slice(0, i + 1).map((n) => n.slug).join("/");
+              const isLast = i === trail.length - 1;
+              return (
+                <span key={t.slug} style={{ display: "flex", gap: "0.4rem" }}>
+                  <span>/</span>
+                  {isLast ? <span style={{ color: "var(--text-2)" }}>{t.name}</span> : <Link href={href} style={{ color: "var(--text-3)" }}>{t.name}</Link>}
+                </span>
+              );
+            })}
+          </div>
+
+          <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>{node.name}</h1>
+          <p style={{ color: "var(--text-2)", marginBottom: "2rem", maxWidth: 620 }}>{node.tagline}</p>
+
+          {!node.detailed && (
+            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
+              <p style={{ color: "var(--text-2)" }}>
+                This branch of the Codex hasn&apos;t been mapped yet. It&apos;ll follow the same
+                pattern as the rest of the Codex once it&apos;s built out.
+              </p>
+            </div>
+          )}
+
+          {node.practicalQuestion && (
+            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
+              <div className="label" style={{ marginBottom: "0.4rem" }}>
+                The practical question
+              </div>
+              <p style={{ fontWeight: 500 }}>{node.practicalQuestion}</p>
+            </div>
+          )}
+
+          {node.branches && node.branches.length > 0 && (
+            <>
+              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>Branches</h2>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
+                  gap: "0.75rem",
+                  marginBottom: "2.5rem",
+                }}
+              >
+                {node.branches.map((b) => (
+                  <Link
+                    key={b.slug}
+                    href={`/codex/${[...path, b.slug].join("/")}`}
+                    className="card"
+                    style={{ display: "block", padding: "1.1rem 1.25rem", textDecoration: "none" }}
+                  >
+                    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.3rem" }}>
+                      <span style={{ fontWeight: 500 }}>{b.name}</span>
+                      {!b.detailed && (
+                        <span className="pill pill-opinion" style={{ fontSize: "0.62rem" }}>
+                          Stub
+                        </span>
+                      )}
+                    </div>
+                    <p style={{ color: "var(--text-2)", fontSize: "0.85rem" }}>{b.tagline}</p>
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
+
+          {node.items && node.items.length > 0 && (
+            <>
+              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>
+                {node.slug === "family-capability" ? "Examples" : "Categories"}
+              </h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.5rem" }}>
+                {node.items.map((item) => (
+                  <div key={item.name} className="card" style={{ padding: "0.9rem 1.25rem" }}>
+                    <strong>{item.name}</strong>
+                    {item.description && (
+                      <p style={{ color: "var(--text-2)", fontSize: "0.88rem", marginTop: "0.2rem" }}>
+                        {item.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {node.pathways && node.pathways.length > 0 && (
+            <>
+              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "0.5rem" }}>
+                Multiple ways to the same outcome
+              </h2>
+              <p style={{ color: "var(--text-2)", fontSize: "0.9rem", marginBottom: "1rem" }}>
+                The same category can be reached through different materials — the Codex is meant
+                to show the alternatives, not just the conventional default.
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.5rem" }}>
+                {node.pathways.map((p) => (
+                  <div key={p.label} className="card" style={{ padding: "0.9rem 1.25rem" }}>
+                    <strong>{p.label}</strong>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginTop: "0.5rem" }}>
+                      {p.options.map((o) => (
+                        <span key={o} className="pill" style={{ background: "var(--card)", color: "var(--text-2)" }}>
+                          {o}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          {connectionItems.length > 0 && (
+            <>
+              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>Connections</h2>
+              <div style={{ marginBottom: node.futureRefs && node.futureRefs.length > 0 ? "0.75rem" : "2.5rem" }}>
+                <PeekList items={connectionItems} />
+              </div>
+            </>
+          )}
+
+          {node.futureRefs && node.futureRefs.length > 0 && (
+            <p style={{ color: "var(--text-3)", fontSize: "0.85rem", marginBottom: "2.5rem" }}>
+              Also connects to: {node.futureRefs.join(", ")} — not built yet.
+            </p>
+          )}
+
+          {node.sovereignFramework && (
+            <div className="card" style={{ padding: "1.5rem", marginBottom: "2.5rem" }}>
+              <h2 style={{ fontSize: "1.05rem", fontWeight: 500, marginBottom: "1rem" }}>
+                How this node will be filled in
+              </h2>
+              <p style={{ color: "var(--text-2)", fontSize: "0.9rem", marginBottom: "1.25rem" }}>
+                Every node that touches rights or permissions follows this same framework. The
+                structure is built — the research and content for each field still needs to be
+                done properly, not guessed.
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
+                <div>
+                  <span className="pill pill-scenario">Sovereign principle</span>
+                  <p style={{ color: "var(--text-3)", fontSize: "0.85rem", marginTop: "0.35rem" }}>
+                    What should an individual be free to do here, in principle?
+                  </p>
+                </div>
+                <div>
+                  <span className="pill pill-fact">Legal reality</span>
+                  <p style={{ color: "var(--text-3)", fontSize: "0.85rem", marginTop: "0.35rem" }}>
+                    What does the applicable jurisdiction actually permit, restrict, or require —
+                    researched per jurisdiction, not assumed.
+                  </p>
+                </div>
+                <div>
+                  <span className="pill pill-opinion">Rationale → evidence → counterarguments → options</span>
+                  <p style={{ color: "var(--text-3)", fontSize: "0.85rem", marginTop: "0.35rem" }}>
+                    Why it matters, what supports it, the strongest case against it, and the real
+                    options available.
+                  </p>
+                </div>
+                <div style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap", fontSize: "0.82rem", color: "var(--text-3)" }}>
+                  <span>What · Why · When · Where · How</span>
+                  <span>Evidence / sources</span>
+                  <span>Sovereign alignment rating</span>
+                  <span>Community validation</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {relatedDomains.length > 0 && (
+            <>
+              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>
+                Related Sovereign Score domains
+              </h2>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.5rem" }}>
+                {relatedDomains.map((id) => (
+                  <Link
+                    key={id}
+                    href="/assessment"
+                    className="pill"
+                    style={{ background: "var(--card)", color: "var(--text-2)", textDecoration: "none" }}
+                  >
+                    {DOMAINS.find((d) => d.id === id)?.name}
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
+
+          {node.relatedTools && node.relatedTools.length > 0 && (
+            <>
+              <h2 style={{ fontSize: "1.1rem", fontWeight: 500, marginBottom: "1rem" }}>Related tools</h2>
+              <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+                {node.relatedTools.map((t) => (
+                  <Link key={t.href} href={t.href} className="btn btn-outline">
+                    {t.label}
+                  </Link>
+                ))}
+              </div>
+            </>
+          )}
+        </div>
+      </main>
+    </PeekProvider>
+  );
+}

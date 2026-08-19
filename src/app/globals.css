@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+html {
+  background: #0b0e11;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0b0e11;
+  color: #e9e6df;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, 'Inter', Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0b0e11;
+  --bg-raised: #12161b;
+  --card: rgba(255,255,255,0.03);
+  --card-hover: rgba(255,255,255,0.055);
+  --border: rgba(255,255,255,0.12);
+  --border-strong: rgba(255,255,255,0.22);
+
+  --amber: #c98a3e;
+  --amber-strong: #e0a35a;
+  --amber-dim: rgba(201,138,62,0.14);
+
+  --text-1: #e9e6df;
+  --text-2: rgba(233,230,223,0.75);
+  --text-3: rgba(233,230,223,0.52);
+
+  --fact: #4f9cd6;
+  --scenario: #c98a3e;
+  --opinion: #8a8780;
+
+  --danger: #c25b4f;
+  --good: #6fa072;
+
+  --size-label: 0.78rem;
+  --size-body: 1rem;
+  --size-h3: 1.25rem;
+  --size-h2: 1.75rem;
+  --size-h1: 2.75rem;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.label {
+  font-size: var(--size-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  font-weight: 500; letter-spacing: 0.02em;
+  cursor: pointer; transition: all 0.2s ease; text-decoration: none;
+  border-radius: 8px; white-space: nowrap;
+  padding: 0.85rem 1.75rem; font-size: 0.95rem;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: var(--amber);
+  color: #1a1005;
+}
+.btn-primary:hover { background: var(--amber-strong); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-1);
+  border-color: var(--border-strong);
+}
+.btn-outline:hover { border-color: var(--amber); color: var(--amber-strong); }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.2rem 0.6rem; border-radius: 999px;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+}
+
+.pill-fact { background: rgba(79,156,214,0.14); color: #7cb8e8; }
+.pill-scenario { background: var(--amber-dim); color: var(--amber-strong); }
+.pill-opinion { background: rgba(138,135,128,0.16); color: #b0aca3; }
+
+a { color: inherit; }
