@@ -95,7 +95,7 @@ export default function ResultsPage() {
         <p style={{ fontSize: "var(--size-body)", color: "#fff", marginBottom: "1.5rem" }}>
           Sovereignty is a goal, not a binary state — this tells you where to go, what to fix.
         </p>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "1.25rem", marginBottom: "2.5rem" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.5rem", marginBottom: "2.5rem" }}>
           {(["red", "amber", "green"] as Tier[]).map((tier) => (
             <div key={tier} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <span style={{ width: 10, height: 10, borderRadius: "50%", background: TIER_COLOR[tier], flexShrink: 0 }} />
