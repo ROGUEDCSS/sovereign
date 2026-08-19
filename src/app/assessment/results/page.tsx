@@ -61,7 +61,9 @@ export default function ResultsPage() {
   return (
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
-        <div className="label" style={{ color: "#fff", fontWeight: 700 }}>Your Sovereign Score</div>
+        <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 700, color: "#fff", textAlign: "right", marginBottom: "0.5rem" }}>
+          Your Sovereign Score
+        </h1>
         <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "0.75rem", margin: "0.5rem 0 0.25rem", flexWrap: "wrap" }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem" }}>
             <span style={{ fontSize: "var(--size-stat)", fontWeight: 500, color: "var(--amber-strong)" }}>
@@ -69,7 +71,7 @@ export default function ResultsPage() {
             </span>
             <span style={{ fontSize: "var(--size-stat-suffix)", color: "var(--text-3)" }}>/ 12 Domains</span>
           </div>
-          <span style={{ fontSize: "var(--size-h3)", fontWeight: 700, color: status.color, marginLeft: "auto" }}>
+          <span style={{ fontSize: "var(--size-h3)", fontWeight: 700, color: status.color, marginLeft: "auto", textAlign: "right" }}>
             {status.label}
           </span>
         </div>
