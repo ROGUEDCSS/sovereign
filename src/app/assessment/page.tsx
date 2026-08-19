@@ -155,8 +155,8 @@ export default function AssessmentPage() {
         </h1>
         <p style={{ color: "var(--text-2)", marginBottom: "1.5rem" }}>{domain.tagline}</p>
 
-        <div className="label" style={{ marginBottom: "0.75rem" }}>
-          Domain {step + 1} of {DOMAINS.length}
+        <div className="label" style={{ marginBottom: "0.75rem", textAlign: "center" }}>
+          12 Domains
         </div>
 
         <div style={{ display: "flex", gap: "0.4rem", marginBottom: "2.5rem" }}>
