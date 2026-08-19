@@ -141,19 +141,6 @@ export default function ResultsPage() {
           })}
         </div>
 
-        <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
-          How &quot;Sovereign&quot; are you?
-        </h2>
-        <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
-          {scored.map(({ domain, tier }) => (
-            <div key={domain.id} style={{ padding: "0.9rem 0" }}>
-              <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{domain.name}</strong>
-              <p style={{ fontSize: "var(--size-body)", color: "var(--ink)", marginTop: "0.2rem" }}>
-                {domain.tierAdvice[tier]}
-              </p>
-            </div>
-          ))}
-        </div>
 
         {amberDomains.length > 0 && (
           <>
