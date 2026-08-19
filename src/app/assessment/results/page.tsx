@@ -46,7 +46,7 @@ export default function ResultsPage() {
           <span style={{ fontSize: "var(--size-stat-suffix)", color: "var(--text-3)" }}>/ 120</span>
         </div>
         <p style={{ color: "var(--text-2)", marginBottom: "2.5rem" }}>
-          Status: <strong style={{ color: "var(--text-1)" }}>{status}</strong>. Sovereignty is a
+          Status: <strong>{status}</strong>. Sovereignty is a
           continuum, not a binary state — this is where you start, not a verdict.
         </p>
 
@@ -88,7 +88,7 @@ export default function ResultsPage() {
         <ol style={{ marginBottom: "2.5rem", paddingLeft: "1.25rem", color: "var(--text-2)" }}>
           {weakest.map(({ domain, score }) => (
             <li key={domain.id} style={{ marginBottom: "0.5rem" }}>
-              <strong style={{ color: "var(--text-1)" }}>{domain.name}</strong> — {score}/10
+              <strong>{domain.name}</strong> — {score}/10
               {codexLinksForDomain(domain.id).map((link) => (
                 <Link
                   key={link.path.join("/")}

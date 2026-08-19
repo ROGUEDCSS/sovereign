@@ -15,6 +15,12 @@ body {
   min-height: 100vh;
 }
 
+/* Hard rule: every heading is gold, always — h1-h4 and the <strong> titles
+   used for card/item names that function as headings without the tag. */
+h1, h2, h3, h4, strong {
+  color: var(--amber-strong);
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {

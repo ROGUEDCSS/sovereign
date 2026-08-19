@@ -69,10 +69,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section style={{ borderTop: "1px solid var(--border)", background: "var(--bg-raised)" }}>
+      <section style={{ borderTop: "1px solid var(--border)", background: "#fff" }}>
         <div className="container" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
-          <h2 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "2rem", maxWidth: 560 }}>
-            Four moves. Start today.
+          <h2 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem", maxWidth: 560, color: "var(--ink)" }}>
+            4 STEPS: Start TODAY
           </h2>
           <div
             style={{
@@ -83,19 +83,19 @@ export default function Home() {
             }}
           >
             {PILLARS.map((p) => (
-              <div key={p.tag} style={{ padding: "1.5rem", borderRadius: "10px", background: "var(--cream)" }}>
-                <div className="label" style={{ color: "var(--amber-on-light)", marginBottom: "0.75rem" }}>
+              <div key={p.tag} style={{ padding: "1.5rem", borderRadius: "10px", background: "var(--ink)" }}>
+                <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "1rem" }}>
                   {p.tag}
                 </div>
-                <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.6rem", lineHeight: 1.35, color: "var(--ink)" }}>
+                <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.6rem", lineHeight: 1.35, color: "var(--amber-strong)" }}>
                   {p.title}
                 </h3>
-                <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginBottom: "1.25rem", lineHeight: 1.55 }}>
+                <p style={{ color: "#fff", fontSize: "var(--size-h4)", marginBottom: "1.25rem", lineHeight: 1.55 }}>
                   {p.body}
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                   {p.links.map((l) => (
-                    <Link key={l.href} href={l.href} style={{ color: "var(--ink)", fontSize: "var(--size-sm)", textDecoration: "none", fontWeight: 600 }}>
+                    <Link key={l.href} href={l.href} style={{ color: "#fff", fontSize: "var(--size-body)", textDecoration: "none", fontWeight: 600 }}>
                       {l.label} →
                     </Link>
                   ))}
