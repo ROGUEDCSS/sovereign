@@ -128,28 +128,19 @@ const ROWS: Row[] = [
     rule: "Green-tier score, positive state.",
   },
   {
-    name: "Colour — Text on dark, primary",
-    example: <Swatch color="var(--text-1)" />,
-    technical: "var(--text-1)",
-    rule: "Default body text colour on the dark background.",
-  },
-  {
-    name: "Colour — Text on dark, secondary",
-    example: <Swatch color="var(--text-2)" />,
-    technical: "var(--text-2)",
-    rule: "Muted body text on the dark background.",
-  },
-  {
-    name: "Colour — Text on dark, muted",
-    example: <Swatch color="var(--text-3)" />,
-    technical: "var(--text-3)",
-    rule: "Quietest text on the dark background — captions, meta.",
-  },
-  {
-    name: "Colour — Ink",
-    example: <Swatch color="var(--ink)" />,
-    technical: "var(--ink)",
-    rule: "Text colour on every white block.",
+    name: "Colour — Text",
+    example: (
+      <div style={{ display: "flex", gap: "0.5rem" }}>
+        <div style={{ background: "var(--bg)", borderRadius: "6px", padding: "0.5rem 0.75rem" }}>
+          <span style={{ color: "#fff" }}>White on black</span>
+        </div>
+        <div style={{ background: "#fff", borderRadius: "6px", padding: "0.5rem 0.75rem" }}>
+          <span style={{ color: "var(--ink)" }}>Black on white</span>
+        </div>
+      </div>
+    ),
+    technical: "#fff on var(--bg); var(--ink) on white",
+    rule: "Black background -> pure white text. White background -> pure black text. That's the whole rule, unless a specific row above says otherwise.",
   },
 ];
 
