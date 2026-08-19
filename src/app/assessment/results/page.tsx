@@ -64,12 +64,24 @@ export default function ResultsPage() {
         <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 700, color: "#fff", textAlign: "left", marginBottom: "0.5rem" }}>
           Your Sovereign Score
         </h1>
-        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "flex-end", gap: "1.5rem", margin: "0.5rem 0 0.25rem", flexWrap: "wrap" }}>
-          <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem" }}>
-            <span style={{ fontSize: "var(--size-stat)", fontWeight: 500, color: "var(--amber-strong)" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.85rem", margin: "0.5rem 0 0.25rem" }}>
+          <div
+            style={{
+              width: 130,
+              height: 130,
+              borderRadius: "50%",
+              border: `3px solid ${status.color}`,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "var(--bg-raised)",
+            }}
+          >
+            <span style={{ fontSize: "var(--size-h1)", fontWeight: 700, color: "var(--amber-strong)", lineHeight: 1 }}>
               {greenCount}
             </span>
-            <span style={{ fontSize: "var(--size-stat-suffix)", color: "var(--text-3)" }}>/ 12 Domains</span>
+            <span style={{ fontSize: "var(--size-label)", color: "var(--text-3)" }}>/ 12 Domains</span>
           </div>
           <span style={{ fontSize: "var(--size-h3)", fontWeight: 700, color: status.color, textAlign: "right" }}>
             {status.label}
