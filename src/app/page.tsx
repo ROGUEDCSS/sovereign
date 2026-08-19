@@ -79,7 +79,6 @@ export default function Home() {
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
               gap: "1rem",
-              alignItems: "start",
             }}
           >
             {PILLARS.map((p) => (
