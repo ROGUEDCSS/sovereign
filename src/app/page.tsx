@@ -82,7 +82,8 @@ export default function Home() {
         </p>
         <p style={{ fontSize: "var(--size-h4)", color: "var(--text-2)", marginBottom: "2.5rem", maxWidth: 560 }}>
           The Sovereign Codex is a complete blueprint for you and your family — to get ready,
-          skilled, organised, and connected with your kin and clan.
+          skilled, organised, and connected with your kin and clan, so you can build a life ruled
+          by freedom, happiness, and sovereignty, not by whoever controls what you depend on.
         </p>
         <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
           <Link href="/sovereignty" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>

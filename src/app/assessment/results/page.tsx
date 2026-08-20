@@ -81,10 +81,7 @@ export default function ResultsPage() {
             Retake the assessment
           </button>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1.5rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
-          <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, color: "var(--amber-strong)" }}>
-            Results
-          </h1>
+        <div style={{ display: "flex", alignItems: "center", gap: "1.75rem", flexWrap: "wrap", marginBottom: "2rem" }}>
           <div
             style={{
               width: 130,
@@ -96,23 +93,37 @@ export default function ResultsPage() {
               alignItems: "center",
               justifyContent: "center",
               background: "var(--bg-raised)",
+              flexShrink: 0,
             }}
           >
             <span style={{ fontSize: "var(--size-h1)", fontWeight: 700, color: "var(--amber-strong)", lineHeight: 1 }}>
               {greenCount}
             </span>
             <span style={{ fontSize: "var(--size-label)", color: "var(--text-3)" }}>/ 12 Domains</span>
-            <span style={{ fontSize: "var(--size-label)", color: "var(--text-3)" }}>OK</span>
+          </div>
+          <div style={{ maxWidth: 420 }}>
+            <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, color: status.color, marginBottom: "0.5rem" }}>
+              {status.label}
+            </h1>
+            <p style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>
+              Sovereignty is a goal, not a binary state — this tells you where to go, what to fix.
+            </p>
           </div>
         </div>
-        <p style={{ fontSize: "var(--size-body)", color: "#fff", marginBottom: "1.5rem" }}>
-          Sovereignty is a goal, not a binary state — this tells you where to go, what to fix.
-        </p>
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "0.5rem", marginBottom: "2.5rem" }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "1.5rem",
+            marginBottom: "2.5rem",
+            paddingBottom: "2rem",
+            borderBottom: "1px solid var(--border)",
+          }}
+        >
           {(["red", "amber", "green"] as Tier[]).map((tier) => (
             <div key={tier} style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              <span style={{ fontSize: "var(--size-sm)", color: "#fff" }}>{TIER_LABEL[tier]}</span>
               <span style={{ width: 10, height: 10, borderRadius: "50%", background: TIER_COLOR[tier], flexShrink: 0 }} />
+              <span style={{ fontSize: "var(--size-sm)", color: "var(--text-2)" }}>{TIER_LABEL[tier]}</span>
             </div>
           ))}
         </div>
