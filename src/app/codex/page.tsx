@@ -51,7 +51,10 @@ export default function CodexIndexPage() {
               key={branch.slug}
               style={{ border: "1px solid var(--border-strong)", borderRadius: "12px", padding: "1.5rem" }}
             >
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", marginBottom: "1.25rem" }}>
+              <div
+                className="card"
+                style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", marginBottom: "1.25rem", padding: "0.85rem 1.1rem" }}
+              >
                 <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem" }}>
                   <span
                     style={{
@@ -71,8 +74,8 @@ export default function CodexIndexPage() {
                   >
                     {i + 1}
                   </span>
-                  <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--amber-strong)" }}>{branch.name}</h2>
-                  <span style={{ fontSize: "var(--size-xs)", color: "var(--text-3)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                  <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--ink)" }}>{branch.name}</h2>
+                  <span style={{ fontSize: "var(--size-xs)", color: "var(--ink-2)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>
                     {JOURNEY_TAG[branch.slug]}
                   </span>
                 </div>
