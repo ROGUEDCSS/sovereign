@@ -5,6 +5,11 @@ export interface CodexItem {
   description?: string;
 }
 
+export interface CodexFact {
+  label: string;
+  text: string;
+}
+
 export interface CodexPathway {
   label: string;
   options: string[];
@@ -26,7 +31,12 @@ export interface CodexNode {
   /** One or two extra sentences shown on the PARENT node's branch-preview card, so a listing page doesn't just repeat the one-line tagline. */
   elaboration?: string;
   definition?: string;
-  facts?: string[];
+  /** Optional bullet breakout under the definition intro, for a list-shaped definition instead of one dense paragraph. */
+  definitionPoints?: string[];
+  /** Optional closing line after definitionPoints. */
+  definitionOutro?: string;
+  /** A plain string renders as-is; a labeled fact renders with a bold lead-in word/phrase so a reader can scan the topic before deciding to read the sentence. */
+  facts?: (string | CodexFact)[];
   practicalQuestion?: string;
   items?: CodexItem[];
   connections?: CodexConnection[];
@@ -166,13 +176,19 @@ const MINDSET_RESPONSIBILITY: CodexNode = {
   tagline: "Self-governance — the character and judgement a Sovereign individual actually runs on.",
   elaboration:
     "Skills and resources only matter if the person holding them is disciplined enough to actually use them well. This branch is about the follow-through — showing up, owning outcomes, and making sound calls under pressure.",
-  definition:
-    "Mindset and responsibility is the discipline to do what you said you'd do, own the consequences of your own decisions, and make sound calls under pressure — without waiting for someone else to hold you accountable. Every skill and resource in this Codex is inert without it; it's the difference between having what you need and actually using it when it counts.",
+  definition: "Mindset and responsibility is the discipline to:",
+  definitionPoints: [
+    "Do what you said you'd do",
+    "Own the consequences of your own decisions",
+    "Make sound calls under pressure — without waiting for someone else to hold you accountable",
+  ],
+  definitionOutro:
+    "Every skill and resource in this Codex is inert without it. It's the difference between having what you need and actually using it when it counts.",
   facts: [
-    "Most people default to blaming circumstances, other people, or bad luck for outcomes they had real influence over — it's the easier story to tell, not the honest one.",
-    "Discipline consistently outperforms motivation because motivation is unreliable — it shows up under good conditions and disappears exactly when you need it most.",
-    "Under real pressure, most people don't rise to some higher standard — they fall back to whatever they've actually practiced, not what they intended to do.",
-    "Following through on a commitment you made to yourself, with no one else watching or checking, is one of the few things that reliably builds genuine self-trust.",
+    { label: "Accountability", text: "Most people default to blaming circumstances, other people, or bad luck for outcomes they had real influence over — it's the easier story to tell, not the honest one." },
+    { label: "Discipline", text: "Discipline consistently outperforms motivation because motivation is unreliable — it shows up under good conditions and disappears exactly when you need it most." },
+    { label: "Pressure", text: "Under real pressure, most people don't rise to some higher standard — they fall back to whatever they've actually practiced, not what they intended to do." },
+    { label: "Follow-through", text: "Following through on a commitment you made to yourself, with no one else watching or checking, is one of the few things that reliably builds genuine self-trust." },
   ],
   practicalQuestion:
     "When was the last time you did something hard and inconvenient purely because you said you would — with no one else checking?",

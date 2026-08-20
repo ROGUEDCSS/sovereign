@@ -71,6 +71,20 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
                 Definition
               </div>
               <p style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "#1a1005" }}>{node.definition}</p>
+              {node.definitionPoints && node.definitionPoints.length > 0 && (
+                <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", margin: "0.6rem 0", display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+                  {node.definitionPoints.map((point) => (
+                    <li key={point} style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "#1a1005" }}>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {node.definitionOutro && (
+                <p style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "#1a1005", marginTop: "0.6rem" }}>
+                  {node.definitionOutro}
+                </p>
+              )}
             </div>
           )}
 
@@ -80,11 +94,20 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
                 Facts
               </div>
               <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-                {node.facts.map((fact) => (
-                  <li key={fact} style={{ fontSize: "var(--size-body)", fontWeight: 400 }}>
-                    {fact}
-                  </li>
-                ))}
+                {node.facts.map((fact) => {
+                  const labeled = typeof fact !== "string";
+                  return (
+                    <li key={labeled ? fact.label : fact} style={{ fontSize: "var(--size-body)", fontWeight: 400 }}>
+                      {labeled ? (
+                        <>
+                          <strong style={{ color: "var(--ink)" }}>{fact.label}:</strong> {fact.text}
+                        </>
+                      ) : (
+                        fact
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           )}
