@@ -13,7 +13,7 @@ const KIND_LABEL: Record<SearchResult["kind"], string> = {
   page: "Page",
 };
 
-export function SearchBar() {
+export function SearchBar({ fullWidth = false }: { fullWidth?: boolean }) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -41,7 +41,7 @@ export function SearchBar() {
   }
 
   return (
-    <div ref={containerRef} style={{ position: "relative", flex: "1 1 auto", maxWidth: 320 }}>
+    <div ref={containerRef} style={{ position: "relative", flex: "1 1 auto", maxWidth: fullWidth ? "none" : 320 }}>
       <input
         type="text"
         value={query}

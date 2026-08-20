@@ -146,3 +146,10 @@ h1, h2, h3, h4, strong {
 .pill-opinion { background: rgba(138,135,128,0.16); color: var(--opinion-strong); }
 
 a { color: inherit; }
+
+.header-mobile-toggle { display: none; }
+
+@media (max-width: 767px) {
+  .header-desktop-row { display: none !important; }
+  .header-mobile-toggle { display: inline-flex !important; }
+}

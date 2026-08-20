@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SearchBar } from "./SearchBar";
@@ -49,6 +49,11 @@ const NAV: NavItem[] = [
 export default function Header() {
   const pathname = usePathname();
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
   return (
     <header style={{ borderBottom: "1px solid var(--border)", position: "sticky", top: 0, background: "var(--bg)", zIndex: 50 }}>
@@ -59,83 +64,165 @@ export default function Header() {
         <Link href="/" style={{ fontWeight: 500, fontSize: "var(--size-body)", textDecoration: "none", whiteSpace: "nowrap", textTransform: "uppercase", letterSpacing: "0.03em" }}>
           Sovereign
         </Link>
-        <SearchBar />
-        <nav style={{ display: "flex", gap: "1.5rem", height: "100%" }}>
-          {NAV.map((item, i) => {
-            const childActive = item.children?.some((c) => pathname === c.href) ?? false;
-            const active = pathname === item.href || childActive;
-            return (
-              <div
-                key={item.href}
-                onMouseEnter={() => setOpenIdx(i)}
-                onMouseLeave={() => setOpenIdx(null)}
-                style={{ position: "relative", display: "flex", alignItems: "center", height: "100%" }}
-              >
-                <Link
-                  href={item.href}
-                  onFocus={() => setOpenIdx(i)}
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.3rem",
-                    fontSize: "var(--size-sm)",
-                    color: active ? "var(--amber-strong)" : "var(--text-2)",
-                    textDecoration: "none",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {item.label}
-                  {item.children && <span style={{ fontSize: "var(--size-xs)", opacity: 0.7 }}>▾</span>}
-                </Link>
 
-                {item.children && (
-                  <div
+        <div className="header-desktop-row" style={{ display: "flex", alignItems: "center", gap: "1.5rem", flex: "1 1 auto", justifyContent: "flex-end" }}>
+          <SearchBar />
+          <nav style={{ display: "flex", gap: "1.5rem", height: "100%" }}>
+            {NAV.map((item, i) => {
+              const childActive = item.children?.some((c) => pathname === c.href) ?? false;
+              const active = pathname === item.href || childActive;
+              return (
+                <div
+                  key={item.href}
+                  onMouseEnter={() => setOpenIdx(i)}
+                  onMouseLeave={() => setOpenIdx(null)}
+                  style={{ position: "relative", display: "flex", alignItems: "center", height: "100%" }}
+                >
+                  <Link
+                    href={item.href}
+                    onFocus={() => setOpenIdx(i)}
                     style={{
-                      position: "absolute",
-                      top: "100%",
-                      ...(i >= NAV.length - 2 ? { right: 0 } : { left: 0 }),
-                      minWidth: 190,
-                      background: "var(--bg-raised)",
-                      border: "1px solid var(--border-strong)",
-                      borderRadius: "8px",
-                      padding: "0.4rem",
-                      boxShadow: "0 12px 32px rgba(0,0,0,0.4)",
-                      opacity: openIdx === i ? 1 : 0,
-                      pointerEvents: openIdx === i ? "auto" : "none",
-                      transform: openIdx === i ? "translateY(0)" : "translateY(-4px)",
-                      transition: "opacity 0.15s ease, transform 0.15s ease",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.3rem",
+                      fontSize: "var(--size-sm)",
+                      color: active ? "var(--amber-strong)" : "var(--text-2)",
+                      textDecoration: "none",
+                      whiteSpace: "nowrap",
                     }}
                   >
-                    {item.children.map((child) => {
-                      const childCurrent = pathname === child.href;
-                      return (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          onFocus={() => setOpenIdx(i)}
-                          onBlur={() => setOpenIdx(null)}
-                          style={{
-                            display: "block",
-                            padding: "0.5rem 0.65rem",
-                            borderRadius: "6px",
-                            fontSize: "var(--size-sm)",
-                            color: childCurrent ? "var(--amber-strong)" : "var(--text-1)",
-                            textDecoration: "none",
-                            background: childCurrent ? "var(--card)" : "transparent",
-                            whiteSpace: "nowrap",
-                          }}
-                        >
-                          {child.label}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </nav>
+                    {item.label}
+                    {item.children && <span style={{ fontSize: "var(--size-xs)", opacity: 0.7 }}>▾</span>}
+                  </Link>
+
+                  {item.children && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "100%",
+                        ...(i >= NAV.length - 2 ? { right: 0 } : { left: 0 }),
+                        minWidth: 190,
+                        background: "var(--bg-raised)",
+                        border: "1px solid var(--border-strong)",
+                        borderRadius: "8px",
+                        padding: "0.4rem",
+                        boxShadow: "0 12px 32px rgba(0,0,0,0.4)",
+                        opacity: openIdx === i ? 1 : 0,
+                        pointerEvents: openIdx === i ? "auto" : "none",
+                        transform: openIdx === i ? "translateY(0)" : "translateY(-4px)",
+                        transition: "opacity 0.15s ease, transform 0.15s ease",
+                      }}
+                    >
+                      {item.children.map((child) => {
+                        const childCurrent = pathname === child.href;
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            onFocus={() => setOpenIdx(i)}
+                            onBlur={() => setOpenIdx(null)}
+                            style={{
+                              display: "block",
+                              padding: "0.5rem 0.65rem",
+                              borderRadius: "6px",
+                              fontSize: "var(--size-sm)",
+                              color: childCurrent ? "var(--amber-strong)" : "var(--text-1)",
+                              textDecoration: "none",
+                              background: childCurrent ? "var(--card)" : "transparent",
+                              whiteSpace: "nowrap",
+                            }}
+                          >
+                            {child.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
+        </div>
+
+        <button
+          className="header-mobile-toggle"
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          style={{
+            display: "none",
+            background: "none",
+            border: "none",
+            color: "var(--text-1)",
+            fontSize: "1.4rem",
+            lineHeight: 1,
+            padding: "0.3rem",
+            cursor: "pointer",
+          }}
+        >
+          {mobileOpen ? "✕" : "☰"}
+        </button>
       </div>
+
+      {mobileOpen && (
+        <div
+          className="header-mobile-menu"
+          style={{
+            borderTop: "1px solid var(--border)",
+            background: "var(--bg)",
+            padding: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            gap: "1.25rem",
+          }}
+        >
+          <SearchBar fullWidth />
+          <nav style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+            {NAV.map((item) => {
+              const childActive = item.children?.some((c) => pathname === c.href) ?? false;
+              const active = pathname === item.href || childActive;
+              return (
+                <div key={item.href}>
+                  <Link
+                    href={item.href}
+                    style={{
+                      display: "block",
+                      padding: "0.6rem 0.25rem",
+                      fontSize: "var(--size-body)",
+                      color: active ? "var(--amber-strong)" : "var(--text-1)",
+                      textDecoration: "none",
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                  {item.children && (
+                    <div style={{ display: "flex", flexDirection: "column", paddingLeft: "1rem" }}>
+                      {item.children.map((child) => {
+                        const childCurrent = pathname === child.href;
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            style={{
+                              display: "block",
+                              padding: "0.45rem 0.25rem",
+                              fontSize: "var(--size-sm)",
+                              color: childCurrent ? "var(--amber-strong)" : "var(--text-2)",
+                              textDecoration: "none",
+                            }}
+                          >
+                            {child.label}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
