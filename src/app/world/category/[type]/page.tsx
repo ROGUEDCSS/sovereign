@@ -63,7 +63,7 @@ export default async function WorldCategoryPage({ params }: { params: Promise<{ 
               </h2>
 
               <div className="card" style={{ padding: "1.5rem", marginBottom: "1.5rem" }}>
-                <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--good)" }}>Pros</h2>
+                <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--good)" }}>For Sovereignty</h2>
                 <ul style={{ paddingLeft: "1.25rem", color: "var(--ink-2)" }}>
                   {sovereignty.pros.map((p) => (
                     <li key={p.label} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>
@@ -74,7 +74,7 @@ export default async function WorldCategoryPage({ params }: { params: Promise<{ 
               </div>
 
               <div className="card" style={{ padding: "1.5rem" }}>
-                <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--danger)" }}>Cons</h2>
+                <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--danger)" }}>Against Sovereignty</h2>
                 <ul style={{ paddingLeft: "1.25rem", color: "var(--ink-2)" }}>
                   {sovereignty.cons.map((c) => (
                     <li key={c.label} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>
@@ -87,32 +87,27 @@ export default async function WorldCategoryPage({ params }: { params: Promise<{ 
           )}
 
           {subsections ? (
-            <>
-              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1.25rem" }}>Subsections</h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", marginBottom: "2.5rem" }}>
+            <div style={{ marginBottom: "2.5rem" }}>
+              <div style={{ fontSize: "var(--size-xs)", color: "var(--text-3)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: "0.75rem" }}>
+                Subsections
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
                 {subsections.map((sub) => {
-                  const subEntities = entities.filter((e) => e.subsection === sub);
+                  const count = entities.filter((e) => e.subsection === sub).length;
                   return (
-                    <div key={sub} style={{ borderBottom: "1px solid var(--border)", paddingBottom: "1.5rem" }}>
-                      <Link
-                        href={`/world/category/${entityType}/${slugifySubsection(sub)}`}
-                        style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--amber-strong)", marginBottom: "0.75rem", display: "block", textDecoration: "none" }}
-                      >
-                        {sub} →
-                      </Link>
-                      {subEntities.length > 0 ? (
-                        <PeekList
-                          variant="grid"
-                          items={subEntities.map((e) => ({ label: e.name, target: { kind: "world", slug: e.slug } }))}
-                        />
-                      ) : (
-                        <p style={{ color: "var(--text-3)", fontSize: "var(--size-sm)" }}>Not yet mapped.</p>
-                      )}
-                    </div>
+                    <Link
+                      key={sub}
+                      href={`/world/category/${entityType}/${slugifySubsection(sub)}`}
+                      className="card"
+                      style={{ padding: "0.5rem 0.95rem", fontSize: "var(--size-sm)", textDecoration: "none" }}
+                    >
+                      {sub}
+                      {count > 0 && <span style={{ color: "var(--ink-2)" }}> ({count})</span>}
+                    </Link>
                   );
                 })}
               </div>
-            </>
+            </div>
           ) : entities.length > 0 ? (
             <PeekList
               variant="grid"
