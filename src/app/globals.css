@@ -133,7 +133,7 @@ h1, h2, h3, h4, strong {
 }
 .btn-white:hover { background: #f0f0f0; }
 
-.search-result-row:hover { background: var(--card-hover); }
+.search-result-row:hover { background: rgba(11,14,17,0.06); }
 
 .pill {
   display: inline-flex; align-items: center; gap: 0.4rem;

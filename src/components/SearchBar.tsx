@@ -57,12 +57,12 @@ export function SearchBar() {
         }}
         style={{
           width: "100%",
-          background: "var(--bg-raised)",
-          border: "1px solid var(--border)",
+          background: "var(--white-block)",
+          border: "1px solid rgba(11,14,17,0.15)",
           borderRadius: "8px",
           padding: "0.45rem 0.75rem",
           fontSize: "var(--size-sm)",
-          color: "var(--text-1)",
+          color: "var(--ink)",
           outline: "none",
         }}
       />
@@ -74,8 +74,8 @@ export function SearchBar() {
             top: "calc(100% + 6px)",
             left: 0,
             right: 0,
-            background: "var(--bg-raised)",
-            border: "1px solid var(--border-strong)",
+            background: "var(--white-block)",
+            border: "1px solid rgba(11,14,17,0.28)",
             borderRadius: "8px",
             padding: "0.4rem",
             boxShadow: "0 12px 32px rgba(0,0,0,0.4)",
@@ -85,7 +85,7 @@ export function SearchBar() {
           }}
         >
           {results.length === 0 ? (
-            <div style={{ padding: "0.6rem 0.65rem", fontSize: "var(--size-sm)", color: "var(--text-3)" }}>
+            <div style={{ padding: "0.6rem 0.65rem", fontSize: "var(--size-sm)", color: "rgba(11,14,17,0.5)" }}>
               No results for &ldquo;{query}&rdquo;
             </div>
           ) : (
@@ -105,8 +105,8 @@ export function SearchBar() {
                 }}
                 className="search-result-row"
               >
-                <div style={{ fontSize: "var(--size-sm)", color: "var(--text-1)", fontWeight: 500 }}>{r.title}</div>
-                <div style={{ fontSize: "var(--size-xs)", color: "var(--text-3)", marginTop: "0.1rem" }}>
+                <div style={{ fontSize: "var(--size-sm)", color: "var(--ink)", fontWeight: 500 }}>{r.title}</div>
+                <div style={{ fontSize: "var(--size-xs)", color: "var(--ink-2)", marginTop: "0.1rem" }}>
                   {KIND_LABEL[r.kind]}
                   {r.subtitle ? ` · ${r.subtitle}` : ""}
                 </div>
