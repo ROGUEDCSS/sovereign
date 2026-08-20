@@ -129,15 +129,12 @@ export default function AssessmentPage() {
             ✕
           </button>
 
-          <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.75rem" }}>
-            Before you start
-          </div>
-          <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem" }}>
+          <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginTop: "0.5rem", marginBottom: "0.75rem" }}>
             Where should your score go?
           </h1>
           <p style={{ color: "var(--text-2)", marginBottom: "1.75rem" }}>
-            Twelve domains, three questions each. Give us your email so your result isn&apos;t
-            just left in this browser tab.
+            Twelve domains, three questions each. Add your email and this result is saved to
+            your Profile.
           </p>
           <input
             type="email"
@@ -165,8 +162,9 @@ export default function AssessmentPage() {
             Start the assessment
           </button>
           <p style={{ color: "var(--text-3)", fontSize: "var(--size-label)", lineHeight: 1.5 }}>
-            Saved to this browser only — there&apos;s no account system yet, so nothing is sent
-            anywhere or emailed to you. This just reserves the field until real accounts exist.
+            Saved to your Profile in this browser — there&apos;s no account system yet, so
+            nothing is emailed to you or sent anywhere else. This just reserves your email
+            until real accounts exist.
           </p>
         </div>
       </div>
