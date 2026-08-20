@@ -11,33 +11,76 @@ import {
   LandStatus,
   LAND_LABELS,
   TimeMoneyStatus,
-  TIME_MONEY_LABELS,
-  TIME_MONEY_EXPLAINERS,
 } from "@/lib/recommendation";
+
+function StepBadge({ n }: { n: number }) {
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: 28,
+        height: 28,
+        borderRadius: "50%",
+        background: "var(--amber)",
+        color: "#1a1005",
+        fontSize: "var(--size-sm)",
+        fontWeight: 700,
+        flexShrink: 0,
+        alignSelf: "center",
+      }}
+    >
+      {n}
+    </span>
+  );
+}
+
+function DoneLabel() {
+  return (
+    <span style={{ fontSize: "var(--size-xs)", color: "var(--good)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>
+      Done
+    </span>
+  );
+}
+
+const blackLink: React.CSSProperties = {
+  display: "inline-flex",
+  alignItems: "center",
+  padding: "0.55rem 1.1rem",
+  fontSize: "var(--size-sm)",
+  fontWeight: 600,
+  borderRadius: "8px",
+  background: "var(--ink)",
+  color: "#fff",
+  textDecoration: "none",
+};
 
 export default function BuildMySystemPage() {
   const [tier, setTier] = useState<BudgetTier | null>(null);
   const [weakDomains, setWeakDomains] = useState<DomainId[]>([]);
   const [hasAssessment, setHasAssessment] = useState(false);
-  const [hoveredTier, setHoveredTier] = useState<BudgetTier | null>(null);
   const [land, setLand] = useState<LandStatus | null>(null);
-  const [timeMoney, setTimeMoney] = useState<TimeMoneyStatus | null>(null);
-  const [hoveredTimeMoney, setHoveredTimeMoney] = useState<TimeMoneyStatus | null>(null);
+  const [hasTime, setHasTime] = useState<boolean | null>(null);
+  const [hasMoney, setHasMoney] = useState<boolean | null>(null);
 
   useEffect(() => {
     const raw = localStorage.getItem("sovereign-answers");
-    if (!raw) return;
-    const answers = JSON.parse(raw) as Record<string, number>;
-    const scored = DOMAINS.map((d) => ({ id: d.id, score: domainScore(d, answers) })).sort(
-      (a, b) => a.score - b.score
-    );
-    setWeakDomains(scored.map((s) => s.id));
-    setHasAssessment(true);
+    if (raw) {
+      const answers = JSON.parse(raw) as Record<string, number>;
+      const scored = DOMAINS.map((d) => ({ id: d.id, score: domainScore(d, answers) })).sort(
+        (a, b) => a.score - b.score
+      );
+      setWeakDomains(scored.map((s) => s.id));
+      setHasAssessment(true);
+    }
 
     const savedLand = localStorage.getItem("sovereign-land") as LandStatus | null;
     if (savedLand) setLand(savedLand);
-    const savedTimeMoney = localStorage.getItem("sovereign-time-money") as TimeMoneyStatus | null;
-    if (savedTimeMoney) setTimeMoney(savedTimeMoney);
+    const savedTime = localStorage.getItem("sovereign-has-time");
+    if (savedTime !== null) setHasTime(savedTime === "true");
+    const savedMoney = localStorage.getItem("sovereign-has-money");
+    if (savedMoney !== null) setHasMoney(savedMoney === "true");
   }, []);
 
   function chooseLand(l: LandStatus) {
@@ -45,13 +88,37 @@ export default function BuildMySystemPage() {
     localStorage.setItem("sovereign-land", l);
   }
 
-  function chooseTimeMoney(t: TimeMoneyStatus) {
-    setTimeMoney(t);
-    localStorage.setItem("sovereign-time-money", t);
+  function chooseTime(v: boolean) {
+    setHasTime(v);
+    localStorage.setItem("sovereign-has-time", String(v));
   }
+
+  function chooseMoney(v: boolean) {
+    setHasMoney(v);
+    localStorage.setItem("sovereign-has-money", String(v));
+  }
+
+  const timeMoney: TimeMoneyStatus | null =
+    hasTime === null || hasMoney === null
+      ? null
+      : hasTime && hasMoney
+      ? "both"
+      : hasTime
+      ? "time"
+      : hasMoney
+      ? "money"
+      : "neither";
 
   const resources = land && timeMoney ? { land, timeMoney } : null;
   const plan = tier && resources ? buildPlan(tier, weakDomains, resources.land, resources.timeMoney) : null;
+
+  const choiceBtn = (active: boolean): React.CSSProperties => ({
+    padding: "0.85rem 1.25rem",
+    cursor: "pointer",
+    border: "1px solid transparent",
+    background: active ? "var(--amber)" : undefined,
+    fontWeight: active ? 700 : 500,
+  });
 
   return (
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
@@ -65,204 +132,139 @@ export default function BuildMySystemPage() {
           generic checklist.
         </p>
 
-        <div className="label" style={{ color: hasAssessment ? "var(--good)" : "var(--amber-strong)", marginBottom: "0.5rem" }}>
-          Step 1{hasAssessment ? " — done" : ""}
-        </div>
-        <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.75rem" }}>
-          Get your Sovereign Score
-        </h2>
-        {hasAssessment ? (
-          <p style={{ color: "var(--text-2)", marginBottom: "2.5rem" }}>
-            Score on file — your plan below is prioritised by your weakest domains.
-          </p>
-        ) : (
-          <>
-            <p style={{ color: "var(--text-2)", marginBottom: "1rem" }}>
-              Everything below depends on this. No score yet, so the plan can&apos;t be
-              prioritised — it&apos;ll just show budget tiers in a default order.
+        <div className="card" style={{ padding: "1.5rem", marginBottom: "1.5rem" }}>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "1rem", marginBottom: "0.6rem" }}>
+            <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem" }}>
+              <StepBadge n={1} />
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--ink)" }}>Get your Sovereign Score</h2>
+            </div>
+            {hasAssessment && <DoneLabel />}
+          </div>
+          {hasAssessment ? (
+            <p style={{ color: "var(--ink-2)" }}>
+              Score on file — your plan below is prioritised by your weakest domains.
             </p>
-            <Link href="/assessment" className="btn btn-primary" style={{ marginBottom: "2.5rem" }}>
-              Get your Sovereign Score →
-            </Link>
-          </>
-        )}
-
-        <div className="label" style={{ color: resources ? "var(--good)" : "var(--amber-strong)", marginBottom: "0.5rem" }}>
-          Step 2{resources ? " — done" : ""}
+          ) : (
+            <>
+              <p style={{ color: "var(--ink-2)", marginBottom: "1rem" }}>
+                Everything below depends on this. No score yet, so the plan can&apos;t be
+                prioritised — it&apos;ll just show budget tiers in a default order.
+              </p>
+              <Link href="/assessment" style={blackLink}>
+                Get your Sovereign Score →
+              </Link>
+            </>
+          )}
         </div>
-        <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "0.75rem" }}>
-          Your actual resources
-        </h2>
-        <p style={{ color: "var(--text-2)", marginBottom: "1.25rem" }}>
-          Land sets the ceiling on what&apos;s possible. Time and money decide how you get
-          there. This changes what the plan below actually recommends.
-        </p>
 
-        <p style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginBottom: "0.6rem", textTransform: "uppercase", letterSpacing: "0.04em", fontWeight: 600 }}>
-          Land
-        </p>
-        <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
-          {(Object.keys(LAND_LABELS) as LandStatus[]).map((l) => (
-            <button
-              key={l}
-              onClick={() => chooseLand(l)}
-              className="card"
-              style={{
-                padding: "0.85rem 1.25rem",
-                cursor: "pointer",
-                border: "1px solid transparent",
-                background: land === l ? "var(--amber)" : undefined,
-                fontWeight: land === l ? 700 : 500,
-              }}
-            >
-              {LAND_LABELS[l]}
+        <div className="card" style={{ padding: "1.5rem", marginBottom: "1.5rem" }}>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "1rem", marginBottom: "0.6rem" }}>
+            <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem" }}>
+              <StepBadge n={2} />
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--ink)" }}>Your actual resources</h2>
+            </div>
+            {resources && <DoneLabel />}
+          </div>
+          <p style={{ color: "var(--ink-2)", marginBottom: "1.5rem" }}>
+            Land sets the ceiling on what&apos;s possible. Time and money decide how you get
+            there. This changes what the plan below actually recommends.
+          </p>
+
+          <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginBottom: "0.6rem", textTransform: "uppercase", letterSpacing: "0.04em", fontWeight: 600 }}>
+            Land
+          </p>
+          <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
+            {(Object.keys(LAND_LABELS) as LandStatus[]).map((l) => (
+              <button key={l} onClick={() => chooseLand(l)} className="card" style={choiceBtn(land === l)}>
+                {LAND_LABELS[l]}
+              </button>
+            ))}
+          </div>
+
+          <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginBottom: "0.6rem", textTransform: "uppercase", letterSpacing: "0.04em", fontWeight: 600 }}>
+            Time
+          </p>
+          <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
+            <button onClick={() => chooseTime(true)} className="card" style={choiceBtn(hasTime === true)}>
+              I have time
             </button>
-          ))}
-        </div>
+            <button onClick={() => chooseTime(false)} className="card" style={choiceBtn(hasTime === false)}>
+              I don&apos;t have time
+            </button>
+          </div>
 
-        <p style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginBottom: "0.6rem", textTransform: "uppercase", letterSpacing: "0.04em", fontWeight: 600 }}>
-          Time & money
-        </p>
-        <div style={{ display: "flex", gap: "0.75rem", marginBottom: "2.5rem", flexWrap: "wrap" }}>
-          {(Object.keys(TIME_MONEY_LABELS) as TimeMoneyStatus[]).map((t) => (
-            <div key={t} style={{ position: "relative" }}>
-              <button
-                onClick={() => chooseTimeMoney(t)}
-                onMouseEnter={() => setHoveredTimeMoney(t)}
-                onMouseLeave={() => setHoveredTimeMoney(null)}
-                onFocus={() => setHoveredTimeMoney(t)}
-                onBlur={() => setHoveredTimeMoney(null)}
-                className="card"
-                style={{
-                  padding: "0.85rem 1.25rem",
-                  cursor: "pointer",
-                  border: "1px solid transparent",
-                  background: timeMoney === t ? "var(--amber)" : undefined,
-                  fontWeight: timeMoney === t ? 700 : 500,
-                }}
-              >
-                {TIME_MONEY_LABELS[t]}
-              </button>
-              {hoveredTimeMoney === t && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "100%",
-                    left: 0,
-                    marginTop: "0.5rem",
-                    zIndex: 20,
-                    width: 260,
-                    background: "var(--bg-raised)",
-                    border: "1px solid var(--border-strong)",
-                    borderRadius: "8px",
-                    padding: "0.85rem 1rem",
-                    fontSize: "var(--size-label)",
-                    color: "var(--text-2)",
-                    lineHeight: 1.5,
-                    boxShadow: "0 12px 32px rgba(0,0,0,0.4)",
-                  }}
-                >
-                  {TIME_MONEY_EXPLAINERS[t]}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
-          Step 3
-        </div>
-        <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
-          Choose a budget
-        </h2>
-        <div style={{ display: "flex", gap: "0.75rem", marginBottom: "2.5rem", flexWrap: "wrap" }}>
-          {(Object.keys(BUDGET_LABELS) as BudgetTier[]).map((t) => (
-            <div key={t} style={{ position: "relative" }}>
-              <button
-                onClick={() => setTier(t)}
-                onMouseEnter={() => setHoveredTier(t)}
-                onMouseLeave={() => setHoveredTier(null)}
-                onFocus={() => setHoveredTier(t)}
-                onBlur={() => setHoveredTier(null)}
-                className="card"
-                style={{
-                  padding: "1rem 1.5rem",
-                  cursor: "pointer",
-                  border: "1px solid transparent",
-                  background: tier === t ? "var(--amber)" : undefined,
-                  fontWeight: tier === t ? 700 : 500,
-                }}
-              >
-                {BUDGET_LABELS[t]}
-              </button>
-              {hoveredTier === t && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "100%",
-                    left: 0,
-                    marginTop: "0.5rem",
-                    zIndex: 20,
-                    width: 260,
-                    background: "var(--bg-raised)",
-                    border: "1px solid var(--border-strong)",
-                    borderRadius: "8px",
-                    padding: "0.85rem 1rem",
-                    fontSize: "var(--size-label)",
-                    color: "var(--text-2)",
-                    lineHeight: 1.5,
-                    boxShadow: "0 12px 32px rgba(0,0,0,0.4)",
-                  }}
-                >
-                  {BUDGET_EXPLAINERS[t]}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
-          Step 4
-        </div>
-        <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>
-          Result: your action plan, prioritised
-        </h2>
-        {plan ? (
-          <>
-            {timeMoney === "neither" && (
-              <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "1.5rem", background: "var(--amber)" }}>
-                <p style={{ color: "#1a1005", fontWeight: 500 }}>
-                  With neither time nor money right now, the honest first move isn&apos;t on this
-                  list at all — it&apos;s Mindset & Responsibility and Mutual Aid, which cost
-                  neither. The items below are reordered to put what little you can actually act
-                  on first.
-                </p>
-              </div>
-            )}
-            <ol style={{ display: "flex", flexDirection: "column", gap: "0.75rem", paddingLeft: "1.25rem" }}>
-              {plan.map((item) => (
-                <li key={item.title} className="card" style={{ padding: "1rem 1.25rem", listStyle: "decimal" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.25rem" }}>
-                    <strong style={{ color: "var(--ink)" }}>{item.title}</strong>
-                    <span className="pill pill-scenario">
-                      {DOMAINS.find((d) => d.id === item.category)?.name}
-                    </span>
-                  </div>
-                  <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)" }}>{item.note}</p>
-                </li>
-              ))}
-            </ol>
-            <p style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "1.5rem" }}>
-              This plan uses your budget, resources, and Sovereign Score. A fuller intake —
-              property size, location, existing equipment, and skill level — is coming in a
-              future version to refine it further.
-            </p>
-          </>
-        ) : (
-          <p style={{ color: "var(--text-3)" }}>
-            {resources ? "Pick a budget above to see your plan." : "Answer Land and Time & money above, then pick a budget, to see your plan."}
+          <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginBottom: "0.6rem", textTransform: "uppercase", letterSpacing: "0.04em", fontWeight: 600 }}>
+            Money
           </p>
-        )}
+          <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+            <button onClick={() => chooseMoney(true)} className="card" style={choiceBtn(hasMoney === true)}>
+              I have money
+            </button>
+            <button onClick={() => chooseMoney(false)} className="card" style={choiceBtn(hasMoney === false)}>
+              I don&apos;t have money
+            </button>
+          </div>
+        </div>
+
+        <div className="card" style={{ padding: "1.5rem", marginBottom: "1.5rem" }}>
+          <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem", marginBottom: "1rem" }}>
+            <StepBadge n={3} />
+            <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--ink)" }}>Choose a budget</h2>
+          </div>
+          <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+            {(Object.keys(BUDGET_LABELS) as BudgetTier[]).map((t) => (
+              <div key={t} style={{ position: "relative" }}>
+                <button onClick={() => setTier(t)} className="card" style={choiceBtn(tier === t)}>
+                  {BUDGET_LABELS[t]}
+                </button>
+              </div>
+            ))}
+          </div>
+          {tier && <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginTop: "1rem" }}>{BUDGET_EXPLAINERS[tier]}</p>}
+        </div>
+
+        <div className="card" style={{ padding: "1.5rem" }}>
+          <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem", marginBottom: "1.25rem" }}>
+            <StepBadge n={4} />
+            <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--ink)" }}>Result: your action plan, prioritised</h2>
+          </div>
+          {plan ? (
+            <>
+              {timeMoney === "neither" && (
+                <div style={{ padding: "1.25rem 1.5rem", marginBottom: "1.5rem", background: "var(--amber)", borderRadius: "8px" }}>
+                  <p style={{ color: "#1a1005", fontWeight: 500 }}>
+                    With neither time nor money right now, the honest first move isn&apos;t on
+                    this list at all — it&apos;s Mindset &amp; Responsibility and Mutual Aid,
+                    which cost neither. The items below are reordered to put what little you can
+                    actually act on first.
+                  </p>
+                </div>
+              )}
+              <ol style={{ display: "flex", flexDirection: "column", gap: "0.75rem", paddingLeft: "1.25rem" }}>
+                {plan.map((item) => (
+                  <li key={item.title} style={{ padding: "1rem 1.25rem", listStyle: "decimal", background: "var(--card)", border: "1px solid var(--border)", borderRadius: "8px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem", marginBottom: "0.25rem" }}>
+                      <strong style={{ color: "var(--ink)" }}>{item.title}</strong>
+                      <span className="pill pill-scenario">
+                        {DOMAINS.find((d) => d.id === item.category)?.name}
+                      </span>
+                    </div>
+                    <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)" }}>{item.note}</p>
+                  </li>
+                ))}
+              </ol>
+              <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginTop: "1.5rem" }}>
+                This plan uses your budget, resources, and Sovereign Score. A fuller intake —
+                property size, location, existing equipment, and skill level — is coming in a
+                future version to refine it further.
+              </p>
+            </>
+          ) : (
+            <p style={{ color: "var(--ink-2)" }}>
+              {resources ? "Pick a budget above to see your plan." : "Answer Land, Time, and Money above, then pick a budget, to see your plan."}
+            </p>
+          )}
+        </div>
       </div>
     </main>
   );

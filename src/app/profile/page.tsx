@@ -49,10 +49,7 @@ export default function ProfilePage() {
           {STEPS.map((step, i) => {
             const done = i < 2 && hasAssessment;
             return (
-              <div
-                key={step.href}
-                style={{ border: "1px solid var(--border-strong)", borderRadius: "12px", padding: "1.5rem" }}
-              >
+              <div key={step.href} className="card" style={{ padding: "1.5rem" }}>
                 <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "1rem", marginBottom: "0.6rem" }}>
                   <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem" }}>
                     <span
@@ -73,7 +70,7 @@ export default function ProfilePage() {
                     >
                       {i + 1}
                     </span>
-                    <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--amber-strong)" }}>{step.name}</h2>
+                    <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--ink)" }}>{step.name}</h2>
                   </div>
                   {done && (
                     <span style={{ fontSize: "var(--size-xs)", color: "var(--good)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>
@@ -81,9 +78,9 @@ export default function ProfilePage() {
                     </span>
                   )}
                 </div>
-                <p style={{ fontSize: "var(--size-body)", color: "#fff", marginBottom: "1rem" }}>{step.description}</p>
+                <p style={{ fontSize: "var(--size-body)", color: "var(--ink-2)", marginBottom: "1rem" }}>{step.description}</p>
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                  <Link href={step.href} className="btn btn-primary" style={{ padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
+                  <Link href={step.href} style={{ display: "inline-flex", alignItems: "center", padding: "0.55rem 1.1rem", fontSize: "var(--size-sm)", fontWeight: 600, borderRadius: "8px", background: "var(--ink)", color: "#fff", textDecoration: "none" }}>
                     {step.cta}
                   </Link>
                 </div>

@@ -68,7 +68,7 @@ export default async function WorldCategoryPage({ params }: { params: Promise<{ 
                   {sovereignty.pros.map((p) => (
                     <div key={p.label}>
                       <div style={{ fontWeight: 600, color: "var(--ink)", marginBottom: "0.5rem" }}>{p.label}</div>
-                      <ul style={{ paddingLeft: "1.25rem", color: "var(--ink-2)", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                      <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", color: "var(--ink-2)", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
                         {p.points.map((pt) => (
                           <li key={pt} style={{ lineHeight: 1.6 }}>{pt}</li>
                         ))}
@@ -84,7 +84,7 @@ export default async function WorldCategoryPage({ params }: { params: Promise<{ 
                   {sovereignty.cons.map((c) => (
                     <div key={c.label}>
                       <div style={{ fontWeight: 600, color: "var(--ink)", marginBottom: "0.5rem" }}>{c.label}</div>
-                      <ul style={{ paddingLeft: "1.25rem", color: "var(--ink-2)", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                      <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", color: "var(--ink-2)", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
                         {c.points.map((pt) => (
                           <li key={pt} style={{ lineHeight: 1.6 }}>{pt}</li>
                         ))}
