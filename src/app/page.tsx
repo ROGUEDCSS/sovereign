@@ -152,7 +152,10 @@ export default function Home() {
 
             <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
               <div style={{ border: "1px solid var(--border-strong)", borderRadius: "12px", padding: "1.5rem" }}>
-                <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
+                <h3
+                  className="card"
+                  style={{ display: "inline-block", fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)", padding: "0.5rem 1rem", borderRadius: "8px", marginBottom: "1.1rem" }}
+                >
                   Core civilizational values
                 </h3>
                 <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
@@ -165,7 +168,10 @@ export default function Home() {
               </div>
 
               <div style={{ border: "1px solid var(--border-strong)", borderRadius: "12px", padding: "1.5rem" }}>
-                <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
+                <h3
+                  className="card"
+                  style={{ display: "inline-block", fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)", padding: "0.5rem 1rem", borderRadius: "8px", marginBottom: "1.1rem" }}
+                >
                   Personal life values
                 </h3>
                 <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
