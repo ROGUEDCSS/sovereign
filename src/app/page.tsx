@@ -259,11 +259,11 @@ export default function Home() {
             ))}
           </div>
           <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+            <Link href="/threat-map" className="btn btn-primary">
+              Threat map
+            </Link>
             <Link href="/world" className="btn btn-primary">
               Open the World
-            </Link>
-            <Link href="/threat-map" style={{ color: "var(--amber-strong)", fontSize: "var(--size-sm)", textDecoration: "none", display: "inline-flex", alignItems: "center" }}>
-              Threat map →
             </Link>
           </div>
         </div>
