@@ -8,6 +8,12 @@ const LABELS: Record<BlockType, string> = {
   opinion: "Opinion",
 };
 
+const LABEL_COLOR: Record<BlockType, string> = {
+  fact: "var(--fact-strong)",
+  scenario: "var(--amber-strong)",
+  opinion: "var(--opinion-strong)",
+};
+
 export function generateStaticParams() {
   return ARTICLES.map((a) => ({ slug: a.slug }));
 }
@@ -114,12 +120,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             )}
             <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
               {article.blocks.map((block, i) => (
-                <div key={i}>
-                  <span className={`pill pill-${block.type}`} style={{ marginBottom: "0.5rem" }}>
-                    {LABELS[block.type]}
-                  </span>
-                  <p style={{ color: "var(--text-1)" }}>{block.text}</p>
-                </div>
+                <p key={i} style={{ color: "var(--text-1)", lineHeight: 1.65 }}>
+                  <strong style={{ color: LABEL_COLOR[block.type] }}>{LABELS[block.type]}:</strong> {block.text}
+                </p>
               ))}
             </div>
           </>
