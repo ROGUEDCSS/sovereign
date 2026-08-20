@@ -301,6 +301,232 @@ export const ARTICLES: Article[] = [
     dek: "Skip the debate about whether CBDCs are good or bad. Ask what the specific design does to cash, privacy, and your ability to spend your own money.",
     evidenceRating: 4,
     independenceSource: "Government source",
+    sections: [
+      {
+        heading: "Central bank digital currencies",
+        content: [
+          { kind: "p", text: "What is a CBDC?" },
+          { kind: "p", text: "A Central Bank Digital Currency, or CBDC, is digital money issued directly by a country's central bank." },
+          { kind: "p", text: "In Australia, that would mean digital money issued by the Reserve Bank of Australia, rather than money represented by a balance at a commercial bank." },
+          { kind: "p", text: "The simplest description is: a CBDC is essentially digital central-bank money for the public." },
+          { kind: "p", text: "The RBA describes a retail CBDC as, for the most part, a digital version of cash. Australia does not currently have a retail CBDC, and the RBA says no decision has been made to introduce one." },
+        ],
+      },
+      {
+        heading: "Money we have today",
+        content: [
+          { kind: "p", text: "There are already two fundamentally different types of Australian money available to ordinary people." },
+          {
+            kind: "definitions",
+            items: [
+              { term: "Cash", text: "Issued by the RBA. You hold it directly. No commercial bank is required for a cash transaction." },
+              { term: "Bank deposits", text: "The money in your bank account. Your bank owes you that money. It is commercial-bank money, not money issued directly to you by the RBA." },
+            ],
+          },
+          { kind: "p", text: "CBDC would create a third possibility: digital money that is a direct liability of the central bank." },
+          { kind: "p", text: "That is one of the fundamental differences between a CBDC and the money in your normal bank account." },
+        ],
+      },
+      {
+        heading: "Why would we want one?",
+        content: [
+          { kind: "p", text: "There are legitimate reasons. Payments are becoming increasingly digital. Cash is declining in everyday use." },
+          { kind: "p", text: "Central banks are therefore asking: if people stop using physical central-bank money, should there also be a digital form of central-bank money available to them?" },
+          { kind: "p", text: "Possible benefits include:" },
+          { kind: "list", items: ["Faster payments", "More competition", "Greater payment resilience", "New forms of digital commerce", "Reduced settlement risk", "Potentially greater financial inclusion", "A public alternative to privately issued digital money"] },
+          { kind: "p", text: "These are genuine arguments." },
+        ],
+      },
+      {
+        heading: "CBDC is not Bitcoin",
+        content: [
+          { kind: "p", text: "They are fundamentally different." },
+          {
+            kind: "definitions",
+            items: [
+              { term: "Bitcoin", text: "Decentralised. No central bank issues it. No government controls the Bitcoin network." },
+              { term: "CBDC", text: "Centralised or centrally governed. Issued by a central bank. Created within a legal and institutional framework controlled by government." },
+            ],
+          },
+          { kind: "p", text: "So: Bitcoin attempts to remove the central authority from money. CBDC puts central-bank money into a digital form." },
+        ],
+      },
+      {
+        heading: "CBDC is also not your banking app",
+        content: [
+          { kind: "p", text: "This distinction is important. You already use digital money every day — you tap your card, transfer money, use Apple Pay, pay a bill online." },
+          { kind: "p", text: "None of that means you already have a CBDC. Your bank balance is generally a claim on a commercial bank. A CBDC would be a claim on the central bank." },
+        ],
+      },
+      {
+        heading: "Retail vs wholesale CBDC",
+        content: [
+          { kind: "p", text: "There are two very different concepts." },
+          {
+            kind: "definitions",
+            items: [
+              { term: "Retail CBDC", text: "For ordinary people and businesses — think digital cash. You could potentially use it to buy groceries, pay someone, or make online purchases." },
+              { term: "Wholesale CBDC", text: "For banks and other financial institutions — think digital central-bank settlement money for the financial system." },
+            ],
+          },
+          { kind: "p", text: "The RBA is currently much more interested in exploring wholesale applications than a retail CBDC. It has not decided to introduce either." },
+        ],
+      },
+      {
+        heading: "The big question: who controls it?",
+        content: [
+          { kind: "p", text: "This is where the Sovereign discussion begins." },
+          { kind: "p", text: "Imagine you have $1,000 of cash. You possess it. You can give it to someone. You can spend it. You don't need permission from a central computer every time you hand someone a $20 note." },
+          { kind: "p", text: "Now imagine $1,000 of CBDC. The money exists digitally. Therefore the system has to define:" },
+          { kind: "list", items: ["Who operates the wallet?", "Who verifies transactions?", "What information is recorded?", "Who can access that information?", "Can transactions be blocked?", "Can money be frozen?", "Can money be returned?", "Can money expire?", "Can conditions be attached to its use?"] },
+          { kind: "p", text: "These aren't theoretical questions. They are design questions." },
+        ],
+      },
+      {
+        heading: "The programmability question",
+        content: [
+          { kind: "p", text: "This is probably the most misunderstood part of CBDCs. A digital payment system can potentially contain rules." },
+          { kind: "p", text: "For example, \"transfer $500 to John\" is a simple payment. But a programmable payment could theoretically say \"transfer $500 to John only if condition X is satisfied.\"" },
+          { kind: "p", text: "That can be extremely useful. For example:" },
+          {
+            kind: "definitions",
+            items: [
+              { term: "Escrow", text: "Money is released when a house settlement occurs." },
+              { term: "Government payments", text: "A payment could automatically be distributed when eligibility is established." },
+              { term: "Business transactions", text: "Payment occurs automatically when goods are delivered." },
+            ],
+          },
+          { kind: "p", text: "There are legitimate uses. The concern is what happens if programmability moves from \"make payments execute automatically\" to \"control what the money can be used for.\"" },
+        ],
+      },
+      {
+        heading: "The programmable money danger",
+        content: [
+          { kind: "p", text: "Imagine your government gives you $1,000 but the system says: you may only spend it on approved food. Or: you must spend it before 30 June. Or: you cannot spend it outside your region. Or: you cannot purchase particular products. Or: your money becomes unavailable if condition X occurs." },
+          { kind: "p", text: "Now something fundamental has changed. It isn't simply money. It is money + rules." },
+          { kind: "p", text: "That is where the Sovereign concern becomes very serious." },
+        ],
+      },
+      {
+        heading: "Important: this does not mean all CBDCs are programmable like this",
+        content: [
+          { kind: "p", text: "This distinction matters. The fact that something could technically be programmed does not mean a particular CBDC will be." },
+          { kind: "p", text: "For example, the European Central Bank has explicitly said its proposed digital euro would not be programmable money and would not restrict what goods or services people could buy." },
+          { kind: "p", text: "So Sovereign should never say \"CBDCs automatically mean programmable money.\" The correct question is: \"What rules does this particular CBDC allow, and who has the authority to change those rules?\"" },
+        ],
+      },
+      {
+        heading: "The surveillance question",
+        content: [
+          { kind: "p", text: "Cash has a powerful property: you can transact without creating a digital record held by your bank. Digital money is different." },
+          { kind: "p", text: "A CBDC system must determine what transaction information exists and who can see it. That creates a fundamental privacy question: can the government see what you spend your money on?" },
+          { kind: "p", text: "The answer depends entirely on the architecture and legal framework. CBDC research by the BIS specifically identifies privacy and data governance as major design issues. Research has also found that privacy protection materially affects people's willingness to use CBDCs." },
+        ],
+      },
+      {
+        heading: "The linking problem",
+        content: [
+          { kind: "p", text: "Now connect CBDC to the Digital ID discussion. Imagine:" },
+          { kind: "diagram", text: "DIGITAL ID\n     │\n     ▼\n    CBDC\n     │\n     ├── BANKING\n     ├── PURCHASES\n     ├── TAX\n     ├── BENEFITS\n     ├── LICENCES\n     ├── TRAVEL\n     └── OTHER SERVICES" },
+          { kind: "p", text: "If these systems become interoperable and linkable, financial activity could potentially become associated with a person's broader digital identity." },
+          { kind: "p", text: "That is where Digital ID + CBDC becomes much more consequential than either technology considered separately." },
+        ],
+      },
+      {
+        heading: "The freeze button",
+        content: [
+          { kind: "p", text: "Consider a traditional bank account. A bank can already freeze an account in certain circumstances under existing laws." },
+          { kind: "p", text: "A CBDC could introduce another layer: who has the technical ability to stop a CBDC transaction? And: who can freeze the wallet? And: under what circumstances? And: how quickly? And: who reviews the decision? And: can the individual appeal?" },
+          { kind: "p", text: "These questions should be answered before the system exists, not after." },
+        ],
+      },
+      {
+        heading: "The function creep problem",
+        content: [
+          { kind: "p", text: "This is the same danger identified with Digital ID. A CBDC begins as \"digital cash.\" Then it becomes useful for government payments. Then: tax collection. Then: benefits. Then: identity verification. Then: age verification. Then: anti-money-laundering controls. Then: restrictions on particular transactions." },
+          { kind: "p", text: "Each individual expansion might have a justification. Eventually the system could become something very different from the original concept. That is function creep." },
+        ],
+      },
+      {
+        heading: "The cash question",
+        content: [
+          { kind: "p", text: "This is one of the most important safeguards. If CBDC is introduced alongside cash, people retain a physical alternative." },
+          { kind: "p", text: "If cash disappears and CBDC becomes the dominant form of money, the characteristics of the digital system become much more important." },
+          { kind: "p", text: "Australia's current RBA position is that a retail CBDC would not replace cash. The RBA says it would continue to provide cash. That is an important distinction." },
+        ],
+      },
+      {
+        heading: "The offline question",
+        content: [
+          { kind: "p", text: "This is particularly relevant to Sovereign. What happens when:" },
+          { kind: "list", items: ["The internet goes down?", "The electricity goes down?", "Your phone dies?", "The network is unavailable?", "A natural disaster occurs?", "Telecommunications fail?"] },
+          { kind: "p", text: "A CBDC that only works when the entire digital infrastructure works is not particularly resilient." },
+          { kind: "p", text: "Central banks are actively researching offline CBDC payments for precisely these reasons, including resilience and privacy. For Sovereign, the question is even simpler: can you still use your money when the network disappears?" },
+        ],
+      },
+      {
+        heading: "The banking system problem",
+        content: [
+          { kind: "p", text: "CBDCs could also change the relationship between people and commercial banks. Today, much of the money people use exists as commercial-bank deposits." },
+          { kind: "p", text: "If people could move large amounts of their money directly into central-bank digital money, commercial banks could lose deposits. That could affect:" },
+          { kind: "list", items: ["Bank funding", "Lending", "Mortgages", "Credit", "Financial stability"] },
+          { kind: "p", text: "BIS research specifically identifies potential disintermediation and the possibility of faster movement of deposits into CBDC during periods of banking stress. So this isn't just a privacy issue — it could fundamentally change the financial system." },
+        ],
+      },
+      {
+        heading: "The government abuse question",
+        content: [
+          { kind: "p", text: "This is where we need to separate today's government from future governments. A government might introduce a CBDC with excellent safeguards. But technology lasts much longer than political administrations." },
+          { kind: "p", text: "The question is: would you give the same powers to every government that might exist 20 or 50 years from now? That is the Sovereign test." },
+        ],
+      },
+      {
+        heading: "The worst-case architecture",
+        content: [
+          { kind: "p", text: "Imagine:" },
+          { kind: "diagram", text: "                 DIGITAL ID\n                     │\n                     ▼\n                    CBDC\n                     │\n          ┌──────────┼──────────┐\n          │          │          │\n        MONEY      IDENTITY   DATA\n          │          │          │\n          └──────────┼──────────┘\n                     │\n                     ▼\n                 PERMISSION\n                     │\n                     ▼\n              ACCESS TO LIFE" },
+          { kind: "p", text: "Now imagine: your identity determines your access to money. Your money determines what you can buy. Your behaviour determines your eligibility. Your eligibility determines your access." },
+          { kind: "p", text: "That would be an extraordinarily powerful system. It does not mean CBDCs inevitably become this. It means a system capable of becoming this must have extremely strong protections against it." },
+        ],
+      },
+      {
+        heading: "The Sovereign CBDC test",
+        content: [
+          { kind: "p", text: "Before accepting a CBDC, ask:" },
+          {
+            kind: "definitions",
+            items: [
+              { term: "1. Is cash protected?", text: "Can people continue using physical money?" },
+              { term: "2. Is it voluntary?", text: "Can people refuse CBDC without being excluded from society?" },
+              { term: "3. Can money be programmed?", text: "If yes, who can program it?" },
+              { term: "4. Can money expire?", text: "Can someone make your money disappear because you didn't spend it?" },
+              { term: "5. Can transactions be blocked?", text: "Who has that power?" },
+              { term: "6. Can wallets be frozen?", text: "Under what circumstances?" },
+              { term: "7. Who sees your transactions?", text: "The central bank? Government? Banks? Private companies?" },
+              { term: "8. Can transactions be linked to Digital ID?", text: "If so, how?" },
+              { term: "9. Is there a universal transaction history?", text: "Who can access it?" },
+              { term: "10. Can the system operate offline?", text: "What happens when the network fails?" },
+              { term: "11. Can the government change the rules?", text: "How?" },
+              { term: "12. Can future governments expand the system?", text: "What prevents function creep?" },
+              { term: "13. Is there due process?", text: "Can money be taken or blocked without a fair hearing?" },
+              { term: "14. Is there an independent appeal?", text: "Who can overrule the government?" },
+              { term: "15. Can you exit?", text: "Can you continue functioning without it?" },
+            ],
+          },
+        ],
+      },
+      {
+        heading: "The Sovereign position",
+        content: [
+          { kind: "p", text: "Sovereign shouldn't say \"CBDCs are evil.\" That is too simplistic. Nor: \"CBDCs are perfectly safe.\" That is equally simplistic." },
+          { kind: "p", text: "The proper question is: what does the architecture allow? And: who controls it? And: what prevents that power being expanded?" },
+          { kind: "p", text: "A CBDC could potentially provide safer digital public money, greater payment resilience and useful new capabilities. It could also become dangerous if combined with: universal Digital ID + centralised tracking + programmable money + mandatory adoption + removal of cash + weak due process." },
+          { kind: "p", text: "That combination is where the real Sovereign concern lies. Money should be a means of exchange — not a mechanism for controlling behaviour." },
+          { kind: "p", text: "And the strongest protection is not trusting that today's institutions will always behave well. It is designing the system so that even a government acting badly has limited ability to abuse it." },
+          { kind: "p", text: "Australia currently has no retail CBDC. The RBA says no decision has been made to introduce one, and its current work is also focused heavily on wholesale digital money and tokenised financial markets." },
+        ],
+      },
+    ],
     blocks: [
       {
         type: "fact",

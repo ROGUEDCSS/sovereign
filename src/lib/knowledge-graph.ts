@@ -73,11 +73,33 @@ export const WORLD_SUBSECTIONS: Partial<Record<EntityType, string[]>> = {
     "Government accountability",
     "Political power & influence",
   ],
+  finance: [
+    "Banks",
+    "Central banks",
+    "Credit unions",
+    "Payment systems",
+    "Lending",
+    "Mortgages",
+    "Credit",
+    "Debt",
+    "Bonds",
+    "Shares",
+    "Investment funds",
+    "Insurance",
+    "Financial markets",
+    "Commodities",
+    "Digital assets",
+    "Monetary systems",
+    "Financial regulation",
+    "Personal finance",
+    "Business finance",
+  ],
 };
 
-/** Related-category cross-links, from docs/world-taxonomy.md's "Connections" line per category. */
+/** Related-category cross-links, from docs/world-taxonomy.md's "Connections" line per category (where specified — inferred where not). */
 export const WORLD_CATEGORY_CONNECTIONS: Partial<Record<EntityType, EntityType[]>> = {
   governance: ["law", "finance", "economics", "geography", "organisations", "events", "people"],
+  finance: ["economics", "law", "governance", "corporates", "technology"],
 };
 
 /** One-line definition per category, tied specifically to what it means for your own sovereignty — not a generic dictionary gloss. */
@@ -173,6 +195,60 @@ export const WORLD_CATEGORY_SOVEREIGNTY: Partial<Record<EntityType, { pros: Worl
           "Once that data exists, sharing it between agencies is a policy decision, not a technical barrier — today's convenience can become tomorrow's monitoring without you being asked again.",
           "Financial monitoring in particular sits at the intersection of Governance and Law, because both can be used to restrict what you're allowed to buy, hold, or transfer — not just observe it.",
           "None of this requires bad intent from any individual official — the risk is structural: more capability to observe always means more capacity to restrict, whoever ends up holding it.",
+        ],
+      },
+    ],
+  },
+  finance: {
+    pros: [
+      {
+        label: "A place to hold and grow wealth",
+        points: [
+          "Without banks, safely storing and growing money beyond what you can physically hold is nearly impossible — cash under a mattress doesn't earn interest and doesn't survive a house fire.",
+          "Deposit protection schemes cover savings up to a set threshold even if a bank fails, which is a real backstop cash alone doesn't have against theft or disaster.",
+          "Access to credit lets you build something — a home, a business — years before you could otherwise pay for it outright, compounding your own effort with someone else's capital.",
+        ],
+      },
+      {
+        label: "Payment systems remove barter's limits",
+        points: [
+          "Without a shared payment system, exchange is limited to what you can directly barter with someone standing in front of you.",
+          "Card networks and bank transfers let you transact with strangers across the country or the world in seconds — the infrastructure that makes a modern division-of-labour economy possible at the individual level.",
+          "This is what lets you specialise in one thing and still access everything else you need, rather than having to produce it all yourself.",
+        ],
+      },
+      {
+        label: "Markets let you own productive assets",
+        points: [
+          "Shares and bonds let ordinary people own a slice of enterprises and infrastructure they didn't build themselves — a real path to wealth beyond labour income alone.",
+          "Regulated markets carry disclosure requirements that give you information you wouldn't have negotiating a private deal on your own.",
+          "This is the mechanism that lets savings actually compound over decades, rather than just sitting still losing value to inflation.",
+        ],
+      },
+    ],
+    cons: [
+      {
+        label: "Your bank balance isn't actually your money",
+        points: [
+          "A bank deposit is legally a claim on the bank, not physical possession of money — it's the bank's liability to you, not an asset sitting in your hand.",
+          "If a bank fails, restricts withdrawals, or is instructed to freeze your account, your 'money' becomes inaccessible even though the number still shows in an app.",
+          "Deposit protection has limits and doesn't cover every failure mode — it's a backstop, not a guarantee.",
+        ],
+      },
+      {
+        label: "Concentration is a single point of failure",
+        points: [
+          "Most people's entire financial life routes through one or two institutions, by default rather than by decision.",
+          "An account freeze, a technical outage, or a compliance flag can cut off access to funds with no immediate recourse, regardless of how much money is actually there.",
+          "The more of your financial life concentrated in one place, the more one decision by one institution controls your life.",
+        ],
+      },
+      {
+        label: "Digital money can be watched, restricted, or reprogrammed",
+        points: [
+          "Cashless payments create a detailed transaction record by default — cash doesn't leave that trail.",
+          "The technical capability to freeze, block, or condition a digital payment already exists in ordinary commercial banking.",
+          "A central bank digital currency would extend that same capability directly to the central bank itself — see the CBDCs entity for what that specifically changes.",
         ],
       },
     ],
@@ -350,6 +426,30 @@ export const KG_ENTITIES: KGEntity[] = [
       "Coordinates central-bank CBDC research including APIs, interoperability, offline payments, biometric authentication devices, privacy-preserving design, and programmability.",
     ],
     relationships: [],
+    knowledgeBaseSlug: "cbdcs",
+    evidenceRating: 4,
+    independenceSource: "Government source",
+  },
+  {
+    slug: "cbdcs",
+    name: "CBDCs",
+    type: "finance",
+    subsection: "Monetary systems",
+    summary: "Central Bank Digital Currencies — digital money issued directly by a central bank, rather than a claim on a commercial bank the way an ordinary bank deposit is.",
+    whyItMatters: "Cash is money you possess directly — no permission needed to hand someone a note. A bank deposit is already a claim on a commercial bank, not money in hand. A CBDC would create a third kind of money: a direct digital liability of the central bank itself. Whether that's a genuine public option or a new point of control depends entirely on the architecture — who can see it, who can block it, and whether it can be programmed.",
+    facts: [
+      "The RBA describes a retail CBDC as, for the most part, a digital version of cash. Australia does not currently have a retail CBDC, and the RBA says no decision has been made to introduce one.",
+      "The RBA is currently more focused on exploring wholesale CBDC and tokenised financial market applications — for banks and financial institutions — than a retail CBDC for ordinary people.",
+      "The European Central Bank has explicitly stated its proposed digital euro would not be programmable money and would not restrict what goods or services people could buy — the fact that a CBDC could technically be programmed does not mean a specific CBDC is.",
+      "Central banks, including through BIS-coordinated research, are actively investigating offline CBDC payment capability, and identify privacy and data governance as major open design questions.",
+      "BIS research specifically identifies potential bank disintermediation — deposits moving faster into CBDC during periods of banking stress — as a real risk to weigh, not just a privacy question.",
+    ],
+    relationships: [
+      { type: "issued by", targetSlug: "reserve-bank-of-australia", note: "Australia's own central bank, currently focused on wholesale applications, not retail." },
+      { type: "researched via", targetSlug: "bank-for-international-settlements", note: "Coordinates cross-border CBDC research, including programmability and privacy design." },
+      { type: "compounds with", targetSlug: "digital-identity", note: "Linking a CBDC to a universal digital ID is where the two technologies become far more consequential together than either is alone." },
+    ],
+    codexLinks: [{ path: ["individual", "finance"], note: "Central bank digital currency design directly affects personal financial resilience and privacy." }],
     knowledgeBaseSlug: "cbdcs",
     evidenceRating: 4,
     independenceSource: "Government source",
