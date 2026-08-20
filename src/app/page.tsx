@@ -2,6 +2,24 @@ import Link from "next/link";
 import { CODEX_BRANCHES } from "@/lib/codex";
 import { entitiesByType } from "@/lib/knowledge-graph";
 
+const CIVILIZATIONAL_VALUES = [
+  { label: "Rule of law", text: "The law applies to everyone, including the people who make it." },
+  { label: "Free markets & property rights", text: "You own what you build, and you can trade it freely." },
+  { label: "Freedom of speech", text: "Dissent that doesn't require permission." },
+  { label: "Freedom of religion", text: "Belief and worship that answer to no government." },
+  { label: "Representative government", text: "Power that can be replaced without violence." },
+  { label: "Individual rights", text: "The person, not the collective, is the basic unit the system protects." },
+];
+
+const PERSONAL_VALUES = [
+  { label: "Rugged individualism", text: "The belief that you are capable, responsible, and free to build your own life — not a ward of any system." },
+  { label: "Independence", text: "Owning enough of your own means — money, skills, land — that no single institution holds your future." },
+  { label: "Faith", text: "A moral compass higher than the state, and a community bound by more than convenience." },
+  { label: "Hard work", text: "Outcomes earned, not entitled." },
+  { label: "Family", text: "The first and most durable loyalty." },
+  { label: "Resilience", text: "The capacity to absorb a setback and keep going." },
+];
+
 const PILLARS = [
   {
     step: 1,
@@ -161,6 +179,43 @@ export default function Home() {
           <Link href="/codex" className="btn btn-primary">
             Open the Codex
           </Link>
+        </div>
+      </section>
+
+      <section style={{ borderTop: "1px solid var(--border)" }}>
+        <div className="container" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
+          <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
+            What this is built on
+          </div>
+          <h2 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem", maxWidth: 560 }}>
+            Western values
+          </h2>
+          <p style={{ color: "var(--text-2)", marginBottom: "2rem", maxWidth: 620 }}>
+            Not nostalgia — the actual foundation underneath everything in this Codex. Two layers:
+            what a free society is built on, and what an individual within it actually lives by.
+          </p>
+
+          <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
+            Core civilizational values
+          </h3>
+          <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", maxWidth: 620, display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.25rem" }}>
+            {CIVILIZATIONAL_VALUES.map((v) => (
+              <li key={v.label} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>
+                <strong style={{ color: "var(--amber-strong)" }}>{v.label}:</strong> {v.text}
+              </li>
+            ))}
+          </ul>
+
+          <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
+            Personal life values
+          </h3>
+          <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", maxWidth: 620, display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+            {PERSONAL_VALUES.map((v) => (
+              <li key={v.label} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>
+                <strong style={{ color: "var(--amber-strong)" }}>{v.label}:</strong> {v.text}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
