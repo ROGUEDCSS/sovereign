@@ -94,12 +94,32 @@ export const WORLD_SUBSECTIONS: Partial<Record<EntityType, string[]>> = {
     "Personal finance",
     "Business finance",
   ],
+  technology: [
+    "Computing",
+    "Artificial intelligence",
+    "Software",
+    "Hardware",
+    "Telecommunications",
+    "Internet",
+    "Cybersecurity",
+    "Robotics",
+    "Energy technology",
+    "Manufacturing",
+    "Agriculture technology",
+    "Medical technology",
+    "Transportation",
+    "Construction technology",
+    "Biotechnology",
+    "Open-source technology",
+    "Emerging technology",
+  ],
 };
 
 /** Related-category cross-links, from docs/world-taxonomy.md's "Connections" line per category (where specified — inferred where not). */
 export const WORLD_CATEGORY_CONNECTIONS: Partial<Record<EntityType, EntityType[]>> = {
   governance: ["law", "finance", "economics", "geography", "organisations", "events", "people"],
   finance: ["economics", "law", "governance", "corporates", "technology"],
+  technology: ["science", "corporates", "governance", "law", "economics"],
 };
 
 /** One-line definition per category, tied specifically to what it means for your own sovereignty — not a generic dictionary gloss. */
@@ -249,6 +269,60 @@ export const WORLD_CATEGORY_SOVEREIGNTY: Partial<Record<EntityType, { pros: Worl
           "Cashless payments create a detailed transaction record by default — cash doesn't leave that trail.",
           "The technical capability to freeze, block, or condition a digital payment already exists in ordinary commercial banking.",
           "A central bank digital currency would extend that same capability directly to the central bank itself — see the CBDCs entity for what that specifically changes.",
+        ],
+      },
+    ],
+  },
+  technology: {
+    pros: [
+      {
+        label: "Capability you can carry without institutions",
+        points: [
+          "A tool you own outright — a hand drill, a solar panel, a properly held cryptographic key — works whether or not any company or government is cooperating that day.",
+          "Open-source and widely documented technology in particular can be repaired, understood, and kept running by you, not just by the original vendor.",
+          "This is the direct opposite of a subscription or cloud-dependent service: capability that lives with you, not with a server you don't control.",
+        ],
+      },
+      {
+        label: "Well-designed systems can protect you by default",
+        points: [
+          "Cryptography and access-control architecture can be built specifically to limit what any single party can see or do — the issuer/holder/verifier model behind modern digital identity standards is a direct example.",
+          "Encryption you control the keys to is one of the few genuinely enforceable privacy protections available to an individual, regardless of what any institution decides later.",
+          "Technology that's designed for minimum disclosure — proving a fact about yourself without handing over your whole file — is a real, achievable privacy improvement over older paper-based systems, not just a promise.",
+        ],
+      },
+      {
+        label: "Redundancy and resilience become buildable",
+        points: [
+          "Communication, power generation, and information storage that used to require centralised infrastructure can now be built at household or community scale.",
+          "This means a genuine backup — a second way to communicate, generate power, or verify a fact — is achievable by an individual, not just a government or a large company.",
+          "The same technology that enables centralisation also enables the opposite: distributed, personally-held capability that doesn't depend on any single institution staying online.",
+        ],
+      },
+    ],
+    cons: [
+      {
+        label: "Convenience often means dependency",
+        points: [
+          "Most consumer technology is designed to be used, not understood or repaired — when it breaks or the company stops supporting it, your capability disappears with it.",
+          "A cloud-dependent tool only works as long as the company behind it keeps the service running, keeps you as a customer, and keeps operating in your country at all.",
+          "The more convenient a piece of technology is, the more likely it's quietly outsourcing a capability you used to hold yourself.",
+        ],
+      },
+      {
+        label: "The same architecture that protects can also expose",
+        points: [
+          "Any system capable of minimum-disclosure privacy is, by the same design, capable of the opposite — total disclosure — if the architecture is changed or the rules are reinterpreted.",
+          "A device or account you don't fully control can be updated, monitored, or restricted remotely, often without a clear notice that it happened.",
+          "Whether a given technology protects you or exposes you depends entirely on who controls the keys, the code, and the update mechanism — not on the technology's label.",
+        ],
+      },
+      {
+        label: "Obsolescence and lock-in are business models",
+        points: [
+          "Proprietary formats, closed ecosystems, and forced updates are often designed specifically to make switching away expensive, not to make the product better.",
+          "A skill or tool that only works within one company's ecosystem is a dependency, even if it doesn't feel like one day to day.",
+          "The more of your daily capability runs through a small number of technology providers, the more their commercial decisions become decisions about your own life.",
         ],
       },
     ],
@@ -521,6 +595,7 @@ export const KG_ENTITIES: KGEntity[] = [
     slug: "digital-identity",
     name: "Digital ID",
     type: "technology",
+    subsection: "Cybersecurity",
     summary: "A model for proving facts about yourself online that separates the job into three roles — issuer, holder, and verifier — so no single party has to see or control everything.",
     whyItMatters: "Most digital ID systems people already use quietly collapse issuer and verifier into the same party — the company or government that issued the credential is also the one checking it every time, seeing every place you use it. The issuer/holder/verifier split is the standard alternative model: it's how a physical driver's licence already works (the government issues it, you hold it, a bar checks it without calling the government), and modern digital identity standards are built to replicate that same separation online.",
     facts: [
