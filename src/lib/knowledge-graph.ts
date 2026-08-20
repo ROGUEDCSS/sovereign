@@ -1014,6 +1014,30 @@ export const KG_ENTITIES: KGEntity[] = [
         ],
       },
       {
+        heading: "Degrees of Digital ID — the boiling frog problem",
+        content: [
+          { kind: "p", text: "A frog dropped into boiling water jumps out immediately. The same frog in water that's heated slowly, one degree at a time, won't notice until it's too late to jump. That's not really a claim about frog biology — it's a warning about anything that changes gradually enough that no single step looks alarming." },
+          { kind: "p", text: "Digital ID is exactly this kind of thing. No system rolls out as a \"total control identity system\" on day one. Every step looks reasonable on its own: a login here, a convenience there, one more service added to the same credential. The danger isn't any single step. It's the direction, and how far it's already travelled by the time anyone asks." },
+          { kind: "p", text: "So the right question was never \"do we have Digital ID, yes or no?\" It's: how much power does the identity system actually have over the individual, right now? That's a question of degree, not category — and it helps to see the whole ladder at once, not just the rung you happen to be standing on." },
+          {
+            kind: "definitions",
+            items: [
+              { term: "Level 1 — Situational ID", text: "Identity is requested only for a specific situation — proving you're over 18 to buy alcohol, for example. The shop doesn't need your entire history. Effect on the individual: low." },
+              { term: "Level 2 — Time-and-place ID", text: "Identity is required because of a particular location, event, or period — entering a secure building, crossing a border, attending a restricted event. Once the situation ends, so does the requirement. Effect: low to moderate." },
+              { term: "Level 3 — Persistent ID", text: "Instead of presenting different documents each time, one recognised digital identity follows you between transactions. Convenience increases sharply — and so does the ability to connect those transactions together. Effect: moderate." },
+              { term: "Level 4 — Pervasive ID", text: "Digital ID becomes normal everywhere — banking, government, employment, healthcare, education, telecommunications, travel, commerce. You may still technically have a choice, but ordinary life increasingly expects you to use the system. Identity becomes infrastructure. Effect: high." },
+              { term: "Level 5 — Linked ID", text: "Your identity becomes the common key connecting different systems — bank, tax, health — so you can be cross-referenced across all of them at once. Substantially more powerful than a digital driver's licence. Effect: very high." },
+              { term: "Level 6 — Behavioural ID", text: "The system no longer just knows who you are; it knows what you've been doing — where you've been, what you've bought, who you've interacted with. The danger isn't one organisation seeing everything — it's that separate datasets can be combined into one behavioural history. Effect: very high." },
+              { term: "Level 7 — Permission ID", text: "The major conceptual jump: the system stops asking \"who are you?\" and starts asking \"are you allowed to do this?\" Your ID becomes an access-control mechanism, not just proof. Effect: extreme." },
+              { term: "Level 8 — Conditional ID", text: "Permissions now depend on conditions attached to your identity — age, licence status, eligibility, location, payment status, regulatory compliance. Your identity starts carrying rules, not just facts. Effect: extreme." },
+              { term: "Level 9 — Programmable Identity", text: "Those conditions can change your permissions automatically, without anyone deciding to intervene: a rule evaluates, and access is granted or removed. No human has to act — the system just executes. Effect: extreme." },
+              { term: "Level 10 — Total Identity System", text: "The extreme, hypothetical end of the spectrum: your digital identity becomes the master credential for money, work, healthcare, travel, housing, and commerce alike — no longer something you merely possess, but the mechanism through which the system administers your access to society. Effect: maximum." },
+            ],
+          },
+          { kind: "p", text: "Most real systems sit somewhere in the low-to-moderate range today. The point of the ladder isn't to claim any particular system is already at Level 10 — it's to make the direction of travel visible, one degree at a time, so a reasonable-sounding step 6 doesn't get evaluated in isolation from steps 1 through 5." },
+        ],
+      },
+      {
         heading: "The old system",
         content: [
           { kind: "p", text: "Traditionally, you prove who you are using separate things:" },
@@ -1168,6 +1192,38 @@ export const KG_ENTITIES: KGEntity[] = [
         content: [
           { kind: "p", text: "A democratic government today may have no intention of abusing a digital identity system. But governments change. Laws change. Emergencies happen. Political systems change. Future governments may have different ideas about what behaviour should be permitted." },
           { kind: "p", text: "Therefore the important question isn't \"do we trust today's government?\" It is \"would we trust every future government with the same power?\" That is a much harder question." },
+        ],
+      },
+      {
+        heading: "Where these dangers actually sit on the ladder",
+        content: [
+          { kind: "p", text: "Every problem raised so far in this essay is really a description of climbing that ladder, one rung at a time." },
+          {
+            kind: "list",
+            items: [
+              "The universal ID problem — needing the same ID for banking, employment, healthcare, and travel — is Level 4, Pervasive ID: identity becoming infrastructure.",
+              "The linking problem is Level 5, Linked ID: one identity becoming the common key across separate databases.",
+              "The surveillance and profiling problems are Level 6, Behavioural ID: a record of where you go and what you do, built from combined datasets.",
+              "\"Identity is not the same as permission,\" and the social-credit problem, are Level 7, Permission ID: the system deciding what you're allowed to do, not just who you are.",
+              "The \"one switch\" problem and the government abuse problem are Level 10, Total Identity System: enough of life routed through one credential that switching it off, by accident or by design, switches off the person.",
+            ],
+          },
+          { kind: "p", text: "Two rungs on the ladder haven't come up yet, and they're worth naming directly — they're where the danger stops being hypothetical and starts being mechanical." },
+          { kind: "subheading", text: "Level 8 — Conditional ID" },
+          { kind: "p", text: "This is where access starts depending on conditions attached to your identity, not just facts about it — your licence status, your location, whether a payment cleared, whether you're judged compliant with some regulation." },
+          { kind: "subheading", text: "Level 9 — Programmable Identity" },
+          { kind: "p", text: "This is where those conditions stop needing a person to apply them. A rule evaluates automatically: condition true, access granted; condition false, access removed. Nobody has to decide to restrict you — the system just executes. It's the same underlying idea as programmable money (see CBDCs) applied to identity instead of currency: once permission is coded as a rule instead of exercised as a judgment, it can be enforced at a scale and speed no human process ever could." },
+          { kind: "p", text: "Underneath all ten levels, there are really only four separate questions being asked — and they don't have to be answered the same way:" },
+          {
+            kind: "definitions",
+            items: [
+              { term: "Identification", text: "Who are you?" },
+              { term: "Persistence", text: "Does the same identity follow you everywhere?" },
+              { term: "Linkage", text: "Can different parts of your life be connected through that identity?" },
+              { term: "Authority", text: "Can the identity determine what you're allowed to do?" },
+            ],
+          },
+          { kind: "p", text: "The dangerous progression was never simply \"paper ID → digital ID.\" It's Identity → Information → Profile → Permission → Control — and every one of those arrows is a separate decision, made by someone, that didn't have to be made the way it was." },
         ],
       },
       {

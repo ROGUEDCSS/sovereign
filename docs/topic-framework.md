@@ -95,3 +95,29 @@ doesn't change either:
   cite named sources — Hayek, Marx, the RBA, the BIS, W3C, Kim Cameron.
   Steelmanned arguments need a named school of thought behind them, not a
   strawman.
+
+---
+
+## Degrees, not a yes/no — with a simple analogy
+
+Standing rule, applies to every topic that has real gradations of
+severity or power, which is most of them: don't present the topic as a
+flat list of dangers or a binary "is this bad." Name the actual **degrees**
+— a spectrum or ladder from mild to extreme — and anchor it with one
+simple, concrete analogy the reader already understands.
+
+Digital ID's version of this is the boiling-frog framing: no one system
+rolls out at "total control" on day one; every step looks reasonable in
+isolation, and the danger is the direction of travel, not any single
+rung. The actual ladder — Situational → Time-and-place → Persistent →
+Pervasive → Linked → Behavioural → Permission → Conditional →
+Programmable → Total Identity System — replaced "is Digital ID
+dangerous, yes or no" with "how much power does this specific system
+actually have, and how far has it already travelled." That's a sharper,
+more honest question, and it's the one readers actually need answered.
+
+When writing or reworking a topic (`sections` narrative or the shorter
+structured fields alike), ask: does this topic have a real spectrum of
+severity underneath it? If yes, name the rungs explicitly and give the
+reader one simple analogy to hold the whole shape in their head — don't
+just list dangers in whatever order they occurred to you.
