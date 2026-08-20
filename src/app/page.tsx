@@ -263,7 +263,7 @@ export default function Home() {
               </Link>
             ))}
           </div>
-          <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", justifyContent: "center" }}>
             <Link href="/threat-map" className="btn btn-primary">
               Threat map
             </Link>
