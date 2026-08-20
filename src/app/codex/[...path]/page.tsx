@@ -6,6 +6,7 @@ import { DOMAINS } from "@/lib/domains";
 import { PeekProvider } from "@/components/PeekProvider";
 import { PeekList, PeekItem } from "@/components/PeekList";
 import { CommunityPanel } from "@/components/CommunityPanel";
+import { TopicItem } from "@/components/TopicItem";
 
 export function generateStaticParams() {
   return allCodexPaths().map((path) => ({ path }));
@@ -157,14 +158,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.5rem" }}>
                 {node.items.map((item) => (
-                  <div key={item.name} className="card" style={{ padding: "0.9rem 1.25rem" }}>
-                    <strong style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>{item.name}</strong>
-                    {item.description && (
-                      <p style={{ color: "var(--text-2)", fontSize: "var(--size-body)", marginTop: "0.2rem" }}>
-                        {item.description}
-                      </p>
-                    )}
-                  </div>
+                  <TopicItem key={item.name} item={item} />
                 ))}
               </div>
             </>

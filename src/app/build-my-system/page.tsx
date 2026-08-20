@@ -3,6 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { DOMAINS, domainScore, DomainId } from "@/lib/domains";
+
+function tierFor(score: number): "red" | "amber" | "green" {
+  if (score <= 3) return "red";
+  if (score <= 6) return "amber";
+  return "green";
+}
 import {
   buildPlan,
   BudgetTier,
@@ -60,6 +66,7 @@ export default function BuildMySystemPage() {
   const [tier, setTier] = useState<BudgetTier | null>(null);
   const [weakDomains, setWeakDomains] = useState<DomainId[]>([]);
   const [hasAssessment, setHasAssessment] = useState(false);
+  const [greenCount, setGreenCount] = useState(0);
   const [land, setLand] = useState<LandStatus | null>(null);
   const [hasTime, setHasTime] = useState<boolean | null>(null);
   const [hasMoney, setHasMoney] = useState<boolean | null>(null);
@@ -72,6 +79,7 @@ export default function BuildMySystemPage() {
         (a, b) => a.score - b.score
       );
       setWeakDomains(scored.map((s) => s.id));
+      setGreenCount(scored.filter((s) => tierFor(s.score) === "green").length);
       setHasAssessment(true);
     }
 
@@ -115,8 +123,8 @@ export default function BuildMySystemPage() {
   const choiceBtn = (active: boolean): React.CSSProperties => ({
     padding: "0.85rem 1.25rem",
     cursor: "pointer",
-    border: "1px solid transparent",
-    background: active ? "var(--amber)" : undefined,
+    border: active ? "1px solid transparent" : "1px solid var(--border-strong)",
+    background: active ? "var(--amber)" : "var(--white-block)",
     fontWeight: active ? 700 : 500,
   });
 
@@ -141,9 +149,15 @@ export default function BuildMySystemPage() {
             {hasAssessment && <DoneLabel />}
           </div>
           {hasAssessment ? (
-            <p style={{ color: "var(--ink-2)" }}>
-              Score on file — your plan below is prioritised by your weakest domains.
-            </p>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
+              <p style={{ color: "var(--ink-2)" }}>
+                <strong style={{ color: "var(--ink)" }}>{greenCount} / 12 domains</strong> scored
+                Sovereign — your plan below is prioritised by the rest.
+              </p>
+              <Link href="/assessment/results" style={blackLink}>
+                View full score →
+              </Link>
+            </div>
           ) : (
             <>
               <p style={{ color: "var(--ink-2)", marginBottom: "1rem" }}>
@@ -161,7 +175,7 @@ export default function BuildMySystemPage() {
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: "1rem", marginBottom: "0.6rem" }}>
             <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem" }}>
               <StepBadge n={2} />
-              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--ink)" }}>Your actual resources</h2>
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, color: "var(--ink)" }}>Actual Key Resources</h2>
             </div>
             {resources && <DoneLabel />}
           </div>
@@ -170,39 +184,41 @@ export default function BuildMySystemPage() {
             there. This changes what the plan below actually recommends.
           </p>
 
-          <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginBottom: "0.6rem", textTransform: "uppercase", letterSpacing: "0.04em", fontWeight: 600 }}>
-            Land
-          </p>
-          <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
-            {(Object.keys(LAND_LABELS) as LandStatus[]).map((l) => (
-              <button key={l} onClick={() => chooseLand(l)} className="card" style={choiceBtn(land === l)}>
-                {LAND_LABELS[l]}
-              </button>
-            ))}
-          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1.5rem", flexWrap: "wrap" }}>
+              <span style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>Land</span>
+              <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+                {(Object.keys(LAND_LABELS) as LandStatus[]).map((l) => (
+                  <button key={l} onClick={() => chooseLand(l)} className="card" style={choiceBtn(land === l)}>
+                    {LAND_LABELS[l]}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-          <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginBottom: "0.6rem", textTransform: "uppercase", letterSpacing: "0.04em", fontWeight: 600 }}>
-            Time
-          </p>
-          <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
-            <button onClick={() => chooseTime(true)} className="card" style={choiceBtn(hasTime === true)}>
-              I have time
-            </button>
-            <button onClick={() => chooseTime(false)} className="card" style={choiceBtn(hasTime === false)}>
-              I don&apos;t have time
-            </button>
-          </div>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1.5rem", flexWrap: "wrap" }}>
+              <span style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>Time</span>
+              <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+                <button onClick={() => chooseTime(true)} className="card" style={choiceBtn(hasTime === true)}>
+                  I have time
+                </button>
+                <button onClick={() => chooseTime(false)} className="card" style={choiceBtn(hasTime === false)}>
+                  I don&apos;t have time
+                </button>
+              </div>
+            </div>
 
-          <p style={{ color: "var(--ink-2)", fontSize: "var(--size-sm)", marginBottom: "0.6rem", textTransform: "uppercase", letterSpacing: "0.04em", fontWeight: 600 }}>
-            Money
-          </p>
-          <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-            <button onClick={() => chooseMoney(true)} className="card" style={choiceBtn(hasMoney === true)}>
-              I have money
-            </button>
-            <button onClick={() => chooseMoney(false)} className="card" style={choiceBtn(hasMoney === false)}>
-              I don&apos;t have money
-            </button>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1.5rem", flexWrap: "wrap" }}>
+              <span style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)" }}>Money</span>
+              <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+                <button onClick={() => chooseMoney(true)} className="card" style={choiceBtn(hasMoney === true)}>
+                  I have money
+                </button>
+                <button onClick={() => chooseMoney(false)} className="card" style={choiceBtn(hasMoney === false)}>
+                  I don&apos;t have money
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
