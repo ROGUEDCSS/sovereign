@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CODEX_BRANCHES } from "@/lib/codex";
-import { entitiesByType } from "@/lib/knowledge-graph";
+import { ENTITY_TYPES, ENTITY_TYPE_LABELS } from "@/lib/knowledge-graph";
 
 const CIVILIZATIONAL_VALUES = [
   { label: "Rule of law", text: "The law applies to everyone, including the people who make it." },
@@ -64,10 +64,6 @@ const PILLARS = [
 ];
 
 export default function Home() {
-  const worldTeaser = entitiesByType()
-    .flatMap((g) => g.entities)
-    .slice(0, 6);
-
   return (
     <main>
       <section className="container" style={{ paddingTop: "6rem", paddingBottom: "5rem", maxWidth: 760 }}>
@@ -244,17 +240,17 @@ export default function Home() {
           </h2>
           <p style={{ color: "var(--text-2)", marginBottom: "1.5rem", maxWidth: 560 }}>
             Everything outside you — the environment you have to understand and navigate, but
-            don&apos;t control. Governments, institutions, policy. Sourced, not speculated.
+            don&apos;t control. Thirteen categories. Sourced, not speculated.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "1.75rem" }}>
-            {worldTeaser.map((e) => (
+            {ENTITY_TYPES.map((type) => (
               <Link
-                key={e.slug}
-                href={`/world/${e.slug}`}
+                key={type}
+                href={`/world/category/${type}`}
                 className="card"
                 style={{ padding: "0.5rem 0.95rem", fontSize: "var(--size-sm)", textDecoration: "none" }}
               >
-                {e.name}
+                {ENTITY_TYPE_LABELS[type]}
               </Link>
             ))}
           </div>
