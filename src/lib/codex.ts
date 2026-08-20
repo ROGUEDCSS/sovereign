@@ -796,7 +796,26 @@ const NEIGHBOURS: CodexNode = {
   slug: "neighbours",
   name: "Neighbours",
   tagline: "The closest circle — the people physically near enough to help, or be helped, quickly.",
+  definition: "Neighbours are the people close enough to actually help, or be helped, before anyone official could arrive. It covers:",
+  definitionPoints: [
+    "Who you'd actually knock on the door for, not just recognise",
+    "What you know about their situation, and what they know about yours",
+    "The small, ongoing exchanges that build trust before it's tested",
+  ],
+  definitionOutro: "Proximity alone isn't a relationship — most neighbours who could help each other never actually have.",
+  facts: [
+    { label: "Proximity isn't relationship", text: "Living next to someone for years doesn't automatically create a relationship you could actually rely on in an emergency." },
+    { label: "First responders", text: "In most emergencies, the people who help first are physically nearby, not officially dispatched — long before any formal service arrives." },
+    { label: "Reciprocity gap", text: "Most people underestimate how willing a neighbour would be to help, because they've never actually tested the relationship by asking for anything small." },
+    { label: "Small exchanges", text: "Trust between neighbours is built through small, low-stakes exchanges over time, not through a single large gesture when a crisis hits." },
+  ],
+  practicalQuestion: "How many of your neighbours could you actually ask for help tonight, and how many would you be a stranger to?",
   detailed: true,
+  items: [
+    { name: "Knowing them", description: "Actually knowing names, situations, and how to reach them — not just recognising faces." },
+    { name: "Small exchanges", description: "The low-stakes favours and check-ins that build real trust before it's ever tested." },
+    { name: "Shared awareness", description: "Knowing who's vulnerable, who has useful skills or equipment, and who to check on." },
+  ],
   connections: [{ path: ["home", "household-routines"] }],
 };
 
@@ -804,21 +823,78 @@ const LOCAL_NETWORK: CodexNode = {
   slug: "local-network",
   name: "Local network",
   tagline: "Friends, tradespeople, and local relationships that aren't formal but are genuinely reliable.",
+  definition: "Your local network is the people you could actually call — not because it's their job, but because the relationship is real. It covers:",
+  definitionPoints: [
+    "Tradespeople you trust, not just the nearest listing",
+    "Friends close enough to ask for a genuine favour",
+    "The reach of your network beyond your own household",
+  ],
+  definitionOutro: "A phone full of contacts isn't a network. A network is who'd actually pick up and help.",
+  facts: [
+    { label: "Contact vs relationship", text: "Having someone's number saved and having a relationship you could actually call on are not the same thing, and most people confuse the two." },
+    { label: "Trusted trade", text: "A tradesperson you've used before and trust is measurably faster to reach in an emergency than searching for one cold." },
+    { label: "Network reach", text: "A household's actual resilience often depends more on the size and quality of its network than on what it owns — most people underinvest in the relationship side." },
+    { label: "Reciprocal effort", text: "Networks that only take and never give tend to quietly weaken until they're not there when needed." },
+  ],
+  practicalQuestion: "Who outside your household would you actually call first if something went wrong tonight?",
   detailed: true,
+  items: [
+    { name: "Trusted tradespeople", description: "People you've used before and would call again, not just the nearest search result." },
+    { name: "Close friends", description: "Relationships strong enough to ask for a genuine, inconvenient favour." },
+    { name: "Professional contacts", description: "People whose skills or knowledge you could draw on outside a formal arrangement." },
+  ],
 };
 
 const GROUPS_INSTITUTIONS: CodexNode = {
   slug: "groups-institutions",
   name: "Groups & institutions",
   tagline: "Clubs, faith communities, and associations — the groups you're actually part of, not just aware of.",
+  definition: "Groups and institutions are the organisations you're actually part of — showing up, contributing, known by name. It covers:",
+  definitionPoints: [
+    "Active membership — attending, contributing, being known",
+    "Passive awareness — knowing a group exists, without ever engaging",
+    "What the group could actually provide if you needed it",
+  ],
+  definitionOutro: "Knowing a community group exists isn't the same as being part of it when it matters.",
+  facts: [
+    { label: "Passive vs active", text: "Most people can name several local groups or institutions nearby and belong to none of them — awareness isn't membership." },
+    { label: "Late engagement", text: "Groups are far more willing to help someone who's shown up before they needed anything, than someone reaching out for the first time in a crisis." },
+    { label: "Institutional resilience", text: "Established groups — faith communities, clubs, associations — often have resources and coordination that individual households don't: space, equipment, organised people." },
+    { label: "Membership decay", text: "Membership that isn't renewed through actual participation quietly lapses into just a name on an old list." },
+  ],
+  practicalQuestion: "Name one local group you're an actual, active member of — not just aware of.",
   detailed: true,
+  items: [
+    { name: "Faith communities", description: "Congregations and religious groups, if part of your life, as an actual support network." },
+    { name: "Clubs & associations", description: "Sporting, hobby, or interest groups with real ongoing participation." },
+    { name: "Civic organisations", description: "Local associations, volunteer groups, and community organisations you actually contribute to." },
+  ],
 };
 
 const MUTUAL_AID: CodexNode = {
   slug: "mutual-aid",
   name: "Mutual aid",
   tagline: "Reciprocal help in practice — what you'd offer, what you'd ask for, and the trust that makes both possible.",
+  definition: "Mutual aid is reciprocal help that actually happens — not charity, and not a favour bank kept in anyone's head. It covers:",
+  definitionPoints: [
+    "What you'd genuinely offer, before being asked",
+    "What you'd actually be willing to ask for",
+    "The trust that makes both of those possible without resentment",
+  ],
+  definitionOutro: "A community that only takes, or only gives, doesn't stay a community for long.",
+  facts: [
+    { label: "Asking is harder", text: "Most people are more comfortable offering help than asking for it — which quietly unbalances every relationship that depends on both happening." },
+    { label: "Reciprocity, not debt", text: "Functional mutual aid isn't a ledger of exact favours owed — it's a general trust that it evens out over time, and keeping strict score usually breaks that trust." },
+    { label: "Untested offers", text: "An offer to help that's never actually been taken up is untested — you don't know if it would hold until it's actually asked of you." },
+    { label: "Capacity honesty", text: "Overcommitting to help beyond your actual capacity erodes trust worse than never offering — reliability matters more than generosity." },
+  ],
+  practicalQuestion: "What would you genuinely be willing to offer a neighbour or friend before they had to ask — and have you ever actually said so?",
   detailed: true,
+  items: [
+    { name: "What you'd offer", description: "Skills, equipment, time, or space you'd genuinely make available to others." },
+    { name: "What you'd ask for", description: "Being honest about what you'd actually need, and willing to ask for it." },
+    { name: "Trust & reciprocity", description: "The ongoing exchange that makes both sides of mutual aid sustainable, not one-directional." },
+  ],
   connections: [{ path: ["individual", "mindset-responsibility"] }],
 };
 
