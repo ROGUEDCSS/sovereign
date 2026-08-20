@@ -79,7 +79,7 @@ export default function Home() {
         </h1>
         <p style={{ fontSize: "var(--size-h4)", color: "var(--text-2)", marginBottom: "1.25rem", maxWidth: 560 }}>
           If you don&apos;t have a plan for the world — know that the world has a plan for you, and
-          it is a plan without thought or care for your Wellbeing.
+          it is a plan without thought or care for your wellbeing.
         </p>
         <p style={{ fontSize: "var(--size-h4)", color: "#fff", fontWeight: 700, marginBottom: "1.25rem", maxWidth: 560 }}>
           Get your affairs in order before the New World begins...
@@ -91,9 +91,6 @@ export default function Home() {
         <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
           <Link href="/sovereignty" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>
             What does it mean to be Sovereign?
-          </Link>
-          <Link href="/assessment" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>
-            Get your Sovereign Score →
           </Link>
           <Link href="/codex" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>
             Explore the Codex
@@ -114,70 +111,69 @@ export default function Home() {
 
       <section style={{ borderTop: "1px solid var(--border)" }}>
         <div className="container" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
-          <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
-            What this is built on
-          </div>
           <h2 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem", maxWidth: 560 }}>
-            Western values
+            The Sovereign Codex
           </h2>
-          <p style={{ color: "var(--text-2)", marginBottom: "2rem", maxWidth: 620 }}>
-            Not nostalgia — the actual foundation underneath everything in this Codex. Two layers:
-            what a free society is built on, and what an individual within it actually lives by.
+          <p style={{ color: "var(--text-2)", marginBottom: "1.5rem", maxWidth: 560 }}>
+            Four circles, radiating out from the individual — the human-centred map of what you
+            actually build. This is what you control.
           </p>
-
-          <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
-            Core civilizational values
-          </h3>
-          <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", maxWidth: 620, display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.25rem" }}>
-            {CIVILIZATIONAL_VALUES.map((v) => (
-              <li key={v.label} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>
-                <strong style={{ color: "var(--amber-strong)" }}>{v.label}:</strong> {v.text}
-              </li>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
+              gap: "0.6rem",
+              marginBottom: "1.75rem",
+            }}
+          >
+            {CODEX_BRANCHES.map((b) => (
+              <Link
+                key={b.slug}
+                href={`/codex/${b.slug}`}
+                className="card"
+                style={{ padding: "0.9rem 1.1rem", fontSize: "var(--size-sm)", textDecoration: "none" }}
+              >
+                {b.name}
+              </Link>
             ))}
-          </ul>
+          </div>
+          <Link href="/codex" className="btn btn-primary">
+            Open the Codex
+          </Link>
 
-          <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
-            Personal life values
-          </h3>
-          <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", maxWidth: 620, display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.75rem" }}>
-            {PERSONAL_VALUES.map((v) => (
-              <li key={v.label} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>
-                <strong style={{ color: "var(--amber-strong)" }}>{v.label}:</strong> {v.text}
-              </li>
-            ))}
-          </ul>
-
-          <div style={{ borderTop: "1px solid var(--border)", paddingTop: "2.75rem" }}>
-            <h2 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem", maxWidth: 560 }}>
-              The Sovereign Codex
-            </h2>
-            <p style={{ color: "var(--text-2)", marginBottom: "1.5rem", maxWidth: 560 }}>
-              Those values, turned into a structure: four circles radiating out from the
-              individual — the human-centred map of what you actually build. This is what you
-              control.
-            </p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
-                gap: "0.6rem",
-                marginBottom: "1.75rem",
-              }}
-            >
-              {CODEX_BRANCHES.map((b) => (
-                <Link
-                  key={b.slug}
-                  href={`/codex/${b.slug}`}
-                  className="card"
-                  style={{ padding: "0.9rem 1.1rem", fontSize: "var(--size-sm)", textDecoration: "none" }}
-                >
-                  {b.name}
-                </Link>
-              ))}
+          <div style={{ marginTop: "2.75rem" }}>
+            <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
+              The Foundations of Sovereignty
             </div>
-            <Link href="/codex" className="btn btn-primary">
-              Open the Codex
-            </Link>
+            <h2 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem", maxWidth: 560 }}>
+              Western values
+            </h2>
+            <p style={{ color: "var(--text-2)", marginBottom: "2rem", maxWidth: 620 }}>
+              Not nostalgia — the actual foundation underneath everything in this Codex. Two layers:
+              what a free society is built on, and what an individual within it actually lives by.
+            </p>
+
+            <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
+              Core civilizational values
+            </h3>
+            <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", maxWidth: 620, display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.25rem" }}>
+              {CIVILIZATIONAL_VALUES.map((v) => (
+                <li key={v.label} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>
+                  <strong style={{ color: "var(--amber-strong)" }}>{v.label}:</strong> {v.text}
+                </li>
+              ))}
+            </ul>
+
+            <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
+              Personal life values
+            </h3>
+            <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", maxWidth: 620, display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+              {PERSONAL_VALUES.map((v) => (
+                <li key={v.label} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>
+                  <strong style={{ color: "var(--amber-strong)" }}>{v.label}:</strong> {v.text}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
