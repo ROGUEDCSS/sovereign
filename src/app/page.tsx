@@ -197,14 +197,19 @@ export default function Home() {
             }}
           >
             {PILLARS.map((p) => (
-              <div key={p.tag} style={{ padding: "1.5rem", borderRadius: "10px", background: "var(--ink)" }}>
-                <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "1rem" }}>
-                  Step {p.step}: {p.tag}
+              <div key={p.tag} style={{ padding: "1.5rem", borderRadius: "10px", background: "var(--amber)" }}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "0.6rem", marginBottom: "1.1rem" }}>
+                  <span style={{ fontSize: "2.1rem", fontWeight: 800, color: "var(--ink)", lineHeight: 1 }}>
+                    {String(p.step).padStart(2, "0")}
+                  </span>
+                  <span className="label" style={{ color: "var(--ink)", opacity: 0.65 }}>
+                    {p.tag}
+                  </span>
                 </div>
-                <h3 style={{ fontSize: "var(--size-h3)", fontWeight: 700, marginBottom: "0.6rem", lineHeight: 1.35, color: "var(--amber-strong)" }}>
+                <h3 style={{ fontSize: "var(--size-h3)", fontWeight: 700, marginBottom: "0.6rem", lineHeight: 1.35, color: "var(--ink)" }}>
                   {p.title}
                 </h3>
-                <p style={{ color: "#fff", fontSize: "var(--size-h4)", marginBottom: "1.25rem", lineHeight: 1.55 }}>
+                <p style={{ color: "var(--ink-2)", fontSize: "var(--size-h4)", marginBottom: "1.25rem", lineHeight: 1.55 }}>
                   {p.body}
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
@@ -215,8 +220,8 @@ export default function Home() {
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
-                        background: "var(--amber)",
-                        color: "#1a1005",
+                        background: "var(--ink)",
+                        color: "var(--amber-strong)",
                         fontSize: "var(--size-sm)",
                         fontWeight: 700,
                         textDecoration: "none",
@@ -224,7 +229,7 @@ export default function Home() {
                         borderRadius: "8px",
                       }}
                     >
-                      {l.label} →
+                      {l.label}
                     </Link>
                   ))}
                 </div>
