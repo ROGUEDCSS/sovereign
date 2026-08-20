@@ -14,6 +14,27 @@ for something like Digital ID undersells the topic. Pick the tier first.
 
 ---
 
+## Voice — the standard, stated plainly
+
+This is the canonical instruction. Every other rule in this document —
+Features vs. Benefits, short/concrete/named, degrees + a simple analogy
+— is a specific case of this one:
+
+> Write in brutally simple, concrete, reader-first language. Use short
+> sentences and ordinary words. Explain one idea at a time. Never use
+> jargon, academic language, vague concepts, or unnecessary qualifiers.
+> Name specific people, systems, actions and consequences. Give concrete
+> real-world examples. Always explain what this means for the individual
+> reader and what could happen to them. Do not try to sound intelligent.
+> Make the idea impossible to misunderstand.
+
+Applies to every field on every entity and every Codex node — `sections`
+prose, `facts`, `whoControls`, `whatCouldGoWrong`, `tldr`, all of it.
+Before publishing any of it, read it back against this paragraph. If a
+sentence would need explaining to a smart 14-year-old, it's not done yet.
+
+---
+
 ## The nine steps
 
 | # | Step | KGEntity field | Tier |
