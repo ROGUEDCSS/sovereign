@@ -34,7 +34,6 @@ const NAV: NavItem[] = [
     label: "World",
     children: [
       { href: "/threat-map", label: "Threat map" },
-      { href: "/knowledge-base", label: "Knowledge base" },
       { href: "/scenario-room", label: "Disaster scenarios" },
     ],
   },
