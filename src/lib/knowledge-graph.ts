@@ -99,7 +99,7 @@ export const WORLD_CATEGORY_DESCRIPTIONS: Record<EntityType, string> = {
 
 export interface WorldSovereigntyPoint {
   label: string;
-  text: string;
+  points: string[];
 }
 
 /**
@@ -107,21 +107,74 @@ export interface WorldSovereigntyPoint {
  * weighed against individual sovereignty — not a generic "is this good"
  * take. Same discipline as KGEntity.pros/cons (Capitalism): real named
  * thinkers, no strawmen, and cons aren't automatically "wins" — a con here
- * is a real tension the reader should weigh, not a verdict. Labeled per
- * the scannable-content standard so a reader can scan the topic before
- * deciding to read the sentence.
+ * is a real tension the reader should weigh, not a verdict.
+ *
+ * STANDARD (applies to every category, always): each point gets multiple
+ * bullets, not one dense sentence — the goal is to actually educate on the
+ * power dynamic (who holds power over whom: the individual over themself,
+ * vs. governance/the category holding power over the individual), not just
+ * assert a labeled claim. Lead with the concrete mechanism, end with the
+ * named source.
  */
 export const WORLD_CATEGORY_SOVEREIGNTY: Partial<Record<EntityType, { pros: WorldSovereigntyPoint[]; cons: WorldSovereigntyPoint[] }>> = {
   governance: {
     pros: [
-      { label: "Enforceable property rights", text: "Without courts and title systems backed by government, what you 'own' is only what you can personally defend. Government enforcement is what turns a claim into something you can actually keep — the mechanism behind it is Locke's Second Treatise of Government (1689)." },
-      { label: "Checks on power", text: "A government split into separate branches, with regular elections and independent courts, can't easily turn on you the way an unchecked ruler could. Those checks exist to stop the state itself from becoming the biggest threat to your sovereignty — the structure Montesquieu set out in The Spirit of the Laws (1748)." },
-      { label: "Baseline public goods", text: "Currency, courts, roads, and defence are expensive to build alone. Government provides the floor that makes your own self-reliance possible to build on top of, instead of starting from zero — Hobbes' core argument in Leviathan (1651)." },
+      {
+        label: "Enforceable property rights",
+        points: [
+          "Ownership without enforcement is just a claim — anyone stronger than you can take it, and you'd have no real recourse.",
+          "A land title register, a functioning court system, and police who'll act on a judgment are what convert 'I built this' into something the state will actually defend on your behalf.",
+          "This flips the power dynamic in your favour: instead of personally guarding everything you own around the clock, you delegate that defence to an institution — but only for as long as it keeps acting impartially.",
+          "Locke's Second Treatise of Government (1689) argued this is the entire justification for government existing at all: protecting life, liberty, and property that would otherwise be defenceless.",
+        ],
+      },
+      {
+        label: "Checks on power",
+        points: [
+          "A single ruler with no checks can change the rules whenever it suits them — today's protection becomes tomorrow's confiscation, with no warning and no appeal.",
+          "Splitting power across branches — legislative, executive, judicial — and forcing regular elections means no single person or party can hold unchecked control indefinitely.",
+          "Crucially, this protects you from the government itself, not just from other people — an independent judiciary can rule against the state, in your favour.",
+          "Montesquieu's The Spirit of the Laws (1748) is the foundational argument that liberty survives only when power is divided, never concentrated in one place.",
+        ],
+      },
+      {
+        label: "Baseline public goods",
+        points: [
+          "Currency, courts, roads, and national defence are expensive, coordination-heavy projects that are extremely hard for any one household to build alone.",
+          "Government pools resources from everyone to provide a shared foundation — a currency you can actually save in, roads you can travel on, courts you can use.",
+          "This isn't a substitute for self-reliance — it's the infrastructure individual self-reliance is actually built on top of.",
+          "Hobbes' Leviathan (1651) argued that without this baseline, individual life reverts to a constant struggle for basic survival, leaving no real room to build anything of your own.",
+        ],
+      },
     ],
     cons: [
-      { label: "Permission over right", text: "The more government regulates, the more your basic freedoms — building, working, travelling — become things you must ask permission for first. A permission can be delayed, taxed, or denied; a right, in principle, cannot. Hayek traced this shift in The Road to Serfdom (1944)." },
-      { label: "Consent-free taxation", text: "Government takes a share of what you earn and decides how to spend it, without asking your individual permission for each use. That is a real, direct reduction in your control over your own resources, whatever you think of what it's spent on — Nozick's argument in Anarchy, State, and Utopia (1974)." },
-      { label: "Surveillance creep", text: "The same administrative systems that deliver services can also track, flag, and restrict you — digital ID, financial monitoring, data-sharing between agencies. More government capability means more capacity to watch and limit you, not less, even when no one involved intends to misuse it." },
+      {
+        label: "Permission over right",
+        points: [
+          "A right, in principle, is yours by default — no one has to approve it before you can exercise it.",
+          "Regulation quietly reverses that default: you now need a permit to extend your house, a licence to work certain jobs, an approval to travel to certain places.",
+          "Every one of those approvals is a point where someone else — a department, an officer, a system — can say no, delay you, or attach conditions you didn't choose.",
+          "Hayek's The Road to Serfdom (1944) tracked exactly this shift: as central planning expands, individual freedom doesn't disappear all at once — it erodes permission by permission, rule by rule.",
+        ],
+      },
+      {
+        label: "Consent-free taxation",
+        points: [
+          "You don't get to individually agree or disagree with each specific use of your tax dollars — the decision is made collectively, by people you didn't necessarily vote for on that specific issue.",
+          "This is a real transfer of control: money you earned through your own labour is redirected according to someone else's priorities, not yours.",
+          "The scale compounds the effect — it isn't a one-off, it's a permanent, recurring claim on your future earnings too.",
+          "Nozick's Anarchy, State, and Utopia (1974) argued this is functionally similar to compelled labour: a portion of your work's proceeds is claimed without your individual agreement to that specific claim.",
+        ],
+      },
+      {
+        label: "Surveillance creep",
+        points: [
+          "The same digital systems built to make government services faster — digital ID, online tax filing, benefit payments — also generate a detailed record of your activity.",
+          "Once that data exists, sharing it between agencies is a policy decision, not a technical barrier — today's convenience can become tomorrow's monitoring without you being asked again.",
+          "Financial monitoring in particular sits at the intersection of Governance and Law, because both can be used to restrict what you're allowed to buy, hold, or transfer — not just observe it.",
+          "None of this requires bad intent from any individual official — the risk is structural: more capability to observe always means more capacity to restrict, whoever ends up holding it.",
+        ],
+      },
     ],
   },
 };

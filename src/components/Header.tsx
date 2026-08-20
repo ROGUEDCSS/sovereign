@@ -23,6 +23,8 @@ const NAV: NavItem[] = [
       { href: "/assessment", label: "Sovereign Assessment" },
       { href: "/assessment/results", label: "Your Sovereign Score" },
       { href: "/build-my-system", label: "Build my system" },
+      { href: "/checklist", label: "Free Checklist" },
+      { href: "/consultation", label: "Consultation" },
     ],
   },
   {
@@ -35,14 +37,6 @@ const NAV: NavItem[] = [
     children: [
       { href: "/threat-map", label: "Threat map" },
       { href: "/scenario-room", label: "Disaster scenarios" },
-    ],
-  },
-  {
-    href: "/help",
-    label: "Help",
-    children: [
-      { href: "/checklist", label: "Free Checklist" },
-      { href: "/consultation", label: "Consultation" },
     ],
   },
   {

@@ -63,25 +63,35 @@ export default async function WorldCategoryPage({ params }: { params: Promise<{ 
               </h2>
 
               <div className="card" style={{ padding: "1.5rem", marginBottom: "1.5rem" }}>
-                <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--good)" }}>For Sovereignty</h2>
-                <ul style={{ paddingLeft: "1.25rem", color: "var(--ink-2)" }}>
+                <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1.25rem", color: "var(--good)" }}>For Sovereignty</h2>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                   {sovereignty.pros.map((p) => (
-                    <li key={p.label} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>
-                      <strong style={{ color: "var(--ink)" }}>{p.label}:</strong> {p.text}
-                    </li>
+                    <div key={p.label}>
+                      <div style={{ fontWeight: 600, color: "var(--ink)", marginBottom: "0.5rem" }}>{p.label}</div>
+                      <ul style={{ paddingLeft: "1.25rem", color: "var(--ink-2)", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                        {p.points.map((pt) => (
+                          <li key={pt} style={{ lineHeight: 1.6 }}>{pt}</li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
 
               <div className="card" style={{ padding: "1.5rem" }}>
-                <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--danger)" }}>Against Sovereignty</h2>
-                <ul style={{ paddingLeft: "1.25rem", color: "var(--ink-2)" }}>
+                <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1.25rem", color: "var(--danger)" }}>Against Sovereignty</h2>
+                <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                   {sovereignty.cons.map((c) => (
-                    <li key={c.label} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>
-                      <strong style={{ color: "var(--ink)" }}>{c.label}:</strong> {c.text}
-                    </li>
+                    <div key={c.label}>
+                      <div style={{ fontWeight: 600, color: "var(--ink)", marginBottom: "0.5rem" }}>{c.label}</div>
+                      <ul style={{ paddingLeft: "1.25rem", color: "var(--ink-2)", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                        {c.points.map((pt) => (
+                          <li key={pt} style={{ lineHeight: 1.6 }}>{pt}</li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
             </div>
           )}
