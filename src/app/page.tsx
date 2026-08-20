@@ -142,8 +142,12 @@ export default function Home() {
               Western values
             </h2>
             <p style={{ color: "var(--text-2)", marginBottom: "2rem", maxWidth: 620 }}>
-              Not nostalgia — the actual foundation underneath everything in this Codex. Two layers:
-              what a free society is built on, and what an individual within it actually lives by.
+              None of this arrived by accident. Rome gave the world codified law and the idea that
+              even rulers answer to it. The Anglo-Saxons gave it trial by jury, the rights of the
+              freeman, and the common law that grew into Magna Carta and parliament. What's below is
+              the compressed result of two thousand years of war, revolution, and hard-won reform —
+              civilisation's toil, not nostalgia for it. Two layers: what that struggle built for the
+              society you live in, and what it demands of you personally if you want to keep it.
             </p>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
