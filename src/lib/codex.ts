@@ -63,7 +63,7 @@ export interface CodexNode {
  * not a circle here — see the CODEX_BRANCHES comment below for why.
  */
 
-// ---------- CIRCLE 1: INDIVIDUAL ----------
+// ---------- DIMENSION 1: INDIVIDUAL ----------
 
 const IDENTITY: CodexNode = {
   slug: "identity",
@@ -215,7 +215,7 @@ const INDIVIDUAL: CodexNode = {
   branches: [IDENTITY, PERSONAL_DEVELOPMENT, HEALTH, FINANCE, MINDSET_RESPONSIBILITY],
 };
 
-// ---------- CIRCLE 2: FAMILY ----------
+// ---------- DIMENSION 2: FAMILY ----------
 
 const FAMILY_LIFE: CodexNode = {
   slug: "family-life",
@@ -419,7 +419,7 @@ const FAMILY: CodexNode = {
   branches: [FAMILY_LIFE, CHILDREN, EDUCATION, RESPONSIBILITY, FAMILY_FINANCE, FAMILY_CAPABILITY, FAMILY_LEGACY],
 };
 
-// ---------- CIRCLE 3: HOME & LAND ----------
+// ---------- DIMENSION 3: HOME & LAND ----------
 
 const HOUSEHOLD_SYSTEMS: CodexNode = {
   slug: "household-systems",
@@ -790,7 +790,7 @@ const HOME: CodexNode = {
   ],
 };
 
-// ---------- CIRCLE 4: COMMUNITY ----------
+// ---------- DIMENSION 4: COMMUNITY ----------
 
 const NEIGHBOURS: CodexNode = {
   slug: "neighbours",
