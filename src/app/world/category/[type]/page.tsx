@@ -58,9 +58,9 @@ export default async function WorldCategoryPage({ params }: { params: Promise<{ 
 
           {sovereignty && (
             <div style={{ marginBottom: "3rem" }}>
-              <div style={{ fontSize: "var(--size-xs)", color: "var(--text-3)", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em", marginBottom: "0.9rem" }}>
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1.25rem" }}>
                 {ENTITY_TYPE_LABELS[entityType]} vs. Sovereignty
-              </div>
+              </h2>
 
               <div className="card" style={{ padding: "1.5rem", marginBottom: "1.5rem" }}>
                 <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--good)" }}>Pros</h2>
