@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { entitiesByType, ENTITY_TYPE_LABELS } from "@/lib/knowledge-graph";
+import { entitiesByType, ENTITY_TYPE_LABELS, WORLD_CATEGORY_DESCRIPTIONS } from "@/lib/knowledge-graph";
 
 export default function WorldIndex() {
   const groups = entitiesByType();
@@ -39,6 +39,9 @@ export default function WorldIndex() {
                   </span>
                 )}
               </div>
+              <p style={{ color: "var(--text-2)", fontSize: "var(--size-body)", marginBottom: "1.25rem", maxWidth: 560 }}>
+                {WORLD_CATEGORY_DESCRIPTIONS[type]}
+              </p>
               <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <Link
                   href={`/world/category/${type}`}

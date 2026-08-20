@@ -80,9 +80,21 @@ export const WORLD_CATEGORY_CONNECTIONS: Partial<Record<EntityType, EntityType[]
   governance: ["law", "finance", "economics", "geography", "organisations", "events", "people"],
 };
 
-/** One-line definition per category, from docs/world-taxonomy.md. */
-export const WORLD_CATEGORY_DESCRIPTIONS: Partial<Record<EntityType, string>> = {
-  governance: "How collective political authority is organised and exercised.",
+/** One-line definition per category, tied specifically to what it means for your own sovereignty — not a generic dictionary gloss. */
+export const WORLD_CATEGORY_DESCRIPTIONS: Record<EntityType, string> = {
+  governance: "How collective political authority is organised and exercised — the rules and institutions that decide what you're permitted to do without asking, and what you're not.",
+  law: "The rules that are actually enforceable in your jurisdiction — the difference between what you're free to do in principle and what you can do without real consequence.",
+  corporates: "The commercial entities you depend on for income, goods, and services — and how much of your daily life runs through companies you don't own or control.",
+  finance: "The institutions and systems that move money and capital — who holds your wealth, and how much of your financial life depends on their continued cooperation.",
+  economics: "How resources, prices, and incentives actually behave at scale — the conditions your personal finances operate inside, whether you notice them or not.",
+  media: "How information reaches you — and how much of what you believe about the world was actually verified, versus simply repeated.",
+  technology: "The tools and systems you rely on daily — and how much of your capability disappears if the technology, or its owner, stops cooperating.",
+  science: "What's actually been tested and shown to be true — the difference between a real finding and a confident claim wearing its authority.",
+  history: "What's already happened, and what it actually proves — patterns worth knowing before you repeat someone else's mistake.",
+  geography: "Where you actually are, and how much that shapes what's possible — the same plan produces different outcomes on different land.",
+  organisations: "The structured collective entities — governments, companies, non-profits, and more — that you deal with as if they were a single person, even though none of them are.",
+  people: "The individuals whose decisions, work, or authority actually affect you — named because they're relevant to something, not catalogued for their own sake.",
+  events: "What happened, when, and to whom — the specific occurrences that actually moved governance, law, markets, or your own circumstances.",
 };
 
 export interface WorldSovereigntyPoint {
