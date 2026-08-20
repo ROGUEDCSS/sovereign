@@ -97,8 +97,38 @@ export default function AssessmentPage() {
 
   if (!emailSaved) {
     return (
-      <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
-        <div style={{ maxWidth: 480, margin: "0 auto" }}>
+      <div
+        style={{
+          position: "fixed",
+          inset: 0,
+          background: "rgba(6,8,15,0.75)",
+          zIndex: 100,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "1.5rem",
+        }}
+        onClick={() => router.back()}
+      >
+        <div className="card" style={{ maxWidth: 480, width: "100%", padding: "2rem", position: "relative" }} onClick={(e) => e.stopPropagation()}>
+          <button
+            onClick={() => router.back()}
+            aria-label="Close"
+            style={{
+              position: "absolute",
+              top: "1rem",
+              right: "1rem",
+              background: "transparent",
+              border: "none",
+              color: "var(--ink-2)",
+              fontSize: "var(--size-body)",
+              cursor: "pointer",
+              lineHeight: 1,
+            }}
+          >
+            ✕
+          </button>
+
           <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.75rem" }}>
             Before you start
           </div>
@@ -132,14 +162,14 @@ export default function AssessmentPage() {
             disabled={!isValidEmail(email)}
             style={{ width: "100%", marginBottom: "1rem" }}
           >
-            Start the assessment →
+            Start the assessment
           </button>
           <p style={{ color: "var(--text-3)", fontSize: "var(--size-label)", lineHeight: 1.5 }}>
             Saved to this browser only — there&apos;s no account system yet, so nothing is sent
             anywhere or emailed to you. This just reserves the field until real accounts exist.
           </p>
         </div>
-      </main>
+      </div>
     );
   }
 
