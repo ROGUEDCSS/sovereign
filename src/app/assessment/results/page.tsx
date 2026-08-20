@@ -154,7 +154,7 @@ export default function ResultsPage() {
                     </div>
                     {actionLink && (
                       <Link href={codexHref(actionLink.path)} className="btn btn-primary" style={{ flexShrink: 0, padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
-                        Action →
+                        Action
                       </Link>
                     )}
                   </div>
@@ -193,7 +193,7 @@ export default function ResultsPage() {
                         </div>
                         {actionLink && (
                           <Link href={codexHref(actionLink.path)} className="btn btn-primary" style={{ flexShrink: 0, padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}>
-                            Action →
+                            Action
                           </Link>
                         )}
                       </div>
@@ -227,7 +227,7 @@ export default function ResultsPage() {
                           className="btn btn-white"
                           style={{ padding: "0.65rem 1.25rem", fontSize: "var(--size-sm)" }}
                         >
-                          Learn more →
+                          Learn more
                         </Link>
                       </div>
                     )}
@@ -239,7 +239,7 @@ export default function ResultsPage() {
         )}
 
         <Link href="/build-my-system" className="btn btn-primary">
-          Build my system →
+          Build my system
         </Link>
       </div>
     </main>

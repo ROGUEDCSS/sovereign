@@ -356,19 +356,19 @@ const FAMILY_FINANCE: CodexNode = {
 
 const FAMILY_CAPABILITY: CodexNode = {
   slug: "family-capability",
-  name: "Family capability",
+  name: "Family skills",
   tagline: "What the family collectively knows and can do — the practical skills no one had to look up.",
-  definition: "Family capability is what your household can actually do without needing to look it up, call someone, or pay for it. It's not the same as one person's expertise:",
+  definition: "Family skills are what your household can actually do without needing to look it up, call someone, or pay for it. It's not the same as one person's expertise:",
   definitionPoints: [
     "Knowledge that only exists in one person's head, never written down or taught",
     "Skill that quietly disappears if that one person is unavailable",
   ],
-  definitionOutro: "A family's real capability is what survives losing its most capable member for a month.",
+  definitionOutro: "A family's real skill base is what survives losing its most capable member for a month.",
   facts: [
     { label: "Single point of knowledge", text: "Most households have exactly one person who knows how to do a given essential task — and no backup if that person is unavailable." },
     { label: "Untaught skill", text: "Skills that live in one person's head and are never demonstrated or taught don't transfer — they just disappear with that person." },
-    { label: "Outsourced capability", text: "Paying someone else to do something isn't the same as being unable to do it yourself — but for most households, it's become the same thing by default." },
-    { label: "Practice, not knowledge", text: "Knowing how a skill works in theory and being able to actually perform it under pressure are different levels of capability entirely." },
+    { label: "Outsourced skill", text: "Paying someone else to do something isn't the same as being unable to do it yourself — but for most households, it's become the same thing by default." },
+    { label: "Practice, not knowledge", text: "Knowing how a skill works in theory and being able to actually perform it under pressure are different levels of skill entirely." },
   ],
   practicalQuestion: "Pick the skill your household relies on most. If the person who knows it was gone for a month, who else could actually do it?",
   detailed: true,

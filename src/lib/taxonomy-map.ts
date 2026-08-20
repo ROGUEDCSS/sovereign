@@ -38,8 +38,8 @@ export const DOMAIN_TO_CODEX: Record<DomainId, CodexLink[]> = {
   "digital-security": [{ path: ["individual", "identity"], label: "Individual → Identity" }],
   health: [{ path: ["individual", "health"], label: "Individual → Health" }],
   skills: [
-    { path: ["family", "family-capability"], label: "Family → Family capability" },
-    { path: ["home", "household-maintenance"], label: "Home & Land → Household maintenance" },
+    { path: ["individual", "personal-development"], label: "Individual → Personal development" },
+    { path: ["family", "family-capability"], label: "Family → Family skills" },
   ],
   community: [
     { path: ["community", "neighbours"], label: "Community → Neighbours" },

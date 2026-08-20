@@ -529,7 +529,7 @@ export const DOMAINS: Domain[] = [
   {
     id: "skills",
     name: "Skills",
-    tagline: "Acquire practical capabilities that reduce dependence on external services.",
+    tagline: "Acquire practical skills that reduce dependence on external services.",
     quickAction: {
       title: "Start building one practical skill deliberately",
       cost: "$0–200",

@@ -37,8 +37,8 @@ const PILLARS = [
     title: "The skills only you can carry.",
     body: "Fire. A blade. First aid. Leading people, and saying what you actually mean. Skills live in you, not in a cupboard — nobody can hand them to you in the moment you need them.",
     links: [
-      { label: "Family capability", href: "/codex/family/family-capability" },
       { label: "Personal development", href: "/codex/individual/personal-development" },
+      { label: "Family skills", href: "/codex/family/family-capability" },
     ],
   },
   {
