@@ -48,6 +48,43 @@ export const ENTITY_TYPE_LABELS: Record<EntityType, string> = {
   events: "Events",
 };
 
+/**
+ * Second-level Subsections per category, from docs/world-taxonomy.md.
+ * Only populated for categories that have actually been built out — a
+ * category missing here just falls back to a flat entity list. Don't
+ * fabricate a full 13-category set to make this look more complete than
+ * it is.
+ */
+export const WORLD_SUBSECTIONS: Partial<Record<EntityType, string[]>> = {
+  governance: [
+    "Governments",
+    "Political systems",
+    "Executive government",
+    "Legislatures",
+    "Public administration",
+    "Elections",
+    "Political parties",
+    "Public policy",
+    "Government agencies",
+    "Local government",
+    "International governance",
+    "Treaties & agreements",
+    "Public spending",
+    "Government accountability",
+    "Political power & influence",
+  ],
+};
+
+/** Related-category cross-links, from docs/world-taxonomy.md's "Connections" line per category. */
+export const WORLD_CATEGORY_CONNECTIONS: Partial<Record<EntityType, EntityType[]>> = {
+  governance: ["law", "finance", "economics", "geography", "organisations", "events", "people"],
+};
+
+/** One-line definition per category, from docs/world-taxonomy.md. */
+export const WORLD_CATEGORY_DESCRIPTIONS: Partial<Record<EntityType, string>> = {
+  governance: "How collective political authority is organised and exercised.",
+};
+
 export interface KGRelationship {
   /** Short verb phrase, kept deliberately modest — "cites", "member of", "researches" — never "controls" or "influences" without real sourcing. */
   type: string;
@@ -90,6 +127,8 @@ export interface KGEntity {
   slug: string;
   name: string;
   type: EntityType;
+  /** Second-level grouping within the category, per docs/world-taxonomy.md's Subsections list. Optional because most categories don't have their Subsections built out yet. */
+  subsection?: string;
   /** "What is it?" */
   summary: string;
   /** "Why does it matter?" */
@@ -138,6 +177,7 @@ export const KG_ENTITIES: KGEntity[] = [
     slug: "2030-agenda",
     name: "2030 Agenda / SDGs",
     type: "governance",
+    subsection: "International governance",
     summary: "The UN's voluntary international framework of 17 goals and 169 targets, adopted by member states in 2015 — not a binding global law.",
     facts: [
       "Contains 17 Sustainable Development Goals and 169 targets covering poverty, health, education, water, energy, cities, climate, and institutions, among others.",
