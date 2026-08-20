@@ -421,6 +421,28 @@ export interface KGEntity {
   cons?: string[];
   /** Plain citations (title, author, year) — never a fabricated URL. */
   furtherReading?: string[];
+  /**
+   * "Who controls it?" — who owns it, operates it, sets the rules, can
+   * change the rules, can switch it off, can see the data. Mandatory at
+   * Standard tier and up — see docs/topic-framework.md.
+   */
+  whoControls?: string[];
+  /**
+   * "What could go wrong?" — misuse, function creep, concentration of
+   * power, failure of safeguards, what happens if the assumptions are
+   * wrong. Distinct from `cons`: this is about failure modes and power,
+   * not the steelmanned opposing argument. Mandatory at Standard tier
+   * and up.
+   */
+  whatCouldGoWrong?: string[];
+  /** Laws, technical controls, governance, transparency, accountability, user controls that actually manage the risk. */
+  safeguards?: string[];
+  /** What's genuinely unresolved or undecided — not a hedge, a real open question. */
+  unresolvedQuestions?: string[];
+  /** A short, direct SOVEREIGN stance — not "it's evil," not "it's fine because they say so." */
+  sovereignPosition?: string;
+  /** Numbered questions the reader can run themselves before accepting the thing. Mandatory at Standard tier and up. */
+  practicalTest?: string[];
   relationships: KGRelationship[];
   codexLinks?: KGCodexLink[];
   /** Long-form, headed content — rendered above blocks when present. */
@@ -580,6 +602,38 @@ export const KG_ENTITIES: KGEntity[] = [
       { type: "compounds with", targetSlug: "digital-identity", note: "Linking a CBDC to a universal digital ID is where the two technologies become far more consequential together than either is alone." },
     ],
     codexLinks: [{ path: ["individual", "finance"], note: "Central bank digital currency design directly affects personal financial resilience and privacy." }],
+    whoControls: [
+      "The issuing central bank sets the architecture — the RBA for Australia — but the wallet, verification, and transaction infrastructure can also involve commercial banks and private technology providers.",
+      "Whoever operates the ledger can, in principle, see transaction data, block a transaction, or freeze a wallet — the specific answer depends entirely on the system's design, not on CBDCs in general.",
+      "Government sets the legal rules the system runs under, and can change them — the same institution that writes today's safeguards can rewrite them later.",
+    ],
+    whatCouldGoWrong: [
+      "Function creep: a system that starts as 'digital cash' expands stepwise into tax collection, benefits administration, and transaction restrictions — each expansion individually justifiable, the cumulative result very different from the original design.",
+      "Linking to Digital ID: if a CBDC becomes interoperable with a universal digital identity, financial activity becomes attachable to a person's broader profile — the two technologies are far more consequential combined than either is alone.",
+      "Concentration without cash: if physical cash is allowed to disappear and CBDC becomes the dominant form of money, every property of the digital system — surveillance, programmability, freeze power — stops being optional and becomes unavoidable.",
+    ],
+    safeguards: [
+      "Cash preserved as a legally protected parallel option, not phased out.",
+      "CBDC adoption voluntary, not a condition of participating in ordinary life.",
+      "Independent due process and appeal before a wallet is frozen or a transaction blocked.",
+      "Programmability, if it exists at all, disclosed and limited by law — not a silent technical capability.",
+    ],
+    unresolvedQuestions: [
+      "Whether Australia introduces a retail CBDC at all — the RBA currently says no decision has been made, and its active work is weighted toward wholesale and tokenised markets, not a retail product.",
+      "What privacy architecture any eventual retail CBDC would use — the RBA and BIS identify this as a major open design question, not a settled answer.",
+    ],
+    sovereignPosition: "CBDCs are neither inherently safe nor inherently dangerous — the architecture is what matters. A CBDC with strong privacy protection, no expiry, no spending restrictions, and cash preserved alongside it is a fundamentally different object from one without those features. The strongest protection isn't trusting that today's institutions will behave well; it's designing the system so that even a government acting badly has limited ability to abuse it.",
+    practicalTest: [
+      "Is cash protected, or does the digital form eventually replace it?",
+      "Is it voluntary — can you refuse it without being excluded from ordinary life?",
+      "Can the money be programmed, and if so, who has that power?",
+      "Can a wallet be frozen, and under what circumstances?",
+      "Who sees your transactions — the central bank, government, commercial banks, private companies?",
+      "Can transactions be linked to a digital identity?",
+      "Can the system operate offline, when the network fails?",
+      "Is there independent due process and appeal before money is blocked or taken?",
+      "Would you accept the same design under a government you don't trust?",
+    ],
     sections: [
       {
         heading: "Central bank digital currencies",
@@ -917,6 +971,34 @@ export const KG_ENTITIES: KGEntity[] = [
     furtherReading: [
       "W3C, 'Verifiable Credentials Data Model' (w3.org/TR/vc-data-model/)",
       "Kim Cameron, 'The Laws of Identity' (2005)",
+    ],
+    whoControls: [
+      "The issuer sets what a credential says and can typically revoke it — for a government-issued credential, that's a government agency.",
+      "Whoever operates the wallet infrastructure controls whether you can access and present your own credentials — this can be government, or a private technology provider under a public-private partnership.",
+      "The verifier decides what it demands to see; a well-designed system limits it to a yes/no answer, but nothing forces that by default.",
+    ],
+    whatCouldGoWrong: [
+      "Function creep: a system that starts as 'ID for government services' expands stepwise into banking, age verification, benefits, and travel — each expansion individually reasonable, the cumulative effect a single point of control over ordinary life.",
+      "Collapsed roles: when issuer and verifier are the same party, or when different verifiers' data can be linked through a shared identity, tracking becomes possible even without one central database.",
+      "Revocation without due process: a digital credential can be switched off electronically — without an appeals process and human review, a system error becomes a person locked out of banking, travel, or work.",
+    ],
+    safeguards: [
+      "Minimum disclosure enforced by design — a verifier receives only the yes/no answer it needs, not the underlying data.",
+      "No universal tracking — using the ID doesn't by default create a central record of every place and time it's used.",
+      "Due process and independent appeal before a credential is suspended or revoked.",
+      "A non-digital alternative remains available — people aren't forced into a purely digital existence to participate in society.",
+    ],
+    unresolvedQuestions: [
+      "How many essential services will ultimately route through the same identity layer in Australia — the Digital ID Act's stated framework is voluntary, but the trajectory of adoption isn't yet settled.",
+      "Which private organisations end up operating identity or wallet infrastructure under public-private partnerships, and what oversight applies to them.",
+    ],
+    sovereignPosition: "Digital identity is a genuine privacy improvement over the old system when it's built correctly — proving 'over 18: yes' without disclosing a full driver's licence is strictly better than the paper alternative. The danger isn't the technology; it's what happens if identity becomes the gateway to everyday life, and if identity and permission are allowed to merge into one system. Identity should belong to the individual — it should never become the government's permission slip for living.",
+    practicalTest: [
+      "Who knows when you use your ID, and what do they actually see?",
+      "Who can connect your identity across different services?",
+      "Who can switch your identity off, and what happens if they get it wrong?",
+      "Is there a non-digital alternative, or is this now mandatory to participate in ordinary life?",
+      "Would you accept this system under every future government, not just today's?",
     ],
     sections: [
       {

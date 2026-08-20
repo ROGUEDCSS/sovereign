@@ -161,6 +161,57 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
             </>
           )}
 
+          {entity.whoControls && entity.whoControls.length > 0 && (
+            <>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Who controls it?</h2>
+              <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
+                {entity.whoControls.map((w) => (
+                  <li key={w} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>{w}</li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          {entity.whatCouldGoWrong && entity.whatCouldGoWrong.length > 0 && (
+            <>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--danger)" }}>What could go wrong?</h2>
+              <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
+                {entity.whatCouldGoWrong.map((w) => (
+                  <li key={w} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>{w}</li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          {entity.safeguards && entity.safeguards.length > 0 && (
+            <>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Safeguards</h2>
+              <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
+                {entity.safeguards.map((s) => (
+                  <li key={s} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>{s}</li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          {entity.unresolvedQuestions && entity.unresolvedQuestions.length > 0 && (
+            <>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>What's unresolved</h2>
+              <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
+                {entity.unresolvedQuestions.map((u) => (
+                  <li key={u} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>{u}</li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          {entity.sovereignPosition && (
+            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
+              <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)", marginBottom: "0.4rem" }}>The Sovereign position</div>
+              <p style={{ color: "var(--text-2)", lineHeight: 1.6 }}>{entity.sovereignPosition}</p>
+            </div>
+          )}
+
           {entity.furtherReading && entity.furtherReading.length > 0 && (
             <>
               <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Further reading</h2>
@@ -222,6 +273,19 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
                 ))}
               </div>
             </>
+          )}
+
+          {entity.practicalTest && entity.practicalTest.length > 0 && (
+            <div className="card" style={{ padding: "1.5rem 1.75rem", background: "var(--amber)" }}>
+              <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)", marginBottom: "0.75rem" }}>
+                Before you accept this, ask:
+              </div>
+              <ol style={{ paddingLeft: "1.25rem", color: "var(--ink-2)", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                {entity.practicalTest.map((q, i) => (
+                  <li key={i} style={{ lineHeight: 1.6 }}>{q}</li>
+                ))}
+              </ol>
+            </div>
           )}
         </div>
       </main>
