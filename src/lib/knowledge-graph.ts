@@ -413,6 +413,8 @@ export interface KGEntity {
   summary: string;
   /** "Why does it matter?" */
   whyItMatters?: string;
+  /** A few skimmable, punchy bullet points covering the whole page — for readers who won't read a Deep-dive essay start to finish. Only worth adding once a topic has real sections. */
+  tldr?: string[];
   /** Sourced factual statements only — no speculation, no unverified claims about motive or control. */
   facts: string[];
   /** Steelmanned, named-source arguments for — real schools of thought, not strawmen. */
@@ -958,11 +960,18 @@ export const KG_ENTITIES: KGEntity[] = [
     type: "technology",
     subsection: "Cybersecurity",
     summary: "A model for proving facts about yourself online that separates the job into three roles — issuer, holder, and verifier — so no single party has to see or control everything.",
+    tldr: [
+      "Digital ID isn't automatically dangerous — done well, it proves one fact (over 18, licensed) without handing over your whole file.",
+      "The real question isn't yes/no. It's degree: how much of your life routes through one credential, and how far that credential can reach.",
+      "The danger starts when 'prove who you are' quietly becomes 'decide what you're allowed to do' — identity and permission need to stay separate.",
+      "Australia has no mandatory national ID. The Digital ID Act 2024 is voluntary and accredited, not compulsory.",
+      "Before accepting any expansion of it, ask: who controls it, what can they see, and what happens when they get it wrong?",
+    ],
     whyItMatters: "Most digital ID systems people already use quietly collapse issuer and verifier into the same party — the company or government that issued the credential is also the one checking it every time, seeing every place you use it. The issuer/holder/verifier split is the standard alternative model: it's how a physical driver's licence already works (the government issues it, you hold it, a bar checks it without calling the government), and modern digital identity standards are built to replicate that same separation online.",
     facts: [
-      "The World Wide Web Consortium's Verifiable Credentials Data Model — a real, published web standard — formalises the three roles: an issuer creates and signs a credential, a holder stores and controls it, and a verifier checks it's valid without needing to contact the issuer directly.",
-      "Identity researcher Kim Cameron's 'Laws of Identity' (2005), written while he was Microsoft's Identity Architect, argued that a trustworthy digital identity system must give the holder control over what's disclosed and to whom — a foundational, widely-cited framing for this model.",
-      "When issuer and verifier are the same party, that party can see every time and place the credential is used — the three-role split exists specifically to remove that single vantage point.",
+      "This isn't just a good idea, it's a real published standard: the W3C's Verifiable Credentials Data Model splits every digital credential into issuer, holder, and verifier — so a shop checking your ID never has to call the government to confirm it, and the government never finds out you were at the shop.",
+      "Microsoft's own former Identity Architect, Kim Cameron, argued back in 2005 that if you don't control what gets disclosed and to whom, the system isn't trustworthy — full stop. That's still the test any digital ID should have to pass before you trust it with anything.",
+      "When issuer and verifier are the same party, that party can see every time and place you use the credential — building a movement log of your life out of something that was only supposed to prove your age. The three-role split exists specifically to stop that.",
     ],
     relationships: [
       { type: "generalises to", targetSlug: "identity", note: "The broader, non-digital version of the same concept." },
@@ -973,14 +982,14 @@ export const KG_ENTITIES: KGEntity[] = [
       "Kim Cameron, 'The Laws of Identity' (2005)",
     ],
     whoControls: [
-      "The issuer sets what a credential says and can typically revoke it — for a government-issued credential, that's a government agency.",
-      "Whoever operates the wallet infrastructure controls whether you can access and present your own credentials — this can be government, or a private technology provider under a public-private partnership.",
-      "The verifier decides what it demands to see; a well-designed system limits it to a yes/no answer, but nothing forces that by default.",
+      "The issuer can revoke what it issued. For a government credential, that's a government agency — not a court, not an appeals panel.",
+      "The wallet operator controls whether you can open and use your own credentials. In Australia, that's myID, or a private provider accredited under the Digital ID Act 2024.",
+      "The verifier decides what it asks for. A good system limits that to a yes/no answer. Nothing forces it to.",
     ],
     whatCouldGoWrong: [
-      "Function creep: a system that starts as 'ID for government services' expands stepwise into banking, age verification, benefits, and travel — each expansion individually reasonable, the cumulative effect a single point of control over ordinary life.",
-      "Collapsed roles: when issuer and verifier are the same party, or when different verifiers' data can be linked through a shared identity, tracking becomes possible even without one central database.",
-      "Revocation without due process: a digital credential can be switched off electronically — without an appeals process and human review, a system error becomes a person locked out of banking, travel, or work.",
+      "Function creep: 'ID for government services' expands into banking, age checks, benefits, travel — one reasonable step at a time — until permission to do ordinary things routes through one credential nobody explicitly signed up for.",
+      "Collapsed roles: issuer and verifier become the same party, or link data through a shared identity. Either way, they can track you without asking your permission again. The three-role split exists to stop exactly this.",
+      "Revocation without due process: a credential gets switched off electronically, and every permission attached to it goes with it. No appeal, no human review — a system error becomes a person locked out of banking, travel, or work, and no one has to explain why.",
     ],
     safeguards: [
       "Minimum disclosure enforced by design — a verifier receives only the yes/no answer it needs, not the underlying data.",

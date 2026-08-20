@@ -121,3 +121,71 @@ structured fields alike), ask: does this topic have a real spectrum of
 severity underneath it? If yes, name the rungs explicitly and give the
 reader one simple analogy to hold the whole shape in their head — don't
 just list dangers in whatever order they occurred to you.
+
+---
+
+## TL;DR — for readers who won't read the whole thing
+
+Deep-dive entities get a `tldr?: string[]` — 4-6 short, punchy bullets
+covering the whole page, rendered at the very top, before "Why it
+matters." Not a teaser for the essay below it — a genuinely complete
+summary someone could stop reading after and still walk away with the
+real answer. Only worth adding once a topic has real `sections`; a
+Standard-tier entity is already short enough not to need one.
+
+---
+
+## Short, concrete, named — not hedged
+
+A recurring failure mode in the structured fields (`whoControls`,
+`whatCouldGoWrong`, `safeguards`) specifically: writing in the abstract
+instead of naming the real thing. Compare:
+
+> "Whoever operates the wallet infrastructure controls whether you can
+> access and present your own credentials — this can be government, or
+> a private technology provider under a public-private partnership."
+
+against:
+
+> "The wallet operator controls whether you can open and use your own
+> credentials. In Australia, that's myID, or a private provider
+> accredited under the Digital ID Act 2024."
+
+Same fact. The second version is shorter, names the real thing (myID,
+the Digital ID Act 2024) instead of describing a hypothetical category
+of thing, and doesn't hedge with "this can be... or..." when the essay
+already knows the actual answer. Rules of thumb:
+
+- If the essay elsewhere names the real institution, program, or law,
+  use that name in the structured fields too — don't retreat to a
+  generic description once you already know the specific.
+- Cut hedge words ("typically," "can be," "in some cases") unless the
+  uncertainty is real and worth flagging. Most of the time it's padding.
+- One idea per sentence. If a sentence needs a semicolon to fit
+  everything in, it's probably two sentences that got tired of waiting.
+
+---
+
+## Features vs. benefits — every fact needs a "so what"
+
+A **feature** is a fact about the thing itself. A **benefit** is what
+that fact actually means for the person reading it. `facts` arrays
+routinely lapse into pure feature-listing — naming a standard or a
+mechanism and stopping there, never landing the consequence for the
+reader. The test, after writing any fact: ask "so what?" If the next
+clause doesn't answer that, the fact is dangling.
+
+> Feature only: "The W3C's Verifiable Credentials Data Model formalises
+> the three roles: an issuer creates and signs a credential, a holder
+> stores and controls it, and a verifier checks it's valid without
+> needing to contact the issuer directly."
+>
+> Feature + benefit: "This isn't just a good idea, it's a real published
+> standard: the W3C's Verifiable Credentials Data Model splits every
+> digital credential into issuer, holder, and verifier — so a shop
+> checking your ID never has to call the government to confirm it, and
+> the government never finds out you were at the shop."
+
+Same underlying fact. The second version earns its place on the page —
+it tells the reader what changes for them, not just what the standard
+says.

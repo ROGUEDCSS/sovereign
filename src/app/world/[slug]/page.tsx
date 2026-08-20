@@ -72,6 +72,17 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
             <span>Source: {entity.independenceSource}</span>
           </div>
 
+          {entity.tldr && entity.tldr.length > 0 && (
+            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem", background: "var(--amber)" }}>
+              <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "#1a1005", marginBottom: "0.6rem" }}>TL;DR</div>
+              <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                {entity.tldr.map((t) => (
+                  <li key={t} style={{ fontSize: "var(--size-body)", color: "#1a1005" }}>{t}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           {entity.whyItMatters && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)", marginBottom: "0.4rem" }}>Why it matters</div>
@@ -122,14 +133,14 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           )}
 
           {entity.whatCouldGoWrong && entity.whatCouldGoWrong.length > 0 && (
-            <>
-              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--danger)" }}>What could go wrong?</h2>
-              <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
+            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
+              <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--danger)", marginBottom: "0.7rem" }}>What could go wrong?</div>
+              <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
                 {entity.whatCouldGoWrong.map((w) => (
-                  <li key={w} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>{w}</li>
+                  <li key={w} style={{ fontSize: "var(--size-body)", color: "var(--text-2)", lineHeight: 1.6 }}>{w}</li>
                 ))}
               </ul>
-            </>
+            </div>
           )}
 
           {entity.safeguards && entity.safeguards.length > 0 && (
