@@ -150,7 +150,7 @@ export default function Home() {
               what a free society is built on, and what an individual within it actually lives by.
             </p>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: 620, margin: "0 auto" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
               <div style={{ border: "1px solid var(--border-strong)", borderRadius: "12px", padding: "1.5rem" }}>
                 <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
                   Core civilizational values
