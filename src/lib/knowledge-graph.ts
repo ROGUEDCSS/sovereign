@@ -1,15 +1,51 @@
 import { EvidenceRating, IndependenceSource } from "./articles";
 
-export type EntityType = "organisation" | "government" | "policy" | "product" | "event" | "person" | "concept";
+export type EntityType =
+  | "governance"
+  | "law"
+  | "corporates"
+  | "finance"
+  | "economics"
+  | "media"
+  | "technology"
+  | "science"
+  | "history"
+  | "geography"
+  | "organisations"
+  | "people"
+  | "events";
+
+/** Order here is the canonical display order for the World index. */
+export const ENTITY_TYPES: EntityType[] = [
+  "governance",
+  "law",
+  "corporates",
+  "finance",
+  "economics",
+  "media",
+  "technology",
+  "science",
+  "history",
+  "geography",
+  "organisations",
+  "people",
+  "events",
+];
 
 export const ENTITY_TYPE_LABELS: Record<EntityType, string> = {
-  organisation: "Organisation",
-  government: "Government",
-  policy: "Policy / document",
-  product: "Product",
-  event: "Event",
-  person: "Person",
-  concept: "Concept / term",
+  governance: "Governance",
+  law: "Law",
+  corporates: "Corporates",
+  finance: "Finance",
+  economics: "Economics",
+  media: "Media",
+  technology: "Technology",
+  science: "Science",
+  history: "History",
+  geography: "Geography",
+  organisations: "Organisations",
+  people: "People",
+  events: "Events",
 };
 
 export interface KGRelationship {
@@ -87,7 +123,7 @@ export const KG_ENTITIES: KGEntity[] = [
   {
     slug: "united-nations",
     name: "United Nations",
-    type: "organisation",
+    type: "organisations",
     summary: "The international organisation whose member states adopted the 2030 Agenda for Sustainable Development in 2015.",
     facts: [
       "Member states adopted the 2030 Agenda for Sustainable Development in 2015, containing 17 Sustainable Development Goals and 169 targets.",
@@ -101,7 +137,7 @@ export const KG_ENTITIES: KGEntity[] = [
   {
     slug: "2030-agenda",
     name: "2030 Agenda / SDGs",
-    type: "policy",
+    type: "governance",
     summary: "The UN's voluntary international framework of 17 goals and 169 targets, adopted by member states in 2015 — not a binding global law.",
     facts: [
       "Contains 17 Sustainable Development Goals and 169 targets covering poverty, health, education, water, energy, cities, climate, and institutions, among others.",
@@ -124,7 +160,7 @@ export const KG_ENTITIES: KGEntity[] = [
   {
     slug: "australia-digital-id-act",
     name: "Australia's Digital ID Act",
-    type: "policy",
+    type: "law",
     summary: "Commenced November 2024 — a framework the Australian Government describes as voluntary, with privacy and consumer protections built in.",
     facts: [
       "Commenced in November 2024.",
@@ -145,7 +181,7 @@ export const KG_ENTITIES: KGEntity[] = [
   {
     slug: "reserve-bank-of-australia",
     name: "Reserve Bank of Australia",
-    type: "government",
+    type: "finance",
     summary: "Australia's central bank. States no decision has been made to issue a retail CBDC, and that cash would not automatically be replaced by one.",
     facts: [
       "Currently states no decision has been made to issue a retail CBDC.",
@@ -166,7 +202,7 @@ export const KG_ENTITIES: KGEntity[] = [
   {
     slug: "bank-for-international-settlements",
     name: "Bank for International Settlements",
-    type: "organisation",
+    type: "finance",
     summary: "An international body coordinating central-bank research, including CBDC technology — APIs, interoperability, offline payments, biometric authentication, privacy design, and programmability.",
     facts: [
       "Coordinates central-bank CBDC research including APIs, interoperability, offline payments, biometric authentication devices, privacy-preserving design, and programmability.",
@@ -179,7 +215,7 @@ export const KG_ENTITIES: KGEntity[] = [
   {
     slug: "c40-cities",
     name: "C40 Cities",
-    type: "organisation",
+    type: "organisations",
     summary: "A network of cities promoting '15-minute neighbourhood' planning — access to everyday services by walking or cycling — including Paris, Melbourne, Vancouver, and Bogotá.",
     facts: [
       "Promotes neighbourhoods where everyday services can be reached by walking or cycling.",
@@ -192,7 +228,7 @@ export const KG_ENTITIES: KGEntity[] = [
   {
     slug: "capitalism",
     name: "Capitalism",
-    type: "concept",
+    type: "economics",
     summary: "An economic system based on private ownership of the means of production, market-based allocation of goods and capital, and production organised for profit within a price system.",
     whyItMatters: "It's the dominant economic system across most of the world today, but the word itself is used to describe everything from near-laissez-faire markets to heavily regulated mixed economies with large public sectors — which is exactly why arguments about 'capitalism' so often talk past each other: people are frequently defending or attacking very different versions of it.",
     facts: [
@@ -224,7 +260,7 @@ export const KG_ENTITIES: KGEntity[] = [
   {
     slug: "identity",
     name: "Identity",
-    type: "concept",
+    type: "law",
     summary: "The ability to prove who you are — to yourself and to others — without depending on any single person, company, or government to vouch for you.",
     whyItMatters: "Almost everything else depends on it: opening a bank account, crossing a border, proving you own something, or simply being believed when you say who you are. The more of that proof routes through one login, one document, or one authority, the more a single failure or gatekeeper can lock you out of your own life.",
     facts: [
@@ -242,7 +278,7 @@ export const KG_ENTITIES: KGEntity[] = [
   {
     slug: "digital-identity",
     name: "Digital ID",
-    type: "concept",
+    type: "technology",
     summary: "A model for proving facts about yourself online that separates the job into three roles — issuer, holder, and verifier — so no single party has to see or control everything.",
     whyItMatters: "Most digital ID systems people already use quietly collapse issuer and verifier into the same party — the company or government that issued the credential is also the one checking it every time, seeing every place you use it. The issuer/holder/verifier split is the standard alternative model: it's how a physical driver's licence already works (the government issues it, you hold it, a bar checks it without calling the government), and modern digital identity standards are built to replicate that same separation online.",
     facts: [
@@ -267,7 +303,7 @@ export function getEntity(slug: string): KGEntity | undefined {
   return KG_ENTITIES.find((e) => e.slug === slug);
 }
 
+/** Every category, in canonical order, even ones with no entities yet — the World index shows all 13 as clickable, not just populated ones. */
 export function entitiesByType(): { type: EntityType; entities: KGEntity[] }[] {
-  const types = Array.from(new Set(KG_ENTITIES.map((e) => e.type)));
-  return types.map((type) => ({ type, entities: KG_ENTITIES.filter((e) => e.type === type) }));
+  return ENTITY_TYPES.map((type) => ({ type, entities: KG_ENTITIES.filter((e) => e.type === type) }));
 }

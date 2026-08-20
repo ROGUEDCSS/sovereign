@@ -42,9 +42,13 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
             <span style={{ color: "var(--text-2)" }}>{entity.name}</span>
           </div>
 
-          <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.4rem" }}>
+          <Link
+            href={`/world/category/${entity.type}`}
+            className="label"
+            style={{ color: "var(--amber-strong)", marginBottom: "0.4rem", display: "inline-block", textDecoration: "none" }}
+          >
             {ENTITY_TYPE_LABELS[entity.type]}
-          </div>
+          </Link>
           <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>
             {entity.name}
           </h1>
