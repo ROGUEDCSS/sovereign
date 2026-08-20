@@ -1,4 +1,4 @@
-import { CommunitySignal, SovereignAlignment } from "./knowledge-graph";
+import { CommunitySignal, SovereignAlignment, ArticleSection } from "./knowledge-graph";
 
 export interface CodexItem {
   name: string;
@@ -49,6 +49,30 @@ export interface CodexNode {
   detailed: boolean;
   /** Show the Sovereign Principle / Legal Reality / evidence framework panel. */
   sovereignFramework?: boolean;
+  /** "What should an individual be free to do here, in principle?" */
+  sovereignPrinciple?: string;
+  /** What the applicable jurisdiction actually permits, restricts, or requires — researched, never assumed. */
+  legalReality?: string;
+  /** Jurisdiction legalReality was researched for. Rendered next to the "Legal reality" heading. */
+  legalJurisdiction?: string;
+  /** Plain citations backing legalReality — never a fabricated URL. */
+  legalSources?: string[];
+  /** Why the sovereign principle matters here — the case for. */
+  rationale?: string;
+  /** Named, real support for the principle/rationale — not a vague assertion. */
+  evidenceFor?: string[];
+  /** Steelmanned, named-source case against — a real school of thought, not a strawman. */
+  counterarguments?: string[];
+  /** Real, concrete options available to an individual today. */
+  options?: string[];
+  /**
+   * A flowing narrative essay — same model as World's deep-dive entities.
+   * When present, this replaces the structured Definition/Facts/practical-
+   * question/Sovereign-framework card blocks in the render (all of that
+   * content lives in the prose instead) — Topics and Connections still
+   * render after it as functional navigation.
+   */
+  sections?: ArticleSection[];
   /** Same living-status signal every World entity carries. Undefined until real activity exists — never fabricated. */
   communitySignal?: CommunitySignal;
   sovereignAlignment?: SovereignAlignment;
@@ -79,16 +103,165 @@ const IDENTITY: CodexNode = {
     { label: "Three roles", text: "Digital identity works best split into issuer, holder, and verifier, so no single party controls everything — the same way a driver's licence works: the government issues it, you hold it, a bar checks it without calling the government." },
     { label: "Replacement", text: "Replacing a lost primary ID document typically requires other forms of ID to apply for it — a bootstrapping problem if your identity proof was concentrated in that one document." },
     { label: "Weakest link", text: "Account-takeover attacks overwhelmingly target the single weakest verification channel available — SIM-swap attacks against phone-based two-factor authentication are a well-documented example." },
+    { label: "Ambient identification", text: "Increasingly, identification doesn't require you to do anything at all. Automated licence-plate-reader networks — Flock Safety's cameras are a well-documented example — log a vehicle's location every time it passes one, whether or not the driver is suspected of anything. This is a fundamentally different kind of identification from a passport check: passive, continuous, and it doesn't ask permission." },
+    { label: "Public-private blurring", text: "Much of this ambient camera infrastructure is bought and deployed by private homeowner associations, businesses, and local councils, not national government — but the resulting data is frequently made accessible to police. Reporting by outlets including 404 Media and civil-liberties groups has documented searches on these networks that went beyond their stated purpose." },
+    { label: "A global pattern", text: "This isn't a single-country problem. The UK is consistently reported among the most camera-dense countries per capita, and China operates the most extensive state-linked camera and facial-recognition network in the world — the ownership models and legal safeguards differ sharply between countries, but the underlying shift, from identity you present to identity that's captured, is global." },
   ],
   practicalQuestion: "How can you prove what's actually necessary about yourself, to whoever needs it, without surrendering everything else?",
   detailed: true,
   sovereignFramework: true,
+  sovereignPrinciple:
+    "An individual should be free to prove who they are, and to prove specific facts about themselves, without being forced to disclose more than what's actually being asked — and without any single institution holding the power to revoke their ability to function in ordinary society.",
+  legalJurisdiction: "Australia",
+  legalReality:
+    "Australia has no single mandatory national identity card. Identity is instead verified through a mix of documents — passport, driver's licence, birth certificate, Medicare card — historically scored under the '100-point check' used to satisfy anti-money-laundering and counter-terrorism-financing rules. The Digital ID Act 2024 (Cth) created a voluntary accreditation scheme for digital identity providers, including the government's own myID, overseen by an independent Accreditation Authority — it does not make digital identity mandatory. The Privacy Act 1988 (Cth) governs how organisations handle personal information, and Australian Privacy Principle 2 gives individuals a qualified right to deal with some organisations anonymously or under a pseudonym, where lawful and practicable. In 2019, a proposed expansion of government facial-recognition data-sharing (the Identity-matching Services Bill) did not proceed after the Parliamentary Joint Committee on Intelligence and Security raised concerns about insufficient privacy safeguards — a real instance of a proposed identity-verification power being checked, not merely a hypothetical one.",
+  legalSources: [
+    "Digital ID Act 2024 (Cth)",
+    "Privacy Act 1988 (Cth), Australian Privacy Principle 2 — Anonymity and pseudonymity",
+    "Identity-matching Services Bill 2019 (Cth) — did not proceed, per the PJCIS advisory report",
+    "Anti-Money Laundering and Counter-Terrorism Financing Act 2006 (Cth) — customer identification requirements",
+  ],
+  rationale:
+    "Identity resilience matters because modern institutions increasingly treat 'prove who you are' and 'prove you're allowed to do this' as the same request — and once they're the same request, whoever controls the proof controls the permission. This is, at its core, a tension between you as a private individual and government as a public institution: government has real, legitimate reasons to verify identity — preventing fraud, enforcing the law, delivering services — but every one of those reasons can also justify near-total tracking if left unchecked. Increasingly, the line isn't drawn by who builds the infrastructure — a lot of it, like ambient camera networks, is privately built and sold — but by who ends up with access to what it captures, and what actually stops them using it beyond its original purpose.",
+  evidenceFor: [
+    "The Privacy Act's own Australian Privacy Principle 2 already recognises a qualified right to anonymity and pseudonymity in dealing with many organisations — a legal acknowledgement that identity disclosure should be minimised, not assumed by default.",
+    "The Digital ID Act 2024 was explicitly built as a voluntary, accredited scheme rather than a mandatory national identity system — a real, current policy choice in favour of optionality.",
+    "SIM-swap fraud and single-factor account takeover are well-documented, common attack patterns specifically because so many people concentrate their identity verification in one phone number or one document.",
+  ],
+  counterarguments: [
+    "A single, well-secured, government-verified digital identity could genuinely reduce fraud and impersonation compared to today's fragmented mix of weak passwords and easily-forged paper documents — the Digital ID Act's own stated rationale is fraud reduction and convenience, not control.",
+    "Concentrating verification through an accredited scheme with legislated privacy safeguards can be more auditable and accountable than dozens of private companies independently collecting and storing identity documents with far less oversight.",
+    "Some services — banking, health, government payments — have a legitimate, legally-grounded need for a high-confidence identity check specifically because the AML/CTF regime exists to prevent real financial crime, not merely bureaucratic caution.",
+    "Ambient camera networks like automated licence-plate readers have real, documented public-safety uses — locating stolen vehicles, missing persons, and suspects in serious crimes quickly. A system that only logs a plate, without facial or biometric data, is narrower than many alternatives, and can operate under an audit trail a covert method wouldn't have.",
+  ],
+  options: [
+    "Keep certified physical copies of your core identity documents separate from where you keep the originals.",
+    "Use an accredited provider's Document Verification Service pathway where available — it confirms a document is valid without you having to hand over the physical original.",
+    "Register more than one authentication method wherever a service allows it — don't rely on a single phone number as your only recovery path.",
+    "Where the Privacy Act's anonymity or pseudonymity principle applies, ask whether an organisation actually needs your full identity, or just confirmation of one fact — your age, your eligibility.",
+    "Recognise that ambient identification — cameras, plate readers — mostly can't be personally opted out of in public space. The real lever isn't personal precaution; it's what data-retention limits, audit requirements, and access restrictions apply to whoever operates the network logging you.",
+  ],
+  sections: [
+    {
+      heading: "What identity actually is",
+      content: [
+        { kind: "p", text: "Identity is your ability to prove who you are — to institutions, strangers, and yourself." },
+        { kind: "p", text: "That sounds simple. It stops being simple the moment you ask a second question: prove it to whom, and on whose permission?" },
+        { kind: "p", text: "Every identity system, at its core, answers one question: who gets to use this information about you, and did you say yes? A resilient identity doesn't rest on any single document, device, or company — because losing any one of those shouldn't cost you the ability to say yes or no in the first place." },
+      ],
+    },
+    {
+      heading: "The old system, and its single point of failure",
+      content: [
+        { kind: "p", text: "For most people, identity is provable through only one primary channel — a phone, or a single government-issued document. Losing that channel is an ordinary event, not a rare catastrophe." },
+        { kind: "p", text: "Replacing a lost primary ID document typically requires other forms of ID to apply for it — a bootstrapping problem if your identity proof was concentrated in that one document to begin with." },
+        { kind: "p", text: "Account-takeover attacks know this. They overwhelmingly target the single weakest verification channel available. SIM-swap attacks against phone-based two-factor authentication are the well-documented example — an attacker doesn't break your password, they just become your phone number for an afternoon, and every permission tied to that number goes with it." },
+      ],
+    },
+    {
+      heading: "A model built to protect your permission",
+      content: [
+        { kind: "p", text: "Digital identity works best split into three roles, so no single party controls everything: an issuer, a holder, and a verifier." },
+        { kind: "p", text: "You already trust this model in physical form. A driver's licence works exactly this way: the government issues it, you hold it, a bar checks it — without calling the government every time. You decide, each time, what gets shown and to whom. That's the entire point of the split: permission stays with the holder, not the verifier." },
+        { kind: "p", text: "The danger isn't the technology. It's what happens when those three roles quietly collapse back into one — when the party checking your identity is also the party that issued it, and now also watches every place you use it. At that point, permission stops being asked. It's just assumed." },
+      ],
+    },
+    {
+      heading: "Ambient identification — when permission isn't asked at all",
+      content: [
+        { kind: "p", text: "Everything above assumes you're presenting something — a document, a credential, a login, a moment where you could, in principle, say no. Identity is increasingly starting to work the opposite way." },
+        { kind: "p", text: "Automated licence-plate-reader networks — Flock Safety's cameras are a well-documented example — log a vehicle's location every time it passes one, whether or not the driver is suspected of anything. This is a fundamentally different kind of identification from a passport check: passive, continuous, and it doesn't ask permission, because there's no interaction for permission to attach to." },
+        { kind: "diagram", text: "PRIVATE CAMERA NETWORK\n     │  (HOA, council, business)\n     ▼\n  LOCATION DATA, LOGGED\n     │\n     ▼\n  POLICE ACCESS\n     │\n     ▼\n  SEARCH BEYOND\n  STATED PURPOSE" },
+        { kind: "p", text: "Much of this infrastructure is bought and deployed by private homeowner associations, businesses, and local councils, not national government — but the resulting data is frequently made accessible to police. Reporting by outlets including 404 Media and civil-liberties groups has documented searches on these networks that went beyond their stated purpose. Nobody asked the person being tracked, and in most cases nobody had to." },
+        { kind: "p", text: "This isn't a single-country problem. The UK is consistently reported among the most camera-dense countries per capita, and China operates the most extensive state-linked camera and facial-recognition network in the world — the ownership models and legal safeguards differ sharply between countries, but the underlying shift, from identity you present to identity that's captured, is global." },
+      ],
+    },
+    {
+      heading: "The private individual and the public institution",
+      content: [
+        { kind: "p", text: "Strip away the specific technology and there's one relationship underneath all of this: you, a private individual, and government, a public institution, negotiating how much of you gets accessed by default — and who has to ask first." },
+        { kind: "p", text: "Government has real, legitimate reasons to verify identity — preventing fraud, enforcing the law, delivering services. Every one of those reasons can also justify near-total tracking, if left unchecked. That's not a hypothetical slope; it's the same justification either way, and the only thing that separates a proportionate identity check from mass surveillance is whether permission and oversight are actually built into the system, or just assumed." },
+        { kind: "p", text: "Increasingly, the line isn't drawn by who builds the infrastructure. A lot of it — ambient camera networks especially — is privately built and sold. The line is drawn by who ends up with access to what it captures, and what actually stops them using it beyond its original purpose." },
+      ],
+    },
+    {
+      heading: "The legal reality — Australia",
+      content: [
+        { kind: "p", text: "Australia has no single mandatory national identity card. Identity is instead verified through a mix of documents — passport, driver's licence, birth certificate, Medicare card — historically scored under the '100-point check' used to satisfy anti-money-laundering and counter-terrorism-financing rules." },
+        { kind: "p", text: "The Digital ID Act 2024 (Cth) created a voluntary accreditation scheme for digital identity providers, including the government's own myID, overseen by an independent Accreditation Authority — it does not make digital identity mandatory. The Privacy Act 1988 (Cth) governs how organisations handle personal information, and Australian Privacy Principle 2 gives individuals a qualified right to deal with some organisations anonymously or under a pseudonym, where lawful and practicable — a legal acknowledgement that your permission to withhold identity is a real thing, not a courtesy." },
+        { kind: "p", text: "In 2019, a proposed expansion of government facial-recognition data-sharing (the Identity-matching Services Bill) did not proceed after the Parliamentary Joint Committee on Intelligence and Security raised concerns about insufficient privacy safeguards — a real instance of a proposed identity-verification power being checked, not merely a hypothetical one." },
+        {
+          kind: "list",
+          items: [
+            "Digital ID Act 2024 (Cth)",
+            "Privacy Act 1988 (Cth), Australian Privacy Principle 2 — Anonymity and pseudonymity",
+            "Identity-matching Services Bill 2019 (Cth) — did not proceed, per the PJCIS advisory report",
+            "Anti-Money Laundering and Counter-Terrorism Financing Act 2006 (Cth) — customer identification requirements",
+          ],
+        },
+      ],
+    },
+    {
+      heading: "The individual's case",
+      content: [
+        { kind: "p", text: "The case for minimal disclosure, and for permission being a real, enforceable thing:" },
+        {
+          kind: "list",
+          items: [
+            "The Privacy Act's own Australian Privacy Principle 2 already recognises a qualified right to anonymity and pseudonymity in dealing with many organisations — a legal acknowledgement that identity disclosure should be minimised, not assumed by default.",
+            "The Digital ID Act 2024 was explicitly built as a voluntary, accredited scheme rather than a mandatory national identity system — a real, current policy choice in favour of optionality.",
+            "SIM-swap fraud and single-factor account takeover are well-documented, common attack patterns specifically because so many people concentrate their identity verification, and every permission attached to it, in one phone number or one document.",
+          ],
+        },
+      ],
+    },
+    {
+      heading: "The government's case",
+      content: [
+        { kind: "p", text: "Steelmanned, not strawmanned — the real case for more verification, not less:" },
+        {
+          kind: "list",
+          items: [
+            "A single, well-secured, government-verified digital identity could genuinely reduce fraud and impersonation compared to today's fragmented mix of weak passwords and easily-forged paper documents — the Digital ID Act's own stated rationale is fraud reduction and convenience, not control.",
+            "Concentrating verification through an accredited scheme with legislated privacy safeguards can be more auditable and accountable than dozens of private companies independently collecting and storing identity documents with far less oversight.",
+            "Some services — banking, health, government payments — have a legitimate, legally-grounded need for a high-confidence identity check specifically because the AML/CTF regime exists to prevent real financial crime, not merely bureaucratic caution.",
+            "Ambient camera networks like automated licence-plate readers have real, documented public-safety uses — locating stolen vehicles, missing persons, and suspects in serious crimes quickly. A system that only logs a plate, without facial or biometric data, is narrower than many alternatives, and can operate under an audit trail a covert method wouldn't have.",
+          ],
+        },
+      ],
+    },
+    {
+      heading: "What resilience actually looks like",
+      content: [
+        { kind: "p", text: "Where permission is a real mechanism — documents, accounts, digital ID — there's real, practical action available:" },
+        {
+          kind: "list",
+          items: [
+            "Keep certified physical copies of your core identity documents separate from where you keep the originals.",
+            "Use an accredited provider's Document Verification Service pathway where available — it confirms a document is valid without you having to hand over the physical original.",
+            "Register more than one authentication method wherever a service allows it — don't rely on a single phone number as your only recovery path.",
+            "Where the Privacy Act's anonymity or pseudonymity principle applies, ask whether an organisation actually needs your full identity, or just confirmation of one fact — your age, your eligibility.",
+          ],
+        },
+        { kind: "p", text: "Where permission was never part of the design — ambient cameras, plate readers — be honest about the limit: there is no personal precaution that opts you out of a camera in public space. The lever there isn't individual action, it's what data-retention limits, audit requirements, and access restrictions apply to whoever operates the network. That's a policy fight, not a resilience checklist item, and pretending otherwise doesn't help anyone." },
+      ],
+    },
+    {
+      heading: "The Sovereign position",
+      content: [
+        { kind: "p", text: "SOVEREIGN doesn't need to argue that identity verification is bad. Fraud is real, and a government or a business asking to confirm a fact about you is often entirely reasonable." },
+        { kind: "p", text: "What matters is whether you were asked. An individual should be free to prove who they are, and to prove specific facts about themselves, without being forced to disclose more than what's actually being asked — and without any single institution, public or private, holding the power to access, track, or revoke their ability to function in ordinary society without their permission." },
+        { kind: "p", text: "That's the whole test. Not \"is this system secure,\" not \"is this operator trustworthy today\" — but who has to ask you first, and what happens if they stop asking." },
+      ],
+    },
+  ],
   items: [
     { name: "Legal identity", description: "Passports, birth certificates, and government-issued documents — the base layer, and the hardest to replace if lost." },
     { name: "Digital identity", description: "Online accounts, digital credentials, and the authentication methods that stand in for you when you're not physically present." },
     { name: "Identity resilience", description: "Certified copies, offline records, and more than one way to prove who you are — so no single lost device or locked account can strand you." },
     { name: "Privacy & disclosure", description: "What you actually choose to reveal, to whom, and why — proving the specific claim asked for, not your entire file." },
     { name: "Digital security tools", description: "Hardware security keys, password managers, and encrypted storage — the tools that make disclosure a choice instead of an accident." },
+    { name: "Ambient identification", description: "Identification that happens to you without any action on your part — licence-plate readers, facial-recognition cameras, and similar networks that log who and where you are by default, not by request." },
   ],
   connections: [{ path: ["individual", "finance"] }, { path: ["family", "family-finance"] }],
 };

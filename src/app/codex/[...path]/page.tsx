@@ -7,6 +7,7 @@ import { PeekProvider } from "@/components/PeekProvider";
 import { PeekList, PeekItem } from "@/components/PeekList";
 import { CommunityPanel } from "@/components/CommunityPanel";
 import { TopicItem } from "@/components/TopicItem";
+import { ArticleSectionsBlock } from "@/components/ArticleSections";
 
 export function generateStaticParams() {
   return allCodexPaths().map((path) => ({ path }));
@@ -66,7 +67,9 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
             </div>
           )}
 
-          {node.definition && (
+          {node.sections && node.sections.length > 0 && <ArticleSectionsBlock sections={node.sections} />}
+
+          {(!node.sections || node.sections.length === 0) && node.definition && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem", background: "var(--amber)" }}>
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "#1a1005", marginBottom: "0.4rem" }}>
                 Definition
@@ -89,10 +92,10 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
             </div>
           )}
 
-          {node.facts && node.facts.length > 0 && (
+          {(!node.sections || node.sections.length === 0) && node.facts && node.facts.length > 0 && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)", marginBottom: "0.4rem" }}>
-                Facts
+                Situation
               </div>
               <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                 {node.facts.map((fact) => {
@@ -113,7 +116,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
             </div>
           )}
 
-          {node.practicalQuestion && (
+          {(!node.sections || node.sections.length === 0) && node.practicalQuestion && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem", background: "var(--amber)" }}>
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "#1a1005", marginBottom: "0.4rem" }}>
                 The practical question
@@ -205,45 +208,86 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
             </p>
           )}
 
-          {node.sovereignFramework && (
-            <div className="card" style={{ padding: "1.5rem", marginBottom: "2.5rem" }}>
-              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)", marginBottom: "1rem" }}>
-                How this node will be filled in
-              </h2>
-              <p style={{ color: "var(--text-2)", fontSize: "var(--size-sm)", marginBottom: "1.25rem" }}>
-                Every node that touches rights or permissions follows this same framework. The
-                structure is built — the research and content for each field still needs to be
-                done properly, not guessed.
+          {(!node.sections || node.sections.length === 0) && node.sovereignFramework && !node.sovereignPrinciple && (
+            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
+              <p style={{ color: "var(--text-2)" }}>
+                This node touches rights or permissions and follows the Sovereign framework, but
+                the research hasn&apos;t been done yet — not guessed, not filled in until it has.
               </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
-                <div>
-                  <span className="pill pill-scenario">Sovereign principle</span>
-                  <p style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.35rem" }}>
-                    What should an individual be free to do here, in principle?
-                  </p>
-                </div>
-                <div>
-                  <span className="pill pill-fact">Legal reality</span>
-                  <p style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.35rem" }}>
-                    What does the applicable jurisdiction actually permit, restrict, or require —
-                    researched per jurisdiction, not assumed.
-                  </p>
-                </div>
-                <div>
-                  <span className="pill pill-opinion">Rationale → evidence → counterarguments → options</span>
-                  <p style={{ color: "var(--text-3)", fontSize: "var(--size-sm)", marginTop: "0.35rem" }}>
-                    Why it matters, what supports it, the strongest case against it, and the real
-                    options available.
-                  </p>
-                </div>
-                <div style={{ display: "flex", gap: "1.25rem", flexWrap: "wrap", fontSize: "var(--size-sm)", color: "var(--text-3)" }}>
-                  <span>What · Why · When · Where · How</span>
-                  <span>Evidence / sources</span>
-                  <span>Sovereign alignment rating</span>
-                  <span>Community validation</span>
-                </div>
-              </div>
             </div>
+          )}
+
+          {(!node.sections || node.sections.length === 0) && node.sovereignPrinciple && (
+            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem", background: "var(--amber)" }}>
+              <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "#1a1005", marginBottom: "0.4rem" }}>
+                The Sovereign principle
+              </div>
+              <p style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "#1a1005" }}>{node.sovereignPrinciple}</p>
+            </div>
+          )}
+
+          {(!node.sections || node.sections.length === 0) && node.legalReality && (
+            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
+              <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)", marginBottom: "0.4rem" }}>
+                The legal reality — {node.legalJurisdiction ?? "researched per jurisdiction"}
+              </div>
+              <p style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>{node.legalReality}</p>
+              {node.legalSources && node.legalSources.length > 0 && (
+                <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", marginTop: "0.9rem", display: "flex", flexDirection: "column", gap: "0.3rem" }}>
+                  {node.legalSources.map((s) => (
+                    <li key={s} style={{ fontSize: "var(--size-sm)", color: "var(--text-3)" }}>{s}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+
+          {(!node.sections || node.sections.length === 0) && node.rationale && (
+            <>
+              <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
+                The private individual vs. the public institution
+              </h2>
+              <p style={{ color: "var(--text-2)", marginBottom: "1.25rem" }}>{node.rationale}</p>
+
+              {node.evidenceFor && node.evidenceFor.length > 0 && (
+                <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "1.25rem" }}>
+                  <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)", marginBottom: "0.4rem" }}>
+                    The individual&apos;s case
+                  </div>
+                  <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                    {node.evidenceFor.map((e) => (
+                      <li key={e} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>{e}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {node.counterarguments && node.counterarguments.length > 0 && (
+                <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "1.25rem" }}>
+                  <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)", marginBottom: "0.4rem" }}>
+                    The government&apos;s case
+                  </div>
+                  <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                    {node.counterarguments.map((c) => (
+                      <li key={c} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>{c}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {node.options && node.options.length > 0 && (
+                <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
+                  <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)", marginBottom: "0.4rem" }}>
+                    Your real options
+                  </div>
+                  <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                    {node.options.map((o) => (
+                      <li key={o} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>{o}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </>
           )}
 
           {relatedDomains.length > 0 && (
