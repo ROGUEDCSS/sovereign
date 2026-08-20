@@ -15,12 +15,27 @@ export type IndependenceSource =
   | "Expert analysis"
   | "Anecdotal";
 
+/** Ordered content within a section, in the order it should render. */
+export type ArticleContentBlock =
+  | { kind: "p"; text: string }
+  | { kind: "subheading"; text: string }
+  | { kind: "list"; items: string[] }
+  | { kind: "diagram"; text: string }
+  | { kind: "definitions"; items: { term: string; text: string }[] };
+
+export interface ArticleSection {
+  heading: string;
+  content: ArticleContentBlock[];
+}
+
 export interface Article {
   slug: string;
   title: string;
   dek: string;
   evidenceRating: EvidenceRating;
   independenceSource: IndependenceSource;
+  /** Long-form, headed content — rendered above blocks when present. */
+  sections?: ArticleSection[];
   blocks: ArticleBlock[];
 }
 
@@ -30,7 +45,225 @@ export const ARTICLES: Article[] = [
     title: "Digital identity: what it is, and how to stay resilient inside it",
     dek: "Digital ID is not inherently authoritarian — but the number of essential services that depend on one credential is the number that actually matters.",
     evidenceRating: 4,
-    independenceSource: "Government source",
+    independenceSource: "Expert analysis",
+    sections: [
+      {
+        heading: "The potential dangers of Digital ID",
+        content: [
+          { kind: "p", text: "Digital ID is not automatically dangerous." },
+          { kind: "p", text: "Digital ID can make life easier." },
+          { kind: "p", text: "You can prove who you are without carrying documents. You may be able to prove that you are over 18 without showing your date of birth. You may be able to access government services without repeatedly providing the same information." },
+          { kind: "p", text: "The danger is not the technology itself." },
+          { kind: "p", text: "The danger is what happens if digital identity becomes the gateway to everyday life." },
+          { kind: "p", text: "The central question is:" },
+          { kind: "p", text: "Who controls your digital identity, what can they see, and what can they prevent you from doing?" },
+        ],
+      },
+      {
+        heading: "The old system",
+        content: [
+          { kind: "p", text: "Traditionally, you prove who you are using separate things:" },
+          { kind: "list", items: ["Passport", "Driver licence", "Birth certificate", "Bank account", "Medicare card", "Membership card", "Paper certificate", "Physical signature"] },
+          { kind: "p", text: "These systems are inconvenient." },
+          { kind: "p", text: "But they are also fragmented." },
+          { kind: "p", text: "Your driver's licence does not automatically know what you bought at the supermarket." },
+          { kind: "p", text: "Your supermarket doesn't automatically know your medical history." },
+          { kind: "p", text: "Your bank doesn't automatically know which books you borrowed from the library." },
+          { kind: "p", text: "There are many separate systems." },
+        ],
+      },
+      {
+        heading: "Digital ID changes the model",
+        content: [
+          { kind: "p", text: "Digital ID can potentially connect many services to one digital identity. For example:" },
+          {
+            kind: "diagram",
+            text: "                 YOUR DIGITAL ID\n                       │\n       ┌───────────────┼───────────────┐\n       │               │               │\n     BANK            HEALTH         GOVERNMENT\n       │               │               │\n    EMPLOYER         TRAVEL          RETAIL\n       │               │               │\n       └───────────────┼───────────────┘\n                       │\n                  ONE PERSON",
+          },
+          { kind: "p", text: "This can be extremely convenient." },
+          { kind: "p", text: "It can also create an enormous concentration of power." },
+        ],
+      },
+      {
+        heading: "Holder, issuer and verifier",
+        content: [
+          { kind: "p", text: "These are three basic parts of a digital identity system." },
+          {
+            kind: "definitions",
+            items: [
+              { term: "Issuer", text: "The organisation that says: \"We certify that this is true.\" For example: \"This person is over 18,\" or: \"This person holds a driver's licence.\"" },
+              { term: "Holder", text: "You. You hold the digital credential in your digital wallet." },
+              { term: "Verifier", text: "The organisation asking for proof. For example: \"Are you over 18?\" Ideally, the verifier receives only: YES — OVER 18. It does not need your full name, address or date of birth." },
+            ],
+          },
+        ],
+      },
+      {
+        heading: "This can actually be better than the old system",
+        content: [
+          { kind: "p", text: "Imagine buying alcohol." },
+          { kind: "subheading", text: "Old system" },
+          { kind: "p", text: "You show your driver's licence. The shop can see:" },
+          { kind: "list", items: ["Your name", "Photograph", "Date of birth", "Address", "Licence number"] },
+          { kind: "p", text: "But the shop only needed to know: are you over 18?" },
+          { kind: "subheading", text: "Better digital system" },
+          { kind: "p", text: "Your digital wallet simply proves: OVER 18: YES. Nothing else is disclosed." },
+          { kind: "p", text: "That is a genuine privacy improvement." },
+        ],
+      },
+      {
+        heading: "So where is the danger?",
+        content: [
+          { kind: "p", text: "The danger starts when digital ID changes from \"prove something about yourself\" into \"you must use this identity to participate.\"" },
+          { kind: "p", text: "That is a very different system." },
+        ],
+      },
+      {
+        heading: "Identity is not the same as permission",
+        content: [
+          { kind: "p", text: "This distinction is fundamental." },
+          {
+            kind: "definitions",
+            items: [
+              { term: "Identity", text: "Who are you?" },
+              { term: "Credential", text: "What can you prove?" },
+              { term: "Verification", text: "Is that proof genuine?" },
+              { term: "Permission", text: "Are you allowed to do this?" },
+            ],
+          },
+          { kind: "p", text: "These should remain separate. The danger comes when they become one system: \"We know who you are, therefore we decide whether you may proceed.\"" },
+        ],
+      },
+      {
+        heading: "The universal ID problem",
+        content: [
+          { kind: "p", text: "Imagine your digital ID becomes necessary for:" },
+          { kind: "list", items: ["Banking", "Employment", "Healthcare", "Education", "Travel", "Government services", "Buying certain products", "Renting a house", "Running a business", "Social media", "Telecommunications"] },
+          { kind: "p", text: "Each individual requirement might sound reasonable. But eventually: your digital ID becomes the key to ordinary life. That creates a single point of control." },
+        ],
+      },
+      {
+        heading: "Function creep",
+        content: [
+          { kind: "p", text: "This is one of the biggest risks. A system starts with: \"Digital ID for government services.\"" },
+          { kind: "p", text: "Then somebody says: \"It would be convenient for banking.\" Then: \"Let's use it for age verification.\" Then: \"Let's use it for online safety.\" Then: \"Let's use it for benefits.\" Then: \"Let's use it for travel.\"" },
+          { kind: "p", text: "Each expansion can be justified individually. Eventually the system does something completely different from what it was originally created to do. This is called function creep." },
+        ],
+      },
+      {
+        heading: "Public + private partnerships",
+        content: [
+          { kind: "p", text: "Government does not have to operate every part of the system. Private companies can potentially become:" },
+          { kind: "list", items: ["Identity providers", "Wallet providers", "Banks", "Telecommunications companies", "Technology providers", "Healthcare providers", "Employers", "Retailers", "Platforms"] },
+          { kind: "p", text: "This can make the system more useful. It can also make the system much bigger. The question becomes: how many organisations can use the identity, and how much information can be connected through it?" },
+        ],
+      },
+      {
+        heading: "The linking problem",
+        content: [
+          { kind: "p", text: "Imagine: your bank knows your financial activity. Your employer knows your employment. Your telecommunications company knows your account. Government knows your tax information. A healthcare provider knows your healthcare information. A retailer knows your purchases." },
+          { kind: "p", text: "A digital identity system could potentially make these systems easier to connect. You don't necessarily need one giant database — you can have many databases that are linked through a common identity. That can be just as powerful." },
+        ],
+      },
+      {
+        heading: "The surveillance problem",
+        content: [
+          { kind: "p", text: "A particularly important question is: does the issuer know every time you use your identity?" },
+          { kind: "p", text: "If the answer is yes, your identity could potentially create a record of where you authenticate. That could reveal:" },
+          { kind: "list", items: ["Where you go", "Which services you use", "Which organisations you interact with", "When you interact with them", "Potentially patterns of behaviour"] },
+          { kind: "p", text: "A good system should minimise or prevent this type of tracking." },
+        ],
+      },
+      {
+        heading: "The profiling problem",
+        content: [
+          { kind: "p", text: "Information from different systems can potentially be combined to create a profile. For example: financial behaviour + location + purchases + employment + services used." },
+          { kind: "p", text: "The result could become a detailed picture of an individual. That creates the possibility of profiling people according to their behaviour." },
+        ],
+      },
+      {
+        heading: "The social-credit problem",
+        content: [
+          { kind: "p", text: "The extreme version is simple:" },
+          { kind: "diagram", text: "YOUR BEHAVIOUR\n       ↓\nYOUR PROFILE\n       ↓\nYOUR SCORE\n       ↓\nYOUR ACCESS" },
+          { kind: "p", text: "Instead of saying \"you are forbidden to do this,\" a system could potentially say \"your digital identity does not qualify.\" That could affect:" },
+          { kind: "list", items: ["Banking", "Travel", "Benefits", "Employment", "Purchases", "Services", "Licences"] },
+          { kind: "p", text: "This is why identity and permission must remain separate." },
+        ],
+      },
+      {
+        heading: "The revocation problem",
+        content: [
+          { kind: "p", text: "A physical document is usually something you possess. A digital credential can be checked electronically. That is useful. But it raises an important question: who can turn it off? And: what happens if they get it wrong?" },
+          { kind: "p", text: "A properly designed system needs:" },
+          { kind: "list", items: ["Due process", "Appeals", "Human review", "Correction mechanisms", "Independent oversight", "Alternative ways to prove identity"] },
+          { kind: "p", text: "Otherwise, a mistake in a digital identity system could become a mistake in your ability to participate in society." },
+        ],
+      },
+      {
+        heading: "The \"one switch\" problem",
+        content: [
+          { kind: "p", text: "Imagine a future where one digital identity controls access to: money + travel + work + healthcare + government + communication." },
+          { kind: "p", text: "Then ask: what happens if that identity stops working? It could be:" },
+          { kind: "list", items: ["Hacked", "Incorrectly suspended", "Lost", "Locked", "Revoked", "Technically unavailable", "Inaccessible because the system is offline"] },
+          { kind: "p", text: "The more things connected to one identity, the greater the consequences of failure." },
+        ],
+      },
+      {
+        heading: "The government abuse problem",
+        content: [
+          { kind: "p", text: "A democratic government today may have no intention of abusing a digital identity system. But governments change. Laws change. Emergencies happen. Political systems change. Future governments may have different ideas about what behaviour should be permitted." },
+          { kind: "p", text: "Therefore the important question isn't \"do we trust today's government?\" It is \"would we trust every future government with the same power?\" That is a much harder question." },
+        ],
+      },
+      {
+        heading: "The most important Sovereign principle",
+        content: [
+          { kind: "p", text: "A digital identity should help you prove who you are. It should not become a mechanism that determines what you are allowed to do with your life." },
+          { kind: "p", text: "There should always be a clear separation between:" },
+          { kind: "list", items: ["Identity", "Authority", "Permission", "Surveillance"] },
+        ],
+      },
+      {
+        heading: "What a Sovereign Digital ID should look like",
+        content: [
+          { kind: "p", text: "A freedom-preserving system would aim for:" },
+          {
+            kind: "definitions",
+            items: [
+              { term: "You control it", text: "You hold your credentials." },
+              { term: "Minimum disclosure", text: "You disclose only what is necessary." },
+              { term: "No universal tracking", text: "Using your ID does not automatically create a central record of everything you do." },
+              { term: "No behavioural score", text: "Your identity does not become a score determining your access to society." },
+              { term: "No function creep", text: "New uses require explicit scrutiny and authorisation." },
+              { term: "Due process", text: "Your identity cannot simply be switched off without meaningful recourse." },
+              { term: "Alternatives", text: "People are not forced into a purely digital existence." },
+              { term: "Transparency", text: "The system can be independently examined." },
+              { term: "Separation", text: "No single organisation controls identity, information and permission." },
+              { term: "Exit", text: "You can leave or change providers without losing your ability to function in society." },
+            ],
+          },
+        ],
+      },
+      {
+        heading: "The simple test",
+        content: [
+          { kind: "p", text: "Whenever someone proposes a new use for Digital ID, ask five questions:" },
+          { kind: "list", items: ["Who knows?", "What do they know?", "Who can connect it?", "Who can stop me?", "What happens if they get it wrong?"] },
+          { kind: "p", text: "Those five questions expose most of the important risks." },
+        ],
+      },
+      {
+        heading: "The Sovereign position",
+        content: [
+          { kind: "p", text: "SOVEREIGN does not need to argue \"Digital ID is evil.\" That is too simplistic." },
+          { kind: "p", text: "Nor should it argue \"Digital ID is safe because the government says it is safe.\" That is equally simplistic." },
+          { kind: "p", text: "The proper position is: digital identity is a powerful technology. It can increase privacy, convenience and security. It can also create unprecedented opportunities for surveillance, profiling, exclusion and control if identity becomes linked to permission and access." },
+          { kind: "p", text: "Therefore: the technology must be scrutinised. The architecture must be scrutinised. The legislation must be scrutinised. And the powers it creates must be scrutinised." },
+          { kind: "p", text: "Identity should belong to the individual. It should never become the government's permission slip for living." },
+        ],
+      },
+    ],
     blocks: [
       {
         type: "fact",

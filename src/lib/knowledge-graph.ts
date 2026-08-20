@@ -432,6 +432,7 @@ export const KG_ENTITIES: KGEntity[] = [
       { type: "generalises to", targetSlug: "identity", note: "The broader, non-digital version of the same concept." },
     ],
     codexLinks: [{ path: ["individual", "identity"], note: "Where this model applies directly to your own setup." }],
+    knowledgeBaseSlug: "digital-id",
     furtherReading: [
       "W3C, 'Verifiable Credentials Data Model' (w3.org/TR/vc-data-model/)",
       "Kim Cameron, 'The Laws of Identity' (2005)",
