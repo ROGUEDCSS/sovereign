@@ -85,6 +85,43 @@ export const WORLD_CATEGORY_DESCRIPTIONS: Partial<Record<EntityType, string>> = 
   governance: "How collective political authority is organised and exercised.",
 };
 
+export interface WorldSovereigntyPoint {
+  label: string;
+  text: string;
+}
+
+/**
+ * Steelmanned, named-source pros/cons of the category itself, specifically
+ * weighed against individual sovereignty — not a generic "is this good"
+ * take. Same discipline as KGEntity.pros/cons (Capitalism): real named
+ * thinkers, no strawmen, and cons aren't automatically "wins" — a con here
+ * is a real tension the reader should weigh, not a verdict. Labeled per
+ * the scannable-content standard so a reader can scan the topic before
+ * deciding to read the sentence.
+ */
+export const WORLD_CATEGORY_SOVEREIGNTY: Partial<Record<EntityType, { pros: WorldSovereigntyPoint[]; cons: WorldSovereigntyPoint[] }>> = {
+  governance: {
+    pros: [
+      { label: "Enforceable property rights", text: "Rule of law is what makes ownership real rather than just claimed — John Locke's Second Treatise of Government (1689) argued government exists specifically to secure life, liberty, and property, without which 'ownership' is only as strong as your own ability to personally defend it." },
+      { label: "Checks on power", text: "Constitutional limits — separation of powers, elections, judicial review — exist specifically to stop any single actor, including the state itself, from accumulating unchecked control; Montesquieu's The Spirit of the Laws (1748) is the foundational argument for this structure." },
+      { label: "Baseline public goods", text: "Currency, courts, basic infrastructure, external defence are what make sustained individual self-reliance possible at all; Thomas Hobbes' Leviathan (1651) argued that without any central authority, no long-term individual project, sovereign or otherwise, survives for long." },
+    ],
+    cons: [
+      { label: "Permission over right", text: "Regulation can turn a natural right into a state-granted permission — needing approval to build, work, or travel converts liberty into a privilege that can be revoked; Friedrich Hayek's The Road to Serfdom (1944) argues that expanding central planning erodes individual liberty by design, not by accident." },
+      { label: "Consent-free taxation", text: "Taxation and redistribution move resources you earned without your individual consent to each specific use — Robert Nozick's Anarchy, State, and Utopia (1974) argued redistributive taxation is functionally similar to forced labour, since it claims a portion of your work's proceeds without your agreement to that specific claim." },
+      { label: "Surveillance creep", text: "Expanding administrative and surveillance capacity — digital ID, data collection, financial monitoring — concentrates the ability to observe and restrict individual behaviour, even under a democratically elected government; this is the throughline connecting most of the specific entities already mapped under Governance and Law in this Codex." },
+    ],
+  },
+};
+
+export function slugifySubsection(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 export interface KGRelationship {
   /** Short verb phrase, kept deliberately modest — "cites", "member of", "researches" — never "controls" or "influences" without real sourcing. */
   type: string;
