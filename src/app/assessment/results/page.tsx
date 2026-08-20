@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { DOMAINS, domainScore } from "@/lib/domains";
 import { codexLinksForDomain, codexHref } from "@/lib/taxonomy-map";
 
@@ -35,12 +36,18 @@ function sovereigntyStatus(greenCount: number): { label: string; color: string }
 }
 
 export default function ResultsPage() {
+  const router = useRouter();
   const [answers, setAnswers] = useState<Record<string, number> | null>(null);
 
   useEffect(() => {
     const raw = localStorage.getItem("sovereign-answers");
     if (raw) setAnswers(JSON.parse(raw));
   }, []);
+
+  function retake() {
+    sessionStorage.setItem("sovereign-retake", "1");
+    router.push("/assessment");
+  }
 
   if (!answers) {
     return (
@@ -68,7 +75,12 @@ export default function ResultsPage() {
   return (
     <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
-        <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>Your Sovereign Score</div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1rem", flexWrap: "wrap", marginBottom: "0.5rem" }}>
+          <div className="label" style={{ color: "var(--amber-strong)" }}>Your Sovereign Score</div>
+          <button onClick={retake} className="btn btn-white" style={{ padding: "0.5rem 1.1rem", fontSize: "var(--size-sm)" }}>
+            Retake the assessment
+          </button>
+        </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "1.5rem", flexWrap: "wrap", marginBottom: "1.5rem" }}>
           <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, color: "var(--amber-strong)" }}>
             Results

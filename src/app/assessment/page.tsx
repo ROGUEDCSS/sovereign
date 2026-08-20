@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DOMAINS, Domain, domainScore } from "@/lib/domains";
 import { getEntity } from "@/lib/knowledge-graph";
@@ -46,19 +46,27 @@ export default function AssessmentPage() {
   const [email, setEmail] = useState("");
   const [emailSaved, setEmailSaved] = useState(false);
   const [step, setStep] = useState(0);
-  const [hasExistingResults, setHasExistingResults] = useState(false);
-  const [retaking, setRetaking] = useState(false);
+  const [checking, setChecking] = useState(true);
+  const initRef = useRef(false);
 
   useEffect(() => {
+    if (initRef.current) return;
+    initRef.current = true;
+
     const saved = localStorage.getItem("sovereign-email");
     if (saved) {
       setEmail(saved);
       setEmailSaved(true);
     }
-    if (localStorage.getItem("sovereign-answers")) {
-      setHasExistingResults(true);
+    const hasResults = !!localStorage.getItem("sovereign-answers");
+    const wantsRetake = sessionStorage.getItem("sovereign-retake") === "1";
+    if (wantsRetake) sessionStorage.removeItem("sovereign-retake");
+    if (hasResults && !wantsRetake) {
+      router.replace("/assessment/results");
+      return;
     }
-  }, []);
+    setChecking(false);
+  }, [router]);
   const [answers, setAnswers] = useState<Record<string, number>>({});
   const [hoveredDomain, setHoveredDomain] = useState<number | null>(null);
 
@@ -85,48 +93,7 @@ export default function AssessmentPage() {
     setStep((s) => s + 1);
   }
 
-  if (hasExistingResults && !retaking) {
-    return (
-      <main className="container" style={{ paddingTop: "3.5rem", paddingBottom: "6rem" }}>
-        <div style={{ maxWidth: 480, margin: "0 auto" }}>
-          <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.75rem" }}>
-            Your Sovereign Assessment
-          </div>
-          <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem" }}>
-            You&apos;ve already got a score
-          </h1>
-          <p style={{ color: "var(--text-2)", marginBottom: "1.75rem" }}>
-            You completed this assessment already — your result is saved. You don&apos;t need to
-            do it again unless you want to.
-          </p>
-          <button
-            className="btn btn-primary"
-            onClick={() => router.push("/assessment/results")}
-            style={{ width: "100%", marginBottom: "0.75rem" }}
-          >
-            View your results →
-          </button>
-          <button
-            onClick={() => {
-              setRetaking(true);
-              setStep(0);
-            }}
-            style={{
-              width: "100%",
-              background: "none",
-              border: "none",
-              color: "var(--text-3)",
-              fontSize: "var(--size-sm)",
-              cursor: "pointer",
-              textDecoration: "underline",
-            }}
-          >
-            Retake the assessment
-          </button>
-        </div>
-      </main>
-    );
-  }
+  if (checking) return null;
 
   if (!emailSaved) {
     return (
