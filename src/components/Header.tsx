@@ -17,26 +17,17 @@ interface NavItem {
 
 const NAV: NavItem[] = [
   {
-    href: "/codex",
-    label: "Codex",
+    href: "/profile",
+    label: "Profile",
     children: [
       { href: "/assessment", label: "Sovereign Assessment" },
       { href: "/assessment/results", label: "Your Sovereign Score" },
-      { href: "/scenario-room", label: "Disaster scenarios" },
       { href: "/build-my-system", label: "Build my system" },
     ],
   },
   {
-    href: "/checklist",
-    label: "Free Checklist",
-  },
-  {
-    href: "/consultation",
-    label: "Consultation",
-  },
-  {
-    href: "/style-guide",
-    label: "Style guide",
+    href: "/codex",
+    label: "Codex",
   },
   {
     href: "/world",
@@ -44,7 +35,20 @@ const NAV: NavItem[] = [
     children: [
       { href: "/threat-map", label: "Threat map" },
       { href: "/knowledge-base", label: "Knowledge base" },
+      { href: "/scenario-room", label: "Disaster scenarios" },
     ],
+  },
+  {
+    href: "/help",
+    label: "Help",
+    children: [
+      { href: "/checklist", label: "Free Checklist" },
+      { href: "/consultation", label: "Consultation" },
+    ],
+  },
+  {
+    href: "/style-guide",
+    label: "Style guide",
   },
 ];
 
@@ -94,7 +98,7 @@ export default function Header() {
                     style={{
                       position: "absolute",
                       top: "100%",
-                      ...(i === NAV.length - 1 ? { right: 0 } : { left: 0 }),
+                      ...(i >= NAV.length - 2 ? { right: 0 } : { left: 0 }),
                       minWidth: 190,
                       background: "var(--bg-raised)",
                       border: "1px solid var(--border-strong)",
