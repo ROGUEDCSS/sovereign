@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { SearchBar } from "./SearchBar";
 
 interface NavChild {
   href: string;
@@ -55,9 +56,10 @@ export default function Header() {
         className="container"
         style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 64, gap: "1.5rem" }}
       >
-        <Link href="/" style={{ fontWeight: 500, fontSize: "var(--size-body)", textDecoration: "none", whiteSpace: "nowrap" }}>
+        <Link href="/" style={{ fontWeight: 500, fontSize: "var(--size-body)", textDecoration: "none", whiteSpace: "nowrap", textTransform: "uppercase", letterSpacing: "0.03em" }}>
           Sovereign
         </Link>
+        <SearchBar />
         <nav style={{ display: "flex", gap: "1.5rem", height: "100%" }}>
           {NAV.map((item, i) => {
             const childActive = item.children?.some((c) => pathname === c.href) ?? false;

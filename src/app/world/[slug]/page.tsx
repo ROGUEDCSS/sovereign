@@ -1,10 +1,74 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { resolveCodexPath } from "@/lib/codex";
-import { KG_ENTITIES, getEntity, ENTITY_TYPE_LABELS } from "@/lib/knowledge-graph";
+import { KG_ENTITIES, getEntity, ENTITY_TYPE_LABELS, BlockType, ArticleContentBlock } from "@/lib/knowledge-graph";
 import { PeekProvider } from "@/components/PeekProvider";
 import { PeekList, PeekItem } from "@/components/PeekList";
 import { CommunityPanel } from "@/components/CommunityPanel";
+
+const BLOCK_LABELS: Record<BlockType, string> = {
+  fact: "Fact",
+  scenario: "Scenario",
+  opinion: "Opinion",
+};
+
+const BLOCK_LABEL_COLOR: Record<BlockType, string> = {
+  fact: "var(--fact-strong)",
+  scenario: "var(--amber-strong)",
+  opinion: "var(--opinion-strong)",
+};
+
+function SectionContent({ block }: { block: ArticleContentBlock }) {
+  switch (block.kind) {
+    case "p":
+      return <p style={{ color: "var(--text-1)", lineHeight: 1.65 }}>{block.text}</p>;
+    case "subheading":
+      return (
+        <p style={{ fontSize: "var(--size-sm)", fontWeight: 700, color: "var(--amber-strong)", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+          {block.text}
+        </p>
+      );
+    case "list":
+      return (
+        <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+          {block.items.map((item) => (
+            <li key={item} style={{ color: "var(--text-1)", lineHeight: 1.6 }}>
+              {item}
+            </li>
+          ))}
+        </ul>
+      );
+    case "diagram":
+      return (
+        <pre
+          className="card"
+          style={{
+            padding: "1.25rem",
+            overflowX: "auto",
+            fontSize: "var(--size-sm)",
+            lineHeight: 1.5,
+            color: "var(--ink)",
+            fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+          }}
+        >
+          {block.text}
+        </pre>
+      );
+    case "definitions":
+      return (
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
+          {block.items.map((d) => (
+            <div key={d.term} className="card" style={{ padding: "0.9rem 1.1rem" }}>
+              <strong style={{ color: "var(--ink)", fontSize: "var(--size-body)" }}>{d.term}</strong>
+              <p style={{ color: "var(--ink-2)", marginTop: "0.25rem" }}>{d.text}</p>
+            </div>
+          ))}
+        </div>
+      );
+    default:
+      return null;
+  }
+}
 
 export function generateStaticParams() {
   return KG_ENTITIES.map((e) => ({ slug: e.slug }));
@@ -128,10 +192,36 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
             </>
           )}
 
-          {entity.knowledgeBaseSlug && (
-            <Link href={`/knowledge-base/${entity.knowledgeBaseSlug}`} className="btn btn-primary">
-              Read the full article →
-            </Link>
+          {entity.sections && entity.sections.length > 0 && (
+            <div style={{ borderTop: "1px solid var(--border)", paddingTop: "2.5rem", marginBottom: "3rem" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem" }}>
+                {entity.sections.map((section, i) => (
+                  <div key={section.heading}>
+                    <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
+                      {i + 1}. {section.heading}
+                    </h2>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
+                      {section.content.map((block, j) => (
+                        <SectionContent key={j} block={block} />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {entity.blocks && entity.blocks.length > 0 && (
+            <>
+              <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1.25rem" }}>Grounding facts</h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem", marginBottom: "2.5rem" }}>
+                {entity.blocks.map((block, i) => (
+                  <p key={i} style={{ color: "var(--text-1)", lineHeight: 1.65 }}>
+                    <strong style={{ color: BLOCK_LABEL_COLOR[block.type] }}>{BLOCK_LABELS[block.type]}:</strong> {block.text}
+                  </p>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </main>
