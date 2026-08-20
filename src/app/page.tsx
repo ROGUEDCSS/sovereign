@@ -102,11 +102,56 @@ export default function Home() {
       </section>
 
       <section style={{ borderTop: "1px solid var(--border)", background: "#fff" }}>
+        <div className="container" style={{ paddingTop: "3rem", paddingBottom: "3rem", textAlign: "center" }}>
+          <p style={{ color: "var(--ink-2)", fontSize: "var(--size-body)", marginBottom: "1.25rem" }}>
+            Twelve domains, three questions each — know exactly where you stand before you try to fix anything.
+          </p>
+          <Link href="/assessment" className="btn btn-primary" style={{ fontSize: "var(--size-body)" }}>
+            Get your Sovereign Score →
+          </Link>
+        </div>
+      </section>
+
+      <section style={{ borderTop: "1px solid var(--border)" }}>
+        <div className="container" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
+          <h2 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem", maxWidth: 560 }}>
+            The Sovereign Codex
+          </h2>
+          <p style={{ color: "var(--text-2)", marginBottom: "1.5rem", maxWidth: 560 }}>
+            Four circles, radiating out from the individual — the human-centred map of what you
+            actually build. This is what you control.
+          </p>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
+              gap: "0.6rem",
+              marginBottom: "1.75rem",
+            }}
+          >
+            {CODEX_BRANCHES.map((b) => (
+              <Link
+                key={b.slug}
+                href={`/codex/${b.slug}`}
+                className="card"
+                style={{ padding: "0.9rem 1.1rem", fontSize: "var(--size-sm)", textDecoration: "none" }}
+              >
+                {b.name}
+              </Link>
+            ))}
+          </div>
+          <Link href="/codex" className="btn btn-primary">
+            Open the Codex
+          </Link>
+        </div>
+      </section>
+
+      <section style={{ borderTop: "1px solid var(--border)", background: "#fff" }}>
         <div className="container" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gridTemplateColumns: "repeat(4, 1fr)",
               gap: "1rem",
             }}
           >
@@ -145,40 +190,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="container" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
-          <h2 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.75rem", maxWidth: 560 }}>
-            The Sovereign Codex
-          </h2>
-          <p style={{ color: "var(--text-2)", marginBottom: "1.5rem", maxWidth: 560 }}>
-            Four circles, radiating out from the individual — the human-centred map of what you
-            actually build. This is what you control.
-          </p>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
-              gap: "0.6rem",
-              marginBottom: "1.75rem",
-            }}
-          >
-            {CODEX_BRANCHES.map((b) => (
-              <Link
-                key={b.slug}
-                href={`/codex/${b.slug}`}
-                className="card"
-                style={{ padding: "0.9rem 1.1rem", fontSize: "var(--size-sm)", textDecoration: "none" }}
-              >
-                {b.name}
-              </Link>
-            ))}
-          </div>
-          <Link href="/codex" className="btn btn-primary">
-            Open the Codex
-          </Link>
         </div>
       </section>
 
