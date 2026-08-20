@@ -221,21 +221,81 @@ const FAMILY_LIFE: CodexNode = {
   slug: "family-life",
   name: "Family life",
   tagline: "Relationships, cooperation, shared responsibilities, and the practical functioning of the family unit.",
+  definition: "Family life is the coordination that keeps a household running:",
+  definitionPoints: [
+    "Who does what, and whether that's ever actually been discussed",
+    "How decisions get made when people disagree",
+    "How conflict gets resolved without it derailing everything else",
+  ],
+  definitionOutro: "None of it runs on goodwill alone — it runs on whether the coordination actually exists.",
+  facts: [
+    { label: "Unspoken division", text: "Most households divide labour by habit, not agreement — and habits formed early rarely get renegotiated even after circumstances change." },
+    { label: "Conflict avoidance", text: "Avoiding a disagreement doesn't resolve it — it just moves the cost to whoever brings it up next, usually with more frustration attached." },
+    { label: "Decision fatigue", text: "A household where one person makes every decision isn't more efficient — it's one person quietly carrying a load the rest have stopped noticing." },
+    { label: "Repair, not perfection", text: "Families that function well aren't the ones that never argue — they're the ones that know how to actually repair things afterward." },
+  ],
+  practicalQuestion: "If you had to name who actually decided the last five things in your household, would everyone agree on the list?",
   detailed: true,
+  items: [
+    { name: "Division of labour", description: "Who actually does what, and whether that division was ever agreed to or just settled by default." },
+    { name: "Decision-making", description: "How choices get made when people disagree — and what happens when no one owns the decision." },
+    { name: "Conflict resolution", description: "The actual process for resolving disagreement, not just avoiding it until it passes." },
+    { name: "Communication rhythm", description: "The regular check-ins, or lack of them, that keep small issues from becoming big ones." },
+  ],
 };
 
 const CHILDREN: CodexNode = {
   slug: "children",
   name: "Children",
   tagline: "Raising capable, responsible, and independent children while respecting their privacy, development, and individual sovereignty.",
+  definition: "Raising capable children means giving them, in age-appropriate doses:",
+  definitionPoints: [
+    "Real responsibility, not just chores assigned and checked",
+    "The room to make small mistakes before the mistakes get expensive",
+    "Privacy and autonomy that grows as their judgement does",
+  ],
+  definitionOutro: "The goal isn't a child who obeys well — it's an adult who doesn't need you.",
+  facts: [
+    { label: "Overprotection cost", text: "Shielding a child from every small failure doesn't produce a more capable adult — it produces one who hasn't practiced recovering from anything." },
+    { label: "Responsibility gap", text: "Most children are given chores, but far fewer are given real responsibility — a task where the consequence of skipping it actually falls on them." },
+    { label: "Privacy as development", text: "As judgement develops, so should privacy — treating a teenager's need for autonomy as a discipline problem usually backfires." },
+    { label: "Modelling over instruction", text: "Children calibrate their own behaviour against what they watch you actually do, not what you tell them to do." },
+  ],
+  practicalQuestion: "What's one real responsibility your child holds, where the consequence of dropping it actually falls on them — not you?",
   detailed: true,
+  items: [
+    { name: "Responsibility & chores", description: "The difference between a task that's assigned and checked, and one where the consequence is genuinely theirs." },
+    { name: "Independence & judgement", description: "Age-appropriate freedom to make decisions, including some that turn out wrong." },
+    { name: "Privacy & autonomy", description: "Respecting a growing need for their own space, thoughts, and decisions as they mature." },
+    { name: "Safety & boundaries", description: "The limits that actually matter, held consistently — not a long list applied selectively." },
+  ],
 };
 
 const EDUCATION: CodexNode = {
   slug: "education",
   name: "Education",
   tagline: "Formal education, home education, practical education, apprenticeships, and the Sovereign learning system.",
+  definition: "Education is whatever actually builds a child's capability to think, learn, and do. It can come through:",
+  definitionPoints: [
+    "A formal school system",
+    "Home education, structured or unstructured",
+    "Practical apprenticeship — learning by doing, under someone who already knows",
+  ],
+  definitionOutro: "The method matters less than whether the child comes out more capable than they went in.",
+  facts: [
+    { label: "Credential vs capability", text: "A completed curriculum and an actually capable learner are not the same outcome — one is measured by attendance, the other by what a child can do unsupervised." },
+    { label: "Home-education stigma", text: "Home-educated children are often assumed to be under-socialised — a claim rarely checked against the actual child in front of you." },
+    { label: "Apprenticeship model", text: "Learning a trade by doing it, under someone who already knows, remains one of the fastest ways to build real competence — and one of the most overlooked." },
+    { label: "Parent as default teacher", text: "Whether or not you formally home-educate, you are already your child's first and most consistent teacher — by example, if nothing else." },
+  ],
+  practicalQuestion: "If school stopped tomorrow, what's your actual plan for your child's education — not the fallback, the plan?",
   detailed: true,
+  items: [
+    { name: "Formal schooling", description: "Public, private, or alternative schools — the default most families use by default, not necessarily by choice." },
+    { name: "Home education", description: "Structured or self-directed learning led by the family, inside or outside any curriculum." },
+    { name: "Practical apprenticeship", description: "Learning a real skill or trade by doing it, under someone who already knows how." },
+    { name: "Sovereign learning system", description: "Combining formal, home, and practical education deliberately, instead of defaulting to whichever is easiest." },
+  ],
   connections: [{ path: ["individual", "personal-development"] }],
 };
 
@@ -243,14 +303,54 @@ const RESPONSIBILITY: CodexNode = {
   slug: "responsibility",
   name: "Responsibility",
   tagline: "The responsibilities family members voluntarily assume toward one another.",
+  definition: "Family responsibility is what you owe each other by choice, not by law. It shows up as:",
+  definitionPoints: [
+    "Care obligations — for children, ageing parents, or anyone who can't fully provide for themselves",
+    "Financial commitments made to each other, formal or not",
+    "The unspoken expectation that you show up when it actually matters",
+  ],
+  definitionOutro: "None of it is enforceable. It only exists because you keep it.",
+  facts: [
+    { label: "Voluntary, not legal", text: "Most family obligations aren't legally enforceable — they hold because someone keeps choosing to honour them, not because a contract requires it." },
+    { label: "Caregiver load", text: "Care responsibilities for children or ageing parents usually concentrate on one person by default, rarely by an actual decision." },
+    { label: "Unspoken expectations", text: "Most family conflict over responsibility isn't about who does the work — it's about an expectation that was never actually stated out loud." },
+    { label: "Consistency over grand gestures", text: "Showing up reliably for the small, unremarkable things builds more trust than any single large gesture." },
+  ],
+  practicalQuestion: "What responsibility do you carry for someone else in your family that's never actually been discussed out loud?",
   detailed: true,
+  items: [
+    { name: "Care obligations", description: "For children, ageing parents, or anyone in the family who can't fully provide for themselves." },
+    { name: "Financial commitments", description: "Money owed, lent, or promised between family members — formal or not." },
+    { name: "Showing up", description: "The reliability that actually builds trust — being there for the ordinary things, not just the emergencies." },
+    { name: "Boundaries", description: "Knowing which responsibilities you've genuinely taken on, and which ones you've just quietly absorbed." },
+  ],
 };
 
 const FAMILY_FINANCE: CodexNode = {
   slug: "family-finance",
   name: "Family finance",
   tagline: "Household income, expenditure, assets, ownership, planning, and financial resilience.",
+  definition: "Family finance is individual finance scaled to a household where more than one person's decisions actually matter. It adds:",
+  definitionPoints: [
+    "Shared visibility — does everyone actually know the numbers, or does one person carry them alone?",
+    "Joint decisions — how spending and saving choices actually get made, together",
+    "Combined risk — one household's single point of failure instead of one person's",
+  ],
+  definitionOutro: "A family can be individually financially literate and still be collectively blind to its own numbers.",
+  facts: [
+    { label: "Financial secrecy", text: "In many households, one partner manages the finances alone and the other genuinely doesn't know the numbers — not through malice, just through drift." },
+    { label: "Combined risk", text: "A household's financial single point of failure is often invisible until it's tested — one income, one bank, one person who knows where anything is." },
+    { label: "Asset visibility", text: "It's common for one family member to be unable to name the household's major assets, debts, or account locations if asked without notice." },
+    { label: "Planning avoidance", text: "Money conversations get avoided more often out of discomfort than disagreement — silence isn't the same as consensus." },
+  ],
+  practicalQuestion: "If something happened to the person who manages your household's money, could anyone else actually find and access everything?",
   detailed: true,
+  items: [
+    { name: "Household income", description: "All sources coming into the household, and how concentrated or spread out they actually are." },
+    { name: "Shared expenses", description: "What the household spends on, and whether both or all adults can actually see it." },
+    { name: "Assets & ownership", description: "What the family owns, how it's held, and whether everyone knows where the records actually are." },
+    { name: "Financial planning", description: "Decisions made together, deliberately — not by default or by whoever happened to be paying attention." },
+  ],
   connections: [{ path: ["individual", "finance"] }],
 };
 
@@ -258,15 +358,28 @@ const FAMILY_CAPABILITY: CodexNode = {
   slug: "family-capability",
   name: "Family capability",
   tagline: "What the family collectively knows and can do — the practical skills no one had to look up.",
+  definition: "Family capability is what your household can actually do without needing to look it up, call someone, or pay for it. It's not the same as one person's expertise:",
+  definitionPoints: [
+    "Knowledge that only exists in one person's head, never written down or taught",
+    "Skill that quietly disappears if that one person is unavailable",
+  ],
+  definitionOutro: "A family's real capability is what survives losing its most capable member for a month.",
+  facts: [
+    { label: "Single point of knowledge", text: "Most households have exactly one person who knows how to do a given essential task — and no backup if that person is unavailable." },
+    { label: "Untaught skill", text: "Skills that live in one person's head and are never demonstrated or taught don't transfer — they just disappear with that person." },
+    { label: "Outsourced capability", text: "Paying someone else to do something isn't the same as being unable to do it yourself — but for most households, it's become the same thing by default." },
+    { label: "Practice, not knowledge", text: "Knowing how a skill works in theory and being able to actually perform it under pressure are different levels of capability entirely." },
+  ],
+  practicalQuestion: "Pick the skill your household relies on most. If the person who knows it was gone for a month, who else could actually do it?",
   detailed: true,
   items: [
-    { name: "Growing food" },
-    { name: "Repairing equipment" },
-    { name: "Building" },
-    { name: "Cooking" },
-    { name: "First aid" },
-    { name: "Managing animals" },
-    { name: "Emergency preparedness" },
+    { name: "Growing food", description: "Producing at least some of what the household eats, not just knowing it's theoretically possible." },
+    { name: "Repairing equipment", description: "Fixing what breaks instead of replacing it — tools, appliances, vehicles." },
+    { name: "Building", description: "Basic construction and repair — enough to maintain or extend what you already have." },
+    { name: "Cooking", description: "Turning raw ingredients into food, not just reheating what's already prepared." },
+    { name: "First aid", description: "Responding to an injury or medical event before professional help arrives." },
+    { name: "Managing animals", description: "Caring for livestock or working animals, if the household keeps any." },
+    { name: "Emergency preparedness", description: "Knowing the household's actual plan, not just that one probably exists." },
   ],
 };
 
@@ -274,7 +387,27 @@ const FAMILY_LEGACY: CodexNode = {
   slug: "family-legacy",
   name: "Family legacy",
   tagline: "Knowledge, skills, traditions, property, records, and practical experience passed between generations.",
+  definition: "Family legacy is what actually gets passed down — not what you intend to pass down, but what your children or grandchildren could genuinely access after you're gone. It includes:",
+  definitionPoints: [
+    "Practical knowledge — skills, methods, and hard-won lessons, not just stories about them",
+    "Records — where things are, how they work, what to do next",
+    "Property, and its actual condition, not just its existence",
+  ],
+  definitionOutro: "Most of it exists only in someone's memory, which means most of it is one event away from being lost.",
+  facts: [
+    { label: "Undocumented knowledge", text: "Most family knowledge is never written down — it exists only in conversation, which means it survives only as long as someone remembers to ask." },
+    { label: "Silent inheritance", text: "Property and records are commonly passed down with no explanation of their condition, history, or how to actually maintain them." },
+    { label: "Story vs skill", text: "Being told about a skill a grandparent had is not the same as having been taught it — the story survives; the capability usually doesn't." },
+    { label: "One generation gap", text: "Most family knowledge is lost within a single generation of not being actively used or taught — it doesn't take three generations, it takes one." },
+  ],
+  practicalQuestion: "What does someone in your family know how to do that no one younger than them has ever been taught?",
   detailed: true,
+  items: [
+    { name: "Practical knowledge", description: "Skills and methods, actually taught and practiced — not just described." },
+    { name: "Family records", description: "Documents, histories, and the practical information someone will need after you're gone." },
+    { name: "Property & heirlooms", description: "What's owned, its actual condition, and how to maintain or use it." },
+    { name: "Traditions", description: "The practices and rituals that carry meaning across generations, kept deliberately, not by accident." },
+  ],
   futureRefs: ["Sovereign Almanac"],
 };
 
