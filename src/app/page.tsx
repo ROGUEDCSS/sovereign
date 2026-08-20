@@ -137,9 +137,6 @@ export default function Home() {
               </Link>
             ))}
           </div>
-          <Link href="/codex" className="btn btn-primary">
-            Open the Codex
-          </Link>
 
           <div style={{ marginTop: "2.75rem" }}>
             <div className="label" style={{ color: "var(--amber-strong)", marginBottom: "0.5rem" }}>
@@ -153,27 +150,33 @@ export default function Home() {
               what a free society is built on, and what an individual within it actually lives by.
             </p>
 
-            <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
-              Core civilizational values
-            </h3>
-            <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", maxWidth: 620, display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2.25rem" }}>
-              {CIVILIZATIONAL_VALUES.map((v) => (
-                <li key={v.label} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>
-                  <strong style={{ color: "var(--amber-strong)" }}>{v.label}:</strong> {v.text}
-                </li>
-              ))}
-            </ul>
+            <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: 620, margin: "0 auto" }}>
+              <div style={{ border: "1px solid var(--border-strong)", borderRadius: "12px", padding: "1.5rem" }}>
+                <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
+                  Core civilizational values
+                </h3>
+                <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                  {CIVILIZATIONAL_VALUES.map((v) => (
+                    <li key={v.label} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>
+                      <strong style={{ color: "var(--amber-strong)" }}>{v.label}:</strong> {v.text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
-              Personal life values
-            </h3>
-            <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", maxWidth: 620, display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-              {PERSONAL_VALUES.map((v) => (
-                <li key={v.label} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>
-                  <strong style={{ color: "var(--amber-strong)" }}>{v.label}:</strong> {v.text}
-                </li>
-              ))}
-            </ul>
+              <div style={{ border: "1px solid var(--border-strong)", borderRadius: "12px", padding: "1.5rem" }}>
+                <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--text-3)", marginBottom: "0.9rem" }}>
+                  Personal life values
+                </h3>
+                <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                  {PERSONAL_VALUES.map((v) => (
+                    <li key={v.label} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>
+                      <strong style={{ color: "var(--amber-strong)" }}>{v.label}:</strong> {v.text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
