@@ -6,6 +6,7 @@ import { PeekProvider } from "@/components/PeekProvider";
 import { PeekList, PeekItem } from "@/components/PeekList";
 import { CommunityPanel } from "@/components/CommunityPanel";
 import { ArticleSectionsBlock } from "@/components/ArticleSections";
+import { Editable } from "@/components/Editable";
 
 const BLOCK_LABELS: Record<BlockType, string> = {
   fact: "Fact",
@@ -22,12 +23,12 @@ const BLOCK_LABEL_COLOR: Record<BlockType, string> = {
 const ROLE_WORDS = ["Issuer", "Holder", "Verifier"];
 const ROLE_PATTERN = new RegExp(`\\b(${ROLE_WORDS.join("|")})\\b`, "g");
 
-function highlightRoles(text: string) {
+function highlightRoles(text: string, bold: boolean = true) {
   return text.split(ROLE_PATTERN).map((part, i) =>
     ROLE_WORDS.includes(part) ? (
-      <strong key={i} style={{ color: "var(--amber-strong)" }}>
+      <span key={i} style={{ color: "var(--amber-strong)", fontWeight: bold ? 700 : "inherit" }}>
         {part}
-      </strong>
+      </span>
     ) : (
       <span key={i}>{part}</span>
     )
@@ -42,7 +43,7 @@ function renderFactText(text: string) {
   return (
     <>
       {before && highlightRoles(before)}
-      <em style={{ fontStyle: "italic" }}>{highlightRoles(example)}</em>
+      <em style={{ fontStyle: "italic" }}>{highlightRoles(example, false)}</em>
     </>
   );
 }
@@ -93,7 +94,9 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           <h1 style={{ fontSize: "var(--size-h2)", fontWeight: 500, marginBottom: "0.5rem" }}>
             {entity.name}
           </h1>
-          <p style={{ color: "var(--text-2)", marginBottom: "1.25rem" }}>{entity.summary}</p>
+          <p style={{ color: "var(--text-2)", marginBottom: "1.25rem" }}>
+            <Editable file="knowledge-graph" value={entity.summary}>{entity.summary}</Editable>
+          </p>
 
           <div style={{ display: "flex", gap: "1.5rem", marginBottom: "2.5rem", fontSize: "var(--size-sm)", color: "var(--text-3)" }}>
             <span>Evidence: {"★".repeat(entity.evidenceRating)}{"☆".repeat(5 - entity.evidenceRating)}</span>
@@ -111,7 +114,9 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
                 <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "#1a1005", marginBottom: "1.25rem" }}>TL;DR</div>
 
                 <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
-                  <p style={{ fontSize: "var(--size-body)", color: "#1a1005", margin: "0 0 0.5rem" }}>{premise}</p>
+                  <p style={{ fontSize: "var(--size-body)", color: "#1a1005", margin: "0 0 0.5rem" }}>
+                    <Editable file="knowledge-graph" value={premise}>{premise}</Editable>
+                  </p>
                   <div style={{ fontSize: "1.4rem", color: "#1a1005", opacity: 0.45, lineHeight: 1 }}>↓</div>
                   <div
                     style={{
@@ -127,11 +132,11 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
                       margin: "0.5rem 0",
                     }}
                   >
-                    {condition}
+                    <Editable file="knowledge-graph" value={condition}>{condition}</Editable>
                   </div>
                   <div style={{ fontSize: "1.4rem", color: "#1a1005", opacity: 0.45, lineHeight: 1 }}>↓</div>
                   <p style={{ fontSize: "var(--size-h3)", fontWeight: 700, color: "#1a1005", margin: "0.5rem 0 0", lineHeight: 1.3 }}>
-                    {consequence}
+                    <Editable file="knowledge-graph" value={consequence}>{consequence}</Editable>
                   </p>
                 </div>
 
@@ -150,7 +155,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
                           borderLeft: isRefrain ? "3px solid #1a1005" : "none",
                         }}
                       >
-                        {t}
+                        <Editable file="knowledge-graph" value={t}>{t}</Editable>
                       </p>
                     );
                   })}
@@ -162,7 +167,9 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           {(!entity.sections || entity.sections.length === 0) && entity.whyItMatters && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)", marginBottom: "0.4rem" }}>Why it matters</div>
-              <p style={{ color: "var(--text-2)", lineHeight: 1.6 }}>{entity.whyItMatters}</p>
+              <p style={{ color: "var(--text-2)", lineHeight: 1.6 }}>
+                <Editable file="knowledge-graph" value={entity.whyItMatters}>{entity.whyItMatters}</Editable>
+              </p>
             </div>
           )}
 
@@ -173,6 +180,8 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
             ).map((row, i) => {
               const isRoleLabel = row.label !== null && ROLE_WORDS.some((w) => row.label!.includes(w));
               const isExample = row.label?.toUpperCase() === "EXAMPLE";
+              const isBluntStatement = row.label === "RULE" || row.label === "TEST";
+              const showDivider = i > 0 && !isExample;
               return (
                 <p
                   key={row.key}
@@ -182,9 +191,10 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
                     lineHeight: 1.6,
                     fontSize: isExample ? "var(--size-sm)" : "var(--size-body)",
                     fontStyle: isExample ? "italic" : "normal",
-                    paddingTop: i > 0 ? "0.9rem" : 0,
-                    marginTop: i > 0 ? "0.9rem" : 0,
-                    borderTop: i > 0 ? "1px solid rgba(11,14,17,0.12)" : "none",
+                    fontWeight: isBluntStatement ? 700 : 400,
+                    paddingTop: showDivider ? "0.9rem" : 0,
+                    marginTop: showDivider ? "0.9rem" : 0,
+                    borderTop: showDivider ? "1px solid rgba(11,14,17,0.12)" : "none",
                   }}
                 >
                   {row.label && (
@@ -192,7 +202,9 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
                       {row.label}:{" "}
                     </strong>
                   )}
-                  {isExample ? highlightRoles(row.text) : renderFactText(row.text)}
+                  <Editable file="knowledge-graph" value={row.text}>
+                    {isExample ? highlightRoles(row.text, false) : renderFactText(row.text)}
+                  </Editable>
                 </p>
               );
             })}
@@ -203,7 +215,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
               <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--good)" }}>Pros</h2>
               <ul style={{ paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
                 {entity.pros.map((p) => (
-                  <li key={p} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>{p}</li>
+                  <li key={p} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}><Editable file="knowledge-graph" value={p}>{p}</Editable></li>
                 ))}
               </ul>
             </>
@@ -214,7 +226,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
               <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem", color: "var(--danger)" }}>Cons</h2>
               <ul style={{ paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
                 {entity.cons.map((c) => (
-                  <li key={c} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>{c}</li>
+                  <li key={c} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}><Editable file="knowledge-graph" value={c}>{c}</Editable></li>
                 ))}
               </ul>
             </>
@@ -225,7 +237,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
               <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Who controls it?</h2>
               <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
                 {entity.whoControls.map((w) => (
-                  <li key={w} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>{w}</li>
+                  <li key={w} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}><Editable file="knowledge-graph" value={w}>{w}</Editable></li>
                 ))}
               </ul>
             </>
@@ -236,7 +248,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--danger)", marginBottom: "0.7rem" }}>What could go wrong?</div>
               <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
                 {entity.whatCouldGoWrong.map((w) => (
-                  <li key={w} style={{ fontSize: "var(--size-body)", color: "var(--text-2)", lineHeight: 1.6 }}>{w}</li>
+                  <li key={w} style={{ fontSize: "var(--size-body)", color: "var(--text-2)", lineHeight: 1.6 }}><Editable file="knowledge-graph" value={w}>{w}</Editable></li>
                 ))}
               </ul>
             </div>
@@ -247,7 +259,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
               <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Safeguards</h2>
               <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
                 {entity.safeguards.map((s) => (
-                  <li key={s} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>{s}</li>
+                  <li key={s} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}><Editable file="knowledge-graph" value={s}>{s}</Editable></li>
                 ))}
               </ul>
             </>
@@ -258,7 +270,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
               <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>What's unresolved</h2>
               <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
                 {entity.unresolvedQuestions.map((u) => (
-                  <li key={u} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}>{u}</li>
+                  <li key={u} style={{ marginBottom: "0.6rem", lineHeight: 1.6 }}><Editable file="knowledge-graph" value={u}>{u}</Editable></li>
                 ))}
               </ul>
             </>
@@ -267,7 +279,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           {entity.sovereignPosition && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)", marginBottom: "0.4rem" }}>The Sovereign position</div>
-              <p style={{ color: "var(--text-2)", lineHeight: 1.6 }}>{entity.sovereignPosition}</p>
+              <p style={{ color: "var(--text-2)", lineHeight: 1.6 }}><Editable file="knowledge-graph" value={entity.sovereignPosition}>{entity.sovereignPosition}</Editable></p>
             </div>
           )}
 
@@ -328,7 +340,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
               </div>
               <ol style={{ paddingLeft: "1.25rem", color: "var(--ink-2)", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                 {entity.practicalTest.map((q, i) => (
-                  <li key={i} style={{ lineHeight: 1.6 }}>{q}</li>
+                  <li key={i} style={{ lineHeight: 1.6 }}><Editable file="knowledge-graph" value={q}>{q}</Editable></li>
                 ))}
               </ol>
             </div>
