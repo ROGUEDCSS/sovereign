@@ -996,17 +996,19 @@ export const KG_ENTITIES: KGEntity[] = [
       "The standard used for Digital ID is the W3C's Verifiable Credentials Data Model. It has three parts.",
       {
         items: [
-          { label: "1. Issuer", text: "The organisation that certifies a fact about you. Example: the government confirms you're over 18." },
+          { label: "1. Issuer", text: "The organisation that certifies a fact about you." },
+          { label: "Example", text: "The government confirms you're over 18." },
           { label: "2. Holder", text: "You. You hold the credential. You decide when to show it." },
-          { label: "3. Verifier", text: "Whoever is asking for proof. Example: a shop checking your age." },
+          { label: "3. Verifier", text: "Whoever is asking for proof." },
+          { label: "Example", text: "A shop checking your age." },
         ],
       },
       {
         items: [
           { label: "RULE", text: "These three cannot be the same entity. If they are, the danger starts." },
-          { label: "EXAMPLE", text: "A shop (Verifier) checks your ID. It never calls the government (Issuer). The government never learns you were at the shop. Only you, the Holder, know both things happened." },
+          { label: "Example", text: "A shop (Verifier) checks your ID. It never calls the government (Issuer). The government never learns you were at the shop. Only you, the Holder, know both things happened." },
           { label: "TEST", text: "There has to be clarity on what gets disclosed and to whom. If there isn't, the system is not trustworthy. Full stop." },
-          { label: "EXAMPLE", text: "The government is both Issuer and Verifier. Now it can see every time and place you use your ID. That builds a movement log of your life. The three-part split exists to stop this." },
+          { label: "Example", text: "The government is both Issuer and Verifier. Now it can see every time and place you use your ID. That builds a movement log of your life. The three-part split exists to stop this." },
         ],
       },
     ],

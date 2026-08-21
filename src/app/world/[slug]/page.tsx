@@ -178,6 +178,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
               const isExample = row.label?.toUpperCase() === "EXAMPLE";
               const isBluntStatement = row.label === "RULE" || row.label === "TEST";
               const showDivider = i > 0 && !isExample;
+              const showSpacer = i > 0 && isExample;
               return (
                 <div
                   key={row.key}
@@ -187,8 +188,8 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
                     fontSize: isExample ? "var(--size-sm)" : "var(--size-body)",
                     fontStyle: isExample ? "italic" : "normal",
                     fontWeight: isBluntStatement ? 700 : 400,
-                    paddingTop: showDivider ? "0.9rem" : 0,
-                    marginTop: showDivider ? "0.9rem" : 0,
+                    paddingTop: showDivider || showSpacer ? "0.9rem" : 0,
+                    marginTop: showDivider || showSpacer ? "0.9rem" : 0,
                     borderTop: showDivider ? "1px solid rgba(11,14,17,0.12)" : "none",
                   }}
                 >
@@ -210,7 +211,8 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
                       {row.label}
                     </span>
                   )}
-                  {row.label && !isRoleLabel && (
+                  {row.label && !isRoleLabel && isExample && <>{row.label}:{" "}</>}
+                  {row.label && !isRoleLabel && !isExample && (
                     <strong style={{ color: "var(--ink)", fontStyle: "normal" }}>
                       {row.label}:{" "}
                     </strong>
