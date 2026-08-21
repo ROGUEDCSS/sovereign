@@ -8,6 +8,7 @@ import { PeekList, PeekItem } from "@/components/PeekList";
 import { CommunityPanel } from "@/components/CommunityPanel";
 import { TopicItem } from "@/components/TopicItem";
 import { ArticleSectionsBlock } from "@/components/ArticleSections";
+import { Editable } from "@/components/Editable";
 
 export function generateStaticParams() {
   return allCodexPaths().map((path) => ({ path }));
@@ -67,26 +68,26 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
             </div>
           )}
 
-          {node.sections && node.sections.length > 0 && <ArticleSectionsBlock sections={node.sections} />}
+          {node.sections && node.sections.length > 0 && <ArticleSectionsBlock sections={node.sections} file="codex" />}
 
           {(!node.sections || node.sections.length === 0) && node.definition && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem", background: "var(--amber)" }}>
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "#1a1005", marginBottom: "0.4rem" }}>
                 Definition
               </div>
-              <p style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "#1a1005" }}>{node.definition}</p>
+              <p style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "#1a1005" }}><Editable file="codex" value={node.definition}>{node.definition}</Editable></p>
               {node.definitionPoints && node.definitionPoints.length > 0 && (
                 <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", margin: "0.6rem 0", display: "flex", flexDirection: "column", gap: "0.35rem" }}>
                   {node.definitionPoints.map((point) => (
                     <li key={point} style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "#1a1005" }}>
-                      {point}
+                      <Editable file="codex" value={point}>{point}</Editable>
                     </li>
                   ))}
                 </ul>
               )}
               {node.definitionOutro && (
                 <p style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "#1a1005", marginTop: "0.6rem" }}>
-                  {node.definitionOutro}
+                  <Editable file="codex" value={node.definitionOutro}>{node.definitionOutro}</Editable>
                 </p>
               )}
             </div>
@@ -104,10 +105,11 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
                     <li key={labeled ? fact.label : fact} style={{ fontSize: "var(--size-body)", fontWeight: 400 }}>
                       {labeled ? (
                         <>
-                          <strong style={{ color: "var(--ink)" }}>{fact.label}:</strong> {fact.text}
+                          <strong style={{ color: "var(--ink)" }}>{fact.label}:</strong>{" "}
+                          <Editable file="codex" value={fact.text}>{fact.text}</Editable>
                         </>
                       ) : (
-                        fact
+                        <Editable file="codex" value={fact}>{fact}</Editable>
                       )}
                     </li>
                   );
@@ -121,7 +123,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "#1a1005", marginBottom: "0.4rem" }}>
                 The practical question
               </div>
-              <p style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "#1a1005" }}>{node.practicalQuestion}</p>
+              <p style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "#1a1005" }}><Editable file="codex" value={node.practicalQuestion}>{node.practicalQuestion}</Editable></p>
             </div>
           )}
 
@@ -222,7 +224,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "#1a1005", marginBottom: "0.4rem" }}>
                 The Sovereign principle
               </div>
-              <p style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "#1a1005" }}>{node.sovereignPrinciple}</p>
+              <p style={{ fontSize: "var(--size-body)", fontWeight: 400, color: "#1a1005" }}><Editable file="codex" value={node.sovereignPrinciple}>{node.sovereignPrinciple}</Editable></p>
             </div>
           )}
 
@@ -231,7 +233,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)", marginBottom: "0.4rem" }}>
                 The legal reality — {node.legalJurisdiction ?? "researched per jurisdiction"}
               </div>
-              <p style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>{node.legalReality}</p>
+              <p style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}><Editable file="codex" value={node.legalReality}>{node.legalReality}</Editable></p>
               {node.legalSources && node.legalSources.length > 0 && (
                 <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", marginTop: "0.9rem", display: "flex", flexDirection: "column", gap: "0.3rem" }}>
                   {node.legalSources.map((s) => (
@@ -247,7 +249,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
               <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
                 The private individual vs. the public institution
               </h2>
-              <p style={{ color: "var(--text-2)", marginBottom: "1.25rem" }}>{node.rationale}</p>
+              <p style={{ color: "var(--text-2)", marginBottom: "1.25rem" }}><Editable file="codex" value={node.rationale}>{node.rationale}</Editable></p>
 
               {node.evidenceFor && node.evidenceFor.length > 0 && (
                 <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "1.25rem" }}>
@@ -256,7 +258,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
                   </div>
                   <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                     {node.evidenceFor.map((e) => (
-                      <li key={e} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>{e}</li>
+                      <li key={e} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}><Editable file="codex" value={e}>{e}</Editable></li>
                     ))}
                   </ul>
                 </div>
@@ -269,7 +271,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
                   </div>
                   <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                     {node.counterarguments.map((c) => (
-                      <li key={c} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>{c}</li>
+                      <li key={c} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}><Editable file="codex" value={c}>{c}</Editable></li>
                     ))}
                   </ul>
                 </div>
@@ -282,7 +284,7 @@ export default async function CodexNodePage({ params }: { params: Promise<{ path
                   </div>
                   <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                     {node.options.map((o) => (
-                      <li key={o} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}>{o}</li>
+                      <li key={o} style={{ fontSize: "var(--size-body)", color: "var(--text-2)" }}><Editable file="codex" value={o}>{o}</Editable></li>
                     ))}
                   </ul>
                 </div>

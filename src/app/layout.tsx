@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
+import { EditModeProvider } from "@/components/EditModeProvider";
 
 export const metadata: Metadata = {
   title: "Sovereign — Personal resilience and the Codex for a rapidly changing world",
@@ -15,9 +16,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
-        <ExitIntentPopup />
+        <EditModeProvider>
+          <Header />
+          {children}
+          <ExitIntentPopup />
+        </EditModeProvider>
       </body>
     </html>
   );
