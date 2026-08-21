@@ -102,7 +102,31 @@ const ROWS: Row[] = [
       </div>
     ),
     technical: "var(--size-body), weight 700, background var(--amber), color #1a1005",
-    rule: "Reserved for the single most important prompt on a page. Text is just bold paragraph text (row 5) on an amber background — not a separate size.",
+    rule: "Reserved for the single most important prompt on a page. Text is just bold paragraph text (row 5) on an amber background — not a separate size. A gold card has more than one job: it's also used as a summary or conclusion of whatever content precedes it (e.g. TL;DR's closing consequence line, or a Sovereign-position card after a long essay) — not just a single-prompt callout.",
+  },
+  {
+    name: "Pill / badge",
+    example: (
+      <WhiteExample>
+        <span
+          style={{
+            display: "inline-block",
+            fontSize: "var(--size-sm)",
+            fontWeight: 700,
+            color: "var(--amber-strong)",
+            textTransform: "uppercase",
+            letterSpacing: "0.06em",
+            border: "2px solid currentColor",
+            borderRadius: "999px",
+            padding: "0.35rem 1.1rem",
+          }}
+        >
+          1. Issuer
+        </span>
+      </WhiteExample>
+    ),
+    technical: "var(--size-sm), weight 700, uppercase, letter-spacing 0.06em, 2px solid border (currentColor), border-radius 999px",
+    rule: "For isolating one entity/label as its own visual unit — not for a full sentence or clause. Border and text share one color: gold on a white card (when the label is itself a highlighted term, e.g. Issuer/Holder/Verifier), or dark ink on a gold card. If what's inside the pill is a full statement rather than a single named thing, it's not a pill — it's just bold text.",
   },
   {
     name: "Button — amber",

@@ -118,22 +118,18 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
                     <Editable file="knowledge-graph" value={premise}>{premise}</Editable>
                   </p>
                   <div style={{ fontSize: "1.4rem", color: "#1a1005", opacity: 0.45, lineHeight: 1 }}>↓</div>
-                  <div
+                  <p
                     style={{
-                      display: "inline-block",
                       fontSize: "var(--size-sm)",
                       fontWeight: 700,
                       color: "#1a1005",
                       textTransform: "uppercase",
                       letterSpacing: "0.06em",
-                      border: "2px solid #1a1005",
-                      borderRadius: "999px",
-                      padding: "0.35rem 1.1rem",
                       margin: "0.5rem 0",
                     }}
                   >
                     <Editable file="knowledge-graph" value={condition}>{condition}</Editable>
-                  </div>
+                  </p>
                   <div style={{ fontSize: "1.4rem", color: "#1a1005", opacity: 0.45, lineHeight: 1 }}>↓</div>
                   <p style={{ fontSize: "var(--size-h3)", fontWeight: 700, color: "#1a1005", margin: "0.5rem 0 0", lineHeight: 1.3 }}>
                     <Editable file="knowledge-graph" value={consequence}>{consequence}</Editable>
@@ -183,10 +179,9 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
               const isBluntStatement = row.label === "RULE" || row.label === "TEST";
               const showDivider = i > 0 && !isExample;
               return (
-                <p
+                <div
                   key={row.key}
                   style={{
-                    margin: 0,
                     color: "var(--text-2)",
                     lineHeight: 1.6,
                     fontSize: isExample ? "var(--size-sm)" : "var(--size-body)",
@@ -197,15 +192,41 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
                     borderTop: showDivider ? "1px solid rgba(11,14,17,0.12)" : "none",
                   }}
                 >
-                  {row.label && (
-                    <strong style={{ color: isRoleLabel ? "var(--amber-strong)" : "var(--ink)", fontStyle: "normal" }}>
+                  {row.label && isRoleLabel && (
+                    <span
+                      style={{
+                        display: "inline-block",
+                        fontSize: "var(--size-sm)",
+                        fontWeight: 700,
+                        color: "var(--amber-strong)",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.06em",
+                        border: "2px solid currentColor",
+                        borderRadius: "999px",
+                        padding: "0.3rem 0.9rem",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      {row.label}
+                    </span>
+                  )}
+                  {row.label && !isRoleLabel && (
+                    <strong style={{ color: "var(--ink)", fontStyle: "normal" }}>
                       {row.label}:{" "}
                     </strong>
                   )}
-                  <Editable file="knowledge-graph" value={row.text}>
-                    {isExample ? highlightRoles(row.text, false) : renderFactText(row.text)}
-                  </Editable>
-                </p>
+                  {isRoleLabel ? (
+                    <div>
+                      <Editable file="knowledge-graph" value={row.text}>
+                        {renderFactText(row.text)}
+                      </Editable>
+                    </div>
+                  ) : (
+                    <Editable file="knowledge-graph" value={row.text}>
+                      {isExample ? highlightRoles(row.text, false) : renderFactText(row.text)}
+                    </Editable>
+                  )}
+                </div>
               );
             })}
           </div>
