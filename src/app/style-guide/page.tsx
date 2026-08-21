@@ -113,10 +113,10 @@ const ROWS: Row[] = [
             display: "inline-block",
             fontSize: "var(--size-sm)",
             fontWeight: 700,
-            color: "var(--amber-strong)",
+            color: "#1a1005",
+            background: "var(--amber)",
             textTransform: "uppercase",
             letterSpacing: "0.06em",
-            border: "2px solid currentColor",
             borderRadius: "999px",
             padding: "0.35rem 1.1rem",
           }}
@@ -125,8 +125,8 @@ const ROWS: Row[] = [
         </span>
       </WhiteExample>
     ),
-    technical: "var(--size-sm), weight 700, uppercase, letter-spacing 0.06em, 2px solid border (currentColor), border-radius 999px",
-    rule: "For isolating one entity/label as its own visual unit — not for a full sentence or clause. Border and text share one color: gold on a white card (when the label is itself a highlighted term, e.g. Issuer/Holder/Verifier), or dark ink on a gold card. If what's inside the pill is a full statement rather than a single named thing, it's not a pill — it's just bold text.",
+    technical: "var(--size-sm), weight 700, uppercase, letter-spacing 0.06em, background var(--amber), color #1a1005, border-radius 999px",
+    rule: "For isolating one entity/label as its own visual unit — not for a full sentence or clause. Solid gold fill, black text — same as every other amber surface on the site (buttons, callouts). Never an outline: a pill is filled. If what's inside it is a full statement rather than a single named thing, it's not a pill — it's just bold text.",
   },
   {
     name: "Button — amber",
