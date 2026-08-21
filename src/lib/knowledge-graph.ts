@@ -23,6 +23,16 @@ export type ArticleContentBlock =
   | { kind: "diagram"; text: string }
   | { kind: "definitions"; items: { term: string; text: string }[] };
 
+/**
+ * A set of related entities that belong in one card, stacked as rows,
+ * instead of each getting its own separate card. Use when a fact array
+ * would otherwise repeat the same "N. Label: ..." pattern across
+ * several consecutive entries — e.g. Issuer / Holder / Verifier.
+ */
+export interface KGFactGroup {
+  items: { label: string; text: string }[];
+}
+
 export interface ArticleSection {
   heading: string;
   content: ArticleContentBlock[];
@@ -424,8 +434,8 @@ export interface KGEntity {
   whyItMatters?: string;
   /** A few skimmable, punchy bullet points covering the whole page — for readers who won't read a Deep-dive essay start to finish. Only worth adding once a topic has real sections. */
   tldr?: string[];
-  /** Sourced factual statements only — no speculation, no unverified claims about motive or control. */
-  facts: string[];
+  /** Sourced factual statements only — no speculation, no unverified claims about motive or control. A KGFactGroup renders as one card with its items stacked as rows, for a set of related entities that would otherwise repeat the same pattern across separate cards. */
+  facts: (string | KGFactGroup)[];
   /** Steelmanned, named-source arguments for — real schools of thought, not strawmen. */
   pros?: string[];
   /** Steelmanned, named-source arguments against — real schools of thought, not strawmen. */
@@ -984,9 +994,13 @@ export const KG_ENTITIES: KGEntity[] = [
     whyItMatters: "Most digital ID systems people already use quietly collapse issuer and verifier into the same party — the company or government that issued the credential is also the one checking it every time, seeing every place you use it. The issuer/holder/verifier split is the standard alternative model: it's how a physical driver's licence already works (the government issues it, you hold it, a bar checks it without calling the government), and modern digital identity standards are built to replicate that same separation online.",
     facts: [
       "The standard used for Digital ID is the W3C's Verifiable Credentials Data Model. It has three parts: 1. Issuer, 2. Holder, 3. Verifier.",
-      "1. Issuer: the organisation that certifies a fact about you. Example: the government confirms you're over 18.",
-      "2. Holder: you. You hold the credential. You decide when to show it.",
-      "3. Verifier: whoever is asking for proof. Example: a shop checking your age.",
+      {
+        items: [
+          { label: "1. Issuer", text: "the organisation that certifies a fact about you. Example: the government confirms you're over 18." },
+          { label: "2. Holder", text: "you. You hold the credential. You decide when to show it." },
+          { label: "3. Verifier", text: "whoever is asking for proof. Example: a shop checking your age." },
+        ],
+      },
       "The rule: these three cannot be the same entity. If they are, the danger starts.",
       "Example: a shop (Verifier) checks your ID. It never calls the government (Issuer). The government never learns you were at the shop. Only you, the Holder, know both things happened.",
       "THE UNIVERSAL DIGITAL ID TEST: there has to be clarity on WHAT gets disclosed and to WHOM. If there isn't, the system is not trustworthy. Full stop.",

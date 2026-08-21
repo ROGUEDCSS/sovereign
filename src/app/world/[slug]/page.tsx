@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { resolveCodexPath } from "@/lib/codex";
-import { KG_ENTITIES, getEntity, ENTITY_TYPE_LABELS, BlockType } from "@/lib/knowledge-graph";
+import { KG_ENTITIES, getEntity, ENTITY_TYPE_LABELS, BlockType, KGFactGroup } from "@/lib/knowledge-graph";
 import { PeekProvider } from "@/components/PeekProvider";
 import { PeekList, PeekItem } from "@/components/PeekList";
 import { CommunityPanel } from "@/components/CommunityPanel";
@@ -155,11 +155,35 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
 
           <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Situation</h2>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem", marginBottom: "2.5rem" }}>
-            {entity.facts.map((f) => (
-              <div key={f} className="card" style={{ padding: "1rem 1.25rem" }}>
-                <p style={{ margin: 0, color: "var(--text-2)", lineHeight: 1.6 }}>{highlightRoles(f)}</p>
-              </div>
-            ))}
+            {entity.facts.map((f, i) => {
+              if (typeof f === "string") {
+                return (
+                  <div key={i} className="card" style={{ padding: "1rem 1.25rem" }}>
+                    <p style={{ margin: 0, color: "var(--text-2)", lineHeight: 1.6 }}>{highlightRoles(f)}</p>
+                  </div>
+                );
+              }
+              const group = f as KGFactGroup;
+              return (
+                <div key={i} className="card" style={{ padding: "1rem 1.25rem" }}>
+                  {group.items.map((item, j) => (
+                    <p
+                      key={item.label}
+                      style={{
+                        margin: 0,
+                        color: "var(--text-2)",
+                        lineHeight: 1.6,
+                        paddingTop: j > 0 ? "0.75rem" : 0,
+                        marginTop: j > 0 ? "0.75rem" : 0,
+                        borderTop: j > 0 ? "1px solid rgba(11,14,17,0.12)" : "none",
+                      }}
+                    >
+                      <strong style={{ color: "var(--amber-strong)" }}>{item.label}:</strong> {item.text}
+                    </p>
+                  ))}
+                </div>
+              );
+            })}
           </div>
 
           {entity.pros && entity.pros.length > 0 && (

@@ -43,7 +43,9 @@ export function resolvePeek(target: PeekTarget): PeekContent | null {
     breadcrumb: "The World → " + ENTITY_TYPE_LABELS[entity.type],
     tagline: entity.summary,
     whyItMatters: entity.whyItMatters,
-    facts: entity.facts,
+    facts: entity.facts.map((f) =>
+      typeof f === "string" ? f : f.items.map((item) => `${item.label}: ${item.text}`).join(" ")
+    ),
     pros: entity.pros,
     cons: entity.cons,
     furtherReading: entity.furtherReading,
