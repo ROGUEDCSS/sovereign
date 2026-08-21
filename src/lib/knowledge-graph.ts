@@ -993,6 +993,9 @@ export const KG_ENTITIES: KGEntity[] = [
     ],
     whyItMatters: "Most digital ID systems people already use quietly collapse issuer and verifier into the same party — the company or government that issued the credential is also the one checking it every time, seeing every place you use it. The issuer/holder/verifier split is the standard alternative model: it's how a physical driver's licence already works (the government issues it, you hold it, a bar checks it without calling the government), and modern digital identity standards are built to replicate that same separation online.",
     facts: [
+      "For most of history, identity was physical — a face people recognised, a signed paper, a passport someone could hold and check.",
+      "Then life moved onto a screen. A website can't look at your face or check a signature.",
+      "Digital ID exists to fill that gap. Same old idea — prove who you are — rebuilt for a world where most of what you do happens where no one can physically see you.",
       "The standard used for Digital ID is the W3C's Verifiable Credentials Data Model. It has three parts.",
       {
         items: [
