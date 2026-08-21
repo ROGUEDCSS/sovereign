@@ -147,12 +147,40 @@ just list dangers in whatever order they occurred to you.
 
 ## TL;DR — for readers who won't read the whole thing
 
-Deep-dive entities get a `tldr?: string[]` — 4-6 short, punchy bullets
-covering the whole page, rendered at the very top, before "Why it
-matters." Not a teaser for the essay below it — a genuinely complete
-summary someone could stop reading after and still walk away with the
-real answer. Only worth adding once a topic has real `sections`; a
-Standard-tier entity is already short enough not to need one.
+Deep-dive entities get a `tldr?: string[]` — rendered at the very top,
+before "Why it matters," no bullets, just stacked short lines. Not a
+teaser for the essay below it — a genuinely complete summary someone
+could stop reading after and still walk away with the real answer.
+Only worth adding once a topic has real `sections`; a Standard-tier
+entity is already short enough not to need one.
+
+It's not a bullet list of facts — it's a tiny narrative with rhythm.
+One short sentence per line. Real repetition where the pattern itself
+makes the point. Digital ID's:
+
+> Today, Digital ID proves who you are.
+>
+> The extreme version can go further.
+>
+> It can determine what you are allowed to do.
+>
+> You try to open a bank account.
+> The system checks your Digital ID.
+>
+> You try to access a government service.
+> The system checks your Digital ID.
+>
+> You try to buy something restricted.
+> The system checks your Digital ID.
+>
+> Your identity has changed from proof of who you are into a system
+> that controls what you can do.
+
+Notice what's doing the work: the three-beat repetition ("The system
+checks your Digital ID") isn't padding, it's the argument — the same
+check appearing everywhere is the actual point. The closing line names
+the transformation in one sentence. No qualifiers, no "in some cases,"
+no citation. That's the bar.
 
 ---
 
@@ -201,12 +229,58 @@ clause doesn't answer that, the fact is dangling.
 > stores and controls it, and a verifier checks it's valid without
 > needing to contact the issuer directly."
 >
-> Feature + benefit: "This isn't just a good idea, it's a real published
-> standard: the W3C's Verifiable Credentials Data Model splits every
-> digital credential into issuer, holder, and verifier — so a shop
-> checking your ID never has to call the government to confirm it, and
-> the government never finds out you were at the shop."
+> Feature + benefit, isolated:
+> - The standard used for Digital ID is the W3C's Verifiable
+>   Credentials Data Model. It has three parts: 1. Issuer, 2. Holder,
+>   3. Verifier.
+> - 1. Issuer: the organisation that certifies a fact about you.
+>   Example: the government confirms you're over 18.
+> - 2. Holder: you. You hold the credential. You decide when to show it.
+> - 3. Verifier: whoever is asking for proof. Example: a shop checking
+>   your age.
+> - The rule: these three cannot be the same entity. If they are, the
+>   danger starts.
+> - Example: a shop (Verifier) checks your ID. It never calls the
+>   government (Issuer). The government never learns you were at the
+>   shop. Only you, the Holder, know both things happened.
 
-Same underlying fact. The second version earns its place on the page —
-it tells the reader what changes for them, not just what the standard
-says.
+Same underlying fact. Notice this isn't one dense sentence any more —
+it's seven short bullets, each one idea, each its own line. That's not
+an accident; see "Isolate, don't merge" below.
+
+---
+
+## Isolate, don't merge — one idea per bullet, real numbering
+
+The single most common failure once the earlier rules are being
+followed on paper: writing something that's technically short and
+concrete, but still crams a rule, a definition, and an example into one
+merged paragraph. That's still flowery by the time it's assembled, even
+if each clause on its own was plain. The fix isn't better sentences —
+it's fewer ideas per sentence, each one on its own line:
+
+- **When you name multiple entities (issuer/holder/verifier;
+  who/what/when), give each one its own bullet** — not one sentence
+  naming all three. "1. Issuer: ...", "2. Holder: ...", "3. Verifier:
+  ..." as three separate lines a reader can scan, not three clauses in
+  one they have to parse.
+- **State the rule as its own short, standalone bullet.** "The rule:
+  these three cannot be the same entity." Not folded into the sentence
+  before or after it.
+- **Give the example its own bullet, prefixed "Example:"** (sentence
+  case, not caps — caps is for emphasis in a live conversation, not for
+  the published page) — never merged into the same bullet as the rule
+  it's illustrating.
+- **Tag each role inline where it appears in the example** — "a shop
+  (Verifier) checks your ID... the government (Issuer)... you, the
+  Holder" — so the reader maps the abstract model onto the concrete
+  case without holding both in their head at once.
+- A named test can still read in caps on the page when it's genuinely
+  functioning as a named thing — "THE UNIVERSAL DIGITAL ID TEST:" — but
+  that's a title, not a device to reach for on every sentence. Use it
+  sparingly, for the one or two tests a topic actually has.
+
+The result reads like a checklist, not an essay paragraph. That's
+correct for `facts`, `whoControls`, `whatCouldGoWrong`, and similar
+structured fields — save actual flowing prose for the `sections`
+narrative, where connective tissue between ideas is the point.

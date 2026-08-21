@@ -72,16 +72,37 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
             <span>Source: {entity.independenceSource}</span>
           </div>
 
-          {entity.tldr && entity.tldr.length > 0 && (
-            <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem", background: "var(--amber)" }}>
-              <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "#1a1005", marginBottom: "0.6rem" }}>TL;DR</div>
-              <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
-                {entity.tldr.map((t) => (
-                  <li key={t} style={{ fontSize: "var(--size-body)", color: "#1a1005" }}>{t}</li>
-                ))}
-              </ul>
-            </div>
-          )}
+          {entity.tldr && entity.tldr.length > 0 && (() => {
+            const counts = entity.tldr.reduce<Record<string, number>>((acc, line) => {
+              acc[line] = (acc[line] ?? 0) + 1;
+              return acc;
+            }, {});
+            return (
+              <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem", background: "var(--amber)" }}>
+                <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "#1a1005", marginBottom: "0.9rem" }}>TL;DR</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+                  {entity.tldr!.map((t, i) => {
+                    const isRefrain = counts[t] > 1;
+                    return (
+                      <p
+                        key={i}
+                        style={{
+                          fontSize: "var(--size-body)",
+                          color: "#1a1005",
+                          margin: 0,
+                          fontWeight: isRefrain ? 700 : 400,
+                          paddingLeft: isRefrain ? "1.25rem" : 0,
+                          borderLeft: isRefrain ? "3px solid #1a1005" : "none",
+                        }}
+                      >
+                        {t}
+                      </p>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
 
           {entity.whyItMatters && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
@@ -90,7 +111,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
             </div>
           )}
 
-          <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Facts</h2>
+          <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Situation</h2>
           <ul style={{ paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
             {entity.facts.map((f) => (
               <li key={f} style={{ marginBottom: "0.5rem" }}>
