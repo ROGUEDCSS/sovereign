@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { ArticleContentBlock, ArticleSection } from "@/lib/knowledge-graph";
 
 function SectionContent({ block }: { block: ArticleContentBlock }) {
@@ -54,20 +55,60 @@ function SectionContent({ block }: { block: ArticleContentBlock }) {
 
 export function ArticleSectionsBlock({ sections }: { sections: ArticleSection[] }) {
   if (!sections || sections.length === 0) return null;
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", marginBottom: "3rem" }}>
-      {sections.map((section, i) => (
-        <div key={section.heading}>
-          <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
-            {i + 1}. {section.heading}
+
+  const elements: ReactNode[] = [];
+  let number = 0;
+  let i = 0;
+
+  while (i < sections.length) {
+    const section = sections[i];
+
+    if (section.group) {
+      const groupName = section.group;
+      const groupSections: ArticleSection[] = [];
+      while (i < sections.length && sections[i].group === groupName) {
+        groupSections.push(sections[i]);
+        i++;
+      }
+      elements.push(
+        <div key={`group-${groupName}`}>
+          <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1.5rem", color: "var(--danger)" }}>
+            {groupName}
           </h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
-            {section.content.map((block, j) => (
-              <SectionContent key={j} block={block} />
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+            {groupSections.map((gs) => (
+              <div key={gs.heading} className="card" style={{ padding: "1.5rem" }}>
+                <h3 style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--ink)", marginBottom: "0.9rem" }}>
+                  {gs.heading}
+                </h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
+                  {gs.content.map((block, j) => (
+                    <SectionContent key={j} block={block} />
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
-      ))}
-    </div>
-  );
+      );
+      continue;
+    }
+
+    number++;
+    elements.push(
+      <div key={section.heading}>
+        <h2 style={{ fontSize: "var(--size-h3)", fontWeight: 500, marginBottom: "1rem" }}>
+          {number}. {section.heading}
+        </h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
+          {section.content.map((block, j) => (
+            <SectionContent key={j} block={block} />
+          ))}
+        </div>
+      </div>
+    );
+    i++;
+  }
+
+  return <div style={{ display: "flex", flexDirection: "column", gap: "2.5rem", marginBottom: "3rem" }}>{elements}</div>;
 }

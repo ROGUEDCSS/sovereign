@@ -26,6 +26,15 @@ export type ArticleContentBlock =
 export interface ArticleSection {
   heading: string;
   content: ArticleContentBlock[];
+  /**
+   * When set, this section is part of a labelled, parallel set (e.g.
+   * "PROBLEMS") rather than a step in the essay's sequence. Consecutive
+   * sections sharing the same group render as white cards under one
+   * shared group heading, with no sequential number — because they
+   * aren't a sequence, they're independent items that happen to sit
+   * next to each other in the narrative.
+   */
+  group?: string;
 }
 
 export type EntityType =
@@ -1133,6 +1142,7 @@ export const KG_ENTITIES: KGEntity[] = [
       },
       {
         heading: "The universal ID problem",
+        group: "PROBLEMS",
         content: [
           { kind: "p", text: "Imagine your digital ID becomes necessary for:" },
           { kind: "list", items: ["Banking", "Employment", "Healthcare", "Education", "Travel", "Government services", "Buying certain products", "Renting a house", "Running a business", "Social media", "Telecommunications"] },
@@ -1141,6 +1151,7 @@ export const KG_ENTITIES: KGEntity[] = [
       },
       {
         heading: "Function creep",
+        group: "PROBLEMS",
         content: [
           { kind: "p", text: "This is one of the biggest risks. A system starts with: \"Digital ID for government services.\"" },
           { kind: "p", text: "Then somebody says: \"It would be convenient for banking.\" Then: \"Let's use it for age verification.\" Then: \"Let's use it for online safety.\" Then: \"Let's use it for benefits.\" Then: \"Let's use it for travel.\"" },
@@ -1149,6 +1160,7 @@ export const KG_ENTITIES: KGEntity[] = [
       },
       {
         heading: "Public + private partnerships",
+        group: "PROBLEMS",
         content: [
           { kind: "p", text: "Government does not have to operate every part of the system. Private companies can potentially become:" },
           { kind: "list", items: ["Identity providers", "Wallet providers", "Banks", "Telecommunications companies", "Technology providers", "Healthcare providers", "Employers", "Retailers", "Platforms"] },
@@ -1157,6 +1169,7 @@ export const KG_ENTITIES: KGEntity[] = [
       },
       {
         heading: "The linking problem",
+        group: "PROBLEMS",
         content: [
           { kind: "p", text: "Imagine: your bank knows your financial activity. Your employer knows your employment. Your telecommunications company knows your account. Government knows your tax information. A healthcare provider knows your healthcare information. A retailer knows your purchases." },
           { kind: "p", text: "A digital identity system could potentially make these systems easier to connect. You don't necessarily need one giant database — you can have many databases that are linked through a common identity. That can be just as powerful." },
@@ -1164,6 +1177,7 @@ export const KG_ENTITIES: KGEntity[] = [
       },
       {
         heading: "The surveillance problem",
+        group: "PROBLEMS",
         content: [
           { kind: "p", text: "A particularly important question is: does the issuer know every time you use your identity?" },
           { kind: "p", text: "If the answer is yes, your identity could potentially create a record of where you authenticate. That could reveal:" },
@@ -1173,6 +1187,7 @@ export const KG_ENTITIES: KGEntity[] = [
       },
       {
         heading: "The profiling problem",
+        group: "PROBLEMS",
         content: [
           { kind: "p", text: "Information from different systems can potentially be combined to create a profile. For example: financial behaviour + location + purchases + employment + services used." },
           { kind: "p", text: "The result could become a detailed picture of an individual. That creates the possibility of profiling people according to their behaviour." },
@@ -1180,6 +1195,7 @@ export const KG_ENTITIES: KGEntity[] = [
       },
       {
         heading: "The social-credit problem",
+        group: "PROBLEMS",
         content: [
           { kind: "p", text: "The extreme version is simple:" },
           { kind: "diagram", text: "YOUR BEHAVIOUR\n       ↓\nYOUR PROFILE\n       ↓\nYOUR SCORE\n       ↓\nYOUR ACCESS" },
@@ -1190,6 +1206,7 @@ export const KG_ENTITIES: KGEntity[] = [
       },
       {
         heading: "The revocation problem",
+        group: "PROBLEMS",
         content: [
           { kind: "p", text: "A physical document is usually something you possess. A digital credential can be checked electronically. That is useful. But it raises an important question: who can turn it off? And: what happens if they get it wrong?" },
           { kind: "p", text: "A properly designed system needs:" },
@@ -1199,6 +1216,7 @@ export const KG_ENTITIES: KGEntity[] = [
       },
       {
         heading: "The \"one switch\" problem",
+        group: "PROBLEMS",
         content: [
           { kind: "p", text: "Imagine a future where one digital identity controls access to: money + travel + work + healthcare + government + communication." },
           { kind: "p", text: "Then ask: what happens if that identity stops working? It could be:" },
@@ -1208,6 +1226,7 @@ export const KG_ENTITIES: KGEntity[] = [
       },
       {
         heading: "The government abuse problem",
+        group: "PROBLEMS",
         content: [
           { kind: "p", text: "A democratic government today may have no intention of abusing a digital identity system. But governments change. Laws change. Emergencies happen. Political systems change. Future governments may have different ideas about what behaviour should be permitted." },
           { kind: "p", text: "Therefore the important question isn't \"do we trust today's government?\" It is \"would we trust every future government with the same power?\" That is a much harder question." },

@@ -19,6 +19,21 @@ const BLOCK_LABEL_COLOR: Record<BlockType, string> = {
   opinion: "var(--opinion-strong)",
 };
 
+const ROLE_WORDS = ["Issuer", "Holder", "Verifier"];
+const ROLE_PATTERN = new RegExp(`\\b(${ROLE_WORDS.join("|")})\\b`, "g");
+
+function highlightRoles(text: string) {
+  return text.split(ROLE_PATTERN).map((part, i) =>
+    ROLE_WORDS.includes(part) ? (
+      <strong key={i} style={{ color: "var(--amber-strong)" }}>
+        {part}
+      </strong>
+    ) : (
+      <span key={i}>{part}</span>
+    )
+  );
+}
+
 export function generateStaticParams() {
   return KG_ENTITIES.map((e) => ({ slug: e.slug }));
 }
@@ -73,15 +88,42 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           </div>
 
           {entity.tldr && entity.tldr.length > 0 && (() => {
-            const counts = entity.tldr.reduce<Record<string, number>>((acc, line) => {
+            const [premise, condition, consequence, ...rest] = entity.tldr;
+            const counts = rest.reduce<Record<string, number>>((acc, line) => {
               acc[line] = (acc[line] ?? 0) + 1;
               return acc;
             }, {});
             return (
-              <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem", background: "var(--amber)" }}>
-                <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "#1a1005", marginBottom: "0.9rem" }}>TL;DR</div>
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
-                  {entity.tldr!.map((t, i) => {
+              <div className="card" style={{ padding: "1.5rem", marginBottom: "2rem", background: "var(--amber)" }}>
+                <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "#1a1005", marginBottom: "1.25rem" }}>TL;DR</div>
+
+                <div style={{ textAlign: "center", marginBottom: "1.75rem" }}>
+                  <p style={{ fontSize: "var(--size-body)", color: "#1a1005", margin: "0 0 0.5rem" }}>{premise}</p>
+                  <div style={{ fontSize: "1.4rem", color: "#1a1005", opacity: 0.45, lineHeight: 1 }}>↓</div>
+                  <div
+                    style={{
+                      display: "inline-block",
+                      fontSize: "var(--size-sm)",
+                      fontWeight: 700,
+                      color: "#1a1005",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.06em",
+                      border: "2px solid #1a1005",
+                      borderRadius: "999px",
+                      padding: "0.35rem 1.1rem",
+                      margin: "0.5rem 0",
+                    }}
+                  >
+                    {condition}
+                  </div>
+                  <div style={{ fontSize: "1.4rem", color: "#1a1005", opacity: 0.45, lineHeight: 1 }}>↓</div>
+                  <p style={{ fontSize: "var(--size-h3)", fontWeight: 700, color: "#1a1005", margin: "0.5rem 0 0", lineHeight: 1.3 }}>
+                    {consequence}
+                  </p>
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem", borderTop: "1px solid rgba(26,16,5,0.2)", paddingTop: "1.25rem" }}>
+                  {rest.map((t, i) => {
                     const isRefrain = counts[t] > 1;
                     return (
                       <p
@@ -112,13 +154,13 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           )}
 
           <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Situation</h2>
-          <ul style={{ paddingLeft: "1.25rem", color: "var(--text-2)", marginBottom: "2.5rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem", marginBottom: "2.5rem" }}>
             {entity.facts.map((f) => (
-              <li key={f} style={{ marginBottom: "0.5rem" }}>
-                {f}
-              </li>
+              <div key={f} className="card" style={{ padding: "1rem 1.25rem" }}>
+                <p style={{ margin: 0, color: "var(--text-2)", lineHeight: 1.6 }}>{highlightRoles(f)}</p>
+              </div>
             ))}
-          </ul>
+          </div>
 
           {entity.pros && entity.pros.length > 0 && (
             <>
