@@ -993,20 +993,20 @@ export const KG_ENTITIES: KGEntity[] = [
     ],
     whyItMatters: "Most digital ID systems people already use quietly collapse issuer and verifier into the same party — the company or government that issued the credential is also the one checking it every time, seeing every place you use it. The issuer/holder/verifier split is the standard alternative model: it's how a physical driver's licence already works (the government issues it, you hold it, a bar checks it without calling the government), and modern digital identity standards are built to replicate that same separation online.",
     facts: [
-      "The standard used for Digital ID is the W3C's Verifiable Credentials Data Model. It has three parts: 1. Issuer, 2. Holder, 3. Verifier.",
+      "The standard used for Digital ID is the W3C's Verifiable Credentials Data Model. It has three parts.",
       {
         items: [
-          { label: "1. Issuer", text: "the organisation that certifies a fact about you. Example: the government confirms you're over 18." },
-          { label: "2. Holder", text: "you. You hold the credential. You decide when to show it." },
-          { label: "3. Verifier", text: "whoever is asking for proof. Example: a shop checking your age." },
+          { label: "1. Issuer", text: "The organisation that certifies a fact about you. Example: the government confirms you're over 18." },
+          { label: "2. Holder", text: "You. You hold the credential. You decide when to show it." },
+          { label: "3. Verifier", text: "Whoever is asking for proof. Example: a shop checking your age." },
         ],
       },
       {
         items: [
-          { label: "RULE", text: "these three cannot be the same entity. If they are, the danger starts." },
-          { label: "EXAMPLE", text: "a shop (Verifier) checks your ID. It never calls the government (Issuer). The government never learns you were at the shop. Only you, the Holder, know both things happened." },
-          { label: "TEST", text: "there has to be clarity on what gets disclosed and to whom. If there isn't, the system is not trustworthy. Full stop." },
-          { label: "EXAMPLE", text: "the government is both Issuer and Verifier. Now it can see every time and place you use your ID. That builds a movement log of your life. The three-part split exists to stop this." },
+          { label: "RULE", text: "These three cannot be the same entity. If they are, the danger starts." },
+          { label: "EXAMPLE", text: "A shop (Verifier) checks your ID. It never calls the government (Issuer). The government never learns you were at the shop. Only you, the Holder, know both things happened." },
+          { label: "TEST", text: "There has to be clarity on what gets disclosed and to whom. If there isn't, the system is not trustworthy. Full stop." },
+          { label: "EXAMPLE", text: "The government is both Issuer and Verifier. Now it can see every time and place you use your ID. That builds a movement log of your life. The three-part split exists to stop this." },
         ],
       },
     ],

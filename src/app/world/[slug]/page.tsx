@@ -34,6 +34,19 @@ function highlightRoles(text: string) {
   );
 }
 
+function renderFactText(text: string) {
+  const idx = text.indexOf("Example:");
+  if (idx === -1) return highlightRoles(text);
+  const before = text.slice(0, idx);
+  const example = text.slice(idx);
+  return (
+    <>
+      {before && highlightRoles(before)}
+      <em style={{ fontStyle: "italic" }}>{highlightRoles(example)}</em>
+    </>
+  );
+}
+
 export function generateStaticParams() {
   return KG_ENTITIES.map((e) => ({ slug: e.slug }));
 }
@@ -157,22 +170,32 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
             {entity.facts.flatMap((f, i): { key: string; label: string | null; text: string }[] =>
               typeof f === "string" ? [{ key: `${i}`, label: null, text: f }] : f.items.map((item, j) => ({ key: `${i}-${j}`, label: item.label, text: item.text }))
-            ).map((row, i) => (
-              <p
-                key={row.key}
-                style={{
-                  margin: 0,
-                  color: "var(--text-2)",
-                  lineHeight: 1.6,
-                  paddingTop: i > 0 ? "0.9rem" : 0,
-                  marginTop: i > 0 ? "0.9rem" : 0,
-                  borderTop: i > 0 ? "1px solid rgba(11,14,17,0.12)" : "none",
-                }}
-              >
-                {row.label && <strong style={{ color: "var(--amber-strong)" }}>{row.label}: </strong>}
-                {highlightRoles(row.text)}
-              </p>
-            ))}
+            ).map((row, i) => {
+              const isRoleLabel = row.label !== null && ROLE_WORDS.some((w) => row.label!.includes(w));
+              const isExample = row.label?.toUpperCase() === "EXAMPLE";
+              return (
+                <p
+                  key={row.key}
+                  style={{
+                    margin: 0,
+                    color: "var(--text-2)",
+                    lineHeight: 1.6,
+                    fontSize: isExample ? "var(--size-sm)" : "var(--size-body)",
+                    fontStyle: isExample ? "italic" : "normal",
+                    paddingTop: i > 0 ? "0.9rem" : 0,
+                    marginTop: i > 0 ? "0.9rem" : 0,
+                    borderTop: i > 0 ? "1px solid rgba(11,14,17,0.12)" : "none",
+                  }}
+                >
+                  {row.label && (
+                    <strong style={{ color: isRoleLabel ? "var(--amber-strong)" : "var(--ink)", fontStyle: "normal" }}>
+                      {row.label}:{" "}
+                    </strong>
+                  )}
+                  {isExample ? highlightRoles(row.text) : renderFactText(row.text)}
+                </p>
+              );
+            })}
           </div>
 
           {entity.pros && entity.pros.length > 0 && (

@@ -63,6 +63,18 @@ const ROWS: Row[] = [
     rule: "Exact same size as normal. Weight is the only lever for making a paragraph stand out.",
   },
   {
+    name: "Example text",
+    example: (
+      <WhiteExample>
+        <span style={{ fontSize: "var(--size-sm)", fontStyle: "italic", color: "var(--ink)" }}>
+          Example: a shop checking your ID never has to call the government to confirm it.
+        </span>
+      </WhiteExample>
+    ),
+    technical: "var(--size-sm), italic, color var(--ink) — label prefix (\"Example:\") stays upright, not italic",
+    rule: "Any row whose label is literally \"Example\" — the label is bold and upright as normal, but the text that follows it is italic and one size down. Distinguishes a concrete illustration from the rule or fact it's illustrating, at a glance.",
+  },
+  {
     name: "Kicker / label",
     example: <span className="label" style={{ color: "var(--amber-strong)" }}>Kicker label</span>,
     technical: 'className="label" — var(--size-label), uppercase, letter-spacing 0.08em',
