@@ -1008,7 +1008,7 @@ export const KG_ENTITIES: KGEntity[] = [
       },
       {
         items: [
-          { label: "RULE", text: "These 3 entities must never be the same. They must be different. Always." },
+          { label: "RULE", text: "These three entities must never be the same." },
           { label: "Example", text: "A shop (Verifier) checks your ID. It never calls the government (Issuer). The government never learns you were at the shop. Only you, the Holder, know both things happened." },
           { label: "TEST", text: "There has to be clarity on what gets disclosed and to whom. If there isn't, the system is not trustworthy. Full stop." },
           { label: "Example", text: "The government is both Issuer and Verifier. Now it can see every time and place you use your ID. That builds a movement log of your life. The three-part split exists to stop this." },
@@ -1141,7 +1141,7 @@ export const KG_ENTITIES: KGEntity[] = [
         content: [
           { kind: "p", text: "This is one of the biggest risks. A system starts with: \"Digital ID for government services.\"" },
           { kind: "p", text: "Then somebody says: \"It would be convenient for banking.\" Then: \"Let's use it for age verification.\" Then: \"Let's use it for online safety.\" Then: \"Let's use it for benefits.\" Then: \"Let's use it for travel.\"" },
-          { kind: "p", text: "Each expansion can be justified individually. Eventually the system does something completely different from what it was originally created to do. This is called function creep." },
+          { kind: "p", text: "Each expansion can be justified individually. This is called function creep." },
         ],
       },
       {
@@ -1197,7 +1197,6 @@ export const KG_ENTITIES: KGEntity[] = [
           { kind: "p", text: "A physical document is usually something you possess. A digital credential can be checked electronically. That is useful. But it raises an important question: who can turn it off? And: what happens if they get it wrong?" },
           { kind: "p", text: "A properly designed system needs:" },
           { kind: "list", items: ["Due process", "Appeals", "Human review", "Correction mechanisms", "Independent oversight", "Alternative ways to prove identity"] },
-          { kind: "p", text: "Otherwise, a mistake in a digital identity system could become a mistake in your ability to participate in society." },
         ],
       },
       {
