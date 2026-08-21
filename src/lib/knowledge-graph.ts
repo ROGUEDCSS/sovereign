@@ -996,7 +996,7 @@ export const KG_ENTITIES: KGEntity[] = [
       "For most of history, identity was physical — a face people recognised, a signed paper, a passport someone could hold and check.",
       "Then life moved onto a screen. A website can't look at your face or check a signature.",
       "Digital ID exists to fill that gap. Same old idea — prove who you are — rebuilt for a world where most of what you do happens where no one can physically see you.",
-      "The standard used for Digital ID is the W3C's Verifiable Credentials Data Model has three parts.",
+      "The standard used for Digital ID is the W3C's Verifiable Credentials Data Model. It has three parts.",
       {
         items: [
           { label: "1. Issuer", text: "The organisation that certifies a fact about you." },
@@ -1025,7 +1025,7 @@ export const KG_ENTITIES: KGEntity[] = [
     ],
     whoControls: [
       "The government is the Issuer, and can revoke what it issued, i.e. a government credential.",
-      "The government is also the wallet operator, and controls whether you can open and use your own credentials. In Australia, that's myID, or a private provider accredited under the Digital ID Act 2024.",
+      "The wallet operator controls whether you can open and use your own credentials. In Australia, that's myID, or a private provider accredited under the Digital ID Act 2024.",
       "The verifier decides what it asks for. A good system limits that to a yes/no answer. Nothing forces it to.",
     ],
     whatCouldGoWrong: [
