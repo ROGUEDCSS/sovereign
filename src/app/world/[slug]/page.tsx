@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { resolveCodexPath } from "@/lib/codex";
@@ -170,67 +171,97 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           )}
 
           <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Situation</h2>
-          <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
-            {entity.facts.flatMap((f, i): { key: string; label: string | null; text: string }[] =>
-              typeof f === "string" ? [{ key: `${i}`, label: null, text: f }] : f.items.map((item, j) => ({ key: `${i}-${j}`, label: item.label, text: item.text }))
-            ).map((row, i) => {
-              const isRoleLabel = row.label !== null && ROLE_WORDS.some((w) => row.label!.includes(w));
-              const isExample = row.label?.toUpperCase() === "EXAMPLE";
-              const isBluntStatement = row.label === "RULE" || row.label === "TEST";
-              const showDivider = i > 0 && !isExample;
-              const showSpacer = i > 0 && isExample;
-              return (
-                <div
-                  key={row.key}
-                  style={{
-                    color: "var(--text-2)",
-                    lineHeight: 1.6,
-                    fontSize: isExample ? "var(--size-sm)" : "var(--size-body)",
-                    fontStyle: isExample ? "italic" : "normal",
-                    fontWeight: isBluntStatement ? 700 : 400,
-                    paddingTop: showDivider || showSpacer ? "0.9rem" : 0,
-                    marginTop: showDivider || showSpacer ? "0.9rem" : 0,
-                    borderTop: showDivider ? "1px solid rgba(11,14,17,0.12)" : "none",
-                  }}
-                >
-                  {row.label && isRoleLabel && (
-                    <span
-                      style={{
-                        display: "inline-block",
-                        fontSize: "var(--size-sm)",
-                        fontWeight: 700,
-                        color: "#1a1005",
-                        background: "var(--amber)",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.06em",
-                        borderRadius: "999px",
-                        padding: "0.3rem 0.9rem",
-                        marginBottom: "0.5rem",
-                      }}
-                    >
-                      {row.label}
-                    </span>
-                  )}
-                  {row.label && !isRoleLabel && isExample && <>{row.label}:{" "}</>}
-                  {row.label && !isRoleLabel && !isExample && (
-                    <strong style={{ color: "var(--ink)", fontStyle: "normal" }}>
-                      {row.label}:{" "}
-                    </strong>
-                  )}
-                  {isRoleLabel ? (
-                    <div>
-                      <Editable file="knowledge-graph" value={row.text}>
-                        {renderFactText(row.text)}
-                      </Editable>
-                    </div>
-                  ) : (
+          <div
+            className="card"
+            style={{
+              padding: "1.25rem 1.5rem",
+              marginBottom: "2.5rem",
+              display: "grid",
+              gridTemplateColumns: "auto 1fr",
+              columnGap: "0.9rem",
+              rowGap: "1rem",
+              alignItems: "start",
+            }}
+          >
+            {(() => {
+              const rows = entity.facts.flatMap((f, i): { key: string; label: string | null; text: string }[] =>
+                typeof f === "string" ? [{ key: `${i}`, label: null, text: f }] : f.items.map((item, j) => ({ key: `${i}-${j}`, label: item.label, text: item.text }))
+              );
+              return rows.map((row, i) => {
+                const isRoleLabel = row.label !== null && ROLE_WORDS.some((w) => row.label!.includes(w));
+                const isExample = row.label?.toUpperCase() === "EXAMPLE";
+                const isBluntStatement = row.label === "RULE" || row.label === "TEST";
+                const prevIsRoleLabel = i > 0 && rows[i - 1].label !== null && ROLE_WORDS.some((w) => rows[i - 1].label!.includes(w));
+
+                // Consumed by the preceding role row below — don't render separately.
+                if (isExample && prevIsRoleLabel) return null;
+
+                if (isRoleLabel) {
+                  const nextRow = rows[i + 1];
+                  const example = nextRow && nextRow.label?.toUpperCase() === "EXAMPLE" ? nextRow : null;
+                  return (
+                    <Fragment key={row.key}>
+                      <span
+                        style={{
+                          display: "inline-block",
+                          alignSelf: "start",
+                          fontSize: "var(--size-sm)",
+                          fontWeight: 700,
+                          color: "#1a1005",
+                          background: "var(--amber)",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.06em",
+                          borderRadius: "999px",
+                          padding: "0.3rem 0.9rem",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {row.label}
+                      </span>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+                        <div style={{ color: "var(--text-2)", lineHeight: 1.6 }}>
+                          <Editable file="knowledge-graph" value={row.text}>
+                            {renderFactText(row.text)}
+                          </Editable>
+                        </div>
+                        {example && (
+                          <div style={{ color: "var(--text-2)", lineHeight: 1.6, fontSize: "var(--size-sm)", fontStyle: "italic" }}>
+                            {example.label}:{" "}
+                            <Editable file="knowledge-graph" value={example.text}>
+                              {highlightRoles(example.text, false)}
+                            </Editable>
+                          </div>
+                        )}
+                      </div>
+                    </Fragment>
+                  );
+                }
+
+                return (
+                  <div
+                    key={row.key}
+                    style={{
+                      gridColumn: "1 / -1",
+                      color: "var(--text-2)",
+                      lineHeight: 1.6,
+                      fontSize: isExample ? "var(--size-sm)" : "var(--size-body)",
+                      fontStyle: isExample ? "italic" : "normal",
+                      fontWeight: isBluntStatement ? 700 : 400,
+                    }}
+                  >
+                    {row.label && isExample && <>{row.label}:{" "}</>}
+                    {row.label && !isExample && (
+                      <strong style={{ color: "var(--ink)", fontStyle: "normal" }}>
+                        {row.label}:{" "}
+                      </strong>
+                    )}
                     <Editable file="knowledge-graph" value={row.text}>
                       {isExample ? highlightRoles(row.text, false) : renderFactText(row.text)}
                     </Editable>
-                  )}
-                </div>
-              );
-            })}
+                  </div>
+                );
+              });
+            })()}
           </div>
 
           {entity.pros && entity.pros.length > 0 && (
