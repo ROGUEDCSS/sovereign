@@ -27,12 +27,23 @@ const ROLE_PATTERN = new RegExp(`\\b(${ROLE_WORDS.join("|")})\\b`, "g");
 function highlightRoles(text: string, bold: boolean = true) {
   return text.split(ROLE_PATTERN).map((part, i) =>
     ROLE_WORDS.includes(part) ? (
-      <span key={i} style={{ color: "var(--amber-strong)", fontWeight: bold ? 700 : "inherit" }}>
+      <span key={i} style={{ color: bold ? "var(--amber-strong)" : "var(--ink)", fontWeight: 700 }}>
         {part}
       </span>
     ) : (
       <span key={i}>{part}</span>
     )
+  );
+}
+
+function boldLeadIn(text: string) {
+  const idx = text.indexOf(":");
+  if (idx === -1) return <>{text}</>;
+  return (
+    <>
+      <strong style={{ color: "var(--ink)" }}>{text.slice(0, idx + 1)}</strong>
+      {text.slice(idx + 1)}
+    </>
   );
 }
 
@@ -164,7 +175,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           {(!entity.sections || entity.sections.length === 0) && entity.whyItMatters && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2rem" }}>
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)", marginBottom: "0.4rem" }}>Why it matters</div>
-              <p style={{ color: "var(--text-2)", lineHeight: 1.6 }}>
+              <p style={{ color: "var(--ink)", lineHeight: 1.6 }}>
                 <Editable file="knowledge-graph" value={entity.whyItMatters}>{entity.whyItMatters}</Editable>
               </p>
             </div>
@@ -219,13 +230,13 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
                         {row.label}
                       </span>
                       <div style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-                        <div style={{ color: "var(--text-2)", lineHeight: 1.6 }}>
+                        <div style={{ color: "var(--ink)", lineHeight: 1.6 }}>
                           <Editable file="knowledge-graph" value={row.text}>
                             {renderFactText(row.text)}
                           </Editable>
                         </div>
                         {example && (
-                          <div style={{ color: "var(--text-2)", lineHeight: 1.6, fontSize: "var(--size-sm)", fontStyle: "italic" }}>
+                          <div style={{ color: "var(--ink)", lineHeight: 1.6, fontSize: "var(--size-sm)", fontStyle: "italic" }}>
                             {example.label}:{" "}
                             <Editable file="knowledge-graph" value={example.text}>
                               {highlightRoles(example.text, false)}
@@ -242,7 +253,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
                     key={row.key}
                     style={{
                       gridColumn: "1 / -1",
-                      color: "var(--text-2)",
+                      color: "var(--ink)",
                       lineHeight: 1.6,
                       fontSize: isExample ? "var(--size-sm)" : "var(--size-body)",
                       fontStyle: isExample ? "italic" : "normal",
@@ -302,7 +313,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 500, color: "var(--danger)", marginBottom: "0.7rem" }}>What could go wrong?</div>
               <ul style={{ listStyleType: "disc", paddingLeft: "1.1rem", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
                 {entity.whatCouldGoWrong.map((w) => (
-                  <li key={w} style={{ fontSize: "var(--size-body)", color: "var(--text-2)", lineHeight: 1.6 }}><Editable file="knowledge-graph" value={w}>{w}</Editable></li>
+                  <li key={w} style={{ fontSize: "var(--size-body)", color: "var(--ink)", lineHeight: 1.6 }}><Editable file="knowledge-graph" value={w}>{boldLeadIn(w)}</Editable></li>
                 ))}
               </ul>
             </div>
@@ -333,7 +344,7 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           {entity.sovereignPosition && (
             <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
               <div style={{ fontSize: "var(--size-h4)", fontWeight: 700, color: "var(--ink)", marginBottom: "0.4rem" }}>The Sovereign position</div>
-              <p style={{ color: "var(--text-2)", lineHeight: 1.6 }}><Editable file="knowledge-graph" value={entity.sovereignPosition}>{entity.sovereignPosition}</Editable></p>
+              <p style={{ color: "var(--ink)", lineHeight: 1.6 }}><Editable file="knowledge-graph" value={entity.sovereignPosition}>{entity.sovereignPosition}</Editable></p>
             </div>
           )}
 

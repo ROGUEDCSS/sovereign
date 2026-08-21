@@ -996,19 +996,19 @@ export const KG_ENTITIES: KGEntity[] = [
       "For most of history, identity was physical — a face people recognised, a signed paper, a passport someone could hold and check.",
       "Then life moved onto a screen. A website can't look at your face or check a signature.",
       "Digital ID exists to fill that gap. Same old idea — prove who you are — rebuilt for a world where most of what you do happens where no one can physically see you.",
-      "The standard used for Digital ID is the W3C's Verifiable Credentials Data Model. It has three parts.",
+      "The standard used for Digital ID is the W3C's Verifiable Credentials Data Model has three parts.",
       {
         items: [
           { label: "1. Issuer", text: "The organisation that certifies a fact about you." },
           { label: "Example", text: "The government confirms you're over 18." },
-          { label: "2. Holder", text: "You. You hold the credential. You decide when to show it." },
+          { label: "2. Holder", text: "You, the credential holder. You decide when to show it. " },
           { label: "3. Verifier", text: "Whoever is asking for proof." },
           { label: "Example", text: "A shop checking your age." },
         ],
       },
       {
         items: [
-          { label: "RULE", text: "These three cannot be the same entity. If they are, the danger starts." },
+          { label: "RULE", text: "These 3 entities must never be the same. They must be different. Always." },
           { label: "Example", text: "A shop (Verifier) checks your ID. It never calls the government (Issuer). The government never learns you were at the shop. Only you, the Holder, know both things happened." },
           { label: "TEST", text: "There has to be clarity on what gets disclosed and to whom. If there isn't, the system is not trustworthy. Full stop." },
           { label: "Example", text: "The government is both Issuer and Verifier. Now it can see every time and place you use your ID. That builds a movement log of your life. The three-part split exists to stop this." },
@@ -1024,8 +1024,8 @@ export const KG_ENTITIES: KGEntity[] = [
       "Kim Cameron, 'The Laws of Identity' (2005)",
     ],
     whoControls: [
-      "The issuer can revoke what it issued. For a government credential, that's a government agency — not a court, not an appeals panel.",
-      "The wallet operator controls whether you can open and use your own credentials. In Australia, that's myID, or a private provider accredited under the Digital ID Act 2024.",
+      "The government is the Issuer, and can revoke what it issued, i.e. a government credential.",
+      "The government is also the wallet operator, and controls whether you can open and use your own credentials. In Australia, that's myID, or a private provider accredited under the Digital ID Act 2024.",
       "The verifier decides what it asks for. A good system limits that to a yes/no answer. Nothing forces it to.",
     ],
     whatCouldGoWrong: [
@@ -1114,20 +1114,6 @@ export const KG_ENTITIES: KGEntity[] = [
         ],
       },
       {
-        heading: "Holder, issuer and verifier",
-        content: [
-          { kind: "p", text: "These are three basic parts of a digital identity system." },
-          {
-            kind: "definitions",
-            items: [
-              { term: "Issuer", text: "The organisation that says: \"We certify that this is true.\" For example: \"This person is over 18,\" or: \"This person holds a driver's licence.\"" },
-              { term: "Holder", text: "You. You hold the digital credential in your digital wallet." },
-              { term: "Verifier", text: "The organisation asking for proof. For example: \"Are you over 18?\" Ideally, the verifier receives only: YES — OVER 18. It does not need your full name, address or date of birth." },
-            ],
-          },
-        ],
-      },
-      {
         heading: "This can actually be better than the old system",
         content: [
           { kind: "p", text: "Imagine buying alcohol." },
@@ -1138,29 +1124,6 @@ export const KG_ENTITIES: KGEntity[] = [
           { kind: "subheading", text: "Better digital system" },
           { kind: "p", text: "Your digital wallet simply proves: OVER 18: YES. Nothing else is disclosed." },
           { kind: "p", text: "That is a genuine privacy improvement." },
-        ],
-      },
-      {
-        heading: "So where is the danger?",
-        content: [
-          { kind: "p", text: "The danger starts when digital ID changes from \"prove something about yourself\" into \"you must use this identity to participate.\"" },
-          { kind: "p", text: "That is a very different system." },
-        ],
-      },
-      {
-        heading: "Identity is not the same as permission",
-        content: [
-          { kind: "p", text: "This distinction is fundamental." },
-          {
-            kind: "definitions",
-            items: [
-              { term: "Identity", text: "Who are you?" },
-              { term: "Credential", text: "What can you prove?" },
-              { term: "Verification", text: "Is that proof genuine?" },
-              { term: "Permission", text: "Are you allowed to do this?" },
-            ],
-          },
-          { kind: "p", text: "These should remain separate. The danger comes when they become one system: \"We know who you are, therefore we decide whether you may proceed.\"" },
         ],
       },
       {
@@ -1291,47 +1254,33 @@ export const KG_ENTITIES: KGEntity[] = [
         heading: "The most important Sovereign principle",
         content: [
           { kind: "p", text: "A digital identity should help you prove who you are. It should not become a mechanism that determines what you are allowed to do with your life." },
-          { kind: "p", text: "There should always be a clear separation between:" },
-          { kind: "list", items: ["Identity", "Authority", "Permission", "Surveillance"] },
+          { kind: "p", text: "That distinction is fundamental:" },
+          {
+            kind: "definitions",
+            items: [
+              { term: "Identity", text: "Who are you?" },
+              { term: "Credential", text: "What can you prove?" },
+              { term: "Verification", text: "Is that proof genuine?" },
+              { term: "Permission", text: "Are you allowed to do this?" },
+            ],
+          },
+          { kind: "p", text: "These should remain separate. The danger comes when they become one system: \"We know who you are, therefore we decide whether you may proceed.\"" },
         ],
       },
       {
         heading: "What a Sovereign Digital ID should look like",
         content: [
-          { kind: "p", text: "A freedom-preserving system would aim for:" },
+          { kind: "p", text: "Beyond the safeguards above, a freedom-preserving system would also aim for:" },
           {
             kind: "definitions",
             items: [
               { term: "You control it", text: "You hold your credentials." },
-              { term: "Minimum disclosure", text: "You disclose only what is necessary." },
-              { term: "No universal tracking", text: "Using your ID does not automatically create a central record of everything you do." },
               { term: "No behavioural score", text: "Your identity does not become a score determining your access to society." },
-              { term: "No function creep", text: "New uses require explicit scrutiny and authorisation." },
-              { term: "Due process", text: "Your identity cannot simply be switched off without meaningful recourse." },
-              { term: "Alternatives", text: "People are not forced into a purely digital existence." },
               { term: "Transparency", text: "The system can be independently examined." },
               { term: "Separation", text: "No single organisation controls identity, information and permission." },
               { term: "Exit", text: "You can leave or change providers without losing your ability to function in society." },
             ],
           },
-        ],
-      },
-      {
-        heading: "The simple test",
-        content: [
-          { kind: "p", text: "Whenever someone proposes a new use for Digital ID, ask five questions:" },
-          { kind: "list", items: ["Who knows?", "What do they know?", "Who can connect it?", "Who can stop me?", "What happens if they get it wrong?"] },
-          { kind: "p", text: "Those five questions expose most of the important risks." },
-        ],
-      },
-      {
-        heading: "The Sovereign position",
-        content: [
-          { kind: "p", text: "SOVEREIGN does not need to argue \"Digital ID is evil.\" That is too simplistic." },
-          { kind: "p", text: "Nor should it argue \"Digital ID is safe because the government says it is safe.\" That is equally simplistic." },
-          { kind: "p", text: "The proper position is: digital identity is a powerful technology. It can increase privacy, convenience and security. It can also create unprecedented opportunities for surveillance, profiling, exclusion and control if identity becomes linked to permission and access." },
-          { kind: "p", text: "Therefore: the technology must be scrutinised. The architecture must be scrutinised. The legislation must be scrutinised. And the powers it creates must be scrutinised." },
-          { kind: "p", text: "Identity should belong to the individual. It should never become the government's permission slip for living." },
         ],
       },
     ],
