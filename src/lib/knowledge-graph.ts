@@ -1001,10 +1001,14 @@ export const KG_ENTITIES: KGEntity[] = [
           { label: "3. Verifier", text: "whoever is asking for proof. Example: a shop checking your age." },
         ],
       },
-      "The rule: these three cannot be the same entity. If they are, the danger starts.",
-      "Example: a shop (Verifier) checks your ID. It never calls the government (Issuer). The government never learns you were at the shop. Only you, the Holder, know both things happened.",
-      "THE UNIVERSAL DIGITAL ID TEST: there has to be clarity on WHAT gets disclosed and to WHOM. If there isn't, the system is not trustworthy. Full stop.",
-      "Example: the government is both Issuer and Verifier. Now it can see every time and place you use your ID. That builds a movement log of your life. The three-part split exists to stop this.",
+      {
+        items: [
+          { label: "RULE", text: "these three cannot be the same entity. If they are, the danger starts." },
+          { label: "EXAMPLE", text: "a shop (Verifier) checks your ID. It never calls the government (Issuer). The government never learns you were at the shop. Only you, the Holder, know both things happened." },
+          { label: "TEST", text: "there has to be clarity on what gets disclosed and to whom. If there isn't, the system is not trustworthy. Full stop." },
+          { label: "EXAMPLE", text: "the government is both Issuer and Verifier. Now it can see every time and place you use your ID. That builds a movement log of your life. The three-part split exists to stop this." },
+        ],
+      },
     ],
     relationships: [
       { type: "generalises to", targetSlug: "identity", note: "The broader, non-digital version of the same concept." },

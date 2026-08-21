@@ -154,36 +154,25 @@ export default async function WorldEntityPage({ params }: { params: Promise<{ sl
           )}
 
           <h2 style={{ fontSize: "var(--size-h4)", fontWeight: 500, marginBottom: "1rem" }}>Situation</h2>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.9rem", marginBottom: "2.5rem" }}>
-            {entity.facts.map((f, i) => {
-              if (typeof f === "string") {
-                return (
-                  <div key={i} className="card" style={{ padding: "1rem 1.25rem" }}>
-                    <p style={{ margin: 0, color: "var(--text-2)", lineHeight: 1.6 }}>{highlightRoles(f)}</p>
-                  </div>
-                );
-              }
-              const group = f as KGFactGroup;
-              return (
-                <div key={i} className="card" style={{ padding: "1rem 1.25rem" }}>
-                  {group.items.map((item, j) => (
-                    <p
-                      key={item.label}
-                      style={{
-                        margin: 0,
-                        color: "var(--text-2)",
-                        lineHeight: 1.6,
-                        paddingTop: j > 0 ? "0.75rem" : 0,
-                        marginTop: j > 0 ? "0.75rem" : 0,
-                        borderTop: j > 0 ? "1px solid rgba(11,14,17,0.12)" : "none",
-                      }}
-                    >
-                      <strong style={{ color: "var(--amber-strong)" }}>{item.label}:</strong> {item.text}
-                    </p>
-                  ))}
-                </div>
-              );
-            })}
+          <div className="card" style={{ padding: "1.25rem 1.5rem", marginBottom: "2.5rem" }}>
+            {entity.facts.flatMap((f, i): { key: string; label: string | null; text: string }[] =>
+              typeof f === "string" ? [{ key: `${i}`, label: null, text: f }] : f.items.map((item, j) => ({ key: `${i}-${j}`, label: item.label, text: item.text }))
+            ).map((row, i) => (
+              <p
+                key={row.key}
+                style={{
+                  margin: 0,
+                  color: "var(--text-2)",
+                  lineHeight: 1.6,
+                  paddingTop: i > 0 ? "0.9rem" : 0,
+                  marginTop: i > 0 ? "0.9rem" : 0,
+                  borderTop: i > 0 ? "1px solid rgba(11,14,17,0.12)" : "none",
+                }}
+              >
+                {row.label && <strong style={{ color: "var(--amber-strong)" }}>{row.label}: </strong>}
+                {highlightRoles(row.text)}
+              </p>
+            ))}
           </div>
 
           {entity.pros && entity.pros.length > 0 && (
